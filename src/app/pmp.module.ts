@@ -1,0 +1,21 @@
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+
+import { PmpRoutingModule } from './pmp-routing.module';
+import { PmpComponent } from './pmp.component';
+import { NavbarComponent } from './navbar/navbar.component';
+
+@NgModule({
+  declarations: [
+    PmpComponent,
+    NavbarComponent
+  ],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
+  imports: [
+    BrowserModule,
+    PmpRoutingModule
+  ],
+  providers: [],
+  bootstrap: [PmpComponent]
+})
+export class PmpModule { }
