@@ -1,46 +1,122 @@
-<div class="mx-auto bg-purple-700 px-14 py-3">
-  <nav class="flex justify-between items-center mb-2">
-    <div>
+<!--<div class="mx-auto bg-gray-300 bg-opacity-40 px-14 py-2">-->
+<!--  <nav class="flex justify-between items-center mb-1">-->
+<!--    <div>-->
+<!--      <span>-->
+<!--        <img src="assets/logo.svg" alt="PMP logo" style="height: 50px;">-->
+<!--      </span>-->
+<!--    </div>-->
+<!--&lt;!&ndash;      <form>&ndash;&gt;-->
+<!--&lt;!&ndash;      <span class="flex items-center relative search-bar">&ndash;&gt;-->
+<!--&lt;!&ndash;      <input id="searchBar" type="text" placeholder="Search for items" class="search-bar rounded-l-full"/>&ndash;&gt;-->
+<!--&lt;!&ndash;        <select class="w-56 h-10">&ndash;&gt;-->
+<!--&lt;!&ndash;          <option selected>Look Everywhere</option>&ndash;&gt;-->
+<!--&lt;!&ndash;        </select>&ndash;&gt;-->
+<!--&lt;!&ndash;        <button class="flex items-center justify-center absolute inset-y-0 -right-12 bg-gray-600 rounded-full w-16">&ndash;&gt;-->
+<!--&lt;!&ndash;          <ion-icon name="search"></ion-icon>&ndash;&gt;-->
+<!--&lt;!&ndash;        </button>&ndash;&gt;-->
+<!--&lt;!&ndash;      </span>&ndash;&gt;-->
+<!--&lt;!&ndash;      </form>&ndash;&gt;-->
+<!--      <div class="flex items-center bg-white border border-black border-2 rounded-full search-bar shadow-2xl">-->
+<!--          <input class="ml-5 h-6 w-9/12" placeholder="search">-->
+<!--          <select class="w-56 h-6 w-3/12">-->
+<!--            <option selected>Everywhere</option>-->
+<!--          </select>-->
+<!--                <button class="flex items-center justify-center bg-gray-600 rounded-full h-8 w-24 relative -right-2">-->
+<!--                  <ion-icon name="search"></ion-icon>-->
+<!--                </button>-->
+<!--      </div>-->
+<!--    <ul class="flex flex-row">-->
+<!--      <li class="pr-5"><a class="flex flex-col items-center">-->
+<!--        <ion-icon name="person-outline"></ion-icon>Account</a></li>-->
+<!--      <li class="pr-5"><a class="flex flex-col items-center">-->
+<!--        <ion-icon name="basket-outline"></ion-icon>Basket</a></li>-->
+<!--    </ul>-->
+<!--  </nav>-->
+<!--  <hr class="mb-1.5">-->
+<!--  <nav class="lg:hidden px-1">-->
+<!--    <ul class="flex justify-around">-->
+<!--      <li><a class="flex items-center">-->
+<!--        <ion-icon name="laptop-outline" class="pr-2"></ion-icon>Laptops-->
+<!--      </a></li>-->
+<!--      <li><a class="flex items-center">-->
+<!--        <ion-icon name="desktop-outline" class="pr-2"></ion-icon>Computers</a></li>-->
+<!--      <li><a class="flex items-center">-->
+<!--        <ion-icon name="phone-portrait-outline" class="pr-1"></ion-icon>Smartphones</a></li>-->
+<!--      <li><a class="flex items-center font-bold">-->
+<!--        <ion-icon name="hammer-outline" class="pr-2"></ion-icon>Build PC</a></li>-->
+<!--      <li><a class="flex items-center">-->
+<!--        <ion-icon name="hardware-chip-outline" class="pr-2"></ion-icon>Computer assets</a></li>-->
+<!--      <li><a class="flex items-center">-->
+<!--        <ion-icon name="print-outline" class="pr-2"></ion-icon>Peripherals</a></li>-->
+<!--      <li><a class="flex items-center">-->
+<!--        <ion-icon name="headset-outline" class="pr-2"></ion-icon>Accessories</a></li>-->
+<!--    </ul>-->
+<!--  </nav>-->
+<!--</div>-->
+
+<!--<div class="block sd:hidden">-->
+<!--  <button class="flex items-center px-3 py-2 border rounded text-teal-100 border-teal-400 hover:text-white hover:border-white" id="navbar-btn">-->
+<!--    <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">-->
+<!--      <title>Menu</title>-->
+<!--      <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/>-->
+<!--    </svg>-->
+<!--  </button>-->
+<!--</div>-->
+
+<div class="mx-auto bg-gray-300 bg-opacity-40 md:px-14 py-2">
+  <nav class="mb-1 flex-col sm:w-full sm:flex sm:justify-center">
+    <div class="flex justify-between mb-2">
       <span>
-        <img src="assets/logo.svg" alt="PMP logo" style="height: 40px;">
+        <img src="assets/logo.svg" alt="PMP logo" style="height: 50px;">
       </span>
-    </div>
-    <div>
-      <form>
-      <span>
-      <input id="searchBar" type="text" placeholder="Search for items" class=""/>
-        <select>
-          <option selected>Look Everywhere</option>
-        </select>
-        <button>Search</button>
-      </span>
-      </form>
-    </div>
-    <ul class="flex flex-row">
+    <ul class="flex">
       <li class="pr-5"><a class="flex flex-col items-center">
-        <ion-icon name="person-outline" class="pr-2"></ion-icon>Your account</a></li>
+        <ion-icon name="person-outline"></ion-icon>Account</a></li>
       <li class="pr-5"><a class="flex flex-col items-center">
-        <ion-icon name="basket-outline" class="pr-2"></ion-icon>Basket</a></li>
+        <ion-icon name="basket-outline"></ion-icon>Basket</a></li>
     </ul>
+    </div>
+    <div class="w-full flex items-center justify-center md:w-3/5">
+      <div class="block flex justify-center sm:hidden w-2/12">
+      <button (click)="toggleMenu()" class="flex flex-col items-center" id="navbar-btn">
+        <svg viewBox="0 0 100 80" width="30" height="30">
+          <rect width="100" height="20" rx="8"></rect>
+          <rect y="30" width="100" height="20" rx="8"></rect>
+          <rect y="60" width="100" height="20" rx="8"></rect>
+        </svg>
+        Menu
+      </button>
+    </div>
+    <div class="flex items-center bg-white border border-black border-2 rounded-full h-8 m-2 w-9/12">
+      <input class="ml-5 h-6 w-10/12" type="text" placeholder="search">
+      <select class="w-56 h-6 w-3/12 hidden sm:block">
+        <option selected>Everywhere</option>
+      </select>
+      <button class="flex items-center justify-center bg-gray-600 rounded-full h-8 w-24 relative -right-2">
+        <ion-icon name="search"></ion-icon>
+      </button>
+    </div>
+    </div>
   </nav>
   <hr class="mb-1.5">
-  <nav class="px-1">
-    <ul class="flex justify-around">
-      <li><a class="flex items-center">
+  <nav class="px-1" [ngClass]="{'hidden': !showMenu}" class="md:block">
+    <h4 [ngClass]="{'hidden': !showMenu}">Categories:</h4>
+    <ul class="flex flex-col md:flex-row md:justify-between">
+      <li class="m-2.5 pb-1 border-black border-b-2 md:border-none"><a class="flex items-center">
         <ion-icon name="laptop-outline" class="pr-2"></ion-icon>Laptops
       </a></li>
-      <li><a class="flex items-center">
+      <li class="m-2.5 pb-1 border-black border-b-2 md:border-none"><a class="flex items-center">
         <ion-icon name="desktop-outline" class="pr-2"></ion-icon>Computers</a></li>
-      <li><a class="flex items-center">
+      <li class="m-2.5 pb-1 border-black border-b-2 md:border-none"><a class="flex items-center">
         <ion-icon name="phone-portrait-outline" class="pr-1"></ion-icon>Smartphones</a></li>
-      <li><a class="flex items-center font-bold">
+      <li class="m-2.5 pb-1 border-black border-b-2 md:border-none"><a class="flex items-center font-bold">
         <ion-icon name="hammer-outline" class="pr-2"></ion-icon>Build PC</a></li>
-      <li><a class="flex items-center">
+      <li class="m-2.5 pb-1 border-black border-b-2 md:border-none"><a class="flex items-center">
         <ion-icon name="hardware-chip-outline" class="pr-2"></ion-icon>Computer assets</a></li>
-      <li><a class="flex items-center">
+      <li class="m-2.5 pb-1 border-black border-b-2 md:border-none"><a class="flex items-center">
         <ion-icon name="print-outline" class="pr-2"></ion-icon>Peripherals</a></li>
-      <li><a class="flex items-center">
-        <ion-icon name="desktop-outline" class="pr-2"></ion-icon>Accessories</a></li>
+      <li class="m-2.5 pb-1 border-black border-b-2 md:border-none"><a class="flex items-center">
+        <ion-icon name="headset-outline" class="pr-2"></ion-icon>Accessories</a></li>
     </ul>
   </nav>
 </div>
