@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class NavbarComponent implements OnInit {
 
   showMenu = false;
+  toggleBackdrop = true;
 
   constructor() { }
 
@@ -16,5 +17,19 @@ export class NavbarComponent implements OnInit {
 
   toggleMenu(): void {
     this.showMenu = !this.showMenu;
+  }
+
+  toggleModal(): void {
+    this.toggleBackdrop = !this.toggleBackdrop;
+  }
+
+  showModal(): void {
+    // @ts-ignore
+    document.querySelector('.backdrop').classList.remove('hidden');
+  }
+
+  removeModal(): void {
+    // @ts-ignore
+    document.querySelector('.backdrop').classList.add('hidden');
   }
 }
