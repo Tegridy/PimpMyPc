@@ -1,6 +1,6 @@
 <div class="mx-auto bg-gray-50 md:px-14 pt-3">
 
-  <nav class="mb-1 flex flex-wrap sm:justify-between md:flex-nowrap">
+  <nav class="flex flex-wrap sm:justify-between md:flex-nowrap">
 
      <span class="object-contain">
         <img src="assets/logo.svg" alt="PMP logo" class="cursor-pointer" style="height: 50px;">
@@ -18,11 +18,12 @@
 
     <div class="w-full flex items-center justify-center">
 
-          <button (click)="toggleMenu()" class="hamburger hamburger--collapse-r lg:hidden" [ngClass]="{'is-active': showMenu}" type="button" id="navbar-btn">
+      <button (click)="toggleMenu()" class="hamburger hamburger--collapse-r lg:hidden"
+              [ngClass]="{'is-active': showMenu}" type="button" id="navbar-btn">
              <span class="hamburger-box">
                  <span class="hamburger-inner"></span>
             </span>
-          </button>
+      </button>
 
 
       <div class="flex items-center bg-white border border-black border-2 rounded-full h-8 m-2 order-1 w-3/4 shadow">
@@ -39,42 +40,98 @@
   </nav>
 
 
-  <hr class="mb-1.5 hidden sm:block">
-  <nav class="px-1" [ngClass]="{'hidden': !showMenu}" class="lg:block">
-    <h4 [ngClass]="{'hidden': !showMenu}" class="lg:hidden">Categories:</h4>
-    <ul id="categories" class="flex flex-col lg:flex-row lg:justify-between">
-      <li (mouseenter)="toggleModal()" (mouseleave)="toggleModal()"
-          class="p-2 cursor-pointer rounded-t hover:bg-gray-200 hover:shadow"><a class="flex items-center">
-        <ion-icon name="laptop-outline" class="pr-2"></ion-icon>
-        Laptops
-      </a></li>
-      <li class="p-2 cursor-pointer rounded-t hover:bg-gray-200 hover:shadow" (mouseenter)="toggleModal()"
-          (mouseleave)="toggleModal()"><a class="flex items-center">
-        <ion-icon name="desktop-outline" class="pr-2"></ion-icon>
-        Computers</a></li>
-      <li class="p-2 cursor-pointer rounded-t hover:bg-gray-200 hover:shadow" (mouseenter)="toggleModal()"
-          (mouseleave)="toggleModal()"><a class="flex items-center">
-        <ion-icon name="phone-portrait-outline" class="pr-1"></ion-icon>
-        Smartphones</a></li>
-      <li class="p-2 cursor-pointer rounded-t hover:bg-gray-200 hover:shadow"><a class="flex items-center font-bold">
-        <ion-icon name="hammer-outline" class="pr-2"></ion-icon>
-        Build PC</a></li>
-      <li class="p-2 cursor-pointer rounded-t hover:bg-gray-200 hover:shadow" (mouseenter)="toggleModal()"
-          (mouseleave)="toggleModal()"><a class="flex items-center">
-        <ion-icon name="hardware-chip-outline" class="pr-2"></ion-icon>
-        Computer assets</a></li>
-      <li class="p-2 cursor-pointer rounded-t hover:bg-gray-200 hover:shadow" (mouseenter)="toggleModal()"
-          (mouseleave)="toggleModal()"><a class="flex items-center">
-        <ion-icon name="print-outline" class="pr-2"></ion-icon>
-        Peripherals</a></li>
-      <li class="p-2 cursor-pointer rounded-t hover:bg-gray-200 hover:shadow" (mouseenter)="toggleModal()"
-          (mouseleave)="toggleModal()"><a class="flex items-center">
-        <ion-icon name="headset-outline" class="pr-2"></ion-icon>
-        Accessories</a></li>
+  <!--      Desktop menu      -->
+
+
+  <!--  <hr class="mb-1.5 hidden sm:block">-->
+  <!--  <nav class="px-1" [ngClass]="{'hidden': !showMenu}" class="lg:block">-->
+  <!--    <h4 [ngClass]="{'hidden': !showMenu}" class="lg:hidden">Categories:</h4>-->
+  <!--    <ul id="categories" class="flex flex-col relative lg:flex-row lg:justify-between">-->
+  <!--      <li (mouseenter)="toggleModal();" (mouseleave)="toggleModal()"-->
+  <!--          class="p-2 cursor-pointer rounded-t hover:bg-gray-200 hover:shadow"><a class="flex items-center">-->
+  <!--        <ion-icon name="laptop-outline" class="pr-2"></ion-icon>-->
+  <!--        Laptops-->
+  <!--      </a>-->
+  <!--      </li>-->
+  <!--      <li class="p-2 cursor-pointer rounded-t hover:bg-gray-200 hover:shadow" (mouseenter)="toggleModal()"-->
+  <!--          (mouseleave)="toggleModal()"><a class="flex items-center">-->
+  <!--        <ion-icon name="desktop-outline" class="pr-2"></ion-icon>-->
+  <!--        Computers</a>-->
+  <!--      </li>-->
+  <!--      <li class="p-2 cursor-pointer rounded-t hover:bg-gray-200 hover:shadow" (mouseenter)="toggleModal()"-->
+  <!--          (mouseleave)="toggleModal()"><a class="flex items-center">-->
+  <!--        <ion-icon name="phone-portrait-outline" class="pr-1"></ion-icon>-->
+  <!--        Smartphones</a></li>-->
+  <!--      <li class="p-2 cursor-pointer rounded-t hover:bg-gray-200 hover:shadow"><a class="flex items-center font-bold">-->
+  <!--        <ion-icon name="hammer-outline" class="pr-2"></ion-icon>-->
+  <!--        Build PC</a></li>-->
+  <!--      <li class="p-2 cursor-pointer rounded-t hover:bg-gray-200 hover:shadow" (mouseenter)="toggleModal()"-->
+  <!--          (mouseleave)="toggleModal()"><a class="flex items-center">-->
+  <!--        <ion-icon name="hardware-chip-outline" class="pr-2"></ion-icon>-->
+  <!--        Computer assets</a></li>-->
+  <!--      <li class="p-2 cursor-pointer rounded-t hover:bg-gray-200 hover:shadow" (mouseenter)="toggleModal()"-->
+  <!--          (mouseleave)="toggleModal()"><a class="flex items-center">-->
+  <!--        <ion-icon name="print-outline" class="pr-2"></ion-icon>-->
+  <!--        Peripherals</a></li>-->
+  <!--      <li class="p-2 cursor-pointer rounded-t hover:bg-gray-200 hover:shadow" (mouseenter)="toggleModal()"-->
+  <!--          (mouseleave)="toggleModal()"><a class="flex items-center">-->
+  <!--        <ion-icon name="headset-outline" class="pr-2"></ion-icon>-->
+  <!--        Accessories</a></li>-->
+  <!--    </ul>-->
+  <!--  </nav>-->
+</div>
+
+<div (click)="toggleMenu()"
+     class="-z-10 h-screen w-full fixed left-0 top-0 flex justify-center items-center bg-black bg-opacity-50"
+     [ngClass]="{'hidden': (!showMenu && toggleBackdrop)}">
+</div>
+
+
+<!--     Mobile menu     -->
+
+<div id="wrapper" class="absolute w-64 h-full overflow-hidden"
+     [ngClass]="{'hidden' : !showMenu}">
+
+  <div id="mobile-menu" class="absolute top-0 left-0 bg-gray-50 w-64 h-full">
+
+    <ul>
+      <li *ngFor="let category of mainCategories">
+        <label class="block cursor-pointer" for="menu-{{ category.name }}">
+          <ion-icon name="{{ category.iconName }}" class="pr-2"></ion-icon>
+          {{ category.name }}</label>
+
+        <input type="checkbox" id="menu-{{ category.name }}" name="menu-1" class="menu-checkbox">
+        <div class="menu z-10">
+          <ul *ngFor="let subMenuItems of category.subMenu">
+            <li>
+              <label class="label-style" for="menu-{{ subMenuItems.name }}">{{ subMenuItems.name }}</label>
+
+              <div *ngIf="subMenuItems.laptopsSizes">
+                <input type="checkbox" id="menu-{{ subMenuItems.name }}" name="menu-2" class="menu-checkbox">
+                <div class="menu z-10">
+                  <ul *ngFor="let laptopSize of subMenuItems.laptopsSizes">
+                    <li>
+                      <label class="label-style">Notebook/Laptop {{ laptopSize }}</label>
+                    </li>
+                  </ul>
+                  <hr>
+                  <div>
+                  <label for="menu-{{ subMenuItems.name }}" class="label-style">Go back</label>
+                  </div>
+                </div>
+              </div>
+
+            </li>
+          </ul>
+          <hr>
+          <label for="menu-{{ category.name }}" class="label-style">Go back</label>
+        </div>
+
+      </li>
     </ul>
-  </nav>
+
+  </div>
 </div>
 
 
-<div class="backdrop h-screen w-full fixed left-0 top-0 flex justify-center items-center bg-black bg-opacity-50" [ngClass]="{'hidden': (!showMenu && toggleBackdrop)}">
-</div>
+
