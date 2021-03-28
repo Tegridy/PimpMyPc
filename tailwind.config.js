@@ -14,6 +14,30 @@ module.exports = {
       },
       minHeight: {
         '37vh' : '37vh'
+      },
+      keyframes: {
+        'fade-in-down': {
+          '0%': {
+            opacity: '0',
+            transform: 'translateY(-10px)'
+          },
+          '100%': {
+            opacity: '1',
+            transform: 'translateY(0)'
+          },
+        },
+        'fade-bg': {
+          'from': {
+            opacity: '0'
+          },
+          'to': {
+            opacity: '0.5'
+          }
+        }
+      },
+      animation: {
+        'fade-in-down': 'fade-in-down 0.5s ease-out',
+        'fade-bg': 'fade-bg 0.3s ease-out'
       }
     }
   },
