@@ -3,13 +3,13 @@ ion-icon {
 }
 
 .menu {
-  @apply absolute top-0 left-0 bg-white w-64 h-full;
+  @apply absolute top-0 left-0 bg-white w-64 h-full z-10 divide-y-2 divide-gray-300;
   transform: translate3d(-260px, 0, 0);
   transition: transform 0.35s;
 }
 
 .label-style {
-  @apply block text-center leading-10 no-underline bg-white hover:bg-blue-700 cursor-pointer;
+  @apply flex items-center justify-between text-center leading-10 no-underline bg-white hover:bg-blue-700 cursor-pointer;
 }
 
 /* hide inputs */
@@ -21,3 +21,14 @@ ion-icon {
 .menu-checkbox:checked + .menu {
   transform: translate3d(0, 0, 0);
 }
+
+#main-menu li:hover div {
+  display: block;
+}
+
+#sub-menu ul li:hover div ul {
+  display: block;
+}
+
+
+

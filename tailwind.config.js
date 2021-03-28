@@ -11,9 +11,17 @@ module.exports = {
     extend: {
       zIndex: {
         '-10': -10
+      },
+      minHeight: {
+        '37vh' : '37vh'
       }
     }
   },
-  variants: {},
+  variants: {
+    extend: {
+      display: ['hover', 'group-hover'],
+      scale: ['group-hover'],
+    }
+  },
   plugins: [],
 }
