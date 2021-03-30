@@ -13,7 +13,8 @@ module.exports = {
         '-10': -10
       },
       minHeight: {
-        '37vh' : '37vh'
+        '37vh' : '37vh',
+        '56': '14rem'
       },
       keyframes: {
         'fade-in-down': {

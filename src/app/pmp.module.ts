@@ -4,11 +4,15 @@ import { BrowserModule } from '@angular/platform-browser';
 import { PmpRoutingModule } from './pmp-routing.module';
 import { PmpComponent } from './pmp.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { HomeComponent } from './home/home.component';
+import { RecommendedProductsComponent } from './home/recommended-products/recommended-products.component';
 
 @NgModule({
   declarations: [
     PmpComponent,
-    NavbarComponent
+    NavbarComponent,
+    HomeComponent,
+    RecommendedProductsComponent
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   imports: [

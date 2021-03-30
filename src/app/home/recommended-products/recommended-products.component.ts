@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import Glide from '@glidejs/glide';
+
 
 @Component({
   selector: 'pmp-recommended-products',
@@ -10,6 +12,7 @@ export class RecommendedProductsComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    new Glide('.glide').mount();
   }
 
 }

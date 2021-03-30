@@ -1,4 +1,4 @@
-<div class="mx-auto bg-gray-50 md:px-14 pt-3 shadow-lg">
+<div class="relative z-20 mx-auto bg-gray-50 md:px-14 pt-3 shadow-lg">
 
   <nav class="flex flex-wrap sm:justify-between md:flex-nowrap">
 
@@ -76,17 +76,12 @@
   </nav>
 </div>
 
-<div (click)="toggleMenu()"
-     class="-z-10 h-screen w-full fixed left-0 top-0 flex justify-center items-center bg-black opacity-50 animate-fade-bg"
-     [ngClass]="{'hidden': (!showMenu && toggleBackdrop)}">
-</div>
-
 <!--     Mobile menu     -->
 
-<div id="wrapper" class="absolute w-64 h-full overflow-hidden"
+<div id="wrapper" class="absolute w-64 h-full overflow-hidden z-20"
      [ngClass]="{'hidden' : !showMenu}">
 
-  <div id="mobile-menu" class="absolute top-0 left-0 bg-gray-50 w-64 h-full text-sm">
+  <div id="mobile-menu" class="absolute top-0 left-0 bg-gray-50 w-64 h-full">
 
     <ul class="divide-y-2 divide-gray-300">
       <li *ngFor="let category of mainCategories" class="divide-y-2 ">
@@ -133,5 +128,10 @@
   </div>
 </div>
 
+
+<div (click)="toggleMenu()"
+     class="z-10 h-screen w-full fixed left-0 top-0 flex justify-center items-center bg-black opacity-50 animate-fade-bg"
+     [ngClass]="{'hidden': (!showMenu && toggleBackdrop)}">
+</div>
 
 

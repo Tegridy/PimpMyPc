@@ -2,6 +2,7 @@ ion-icon {
   font-size: 1.5rem;
 }
 
+
 .menu {
   @apply absolute top-0 left-0 bg-white w-64 h-full z-10 divide-y-2 divide-gray-300;
   transform: translate3d(-260px, 0, 0);
@@ -12,12 +13,10 @@ ion-icon {
   @apply flex items-center justify-between text-center leading-10 no-underline bg-white hover:bg-blue-700 cursor-pointer;
 }
 
-/* hide inputs */
 .menu-checkbox {
   display: none;
 }
 
-/* fade in checked menu */
 .menu-checkbox:checked + .menu {
   transform: translate3d(0, 0, 0);
 }
