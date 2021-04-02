@@ -10,15 +10,17 @@
     </div>
 
     <div class="glide__arrows" data-glide-el="controls">
-      <button class="absolute top-0 -left-4 bottom-0 m-auto bg-white w-10 h-10 rounded-full hover:bg-indigo-600  duration-300 shadow-lg flex items-center justify-center glide__arrow glide__arrow--left" data-glide-dir="<"><ion-icon name="chevron-back-outline"></ion-icon></button>
-      <button class="absolute top-0 -right-4 bottom-0 m-auto bg-white w-10 h-10 rounded-full hover:bg-indigo-600 duration-300 shadow-lg flex items-center justify-center glide__arrow glide__arrow--right" data-glide-dir=">"><ion-icon name="chevron-forward-outline"></ion-icon></button>
+      <button class="absolute top-0 -left-4 bottom-0 m-auto bg-white w-10 h-10 rounded-full hover:bg-gray-400  duration-300 shadow-lg flex items-center justify-center glide__arrow glide__arrow--left" data-glide-dir="<"><ion-icon name="chevron-back-outline"></ion-icon></button>
+      <button class="absolute top-0 -right-4 bottom-0 m-auto bg-white w-10 h-10 rounded-full hover:bg-gray-400 duration-300 shadow-lg flex items-center justify-center glide__arrow glide__arrow--right" data-glide-dir=">"><ion-icon name="chevron-forward-outline"></ion-icon></button>
     </div>
 
-<!--    <div class="glide__bullets" data-glide-el="controls[nav]">-->
-<!--      <button class="glide__bullet" data-glide-dir="=0">bullet 1</button>-->
-<!--      <button class="glide__bullet" data-glide-dir="=1">bullet 2</button>-->
-<!--      <button class="glide__bullet" data-glide-dir="=2">bullet 3</button>-->
-<!--    </div>-->
+    <div id="test" class="px-4 glide__bullets flex justify-between" data-glide-el="controls[nav]">
+      <button #recommendedProductName class="glide__bullet border-solid border-transparent border-r-4 border-l-4 border-t-4 hover:border-t-4 hover:border-t-blue-900" [ngClass]="{'border-t-blue-900': recommendedProductName.classList.contains('glide__bullet--active')}" data-glide-dir="=0">bullet 1</button>
+      <button #recommendedProductName2 class="glide__bullet border-solid border-transparent border-r-4 border-l-4 border-t-4 hover:border-t-4 hover:border-t-blue-900" [ngClass]="{'border-t-blue-900': recommendedProductName2.classList.contains('glide__bullet--active')}" data-glide-dir="=1">bullet 2</button>
+      <button #recommendedProductName3 class="glide__bullet border-solid border-transparent border-r-4 border-l-4 border-t-4 hover:border-t-4 hover:border-t-blue-900" [ngClass]="{'border-t-blue-900': recommendedProductName3.classList.contains('glide__bullet--active')}" data-glide-dir="=2">bullet 3</button>
+      <button #recommendedProductName4 class="glide__bullet border-solid border-transparent border-r-4 border-l-4 border-t-4 hover:border-t-4 hover:border-t-blue-900" [ngClass]="{'border-t-blue-900': recommendedProductName4.classList.contains('glide__bullet--active')}" data-glide-dir="=2">bullet 4</button>
+      <button #recommendedProductName5 class="glide__bullet border-solid border-transparent border-r-4 border-l-4 border-t-4 hover:border-t-4 hover:border-t-blue-900" [ngClass]="{'border-t-blue-900': recommendedProductName5.classList.contains('glide__bullet--active')}" data-glide-dir="=2">bullet 5</button>
+    </div>
   </div>
 
 

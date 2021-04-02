@@ -1,3 +1,5 @@
+var flattenColorPalette = require('tailwindcss/lib/util/flattenColorPalette').default;
+
 module.exports = {
   purge: {
     enabled: process.env.WEBPACK_DEV_SERVER === 'true' && process.argv.join(' ').indexOf('build') !== -1,
@@ -39,14 +41,49 @@ module.exports = {
       animation: {
         'fade-in-down': 'fade-in-down 0.5s ease-out',
         'fade-bg': 'fade-bg 0.3s ease-out'
+      },
+      borderColor: {
+        'transparent': 'rgba(255, 255, 255, 0)'
+      },
+      borderWidth: {
+        'none': 'none',
+        'solid': 'solid'
+      },
+      borderStyle: {
+        'solid': 'solid'
       }
+
     }
   },
   variants: {
     extend: {
       display: ['hover', 'group-hover'],
       scale: ['group-hover'],
+      borderColor: ['hover', 'active'],
+      borderStyle: ['hover'],
+      borderWidth: ['hover', 'active']
     }
   },
-  plugins: [],
+  plugins: [
+    ({ addUtilities, e, theme, variants }) => {
+      let colors = flattenColorPalette(theme('borderColor'));
+      delete colors['default'];
+
+      // Replace or Add custom colors
+      if(this.theme?.extend?.colors !== undefined){
+        colors = Object.assign(colors, this.theme.extend.colors);
+      }
+
+      const colorMap = Object.keys(colors)
+        .map(color => ({
+          [`.border-t-${color}`]: {borderTopColor: colors[color]},
+          [`.border-r-${color}`]: {borderRightColor: colors[color]},
+          [`.border-b-${color}`]: {borderBottomColor: colors[color]},
+          [`.border-l-${color}`]: {borderLeftColor: colors[color]},
+        }));
+      const utilities = Object.assign({}, ...colorMap);
+
+      addUtilities(utilities, variants('borderColor'));
+    },
+  ],
 }

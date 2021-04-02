@@ -12,7 +12,7 @@ export class RecommendedProductsComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    new Glide('.glide').mount();
+    new Glide('.glide', { autoplay: 5000 }).mount();
   }
 
 }
