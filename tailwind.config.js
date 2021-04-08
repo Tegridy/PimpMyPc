@@ -18,6 +18,10 @@ module.exports = {
         '37vh' : '37vh',
         '56': '14rem'
       },
+      maxWidth: {
+        '1/5': '20%',
+        '1/2': '50%'
+      },
       keyframes: {
         'fade-in-down': {
           '0%': {

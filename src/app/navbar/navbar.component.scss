@@ -1,8 +1,3 @@
-ion-icon {
-  font-size: 1.5rem;
-}
-
-
 .menu {
   @apply absolute top-0 left-0 bg-white w-64 h-full z-10 divide-y-2 divide-gray-300;
   transform: translate3d(-260px, 0, 0);
