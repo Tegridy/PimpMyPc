@@ -1,34 +1,32 @@
-<div class="bg-gray-50 shadow-lg rounded-lg h-64 mx-auto cursor-pointer border-2 border-transparent hover:border-black hover:shadow-2xl">
+<div
+  class="bg-gray-50 shadow-lg rounded-lg h-auto mx-auto cursor-pointer border-2 border-transparent hover:border-black hover:shadow-2xl">
 
-<div class="flex flex-col items-center p-4">
-  <div>
-  <img src="https://picsum.photos/170/170" alt="photo" />
-  </div>
+  <div class="flex flex-col items-center p-4 group">
 
-  <div class="self-start w-full">
-    <div class="flex justify-between py-4">
+    <div class="m-2 px-4 self-start border border-black border-1 shadow-lg rounded-l-2xl rounded-r-2xl">New</div>
+
     <div>
-      Product long name<br>
-      Price
+      <img class="object-fill" src="https://picsum.photos/170/170" alt="photo"/>
     </div>
-      <button class="w-8 h-8 rounded-full hover:border-green-700 hover:border-2 self-center">
-        <span class="flex items-center justify-center h-full w-full bg-white rounded-full">
-          <ion-icon name="add-outline" style="color: green"></ion-icon>
-        </span>
-      </button>
+
+    <div class="flex flex-col mt-4 w-full">
+      <div>
+        Product long name
+      </div>
+
+      <div class="flex flex-row justify-between items-center">
+        <span class="py-4">Price</span>
+
+        <button
+          class="w-10 h-10 rounded-lg hidden md:group-hover:block border-2 group-hover:border-green-700 hover:bg-green-700 text-green-700 hover:text-gray-50 mr-3 mb-3">
+          <span class="flex items-center justify-center">
+            <ion-icon name="add-outline"></ion-icon>
+          </span>
+        </button>
+      </div>
+
     </div>
-  </div>
 
-
-
-<!--  <div class="self-start m-2">-->
-<!--  <h3 class="my-1">Product name</h3>-->
-
-<!--  <span>1339$</span>-->
-<!--  </div>-->
-<!--  <div>-->
-<!--    <span class="absolute bg-red-500">HALO POLICJA</span>-->
-<!--  </div>-->
   </div>
 
 
