@@ -1,23 +1,31 @@
-<main id="products" class="container mx-auto h-full bg-white bg-opacity-60 p-4">
+<main id="products" class="container mx-auto h-full bg-white bg-opacity-60 sm:p-4">
 
   <pmp-recommended-products></pmp-recommended-products>
 
-  <section class="my-4">
+  <section class="flex my-4">
     <hr class="my-4 rounded-lg bg-black border-black">
 
-    <div class="w-full">
+    <div class=" bg-gray-50 border border-black rounded-lg w-2/5 hidden lg:block">
+      <div class="flex flex-col items-center justify-center h-full relative">
+      <h2 class="absolute -top-2 my-4 mx-auto text-xl">Newest product</h2>
+      <img class="w-11/12" src="https://picsum.photos/100/100">
+      <span class="m-4 text-3xl">product long name of long product</span>
+      <span class="text-xl">product price</span>
+      </div>
+    </div>
+
+    <div class="w-full lg:w-3/5 mx-8">
         <h1 class="font-bold text-4xl my-4">Our choice </h1>
 
 <!--      TODO Make mobile display to max 6-8 rows -->
 
-      <div class="grid grid-cols-2 row-auto grid-rows-none gap-4 md:grid-cols-3 lg:grid-cols-5 px-4 h-192 overflow-auto sm:h-auto sm:overflow-auto">
+      <div class="grid grid-cols-2 row-auto grid-rows-none gap-6 md:grid-cols-3 lg:grid-cols-3 sm:px-4 h-192 overflow-auto sm:h-auto sm:overflow-auto">
         <pmp-product-small></pmp-product-small>
         <pmp-product-small></pmp-product-small>
         <pmp-product-small></pmp-product-small>
         <pmp-product-small></pmp-product-small>
         <pmp-product-small></pmp-product-small>        <pmp-product-small></pmp-product-small>
-        <pmp-product-small></pmp-product-small>
-        <pmp-product-small></pmp-product-small>
+
       </div>
     </div>
 

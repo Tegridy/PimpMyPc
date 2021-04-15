@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {AfterContentInit, AfterViewInit, Component, HostListener, OnInit} from '@angular/core';
 import Glide from '@glidejs/glide';
+
 
 @Component({
   selector: 'pmp-home',
@@ -8,11 +9,31 @@ import Glide from '@glidejs/glide';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  slidesPerView = 6;
+  moviesSlider: any;
+  bestsellersSlider: any;
 
-  ngOnInit(): void {
-    new Glide('#movies-slider', { autoplay: 5000}).mount();
-    new Glide('#bestsellers-slider', { autoplay: 5000 }).mount();
+  constructor() {
+
   }
 
+  ngOnInit(): void {
+    this.moviesSlider = new Glide('#movies-slider', {
+      perView: 6, bound: true, breakpoints: {
+        1024: {
+          perView: 2,
+          bound: true
+        }
+      }
+    }).mount();
+    this.bestsellersSlider = new Glide('#bestsellers-slider', {
+      perView: 6, bound: true, breakpoints: {
+        1024: {
+          perView: 2,
+          bound: true
+        }
+      }
+    }).mount();
+
+  }
 }
