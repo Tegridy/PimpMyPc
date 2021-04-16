@@ -2,13 +2,15 @@
 
   <pmp-recommended-products></pmp-recommended-products>
 
-  <section class="flex my-4">
+  <section class="flex items-center my-4">
     <hr class="my-4 rounded-lg bg-black border-black">
 
-    <div class=" bg-gray-50 border border-black rounded-lg w-2/5 hidden lg:block">
+    <div class="bg-gray-50 border border-black rounded-lg w-2/5 hidden lg:block py-9 ml-8">
       <div class="flex flex-col items-center justify-center h-full relative">
-      <h2 class="absolute -top-2 my-4 mx-auto text-xl">Newest product</h2>
-      <img class="w-11/12" src="https://picsum.photos/100/100">
+      <h2 class="mb-4 mx-auto text-xl">Newest product</h2>
+        <div class="w-10/12 mx-auto">
+      <img class="mx-auto" src="https://picsum.photos/400/400">
+        </div>
       <span class="m-4 text-3xl">product long name of long product</span>
       <span class="text-xl">product price</span>
       </div>
@@ -49,6 +51,27 @@
     <div id="movies-slider">
     <pmp-slider></pmp-slider>
     </div>
+  </section>
+
+  <section id="newsletter">
+
+    <div class="flex justify-center items-center p-8 w-full">
+      <div class="flex items-center justify-between w-1/2 h-auto bg-gray-50 p-6 rounded-lg border border-black">
+        <div class="w-3/5">
+        <h3 class="text-2xl my-2">Newsletter</h3>
+        <p class="mb-2">Dont miss any sale, gain new promos.</p>
+          <div class="flex items-center bg-gray-50 border border-black border-2 rounded-full h-8">
+            <input class="ml-3 h-6 w-10/12" type="text" placeholder="Your e-mail">
+            <button class="flex items-center justify-center bg-blue-600 rounded-full h-8 w-24 font-bold relative -right-2">
+              Sign up
+            </button>
+          </div>
+        </div>
+
+        <ion-icon class="mr-4 h-28 w-28" name="newspaper-outline"></ion-icon>
+      </div>
+    </div>
+
   </section>
 
 </main>
