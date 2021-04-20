@@ -8,6 +8,7 @@ import { HomeComponent } from './home/home.component';
 import { RecommendedProductsComponent } from './home/recommended-products/recommended-products.component';
 import { ProductSmallComponent } from './home/product-small/product-small.component';
 import { SliderComponent } from './slider/slider.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { SliderComponent } from './slider/slider.component';
     HomeComponent,
     RecommendedProductsComponent,
     ProductSmallComponent,
-    SliderComponent
+    SliderComponent,
+    FooterComponent
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   imports: [
