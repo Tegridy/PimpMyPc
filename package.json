@@ -21,6 +21,8 @@
     "@angular/router": "~11.2.4",
     "@types/angular": "^1.8.1",
     "@types/glidejs": "^1.0.30",
+    "angular-star-rating": "*",
+    "css-star-rating": "^1.2.4",
     "hamburgers": "^1.1.3",
     "ionicons": "^5.5.0",
     "rxjs": "~6.6.0",

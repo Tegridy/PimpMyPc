@@ -9,6 +9,9 @@ import { RecommendedProductsComponent } from './home/recommended-products/recomm
 import { ProductSmallComponent } from './home/product-small/product-small.component';
 import { SliderComponent } from './slider/slider.component';
 import { FooterComponent } from './footer/footer.component';
+import { ProductFullComponent } from './product-full/product-full.component';
+import { NewsletterComponent } from './newsletter/newsletter.component';
+import {StarRatingModule} from 'angular-star-rating';
 
 @NgModule({
   declarations: [
@@ -18,13 +21,16 @@ import { FooterComponent } from './footer/footer.component';
     RecommendedProductsComponent,
     ProductSmallComponent,
     SliderComponent,
-    FooterComponent
+    FooterComponent,
+    ProductFullComponent,
+    NewsletterComponent
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
-  imports: [
-    BrowserModule,
-    PmpRoutingModule
-  ],
+    imports: [
+        BrowserModule,
+        PmpRoutingModule,
+        StarRatingModule.forRoot()
+    ],
   providers: [],
   bootstrap: [PmpComponent]
 })

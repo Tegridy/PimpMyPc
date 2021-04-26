@@ -68,7 +68,8 @@ module.exports = {
       scale: ['group-hover'],
       borderColor: ['hover', 'active'],
       borderStyle: ['hover'],
-      borderWidth: ['hover', 'active']
+      borderWidth: ['hover', 'active'],
+      backgroundColor: ['odd']
     }
   },
   plugins: [

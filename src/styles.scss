@@ -3,6 +3,7 @@
 @tailwind components;
 @tailwind utilities;
 @import "node_modules/hamburgers/_sass/hamburgers/hamburgers";
+@import '~css-star-rating/scss/star-rating';
 
 @layer base {
   body {
