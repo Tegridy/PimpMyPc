@@ -3,7 +3,7 @@
 @tailwind components;
 @tailwind utilities;
 @import "node_modules/hamburgers/_sass/hamburgers/hamburgers";
-@import '~css-star-rating/scss/star-rating';
+@import '~css-star-rating/css/star-rating.min.css';
 
 @layer base {
   body {
@@ -25,4 +25,42 @@ html {
 
 ion-icon {
   font-size: 1.5rem;
+}
+
+// Stars styles
+
+.rating.color-negative .star-container .star {
+  svg {
+    fill: #f18f01 !important;
+  }
+  i {
+    color: #f18f01 !important;;
+  }
+}
+
+.rating.color-ok .star-container .star {
+  svg {
+    fill: #f18f01 !important;;
+  }
+  i {
+    color: #f18f01 !important;;
+  }
+}
+
+.rating.color-positive .star-container .star {
+  svg {
+    fill: #f18f01 !important;;
+  }
+  i {
+    color: #f18f01 !important;;
+  }
+}
+
+.rating.color-default .star-container .star {
+  svg {
+    fill: #f18f01 !important;;
+  }
+  i {
+    color: #f18f01 !important;;
+  }
 }

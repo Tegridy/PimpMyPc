@@ -58,8 +58,10 @@ module.exports = {
       },
       borderStyle: {
         'solid': 'solid'
+      },
+      inset: {
+        '2/5': '40%'
       }
-
     }
   },
   variants: {
