@@ -12,6 +12,7 @@ import { FooterComponent } from './footer/footer.component';
 import { ProductFullComponent } from './product-full/product-full.component';
 import { NewsletterComponent } from './newsletter/newsletter.component';
 import {StarRatingModule} from 'angular-star-rating';
+import { ProductsCategoryComponent } from './products-category/products-category.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import {StarRatingModule} from 'angular-star-rating';
     SliderComponent,
     FooterComponent,
     ProductFullComponent,
-    NewsletterComponent
+    NewsletterComponent,
+    ProductsCategoryComponent
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
     imports: [

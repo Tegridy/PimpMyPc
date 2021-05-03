@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'pmp-product-small',
@@ -6,6 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./product-small.component.scss']
 })
 export class ProductSmallComponent implements OnInit {
+
+  @Input()
+  listView = false;
+  @Input()
+  itemParams: string[] = [];
 
   constructor() { }
 

@@ -1,0 +1,77 @@
+<section id="product-categories">
+
+  <div id="categories" class="flex">
+
+    <div class="w-1/5 mr-6 hidden md:block">
+    <nav class="border-2 border-black rounded-t-lg bg-gray-50">
+      <ul>
+        <li>Cat 1</li>
+        <li>Cat 1</li>
+        <li>Cat 1</li>
+      </ul>
+    </nav>
+
+    <div id="filters" class="border-2 border-black border-t-0 rounded-b-lg bg-gray-50 hidden md:block">
+    <h3 class="text-xl">Producer</h3>
+    <ul>
+      <li class="flex items-center"><input type="checkbox" id="producer-#1"><label for="producer-#1">Acer</label></li>
+    </ul>
+
+      <h3 class="text-xl">Price</h3>
+      <div class="flex">
+        <input type="number" placeholder="From">
+        <input type="number" placeholder="To">
+      </div>
+
+<!--      <ng-container *ngFor="let filter of filters">-->
+<!--      <h3 class="text-xl">{{ filter.name }}</h3>-->
+<!--        <ul>-->
+<!--          <li class="flex items-center"><input type="checkbox" id="producer-{{ filter.id}}"><label for="producer-{{ filter.id}}">{{ filter.type}}</label></li>-->
+<!--        </ul>-->
+<!--    </ng-container>-->
+
+    </div>
+    </div>
+
+    <div id="products" class="w-full md:w-4/5">
+
+      <div class="flex flex-col md:flex-row justify-between items-center p-2 bg-gray-50">
+          <div class="flex">
+            <button class="flex justify-center items-center mr-4 p-2 rounded-lg" [ngClass]="{'bg-gray-400' : currentlyActiveView}" (click)="changeProductsView()"><ion-icon  name="grid-outline"  ></ion-icon></button>
+            <button class="flex justify-center items-center p-2 rounded-lg" (click)="changeProductsView()" [ngClass]="{'bg-gray-400' : !currentlyActiveView}"><ion-icon name="list-outline"></ion-icon></button>
+          </div>
+
+          <div class="flex flex-col md:flex-row items-center space-x-4">
+            <select class="w-32">
+              <option>Popularity</option>
+            </select>
+
+            <div class="flex items-center space-x-4">
+              <button class="flex justify-center items-center"><ion-icon class="p-2" name="chevron-back-circle-outline"></ion-icon></button>
+              <span ><input type="number" [defaultValue]="1"> from 96</span>
+              <button class="flex justify-center items-center"><ion-icon class="p-2 " name="chevron-forward-circle-outline"></ion-icon></button>
+            </div>
+          </div>
+      </div>
+
+      <hr class="mb-4 h-1 bg-black rounded-full">
+
+      <div [ngClass]="currentlyActiveView ? 'grid grid-cols-4 gap-4' : 'grid grid-cols-1 gap-4'">
+<!--        <pmp-product-small [itemParams]="['param1', 'param2','param3']"></pmp-product-small>-->
+<!--        <pmp-product-small></pmp-product-small>-->
+<!--        <pmp-product-small></pmp-product-small>-->
+<!--        <pmp-product-small></pmp-product-small>-->
+<!--        <pmp-product-small></pmp-product-small>-->
+<!--        <pmp-product-small></pmp-product-small>-->
+<!--        <pmp-product-small></pmp-product-small>-->
+<!--        <pmp-product-small></pmp-product-small>-->
+        <pmp-product-small [listView]=true></pmp-product-small>
+        <pmp-product-small [listView]=true></pmp-product-small>
+      </div>
+
+    </div>
+
+  </div>
+
+
+</section>
