@@ -1,51 +1,7 @@
-<!--    Grid view   -->
+<div
+     class="bg-gray-50 shadow-lg rounded-lg cursor-pointer border-2 border-transparent hover:border-black hover:shadow-lg">
 
-<div *ngIf="!listView"
-  class="bg-gray-50 shadow-lg rounded-lg cursor-pointer border-2 border-transparent hover:border-black hover:shadow-lg">
-
-  <div class="flex flex-col items-center p-2 group">
-
-    <div class="m-2 px-4 self-start border border-black border-1 shadow rounded-l-2xl rounded-r-2xl">New</div>
-
-    <div>
-      <img class="object-fill" src="https://picsum.photos/170/170" alt="photo"/>
-    </div>
-
-    <div class="flex flex-col mt-4 w-full">
-      <span>
-        Product long name
-      </span>
-
-      <ng-container *ngIf="itemParams">
-        <ul *ngFor="let itemParam of itemParams">
-          <li>{{ itemParam }}</li>
-        </ul>
-      </ng-container>
-
-      <div class="flex flex-row justify-between items-center">
-        <span class="py-4">Price</span>
-
-        <button
-          class="w-10 h-10 rounded-lg hidden md:group-hover:block border-2 group-hover:border-green-700 hover:bg-green-700 text-green-700 hover:text-gray-50 mr-3 mb-3">
-          <span class="flex items-center justify-center">
-            <ion-icon name="add-outline"></ion-icon>
-          </span>
-        </button>
-      </div>
-
-    </div>
-
-  </div>
-
-</div>
-
-<!--    List view   -->
-
-
-<div *ngIf="listView"
-  class="bg-gray-50 shadow-lg rounded-lg cursor-pointer border-2 border-transparent hover:border-black hover:shadow-lg">
-
-  <div class="flex flex-row p-2 group">
+  <div class="flex  p-2 group" [ngClass]="listView ? 'flex-row' : 'flex-col' ">
 
 <!--    <div class="m-2 px-4 self-start border border-black border-1 shadow rounded-l-2xl rounded-r-2xl">New</div>-->
 
@@ -53,23 +9,24 @@
       <img class="" src="https://picsum.photos/170/170" alt="photo"/>
     </div>
 
-
-    <div class="flex justify-between w-4/5 ml-8">
-      <span>
+    <div class="flex mt-4" [ngClass]="listView ?  'justify-between w-4/5 flex-row md:ml-8' : 'flex-col w-full'">
+      <div *ngIf="listView" class="space-y-1">
+      <span class="text-lg md:text-2xl">
         Product long name
       </span>
 
-      <ng-container *ngIf="itemParams">
-        <ul *ngFor="let itemParam of itemParams">
-          <li>{{ itemParam }}</li>
-        </ul>
-      </ng-container>
-
-      <div class="flex flex-col justify-between w-1/5">
-        <span class="py-4">Price</span>
+        <ng-container *ngIf="itemParams">
+          <ul *ngFor="let itemParam of itemParams">
+            <li>{{ itemParam }}</li>
+          </ul>
+        </ng-container>
+      </div>
+      <div class="flex justify-between" [ngClass]="listView ? 'md:flex-col j w-1/5' : 'flex-row items-center'">
+        <span class="py-2 text-lg md:text-2xl">Price</span>
 
         <button
-          class="w-10 h-10 rounded-lg md:group-hover:block border-2 border-green-700 hover:bg-green-700 text-green-700 hover:text-gray-50 mr-3 mb-3 self-end">
+          class="w-10 h-10 rounded-lg hidden md:group-hover:block border-2 group-hover:border-green-700 hover:bg-green-700 text-green-700 hover:text-gray-50 mr-3 mb-3"
+          [ngClass]="{'border-green-700 self-end hidden md:block' : listView}">
           <span class="flex items-center justify-center">
             <ion-icon name="add-outline"></ion-icon>
           </span>

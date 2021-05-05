@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class ProductsCategoryComponent implements OnInit {
 
   currentlyActiveView = true;
+  showModal = false;
 
   constructor() { }
 
@@ -18,4 +19,7 @@ export class ProductsCategoryComponent implements OnInit {
     this.currentlyActiveView = !this.currentlyActiveView;
   }
 
+  toggleModal(): void {
+    this.showModal = !this.showModal;
+  }
 }
