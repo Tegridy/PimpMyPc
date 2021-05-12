@@ -42,8 +42,8 @@
         <button (click)="toggleModal()" class="block md:hidden m-2 p-2 rounded-full bg-blue-600">Categories and filters</button>
 
           <div class="flex">
-            <button class="flex justify-center items-center mr-4 p-2 rounded-lg" [ngClass]="{'bg-gray-400' : currentlyActiveView}" (click)="changeProductsView()"><ion-icon  name="grid-outline"  ></ion-icon></button>
-            <button class="flex justify-center items-center p-2 rounded-lg" (click)="changeProductsView()" [ngClass]="{'bg-gray-400' : !currentlyActiveView}"><ion-icon name="list-outline"></ion-icon></button>
+            <button class="flex justify-center items-center mr-4 p-2 rounded-lg" [ngClass]="{'bg-gray-400' : !showProductsInListView}" (click)="changeProductsView()"><ion-icon name="grid-outline"  ></ion-icon></button>
+            <button class="flex justify-center items-center p-2 rounded-lg" (click)="changeProductsView()" [ngClass]="{'bg-gray-400' : showProductsInListView}"><ion-icon name="list-outline"></ion-icon></button>
           </div>
 
           <div class="flex flex-col md:flex-row items-center space-x-4">
@@ -63,7 +63,7 @@
 
       <hr class="mb-4 h-1 bg-black rounded-full">
 
-      <div [ngClass]="currentlyActiveView ? 'grid grid-cols-2 md:grid-cols-4 gap-4' : 'grid grid-cols-1 gap-4'">
+      <div [ngClass]="showProductsInListView ? 'grid grid-cols-1 gap-4' : 'grid grid-cols-1 sm:grid-cols-3 gap-4'">
 <!--        <pmp-product-small [itemParams]="['param1', 'param2','param3']"></pmp-product-small>-->
 <!--        <pmp-product-small></pmp-product-small>-->
 <!--        <pmp-product-small></pmp-product-small>-->
@@ -72,8 +72,8 @@
 <!--        <pmp-product-small></pmp-product-small>-->
 <!--        <pmp-product-small></pmp-product-small>-->
 <!--        <pmp-product-small></pmp-product-small>-->
-        <pmp-product-small [itemParams]="['param1', 'param2','param3','param3','param3']" [listView]=true></pmp-product-small>
-        <pmp-product-small [listView]=true></pmp-product-small>
+        <pmp-product-small [itemParams]="['param1', 'param2','param3','param3','param3']" [listView]=showProductsInListView></pmp-product-small>
+        <pmp-product-small [listView]=showProductsInListView></pmp-product-small>
       </div>
 
 

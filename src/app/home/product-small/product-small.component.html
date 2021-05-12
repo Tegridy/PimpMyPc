@@ -1,16 +1,16 @@
 <div
-     class="bg-gray-50 shadow-lg rounded-lg cursor-pointer border-2 border-transparent hover:border-black hover:shadow-lg">
+     class="bg-gray-50 shadow-lg rounded-lg cursor-pointer border-2 border-transparent hover:border-black hover:shadow-lg h-full">
 
-  <div class="flex  p-2 group" [ngClass]="listView ? 'flex-row' : 'flex-col' ">
+  <div class="flex p-2 group h-full" [ngClass]="listView ? 'flex-row items-start' : 'flex-col'">
 
 <!--    <div class="m-2 px-4 self-start border border-black border-1 shadow rounded-l-2xl rounded-r-2xl">New</div>-->
 
-    <div>
-      <img class="" src="https://picsum.photos/170/170" alt="photo"/>
+    <div class="mt-4 sm:mt-0 self-center">
+      <img src="https://picsum.photos/170/170" alt="photo"/>
     </div>
 
-    <div class="flex mt-4" [ngClass]="listView ?  'justify-between w-4/5 flex-row md:ml-8' : 'flex-col w-full'">
-      <div *ngIf="listView" class="space-y-1">
+    <div class="flex sm:justify-between ml-4 h-full" [ngClass]="listView ? 'flex-col sm:flex-row w-full lg:pl-8 lg:pr-16' : 'flex-col'">
+      <div class="space-y-1">
       <span class="text-lg md:text-2xl">
         Product long name
       </span>
@@ -21,18 +21,16 @@
           </ul>
         </ng-container>
       </div>
-      <div class="flex justify-between" [ngClass]="listView ? 'md:flex-col j w-1/5' : 'flex-row items-center'">
-        <span class="py-2 text-lg md:text-2xl">Price</span>
+      <div class="flex h-full justify-between" [ngClass]="listView ? 'flex-col' : 'flex-row items-center'">
+        <span class="py-2 text-lg md:text-2xl self-end">Price</span>
 
         <button
-          class="w-10 h-10 rounded-lg hidden md:group-hover:block border-2 group-hover:border-green-700 hover:bg-green-700 text-green-700 hover:text-gray-50 mr-3 mb-3"
-          [ngClass]="{'border-green-700 self-end hidden md:block' : listView}">
+          class="w-10 h-10 rounded-lg hidden md:group-hover:block border-2 hover:border-green-700 hover:bg-green-700 text-green-700 hover:text-gray-50 mr-3 mb-3 self-end hidden sm:block">
           <span class="flex items-center justify-center">
             <ion-icon name="add-outline"></ion-icon>
           </span>
         </button>
       </div>
-
     </div>
 
   </div>

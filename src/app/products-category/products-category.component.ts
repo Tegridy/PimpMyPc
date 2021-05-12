@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'pmp-products-category',
@@ -7,16 +7,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductsCategoryComponent implements OnInit {
 
-  currentlyActiveView = true;
+  showProductsInListView = false;
   showModal = false;
 
-  constructor() { }
+  constructor(private ref: ChangeDetectorRef) { }
 
   ngOnInit(): void {
   }
 
   changeProductsView(): void {
-    this.currentlyActiveView = !this.currentlyActiveView;
+    this.showProductsInListView = !this.showProductsInListView;
+    setInterval(() => console.log(this.showProductsInListView),5000);
   }
 
   toggleModal(): void {

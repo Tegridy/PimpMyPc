@@ -15,6 +15,7 @@ export class ProductSmallComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+ setInterval(() => console.log(this.listView), 5000);
   }
 
 }
