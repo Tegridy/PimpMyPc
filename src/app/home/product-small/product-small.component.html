@@ -11,7 +11,7 @@
 
     <div class="flex sm:justify-between ml-4 h-full" [ngClass]="listView ? 'flex-col sm:flex-row w-full lg:pl-8 lg:pr-16' : 'flex-col'">
       <div class="space-y-1">
-      <span class="text-lg md:text-2xl">
+      <span class="text-lg">
         Product long name
       </span>
 
@@ -22,10 +22,10 @@
         </ng-container>
       </div>
       <div class="flex h-full justify-between" [ngClass]="listView ? 'flex-col' : 'flex-row items-center'">
-        <span class="py-2 text-lg md:text-2xl self-end">Price</span>
+        <span class="py-2 text-lg self-end">Price</span>
 
         <button
-          class="w-10 h-10 rounded-lg hidden md:group-hover:block border-2 hover:border-green-700 hover:bg-green-700 text-green-700 hover:text-gray-50 mr-3 mb-3 self-end hidden sm:block">
+          class="w-10 h-10 rounded-lg hidden md:group-hover:block border-2 hover:border-green-700 hover:bg-green-700 text-green-700 hover:text-gray-50 self-end hidden sm:block">
           <span class="flex items-center justify-center">
             <ion-icon name="add-outline"></ion-icon>
           </span>

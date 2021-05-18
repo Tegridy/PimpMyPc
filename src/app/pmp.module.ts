@@ -13,6 +13,9 @@ import { ProductFullComponent } from './product-full/product-full.component';
 import { NewsletterComponent } from './newsletter/newsletter.component';
 import {StarRatingModule} from 'angular-star-rating';
 import { ProductsCategoryComponent } from './products-category/products-category.component';
+import { UserSignUpComponent } from './user-sign-up/user-sign-up.component';
+import { UserSignInComponent } from './user-sign-in/user-sign-in.component';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -25,14 +28,17 @@ import { ProductsCategoryComponent } from './products-category/products-category
     FooterComponent,
     ProductFullComponent,
     NewsletterComponent,
-    ProductsCategoryComponent
+    ProductsCategoryComponent,
+    UserSignUpComponent,
+    UserSignInComponent
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
-    imports: [
-        BrowserModule,
-        PmpRoutingModule,
-        StarRatingModule.forRoot()
-    ],
+  imports: [
+    BrowserModule,
+    PmpRoutingModule,
+    StarRatingModule.forRoot(),
+    FormsModule
+  ],
   providers: [],
   bootstrap: [PmpComponent]
 })
