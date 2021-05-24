@@ -16,6 +16,7 @@ import { ProductsCategoryComponent } from './products-category/products-category
 import { UserSignUpComponent } from './user-sign-up/user-sign-up.component';
 import { UserSignInComponent } from './user-sign-in/user-sign-in.component';
 import {FormsModule} from '@angular/forms';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import {FormsModule} from '@angular/forms';
     NewsletterComponent,
     ProductsCategoryComponent,
     UserSignUpComponent,
-    UserSignInComponent
+    UserSignInComponent,
+    PageNotFoundComponent
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   imports: [
