@@ -1,0 +1,69 @@
+<section id="basket" class="pt-4">
+
+  <div class="flex flex-col justify-center w-full">
+
+    <div *ngIf="!basketItems" class="text-2xl text-center my-24">
+      <span>Your basket is empty, please add some products.</span><br>
+
+      <button class="m-4 px-4 py-2 bg-blue-600 rounded-full">Homepage</button>
+    </div>
+
+    <div *ngIf="basketItems">
+    <h2 class="text-3xl mb-4 w-full">Basket ({{ numberOfItemsInBasket }})</h2>
+
+    <div class="flex flex-col sm:flex-row justify-between">
+
+      <ul class="w-full sm:w-3/5 space-y-4">
+        <li class="flex w-full justify-between border-2 border-black rounded-lg p-4">
+          <div class="flex">
+          <img src="https://picsum.photos/90/90">
+          <h6 class="ml-4 my-auto">Product long name</h6>
+          </div>
+
+          <div class="">
+            <span class="mr-4">99.99$</span>
+            <select>
+              <option>1</option>
+            </select>
+          </div>
+        </li>
+
+        <li class="flex w-full justify-between border-2 border-black rounded-lg p-4">
+          <div class="flex">
+            <img src="https://picsum.photos/90/90">
+            <h6 class="ml-4 my-auto">Product long name</h6>
+          </div>
+
+          <div class="">
+            <span class="mr-4">99.99$</span>
+            <select>
+              <option>1</option>
+            </select>
+          </div>
+        </li>
+      </ul>
+
+
+      <div class="w-1/5 mx-8 bg-gray-400 bg-opacity-40 flex items-center justify-between flex-col rounded-lg max-h-36">
+        <div class="mt-4 flex flex-col items-center">
+        <h3 class="">Total price</h3>
+        <span>99.99$</span>
+        </div>
+
+        <div>
+          <button routerLink="/delivery" class="p-2 m-4 bg-blue-600 rounded-full">Go to delivery</button>
+        </div>
+
+      </div>
+    </div>
+    </div>
+
+
+
+  </div>
+
+
+
+
+
+</section>

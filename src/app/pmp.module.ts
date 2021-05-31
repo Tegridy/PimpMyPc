@@ -17,6 +17,7 @@ import { UserSignUpComponent } from './user-sign-up/user-sign-up.component';
 import { UserSignInComponent } from './user-sign-in/user-sign-in.component';
 import {FormsModule} from '@angular/forms';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { BasketComponent } from './basket/basket.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     ProductsCategoryComponent,
     UserSignUpComponent,
     UserSignInComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    BasketComponent
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   imports: [
