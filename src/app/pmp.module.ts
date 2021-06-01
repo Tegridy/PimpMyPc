@@ -18,6 +18,10 @@ import { UserSignInComponent } from './user-sign-in/user-sign-in.component';
 import {FormsModule} from '@angular/forms';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { BasketComponent } from './basket/basket.component';
+import { AccountComponent } from './account/account.component';
+import { MyOrdersComponent } from './account/my-orders/my-orders.component';
+import { AccountSettingsComponent } from './account/account-settings/account-settings.component';
+import { ReturnsComponent } from './account/returns/returns.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +38,11 @@ import { BasketComponent } from './basket/basket.component';
     UserSignUpComponent,
     UserSignInComponent,
     PageNotFoundComponent,
-    BasketComponent
+    BasketComponent,
+    AccountComponent,
+    MyOrdersComponent,
+    AccountSettingsComponent,
+    ReturnsComponent
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   imports: [

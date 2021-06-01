@@ -1,0 +1,37 @@
+<section id="account">
+
+  <div class="p-12 flex w-full">
+
+    <div class="flex flex-col border-r-2 border-black w-1/5 min-h-100vh">
+    <span>
+      <h6>Hello,</h6>
+      <h3 class="text-2xl font-bold">User</h3>
+    </span>
+
+    <nav class="mt-8">
+      <ul class="">
+        <li routerLink="orders" class="hover:bg-gray-500 p-3 cursor-pointer flex items-center">
+          <ion-icon name="albums-outline" class="mr-2"></ion-icon>
+          Orders</li>
+        <li routerLink="returns" class="hover:bg-gray-500 p-3 cursor-pointer flex items-center">
+          <ion-icon name="refresh-outline" class="mr-2"></ion-icon>
+          Returns and complains</li>
+        <li routerLink="settings" class="hover:bg-gray-500 p-3 cursor-pointer flex items-center">
+          <ion-icon name="settings-outline" class="mr-2"></ion-icon>
+          Account settings</li>
+      </ul>
+    </nav>
+    </div>
+
+    <div class="px-4">
+      <div>
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+
+
+  </div>
+
+
+
+</section>
