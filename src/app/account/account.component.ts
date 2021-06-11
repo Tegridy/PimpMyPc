@@ -7,9 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AccountComponent implements OnInit {
 
+  showAccountMenu = false;
+
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  toggleAccountMenu(): void {
+    this.showAccountMenu = !this.showAccountMenu;
+  }
 }
