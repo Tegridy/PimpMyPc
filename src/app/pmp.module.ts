@@ -23,6 +23,7 @@ import { MyOrdersComponent } from './account/my-orders/my-orders.component';
 import { AccountSettingsComponent } from './account/account-settings/account-settings.component';
 import { ReturnsComponent } from './account/returns/returns.component';
 import { ModalComponent } from './shared/modal/modal.component';
+import { AboutUsComponent } from './about-us/about-us.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { ModalComponent } from './shared/modal/modal.component';
     MyOrdersComponent,
     AccountSettingsComponent,
     ReturnsComponent,
-    ModalComponent
+    ModalComponent,
+    AboutUsComponent
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   imports: [

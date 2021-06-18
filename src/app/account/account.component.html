@@ -8,11 +8,11 @@
       <h3 class="text-2xl font-bold">User</h3>
     </span>
 
-      <div class="flex justify-center my-4" [ngClass]="showAccountMenu ? 'block' : 'hidden'">
+      <div class="flex justify-center my-4 sm:hidden" [ngClass]="showAccountMenu ? 'block' : 'hidden'">
         <button (click)="toggleAccountMenu()" class="px-2 py-2 bg-blue-600 rounded-full w-4/5">Go back to menu</button>
       </div>
 
-      <nav class="mt-4 sm:mt-8" [ngClass]="showAccountMenu ? 'hidden' : 'block'">
+      <nav class="mt-4 sm:mt-8 sm:block" [ngClass]="showAccountMenu ? 'hidden' : 'block'">
         <ul>
           <li (click)="toggleAccountMenu()" class="hover:bg-gray-500 p-3">
             <a routerLink="orders" class="w-full flex items-center justify-between">
