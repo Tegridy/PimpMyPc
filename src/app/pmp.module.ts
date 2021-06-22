@@ -24,6 +24,9 @@ import { AccountSettingsComponent } from './account/account-settings/account-set
 import { ReturnsComponent } from './account/returns/returns.component';
 import { ModalComponent } from './shared/modal/modal.component';
 import { AboutUsComponent } from './about-us/about-us.component';
+import { RegulationsComponent } from './regulations/regulations.component';
+import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
+import { ContactUsComponent } from './contact-us/contact-us.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +49,10 @@ import { AboutUsComponent } from './about-us/about-us.component';
     AccountSettingsComponent,
     ReturnsComponent,
     ModalComponent,
-    AboutUsComponent
+    AboutUsComponent,
+    RegulationsComponent,
+    PrivacyPolicyComponent,
+    ContactUsComponent
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   imports: [
