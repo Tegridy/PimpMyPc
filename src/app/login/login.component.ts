@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'pmp-user-sign-in',
-  templateUrl: './user-sign-in.component.html',
-  styleUrls: ['./user-sign-in.component.scss']
+  templateUrl: './login.component.html',
+  styleUrls: []
 })
 export class UserSignInComponent implements OnInit {
 

@@ -1,12 +1,9 @@
-<div class="glide px-4">
+<div class="px-4 glide">
   <div class="relative">
     <div class="glide__track" data-glide-el="track">
 
       <ul class="glide__slides">
         <li class="glide__slide max-w-64">
-                <pmp-product-small></pmp-product-small>
-        </li>
-        <li class="glide__slide max-w-64">
           <pmp-product-small></pmp-product-small>
         </li>
         <li class="glide__slide max-w-64">
@@ -21,7 +18,9 @@
         <li class="glide__slide max-w-64">
           <pmp-product-small></pmp-product-small>
         </li>
-
+        <li class="glide__slide max-w-64">
+          <pmp-product-small></pmp-product-small>
+        </li>
         <li class="glide__slide max-w-64">
           <pmp-product-small></pmp-product-small>
         </li>
@@ -42,14 +41,14 @@
 
     </div>
 
-    <div class="glide__arrows hidden md:block" data-glide-el="controls">
+    <div class="hidden glide__arrows md:block" data-glide-el="controls">
       <button
-        class="top-0 absolute my-auto -left-4 bottom-0 bg-white w-10 h-10 rounded-full hover:bg-gray-400  duration-300 shadow-lg flex items-center justify-center glide__arrow glide__arrow--left"
+        class="absolute top-0 bottom-0 flex items-center justify-center w-10 h-10 my-auto duration-300 bg-white rounded-full shadow-lg -left-4 hover:bg-gray-400 glide__arrow glide__arrow--left"
         data-glide-dir="<">
         <ion-icon name="chevron-back-outline"></ion-icon>
       </button>
       <button
-        class="top-0 absolute my-auto -right-4 bottom-0 bg-white w-10 h-10 rounded-full hover:bg-gray-400 duration-300 shadow-lg flex items-center justify-center glide__arrow glide__arrow--right"
+        class="absolute top-0 bottom-0 flex items-center justify-center w-10 h-10 my-auto duration-300 bg-white rounded-full shadow-lg -right-4 hover:bg-gray-400 glide__arrow glide__arrow--right"
         data-glide-dir=">">
         <ion-icon name="chevron-forward-outline"></ion-icon>
       </button>
