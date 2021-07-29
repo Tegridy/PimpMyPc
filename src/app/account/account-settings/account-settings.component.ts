@@ -1,5 +1,4 @@
-import {Component, OnChanges, OnInit, Output, SimpleChanges, ViewChild} from '@angular/core';
-import {ModalComponent} from '../../shared/modal/modal.component';
+import { Component, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'pmp-account-settings',

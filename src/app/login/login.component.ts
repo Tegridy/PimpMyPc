@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'pmp-user-sign-in',
+  selector: 'pmp-login',
   templateUrl: './login.component.html',
   styleUrls: []
 })
-export class UserSignInComponent implements OnInit {
+export class LoginComponent implements OnInit {
 
   constructor() { }
 

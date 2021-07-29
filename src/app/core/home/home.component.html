@@ -1,0 +1,57 @@
+<pmp-recommended-products></pmp-recommended-products>
+
+<section class="flex my-4">
+  <hr class="my-4 bg-black border-black rounded-lg">
+
+  <div class="hidden w-2/5 min-h-full ml-8 border-2 border-black rounded-lg bg-gray-50 lg:block py-9">
+    <div class="flex flex-col items-center justify-center">
+      <h2 class="mx-auto mb-6 text-xl">Newest product</h2>
+      <div class="w-10/12 mx-auto">
+        <img class="mx-auto" src="https://picsum.photos/400/400">
+      </div>
+      <span class="text-3xl my-14">product long name of long product</span>
+      <span class="text-xl">product price</span>
+    </div>
+  </div>
+
+  <div class="w-full mx-8 lg:w-3/5">
+    <h1 class="my-4 text-4xl font-bold">Our choice </h1>
+
+    <!--      TODO Make mobile display to max 6-8 rows -->
+
+    <div
+      class="grid grid-cols-2 grid-rows-none row-auto gap-6 overflow-auto md:grid-cols-3 lg:grid-cols-3 sm:px-4 h-192 sm:h-auto sm:overflow-auto">
+      <pmp-product-small></pmp-product-small>
+      <pmp-product-small></pmp-product-small>
+      <pmp-product-small></pmp-product-small>
+      <pmp-product-small></pmp-product-small>
+      <pmp-product-small></pmp-product-small>
+      <pmp-product-small></pmp-product-small>
+
+    </div>
+  </div>
+
+</section>
+
+<hr class="my-4 bg-black border-black rounded-lg">
+
+<section id="bestsellers">
+  <h1 class="my-4 text-4xl font-bold">Bestsellers </h1>
+  <div id="bestsellers-slider">
+    <pmp-slider></pmp-slider>
+  </div>
+</section>
+
+<hr class="my-4 bg-black border-black rounded-lg">
+
+<section id="movies">
+
+  <h1 class="my-4 text-4xl font-bold">Movies </h1>
+
+  <div id="movies-slider">
+    <pmp-slider></pmp-slider>
+  </div>
+</section>
+
+<pmp-newsletter></pmp-newsletter>
+<router-outlet></router-outlet>

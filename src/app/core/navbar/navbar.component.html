@@ -1,4 +1,4 @@
-<div class="relative z-20 mx-auto bg-gray-50 md:px-14 pt-3 shadow-lg sticky top-0">
+<div class="z-20 mx-auto bg-gray-50 md:px-14 pt-3 shadow-lg sticky top-0">
 
   <nav class="flex flex-wrap sm:justify-between md:flex-nowrap">
 
@@ -28,9 +28,9 @@
       </button>
 
 
-      <div class="flex items-center bg-white border border-black border-2 rounded-full h-8 m-2 order-1 w-3/4 shadow">
+      <div class="flex items-center bg-white border-black border-2 rounded-full h-8 m-2 order-1 w-3/4 shadow">
         <input class="ml-5 h-6 w-10/12" type="text" placeholder="Search">
-        <select class="w-56 h-6 w-3/12 hidden sm:block">
+        <select class="h-6 w-3/12 hidden sm:block">
           <option selected>Everywhere</option>
         </select>
         <button class="flex items-center justify-center bg-gray-600 rounded-full h-8 w-24 relative -right-2">
@@ -87,7 +87,7 @@
 
     <ul class="divide-y-2 divide-gray-300">
       <li *ngFor="let category of mainCategories" class="divide-y-2 ">
-        <label class="block cursor-pointer flex m-3" for="menu-{{ category.name }}">
+        <label class="cursor-pointer flex m-3" for="menu-{{ category.name }}">
           <ion-icon name="{{ category.iconName }}" class="pr-2"></ion-icon>
           {{ category.name }}</label>
 

@@ -24,7 +24,7 @@
     "angular-star-rating": "*",
     "css-star-rating": "^1.2.4",
     "hamburgers": "^1.1.3",
-    "ionicons": "^5.5.0",
+    "ionicons": "^5.5.2",
     "rxjs": "~6.6.0",
     "tailwindcss": "^2.0.3",
     "tslib": "^2.0.0",

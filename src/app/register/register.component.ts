@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'pmp-user-sign-up',
+  selector: 'pmp-register',
   templateUrl: './register.component.html',
   styleUrls: []
 })
-export class UserSignUpComponent implements OnInit {
+export class RegisterComponent implements OnInit {
 
   constructor() { }
 
