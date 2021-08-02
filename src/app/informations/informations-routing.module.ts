@@ -17,6 +17,6 @@ const routes: Routes = [
   imports: [ RouterModule.forChild(routes) ],
   exports: [ RouterModule ]
 })
-export class LoginRoutingModule {
+export class InformationsRoutingModule {
   static components = [ AboutUsComponent, RegulationsComponent, PrivacyPolicyComponent, ContactUsComponent ];
 }

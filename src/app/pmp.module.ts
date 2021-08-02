@@ -1,6 +1,7 @@
-import { AccountModule } from './account/account.module';
 import { ProductsModule } from './products/products.module';
 import { OrdersModule } from './orders/orders.module';
+import { InformationsModule } from './informations/informations.module';
+import { AccountModule } from './account/account.module';
 import { RegisterModule } from './register/register.module';
 import { LoginModule } from './login/login.module';
 import { SharedModule } from './shared/shared.module';
@@ -10,9 +11,6 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { PmpRoutingModule } from './pmp-routing.module';
 import { PmpComponent } from './pmp.component';
-import {StarRatingModule} from 'angular-star-rating';
-import {FormsModule} from '@angular/forms';
-import { InformationsModule } from './informations/informations.module';
 
 
 @NgModule({
@@ -23,16 +21,14 @@ import { InformationsModule } from './informations/informations.module';
   imports: [
     BrowserModule,
     PmpRoutingModule,
-    StarRatingModule.forRoot(),
-    FormsModule,
+    AccountModule,
+    InformationsModule,
+    OrdersModule,
+    ProductsModule,
     CoreModule,
     SharedModule,
     LoginModule,
-    RegisterModule,
-    OrdersModule,
-    ProductsModule,
-    AccountModule,
-    InformationsModule
+    RegisterModule
   ],
   providers: [],
   bootstrap: [PmpComponent]

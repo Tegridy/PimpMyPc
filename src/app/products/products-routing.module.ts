@@ -4,13 +4,13 @@ import { RouterModule, Routes } from '@angular/router';
 
 
 const routes: Routes = [
-  { path: 'category', component: ProductsCategoryComponent }
+  { path: '', component: ProductsCategoryComponent }
 ];
 
 @NgModule({
   imports: [ RouterModule.forChild(routes) ],
   exports: [ RouterModule ]
 })
-export class LoginRoutingModule {
+export class ProductsRoutingModule {
   static components = [ ProductsCategoryComponent ];
 }

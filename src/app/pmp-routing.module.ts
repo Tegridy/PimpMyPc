@@ -17,20 +17,17 @@ import {ContactUsComponent} from './informations/contact-us/contact-us.component
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-//  { path: 'login', component: UserSignInComponent },
- // { path: 'register', component: UserSignUpComponent },
-//  { path: 'category', component: ProductsCategoryComponent },
-  // { path: 'account', component: AccountComponent, children: [
-  //     { path: 'orders', component: MyOrdersComponent },
-  //     { path: 'returns', component: ReturnsComponent },
-  //     { path: 'settings', component: AccountSettingsComponent },
-  //     { path: '', redirectTo: 'orders', pathMatch: 'full'}
-  //   ] },
+  { path: 'login', loadChildren: () => import('./login/login.module').then(m => m.LoginModule) },
+  { path: 'register', loadChildren: () => import('./register/register.module').then(m => m.RegisterModule) },
+  { path: 'account', loadChildren: () => import('./account/account.module').then(m => m.AccountModule) },
+  { path: 'orders', loadChildren: () => import('./orders/orders.module').then(m => m.OrdersModule) },
+  // { path: 'about', loadChildren: () => import('./informations/informations.module').then(m => m.InformationsModule) },
+  { path: 'category', loadChildren: () => import('./products/products.module').then(m => m.ProductsModule)},
   { path: 'basket', component: BasketComponent },
- // { path: 'about-us', component: AboutUsComponent },
- // { path: 'regulations', component: RegulationsComponent },
- // { path: 'privacy-policy', component: PrivacyPolicyComponent },
- // { path: 'contact-us', component: ContactUsComponent },
+ { path: 'about-us', component: AboutUsComponent },
+ { path: 'regulations', component: RegulationsComponent },
+ { path: 'privacy-policy', component: PrivacyPolicyComponent },
+ { path: 'contact-us', component: ContactUsComponent },
   // { path: 'build' }
   { path: '**', component: PageNotFoundComponent}
 ];

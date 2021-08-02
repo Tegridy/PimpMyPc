@@ -5,6 +5,7 @@ import { ProductSmallComponent } from './product-small/product-small.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { ProductsRoutingModule } from './products-routing.module';
 
 
 
@@ -17,8 +18,9 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [
-    CommonModule
+    CommonModule,
+    ProductsRoutingModule
   ],
-  exports: [ProductSmallComponent]
+  exports: [ProductSmallComponent, ProductsCategoryComponent]
 })
 export class ProductsModule { }

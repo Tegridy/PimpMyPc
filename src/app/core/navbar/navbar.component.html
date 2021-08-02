@@ -1,39 +1,43 @@
-<div class="z-20 mx-auto bg-gray-50 md:px-14 pt-3 shadow-lg sticky top-0">
+<div class="sticky top-0 z-20 pt-3 mx-auto shadow-lg bg-gray-50 md:px-14">
 
   <nav class="flex flex-wrap sm:justify-between md:flex-nowrap">
 
     <a routerLink="/">
-     <span class="object-contain">
+      <span class="object-contain">
         <img src="assets/logo.svg" alt="PMP logo" class="cursor-pointer" style="height: 50px;">
-     </span>
+      </span>
     </a>
 
 
     <ul class="flex items-center md:order-2">
-      <li class="px-5 cursor-pointer rounded hover:bg-gray-200 hover:shadow"><a class="flex flex-col items-center" routerLink="/account">
-        <ion-icon name="person-outline"></ion-icon>
-        Account</a></li>
-      <li class="px-5 cursor-pointer rounded hover:bg-gray-200 hover:shadow"><a class="flex flex-col items-center" routerLink="/basket">
-        <ion-icon name="basket-outline"></ion-icon>
-        Basket</a></li>
+      <li class="px-5 rounded cursor-pointer hover:bg-gray-200 hover:shadow"><a class="flex flex-col items-center"
+          routerLink="/account">
+          <ion-icon name="person-outline"></ion-icon>
+          Account
+        </a></li>
+      <li class="px-5 rounded cursor-pointer hover:bg-gray-200 hover:shadow"><a class="flex flex-col items-center"
+          routerLink="/basket">
+          <ion-icon name="basket-outline"></ion-icon>
+          Basket
+        </a></li>
     </ul>
 
-    <div class="w-full flex items-center justify-center">
+    <div class="flex items-center justify-center w-full">
 
       <button (click)="toggleMenu()" class="hamburger hamburger--collapse-r lg:hidden"
-              [ngClass]="{'is-active': showMenu}" type="button" id="navbar-btn">
-             <span class="hamburger-box">
-                 <span class="hamburger-inner"></span>
-            </span>
+        [ngClass]="{'is-active': showMenu}" type="button" id="navbar-btn">
+        <span class="hamburger-box">
+          <span class="hamburger-inner"></span>
+        </span>
       </button>
 
 
-      <div class="flex items-center bg-white border-black border-2 rounded-full h-8 m-2 order-1 w-3/4 shadow">
-        <input class="ml-5 h-6 w-10/12" type="text" placeholder="Search">
-        <select class="h-6 w-3/12 hidden sm:block">
+      <div class="flex items-center order-1 w-3/4 h-8 m-2 bg-white border-2 border-black rounded-full shadow">
+        <input class="w-10/12 h-6 ml-5" type="text" placeholder="Search">
+        <select class="hidden w-3/12 h-6 sm:block">
           <option selected>Everywhere</option>
         </select>
-        <button class="flex items-center justify-center bg-gray-600 rounded-full h-8 w-24 relative -right-2">
+        <button class="relative flex items-center justify-center w-24 h-8 bg-gray-600 rounded-full -right-2">
           <ion-icon name="search"></ion-icon>
         </button>
       </div>
@@ -45,26 +49,28 @@
   <!--      Desktop menu      -->
 
 
-  <nav class="px-1 hidden lg:block" role="navigation">
+  <nav class="hidden px-1 lg:block" role="navigation">
     <hr class="my-1.5">
     <ul id="main-menu" class="flex flex-col lg:flex-row lg:justify-between">
       <li *ngFor="let category of mainCategories" (mouseenter)="toggleModal();" (mouseleave)="toggleModal()"
-          class="p-2 relative cursor-pointer rounded-t hover:bg-gray-400">
-        <a class="flex items-center">
+        class="relative p-2 rounded-t cursor-pointer hover:bg-gray-400">
+        <a routerLink="/category/{{ category.name | lowercase}}" class="flex items-center">
           <ion-icon name="{{ category.iconName }}" class="pr-2"></ion-icon>
           {{ category.name }}
         </a>
 
-        <div id="sub-menu" class="absolute left-0 top-10 bg-gray-50 rounded-b-lg hidden animate-fade-in-down">
+        <div id="sub-menu" class="absolute left-0 hidden rounded-b-lg top-10 bg-gray-50 animate-fade-in-down">
           <ul *ngFor="let subMenuItem of category.subMenu" class="pb-4">
-            <li class="flex relative items-center p-3 hover:bg-gray-400">
+            <li class="relative flex items-center p-3 hover:bg-gray-400">
               {{ subMenuItem.name }}
 
               <div *ngIf="subMenuItem.innerMenu"
-                   class="absolute left-full top-0 bg-gray-50 w-44 rounded-br-lg rounded-tr-lg rounded-bl-lg">
+                class="absolute top-0 rounded-tr-lg rounded-bl-lg rounded-br-lg left-full bg-gray-50 w-44">
                 <ul *ngFor="let innerMenuItem of subMenuItem.innerMenu" class="hidden pb-4 animate-fade-in-down">
                   <li class="p-3 hover:bg-gray-400">
-                    {{ innerMenuItem }}
+                    <a routerLink="/category/{{ category.name | lowercase}}/{{ innerMenuItem }}">
+                      {{ innerMenuItem }}
+                    </a>
                   </li>
                 </ul>
               </div>
@@ -80,22 +86,22 @@
 
 <!--     Mobile menu     -->
 
-<div id="wrapper" class="absolute w-64 h-full overflow-hidden z-20"
-     [ngClass]="{'hidden' : !showMenu}">
+<div id="wrapper" class="absolute z-20 w-64 h-full overflow-hidden" [ngClass]="{'hidden' : !showMenu}">
 
-  <div id="mobile-menu" class="absolute top-0 left-0 bg-gray-50 w-64 h-full">
+  <div id="mobile-menu" class="absolute top-0 left-0 w-64 h-full bg-gray-50">
 
     <ul class="divide-y-2 divide-gray-300">
       <li *ngFor="let category of mainCategories" class="divide-y-2 ">
-        <label class="cursor-pointer flex m-3" for="menu-{{ category.name }}">
+        <label class="flex m-3 cursor-pointer" for="menu-{{ category.name }}">
           <ion-icon name="{{ category.iconName }}" class="pr-2"></ion-icon>
-          {{ category.name }}</label>
+          {{ category.name }}
+        </label>
 
         <input type="checkbox" id="menu-{{ category.name }}" name="menu-1" class="menu-checkbox">
         <div *ngIf="category.subMenu" class="menu">
           <ul *ngFor="let subMenuItem of category.subMenu">
             <li>
-              <label class="label-style m-3" for="menu-{{ subMenuItem.name }}">{{ subMenuItem.name }}
+              <label class="m-3 label-style" for="menu-{{ subMenuItem.name }}">{{ subMenuItem.name }}
                 <ion-icon *ngIf="subMenuItem.innerMenu" name="caret-forward-outline"></ion-icon>
               </label>
 
@@ -132,8 +138,6 @@
 
 
 <div (click)="toggleMenu()"
-     class="z-10 h-screen w-full fixed left-0 top-0 flex justify-center items-center bg-black opacity-50 animate-fade-bg"
-     [ngClass]="{'hidden': (!showMenu && toggleBackdrop)}">
+  class="fixed top-0 left-0 z-10 flex items-center justify-center w-full h-screen bg-black opacity-50 animate-fade-bg"
+  [ngClass]="{'hidden': (!showMenu && toggleBackdrop)}">
 </div>
-
-
