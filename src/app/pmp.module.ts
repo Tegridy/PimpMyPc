@@ -1,3 +1,4 @@
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ProductsModule } from './products/products.module';
 import { OrdersModule } from './orders/orders.module';
 import { InformationsModule } from './informations/informations.module';
@@ -28,7 +29,8 @@ import { PmpComponent } from './pmp.component';
     CoreModule,
     SharedModule,
     LoginModule,
-    RegisterModule
+    RegisterModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [PmpComponent]

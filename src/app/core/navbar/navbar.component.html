@@ -54,7 +54,7 @@
     <ul id="main-menu" class="flex flex-col lg:flex-row lg:justify-between">
       <li *ngFor="let category of mainCategories" (mouseenter)="toggleModal();" (mouseleave)="toggleModal()"
         class="relative p-2 rounded-t cursor-pointer hover:bg-gray-400">
-        <a routerLink="/category/{{ category.name | lowercase}}" class="flex items-center">
+        <a routerLink="/categories/{{ category.name | lowercase}}" class="flex items-center">
           <ion-icon name="{{ category.iconName }}" class="pr-2"></ion-icon>
           {{ category.name }}
         </a>
@@ -68,7 +68,7 @@
                 class="absolute top-0 rounded-tr-lg rounded-bl-lg rounded-br-lg left-full bg-gray-50 w-44">
                 <ul *ngFor="let innerMenuItem of subMenuItem.innerMenu" class="hidden pb-4 animate-fade-in-down">
                   <li class="p-3 hover:bg-gray-400">
-                    <a routerLink="/category/{{ category.name | lowercase}}/{{ innerMenuItem }}">
+                    <a routerLink="/categories/{{ category.name | lowercase}}/{{ innerMenuItem }}">
                       {{ innerMenuItem }}
                     </a>
                   </li>

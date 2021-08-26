@@ -2,7 +2,7 @@
 
   <section id="short-desc" class="flex py-6">
 
-    <div class="mx-4 w-1/2 lg:mx-20">
+    <div class="w-1/2 mx-4 lg:mx-20">
       <img src="https://picsum.photos/530/430">
     </div>
 
@@ -54,21 +54,22 @@
     <h2 class="my-2 text-3xl">Opinions</h2>
 
 
-    <div class="flex justify-center items-center w-full">
-      <div class="p-6 w-4/5 lg:w-3/5 xl:w-2/5 bg-gray-50 rounded-lg border-2 border-black md:w-4/5">
+    <div class="flex items-center justify-center w-full">
+      <div class="w-4/5 p-6 border-2 border-black rounded-lg lg:w-3/5 xl:w-2/5 bg-gray-50 md:w-4/5">
         <div class="md:flex">
-          <div class="mr-8 w-full">
-            <h3 class="my-2 w-full text-center md:text-left text-xl md:text-2xl">Do you own this product ?</h3>
+          <div class="w-full mr-8">
+            <h3 class="w-full my-2 text-xl text-center md:text-left md:text-2xl">Do you own this product ?</h3>
             <p class="text-center md:text-left">Add your opinion about PRODUCT NAME HERE</p>
           </div>
 
-          <div class="hidden md:block self-end">
+          <div class="self-end hidden md:block">
             <star-rating (ratingChange)="onRatingChange($event)" [rating]="productStars" size="large"
-                         [hoverEnabled]="true"></star-rating>
+              [hoverEnabled]="true"></star-rating>
           </div>
         </div>
         <div class="flex justify-center">
-          <button (click)="toggleModal()" class="mt-4 w-full h-8 bg-blue-600 rounded-full md:w-2/5">Add first opinion</button>
+          <button (click)="toggleModal()" class="w-full h-8 mt-4 bg-blue-600 rounded-full md:w-2/5">Add first
+            opinion</button>
         </div>
       </div>
     </div>
@@ -79,21 +80,23 @@
 
 </section>
 
-<div class="overflow-auto fixed md:left-1/3 z-20 w-full sm:w-4/5 md:w-2/5 rounded-lg top-1/3 md:top-2/5" [ngClass]="{'hidden': (!showModal)}">
+<div class="fixed z-20 w-full overflow-auto rounded-lg md:left-1/3 sm:w-4/5 md:w-2/5 top-1/3 md:top-2/5"
+  [ngClass]="{'hidden': (!showModal)}">
 
   <div>
     <div class="flex justify-between p-2 bg-gray-400">
       <h3 class="text-2xl">Add your opinion</h3>
-      <span (click)="toggleModal()" class="flex justify-center items-center bg-gray-50 bg-gray-400 cursor-pointer"><ion-icon
-        name="close-outline"></ion-icon></span>
+      <span (click)="toggleModal()" class="flex items-center justify-center bg-gray-400 cursor-pointer">
+        <ion-icon name="close-outline"></ion-icon>
+      </span>
     </div>
     <div class="flex flex-col items-center bg-gray-50">
       <h4 class="mt-4">Product name ...</h4>
       <star-rating class="my-2" [rating]="productStars" size="large" [hoverEnabled]="true"></star-rating>
-<!--       TODO Use tailwind forms module-->
-      <input type="text" class="mb-3 w-4/5 rounded-lg border" placeholder="Your name">
-      <textarea class="w-4/5 rounded-lg border" placeholder="Description"></textarea>
-      <button class="my-4 w-2/5 h-8 bg-blue-600 rounded-full">Add opinion</button>
+      <!--       TODO Use tailwind forms module-->
+      <input type="text" class="w-4/5 mb-3 border rounded-lg" placeholder="Your name">
+      <textarea class="w-4/5 border rounded-lg" placeholder="Description"></textarea>
+      <button class="w-2/5 h-8 my-4 bg-blue-600 rounded-full">Add opinion</button>
     </div>
   </div>
 
@@ -101,8 +104,8 @@
 </div>
 
 <div (click)="toggleModal()"
-     class="flex fixed top-0 left-0 z-10 justify-center items-center w-full h-screen bg-black opacity-50 animate-fade-bg"
-     [ngClass]="{'hidden': (!showModal)}">
+  class="fixed top-0 left-0 z-10 flex items-center justify-center w-full h-screen bg-black opacity-50 animate-fade-bg"
+  [ngClass]="{'hidden': (!showModal)}">
 </div>
 
 

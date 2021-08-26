@@ -1,3 +1,4 @@
+import { ProductsService } from './services/products.service';
 import { ProductsModule } from './../products/products.module';
 import { InformationsModule } from './../informations/informations.module';
 import { FooterComponent } from './footer/footer.component';
@@ -27,6 +28,9 @@ import { CommonModule } from '@angular/common';
   exports: [
     NavbarComponent,
     FooterComponent
+  ],
+  providers: [
+    ProductsService
   ]
 })
 export class CoreModule { }

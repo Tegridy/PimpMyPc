@@ -1,6 +1,7 @@
+import { CoreModule } from './../core/core.module';
+import { SharedModule } from 'src/app/shared/shared.module';
 import { RecommendedProductsComponent } from './recommended-products/recommended-products.component';
 import { ProductsCategoryComponent } from './products-category/products-category.component';
-import { ProductFullComponent } from './product-full/product-full.component';
 import { ProductSmallComponent } from './product-small/product-small.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -12,7 +13,6 @@ import { ProductsRoutingModule } from './products-routing.module';
 @NgModule({
   declarations: [
     ProductSmallComponent,
-    ProductFullComponent,
     ProductsCategoryComponent,
     RecommendedProductsComponent
   ],

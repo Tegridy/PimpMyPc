@@ -4,7 +4,10 @@ import { RouterModule, Routes } from '@angular/router';
 
 
 const routes: Routes = [
-  { path: '', component: ProductsCategoryComponent }
+  {
+    path: '', children: [
+        { path: '**', component: ProductsCategoryComponent }
+  ] }
 ];
 
 @NgModule({

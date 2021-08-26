@@ -1,4 +1,5 @@
-import {Component, Input, OnInit} from '@angular/core';
+import { Currencies, Money } from 'ts-money';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'pmp-product-small',
@@ -7,10 +8,14 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class ProductSmallComponent implements OnInit {
 
+
+  @Input()
+  product: any;
+
   @Input()
   listView = false;
   @Input()
-  itemParams: string[] = [];
+  productsParams: string[] = [];
 
   constructor() { }
 

@@ -75,20 +75,15 @@
 
         <hr class="h-1 mb-4 bg-black rounded-full">
 
-        <div [ngClass]="showProductsInListView ? 'grid grid-cols-1 gap-4' : 'grid grid-cols-1 sm:grid-cols-3 gap-4'">
-          <!--        <pmp-product-small [itemParams]="['param1', 'param2','param3']"></pmp-product-small>-->
-          <!--        <pmp-product-small></pmp-product-small>-->
-          <!--        <pmp-product-small></pmp-product-small>-->
-          <!--        <pmp-product-small></pmp-product-small>-->
-          <!--        <pmp-product-small></pmp-product-small>-->
-          <!--        <pmp-product-small></pmp-product-small>-->
-          <!--        <pmp-product-small></pmp-product-small>-->
-          <!--        <pmp-product-small></pmp-product-small>-->
-          <pmp-product-small [itemParams]="['param1', 'param2','param3','param3','param3']"
-            [listView]=showProductsInListView></pmp-product-small>
-          <pmp-product-small [listView]=showProductsInListView></pmp-product-small>
-        </div>
+        <div class="mb-4"
+          [ngClass]="showProductsInListView ? 'grid grid-cols-1 gap-4' : 'grid grid-cols-1 sm:grid-cols-3 gap-4'">
 
+          <ng-container *ngFor='let laptop of laptops'>
+
+            <pmp-product-small [listView]=showProductsInListView [product]=laptop></pmp-product-small>
+
+          </ng-container>
+        </div>
 
 
         <div class="flex items-center justify-center mt-auto space-x-4 bg-gray-50">

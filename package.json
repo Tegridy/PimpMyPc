@@ -27,6 +27,7 @@
     "ionicons": "^5.5.2",
     "rxjs": "~6.6.0",
     "tailwindcss": "^2.0.3",
+    "ts-money": "^0.4.6",
     "tslib": "^2.0.0",
     "zone.js": "~0.11.3"
   },
