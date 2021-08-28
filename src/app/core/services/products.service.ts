@@ -3,6 +3,7 @@ import { Observable, throwError } from 'rxjs';
 import { Laptop } from '../../shared/model/Laptop';
 import { catchError, map, tap } from 'rxjs/operators';
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
+import { ProductResponse } from "../../shared/model/ProductResponse";
 
 @Injectable()
 export class ProductsService {
@@ -10,10 +11,9 @@ export class ProductsService {
   constructor(private http: HttpClient) { }
 
 
-  getAllLaptops(): Observable<Laptop[]> {
-    return this.http.get<Laptop[]>("http://localhost:8080/api/v1/products/laptops")
+  getAllLaptops(page: number): Observable<ProductResponse> {
+    return this.http.get<ProductResponse>("http://localhost:8080/api/v1/products/laptops?page=" + page)
       .pipe(
-          tap(data => console.log('All: ', JSON.stringify(data))),
           catchError(this.handleError)
       );
   }

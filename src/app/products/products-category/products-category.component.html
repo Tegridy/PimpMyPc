@@ -61,40 +61,25 @@
                 <option>Popularity</option>
               </select>
             </div>
-            <div class="flex items-center space-x-4">
-              <button class="flex items-center justify-center">
-                <ion-icon class="p-2" name="chevron-back-circle-outline"></ion-icon>
-              </button>
-              <span><input type="number" [defaultValue]="1"> from 96</span>
-              <button class="flex items-center justify-center">
-                <ion-icon class="p-2 " name="chevron-forward-circle-outline"></ion-icon>
-              </button>
-            </div>
+            <pmp-pagination [config]="paginationConfig" (pageChangeEvent)="onPageChange($event)"></pmp-pagination>
           </div>
         </div>
 
         <hr class="h-1 mb-4 bg-black rounded-full">
 
-        <div class="mb-4"
+        <div id="products" class="mb-4"
           [ngClass]="showProductsInListView ? 'grid grid-cols-1 gap-4' : 'grid grid-cols-1 sm:grid-cols-3 gap-4'">
 
-          <ng-container *ngFor='let laptop of laptops'>
+          <ng-container *ngFor="let laptop of laptops | paginate: paginationConfig ">
 
             <pmp-product-small [listView]=showProductsInListView [product]=laptop></pmp-product-small>
 
           </ng-container>
         </div>
 
+        <pmp-pagination [config]="paginationConfig" (pageChangeEvent)="getCurrentCategoryProducts($event)">
+        </pmp-pagination>
 
-        <div class="flex items-center justify-center mt-auto space-x-4 bg-gray-50">
-          <button class="flex items-center justify-center">
-            <ion-icon class="p-2" name="chevron-back-circle-outline"></ion-icon>
-          </button>
-          <span><input type="number" [defaultValue]="1"> from 96</span>
-          <button class="flex items-center justify-center">
-            <ion-icon class="p-2 " name="chevron-forward-circle-outline"></ion-icon>
-          </button>
-        </div>
       </div>
     </div>
 
