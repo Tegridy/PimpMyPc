@@ -1,8 +1,8 @@
-           <pagination-template class="flex items-center justify-center py-2 mt-auto space-x-2 bg-gray-50"
+           <pagination-template class="flex items-center self-end justify-center py-2 space-x-2 bg-gray-50"
              #p="paginationApi" (pageChange)="pageChangeEvent.emit($event)">
 
 
-             <button (click)="p.previous()" class="flex items-center justify-center">
+             <button (click)="p.previous()" [disabled]="p.isFirstPage()" class="flex items-center justify-center">
                <ion-icon class="p-2" [ngClass]="{'text-gray-500' : p.isFirstPage() }"
                  name="chevron-back-circle-outline">
                </ion-icon>
@@ -13,14 +13,15 @@
                  *ngIf="p.getCurrent() !== page.value">
                  <span>{{ page.label }}</span></a>
 
-               <div class="p-2 m-0 bg-gray-500" *ngIf="p.getCurrent() === page.value">
+               <div class="p-2 m-0 bg-gray-500" *ngIf="p.getCurrent() === page.value"
+                 [class.disabled]="p.isFirstPage()">
                  <span>{{ page.label }}</span>
                </div>
 
              </div>
 
 
-             <button (click)="p.next()" class="flex items-center justify-center">
+             <button (click)="p.next()" [disabled]="p.isLastPage()" class="flex items-center justify-center">
                <ion-icon class="p-2" [ngClass]="{'text-gray-500' : p.isLastPage() }"
                  name="chevron-forward-circle-outline">
                </ion-icon>

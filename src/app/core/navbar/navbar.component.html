@@ -11,21 +11,21 @@
 
     <ul class="flex items-center md:order-2">
       <li class="px-5 rounded cursor-pointer hover:bg-gray-200 hover:shadow"><a class="flex flex-col items-center"
-          routerLink="/account">
-          <ion-icon name="person-outline"></ion-icon>
-          Account
-        </a></li>
+                                                                                routerLink="/account">
+        <ion-icon name="person-outline"></ion-icon>
+        Account
+      </a></li>
       <li class="px-5 rounded cursor-pointer hover:bg-gray-200 hover:shadow"><a class="flex flex-col items-center"
-          routerLink="/basket">
-          <ion-icon name="basket-outline"></ion-icon>
-          Basket
-        </a></li>
+                                                                                routerLink="/basket">
+        <ion-icon name="basket-outline"></ion-icon>
+        Basket
+      </a></li>
     </ul>
 
     <div class="flex items-center justify-center w-full">
 
       <button (click)="toggleMenu()" class="hamburger hamburger--collapse-r lg:hidden"
-        [ngClass]="{'is-active': showMenu}" type="button" id="navbar-btn">
+              [ngClass]="{'is-active': showMenu}" type="button" id="navbar-btn">
         <span class="hamburger-box">
           <span class="hamburger-inner"></span>
         </span>
@@ -53,8 +53,9 @@
     <hr class="my-1.5">
     <ul id="main-menu" class="flex flex-col lg:flex-row lg:justify-between">
       <li *ngFor="let category of mainCategories" (mouseenter)="toggleModal();" (mouseleave)="toggleModal()"
-        class="relative p-2 rounded-t cursor-pointer hover:bg-gray-400">
-        <a routerLink="/categories/{{ category.name | lowercase}}" class="flex items-center">
+          class="relative p-2 rounded-t cursor-pointer hover:bg-gray-400">
+        <a (click)="setCurrentCategory(category.endpointName)" routerLink="/categories/{{ category.name | lowercase}}"
+           class="flex items-center">
           <ion-icon name="{{ category.iconName }}" class="pr-2"></ion-icon>
           {{ category.name }}
         </a>
@@ -65,10 +66,11 @@
               {{ subMenuItem.name }}
 
               <div *ngIf="subMenuItem.innerMenu"
-                class="absolute top-0 rounded-tr-lg rounded-bl-lg rounded-br-lg left-full bg-gray-50 w-44">
+                   class="absolute top-0 rounded-tr-lg rounded-bl-lg rounded-br-lg left-full bg-gray-50 w-44">
                 <ul *ngFor="let innerMenuItem of subMenuItem.innerMenu" class="hidden pb-4 animate-fade-in-down">
                   <li class="p-3 hover:bg-gray-400">
-                    <a routerLink="/categories/{{ category.name | lowercase}}/{{ innerMenuItem }}">
+                    <a
+                      routerLink="/categories/{{ category.name | lowercase}}/{{ innerMenuItem }}">
                       {{ innerMenuItem }}
                     </a>
                   </li>
@@ -101,25 +103,25 @@
         <div *ngIf="category.subMenu" class="menu">
           <ul *ngFor="let subMenuItem of category.subMenu">
             <li>
-              <label class="m-3 label-style" for="menu-{{ subMenuItem.name }}">{{ subMenuItem.name }}
-                <ion-icon *ngIf="subMenuItem.innerMenu" name="caret-forward-outline"></ion-icon>
-              </label>
+              <!--              <label class="m-3 label-style" for="menu-{{ subMenuItem.name }}">{{ subMenuItem.name }}-->
+              <!--                <ion-icon *ngIf="subMenuItem.innerMenu" name="caret-forward-outline"></ion-icon>-->
+              <!--              </label>-->
 
-              <div *ngIf="subMenuItem.innerMenu">
-                <input type="checkbox" id="menu-{{ subMenuItem.name }}" name="menu-2" class="menu-checkbox">
-                <div class="menu">
-                  <ul *ngFor="let innerMenuItem of subMenuItem.innerMenu">
-                    <li class="m-3">
-                      <label class="label-style">{{ innerMenuItem }}</label>
-                    </li>
-                  </ul>
-                  <hr>
-                  <div class="flex items-center justify-center">
-                    <ion-icon name="arrow-back-outline"></ion-icon>
-                    <label for="menu-{{ subMenuItem.name }}" class="label-style">Go back</label>
-                  </div>
-                </div>
-              </div>
+              <!--              <div *ngIf="subMenuItem.innerMenu">-->
+              <!--                <input type="checkbox" id="menu-{{ subMenuItem.name }}" name="menu-2" class="menu-checkbox">-->
+              <!--                <div class="menu">-->
+              <!--                  <ul *ngFor="let innerMenuItem of subMenuItem.innerMenu">-->
+              <!--                    <li class="m-3">-->
+              <!--                      <label class="label-style">{{ innerMenuItem }}</label>-->
+              <!--                    </li>-->
+              <!--                  </ul>-->
+              <!--                  <hr>-->
+              <!--                  <div class="flex items-center justify-center">-->
+              <!--                    <ion-icon name="arrow-back-outline"></ion-icon>-->
+              <!--                    <label for="menu-{{ subMenuItem.name }}" class="label-style">Go back</label>-->
+              <!--                  </div>-->
+              <!--                </div>-->
+              <!--              </div>-->
 
             </li>
           </ul>
@@ -138,6 +140,6 @@
 
 
 <div (click)="toggleMenu()"
-  class="fixed top-0 left-0 z-10 flex items-center justify-center w-full h-screen bg-black opacity-50 animate-fade-bg"
-  [ngClass]="{'hidden': (!showMenu && toggleBackdrop)}">
+     class="fixed top-0 left-0 z-10 flex items-center justify-center w-full h-screen bg-black opacity-50 animate-fade-bg"
+     [ngClass]="{'hidden': (!showMenu && toggleBackdrop)}">
 </div>
