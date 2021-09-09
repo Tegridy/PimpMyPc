@@ -16,11 +16,10 @@ export class ProductsService {
     // this.productsEndpointName = categories.find(
     //   (cat) => cat.endpointName == category
     // );
-    
 
     return this.http
       .get<ProductResponse>(
-        this.baseUrl + category + '?page=' + page
+        this.baseUrl + category + '?page=' + page + '&size=9'
       )
       .pipe(catchError(this.handleError));
   }

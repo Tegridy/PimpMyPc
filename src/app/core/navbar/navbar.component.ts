@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {categories} from './Categories';
 import {CategoriesService} from '../services/categories.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'pmp-navbar',
@@ -11,10 +12,12 @@ export class NavbarComponent implements OnInit {
   showMenu = false;
   toggleBackdrop = true;
 
+  smth = '?page=1';
+
   mainCategories: any;
   currentProductsSelected: string = '';
 
-  constructor(private categoryService: CategoriesService) {
+  constructor(private categoryService: CategoriesService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -32,4 +35,5 @@ export class NavbarComponent implements OnInit {
   setCurrentCategory(category: string): void {
     this.categoryService.setCurrentCategoryName = category;
   }
+
 }

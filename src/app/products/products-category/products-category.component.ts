@@ -6,6 +6,8 @@ import {ActivatedRoute, Router, UrlSegment} from '@angular/router';
 import {PaginationInstance} from 'ngx-pagination';
 import {of} from 'rxjs';
 import {isNumeric} from 'rxjs/internal-compatibility';
+import {filters} from './ProductsFilters';
+
 
 @Component({
   selector: 'pmp-products-category',
@@ -21,6 +23,9 @@ export class ProductsCategoryComponent implements OnInit {
   pageNumber = 1;
   productsCount = 1;
 
+  productsFilters = filters;
+  temp: any;
+
   paginationConfig: PaginationInstance = {
     itemsPerPage: 9,
     currentPage: this.pageNumber,
@@ -31,7 +36,8 @@ export class ProductsCategoryComponent implements OnInit {
     private ref: ChangeDetectorRef,
     private router: Router,
     private productsService: ProductsService,
-    private categoriesService: CategoriesService) {
+    private categoriesService: CategoriesService
+  ) {
   }
 
   ngOnInit(): void {
@@ -41,6 +47,7 @@ export class ProductsCategoryComponent implements OnInit {
   }
 
   private getPageNumberFromUrl(): number {
+
     const currentPageNumber = Number(this.router.url.split('page=')[1]);
 
     if (isNumeric(currentPageNumber)) {
@@ -59,12 +66,10 @@ export class ProductsCategoryComponent implements OnInit {
       .subscribe((products) => {
         this.pageNumber = products.currentPage + 1;
         this.productsCount = products.productsCount;
-        console.log(this.pageNumber);
 
         this.validatePageNumber(page);
 
         this.laptops = products.products;
-
         this.paginationConfig.currentPage = this.pageNumber;
         this.paginationConfig.totalItems = products.productsCount;
 
@@ -73,13 +78,17 @@ export class ProductsCategoryComponent implements OnInit {
   }
 
   private validatePageNumber(page: number): void {
-    if (page > Math.ceil(this.productsCount / 9)) {
-      this.getCurrentCategoryProducts(Math.ceil(this.productsCount / 9));
+    const lastPageNumber = Math.ceil(this.productsCount / 9);
+
+    if (page > lastPageNumber) {
+      this.getCurrentCategoryProducts(lastPageNumber);
     }
   }
 
   getCategoryTypeFromUrl(): string {
-    return this.router.url.split('/categories/')[1].toLocaleLowerCase().replace(new RegExp('\\?.+'), '');
+    const type = this.router.url.split('/categories/')[1].toLocaleLowerCase().replace(new RegExp('\\?.+'), '');
+    this.temp = filters.find((x) => x.name === type);
+    return type;
   }
 
   updateUrl(page: number): void {
@@ -96,6 +105,7 @@ export class ProductsCategoryComponent implements OnInit {
   }
 
   onPageChange(page: number): void {
+    console.log(page);
     this.getCurrentCategoryProducts(page);
   }
 
