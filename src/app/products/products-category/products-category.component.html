@@ -76,14 +76,19 @@
 
         <hr class="h-1 mb-4 bg-black rounded-full">
 
-        <div class="mb-4 min-h-100vh"
-             [ngClass]="showProductsInListView ? 'grid grid-cols-1 gap-4' : 'grid grid-cols-1 sm:grid-rows-3 sm:grid-cols-3 gap-4'">
 
-          <ng-container *ngFor="let laptop of laptops | paginate: paginationConfig ">
+        <div class="mb-4 min-h-100vh">
+          <pmp-spinner *ngIf="loading"></pmp-spinner>
+          <div
+            [ngClass]="showProductsInListView ? 'grid grid-cols-1 gap-4' : 'grid grid-cols-1 sm:grid-rows-3 sm:grid-cols-3 gap-4'">
 
-            <pmp-product-small [listView]=showProductsInListView [product]=laptop></pmp-product-small>
 
-          </ng-container>
+            <ng-container *ngFor="let laptop of laptops | paginate: paginationConfig ">
+
+              <pmp-product-small [listView]=showProductsInListView [product]=laptop></pmp-product-small>
+
+            </ng-container>
+          </div>
         </div>
 
         <pmp-pagination [config]="paginationConfig" (pageChangeEvent)="getCurrentCategoryProducts($event)">

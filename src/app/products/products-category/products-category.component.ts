@@ -1,11 +1,11 @@
-import {Laptop} from '../../shared/model/Laptop';
 import {ProductsService} from './../../core/services/products.service';
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
-import {ActivatedRoute, NavigationEnd, Router, UrlSegment} from '@angular/router';
+import {ActivatedRoute, NavigationEnd, NavigationStart, Router, UrlSegment} from '@angular/router';
 import {PaginationInstance} from 'ngx-pagination';
 import {of} from 'rxjs';
 import {isNumeric} from 'rxjs/internal-compatibility';
 import {filters} from './ProductsFilters';
+import {BaseProduct} from '../../shared/model/BaseProduct';
 
 
 @Component({
@@ -17,7 +17,9 @@ export class ProductsCategoryComponent implements OnInit {
   showProductsInListView = false;
   showModal = false;
 
-  laptops: Laptop[] = [];
+  loading = true;
+
+  laptops: BaseProduct[] = [];
 
   pageNumber = 1;
   productsCount = 1;
@@ -40,7 +42,10 @@ export class ProductsCategoryComponent implements OnInit {
 
   ngOnInit(): void {
     this.router.events.subscribe((val) => {
-      if (val instanceof NavigationEnd) {
+      this.laptops = [];
+      if (val instanceof NavigationStart) {
+        this.loading = true;
+      } else if (val instanceof NavigationEnd) {
         this.loadProducts();
       }
     });
@@ -76,6 +81,11 @@ export class ProductsCategoryComponent implements OnInit {
         this.validatePageNumber(page);
 
         this.laptops = products.products;
+
+        if (this.laptops.length > 0) {
+          this.loading = false;
+        }
+
         this.paginationConfig.currentPage = this.pageNumber;
         this.paginationConfig.totalItems = products.productsCount;
 
@@ -111,7 +121,8 @@ export class ProductsCategoryComponent implements OnInit {
   }
 
   onPageChange(page: number): void {
-    this.getCurrentCategoryProducts(page);
+    this.loading = true;
+    this.updateUrl(page);
   }
 
   changeProductsView(): void {

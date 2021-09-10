@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Observable, throwError} from 'rxjs';
-import {catchError} from 'rxjs/operators';
+import {catchError, delay} from 'rxjs/operators';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {ProductResponse} from '../../shared/model/ProductResponse';
 
@@ -21,7 +21,9 @@ export class ProductsService {
       .get<ProductResponse>(
         this.baseUrl + category + '?page=' + page + '&size=9'
       )
-      .pipe(catchError(this.handleError));
+      .pipe(
+        delay(2000),
+        catchError(this.handleError));
   }
 
   // getAllLaptops(page: number): Observable<ProductResponse> {
