@@ -1,8 +1,7 @@
-import {CategoriesService} from './../../core/services/categories.service';
 import {Laptop} from '../../shared/model/Laptop';
 import {ProductsService} from './../../core/services/products.service';
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router, UrlSegment} from '@angular/router';
+import {ActivatedRoute, NavigationEnd, Router, UrlSegment} from '@angular/router';
 import {PaginationInstance} from 'ngx-pagination';
 import {of} from 'rxjs';
 import {isNumeric} from 'rxjs/internal-compatibility';
@@ -35,12 +34,19 @@ export class ProductsCategoryComponent implements OnInit {
   constructor(
     private ref: ChangeDetectorRef,
     private router: Router,
-    private productsService: ProductsService,
-    private categoriesService: CategoriesService
-  ) {
+    private productsService: ProductsService) {
+    this.loadProducts();
   }
 
   ngOnInit(): void {
+    this.router.events.subscribe((val) => {
+      if (val instanceof NavigationEnd) {
+        this.loadProducts();
+      }
+    });
+  }
+
+  loadProducts(): void {
     const currentPageUrl = this.getPageNumberFromUrl();
 
     this.getCurrentCategoryProducts(currentPageUrl);
@@ -105,7 +111,6 @@ export class ProductsCategoryComponent implements OnInit {
   }
 
   onPageChange(page: number): void {
-    console.log(page);
     this.getCurrentCategoryProducts(page);
   }
 
