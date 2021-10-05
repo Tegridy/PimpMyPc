@@ -12,18 +12,30 @@ export class ProductsService {
   productsEndpointName: any = '';
   baseUrl = 'http://localhost:8080/api/v1/products/';
 
-  getProductsPage(page: number, category: string): Observable<ProductResponse> {
+  getProductsPage(page: number, category: string, filtersUrls?: string): Observable<ProductResponse> {
     // this.productsEndpointName = categories.find(
     //   (cat) => cat.endpointName == category
     // );
 
-    return this.http
-      .get<ProductResponse>(
-        this.baseUrl + category + '?page=' + page + '&size=9'
-      )
-      .pipe(
-        delay(2000),
-        catchError(this.handleError));
+    console.log(this.baseUrl + category + '?page=' + page + '&size=9' + filtersUrls);
+
+    if (filtersUrls) {
+      return this.http
+        .get<ProductResponse>(
+          this.baseUrl + category + '?page=' + page + '&size=9' + filtersUrls
+        )
+        .pipe(
+          delay(1000),
+          catchError(this.handleError));
+    } else {
+      return this.http
+        .get<ProductResponse>(
+          this.baseUrl + category + '?page=' + page + '&size=9'
+        )
+        .pipe(
+          delay(1000),
+          catchError(this.handleError));
+    }
   }
 
   // getAllLaptops(page: number): Observable<ProductResponse> {

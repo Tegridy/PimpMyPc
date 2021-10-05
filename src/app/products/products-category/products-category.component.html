@@ -3,42 +3,37 @@
   <div id="categories" class="flex min-h-100vh">
 
     <div class="hidden w-1/5 mr-6 md:block">
-      <!--      <h3>{{ temp.name }} filters</h3>-->
-
-
-      <!--      <ul *ngFor="let l of temp.filters">-->
-      <!--        <li>{{ l }}</li>-->
-      <!--      </ul>-->
 
 
       <nav class="border-2 border-black rounded-t-lg bg-gray-50">
-        <!--        <ul *ngFor="let smth of temp.screenSizes">-->
-        <!--          <li>{{ smth }}</li>-->
 
-        <!--        </ul>-->
-      </nav>
+        <ul class="p-1.5" *ngFor="let filter of productsFilters">
+          <li><span class="font-bold">{{ filter.name }}</span>
 
-      <div id="filters" class="hidden border-2 border-t-0 border-black rounded-b-lg bg-gray-50 md:block">
-        <h3 class="text-xl">Producer</h3>
-        <ul>
-          <li class="flex items-center"><input type="checkbox" id="producer-#1"><label for="producer-#1">Acer</label>
+            <ul class="ml-4 my-2" *ngFor="let filterValue of filter.values">
+              <li class="flex items-center">
+                <label><input
+                  class="mr-1"
+                  type="checkbox"
+                  (change)="filterClick($event, filter.filterProperty, filterValue.valueProperty)"/>{{ filterValue.name }}
+                </label>
+              </li>
+            </ul>
+
           </li>
         </ul>
 
-        <h3 class="text-xl">Price</h3>
-        <div class="flex">
-          <input type="number" placeholder="From">
-          <input type="number" placeholder="To">
-        </div>
 
-        <!--      <ng-container *ngFor="let filter of filters">-->
-        <!--      <h3 class="text-xl">{{ filter.name }}</h3>-->
-        <!--        <ul>-->
-        <!--          <li class="flex items-center"><input type="checkbox" id="producer-{{ filter.id}}"><label for="producer-{{ filter.id}}">{{ filter.type}}</label></li>-->
-        <!--        </ul>-->
-        <!--    </ng-container>-->
+      </nav>
 
-      </div>
+
+      <!--      <ng-container *ngFor="let filter of filters">-->
+      <!--      <h3 class="text-xl">{{ filter.name }}</h3>-->
+      <!--        <ul>-->
+      <!--          <li class="flex items-center"><input type="checkbox" id="producer-{{ filter.id}}"><label for="producer-{{ filter.id}}">{{ filter.type}}</label></li>-->
+      <!--        </ul>-->
+      <!--    </ng-container>-->
+
     </div>
 
     <div id="products" class="w-full min-h-100vh md:w-4/5 ">
@@ -91,7 +86,7 @@
           </div>
         </div>
 
-        <pmp-pagination [config]="paginationConfig" (pageChangeEvent)="getCurrentCategoryProducts($event)">
+        <pmp-pagination [config]="paginationConfig" (pageChangeEvent)="onPageChange($event)">
         </pmp-pagination>
 
       </div>

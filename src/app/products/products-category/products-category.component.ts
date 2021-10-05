@@ -6,6 +6,7 @@ import {of} from 'rxjs';
 import {isNumeric} from 'rxjs/internal-compatibility';
 import {filters} from './ProductsFilters';
 import {BaseProduct} from '../../shared/model/BaseProduct';
+import {Filter} from '../../shared/model/Filter';
 
 
 @Component({
@@ -24,7 +25,7 @@ export class ProductsCategoryComponent implements OnInit {
   pageNumber = 1;
   productsCount = 1;
 
-  productsFilters = filters;
+  productsFilters: Filter[] = [];
   temp: any;
 
   paginationConfig: PaginationInstance = {
@@ -68,28 +69,35 @@ export class ProductsCategoryComponent implements OnInit {
     }
   }
 
-  getCurrentCategoryProducts(page: number): void {
+  getCurrentCategoryProducts(page: number, filtersUrl?: string): void {
 
     const categoryName = this.getCategoryTypeFromUrl();
 
     this.productsService
-      .getProductsPage(page - 1, categoryName)
-      .subscribe((products) => {
-        this.pageNumber = products.currentPage + 1;
-        this.productsCount = products.productsCount;
+      .getProductsPage(page - 1, categoryName, this.url)
+      .subscribe((productsPage) => {
+
+        this.pageNumber = productsPage.products.number + 1;
+        this.productsCount = productsPage.products.totalElements;
 
         this.validatePageNumber(page);
 
-        this.laptops = products.products;
+        this.laptops = productsPage.products.content;
+        this.productsFilters = productsPage.filters;
+        console.log(this.productsFilters);
 
         if (this.laptops.length > 0) {
           this.loading = false;
         }
 
         this.paginationConfig.currentPage = this.pageNumber;
-        this.paginationConfig.totalItems = products.productsCount;
+        this.paginationConfig.totalItems = this.productsCount;
 
         this.updateUrl(this.pageNumber);
+
+        console.log('');
+        console.log(this.laptops);
+        console.log('');
       });
   }
 
@@ -132,4 +140,14 @@ export class ProductsCategoryComponent implements OnInit {
   toggleModal(): void {
     this.showModal = !this.showModal;
   }
+
+  url = '';
+
+  filterClick(event: Event, mainProp: string, prop: string): void {
+    const isChecked = (event.target as HTMLInputElement).checked;
+    this.url += '&' + mainProp + '=' + prop;
+    console.log(this.url);
+    this.getCurrentCategoryProducts(1, this.url);
+  }
 }
+
