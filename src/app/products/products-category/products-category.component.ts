@@ -28,6 +28,9 @@ export class ProductsCategoryComponent implements OnInit {
   productsFilters: Filter[] = [];
   temp: any;
 
+  filtersFromUrl: string = '';
+
+
   paginationConfig: PaginationInstance = {
     itemsPerPage: 9,
     currentPage: this.pageNumber,
@@ -54,6 +57,9 @@ export class ProductsCategoryComponent implements OnInit {
 
   loadProducts(): void {
     const currentPageUrl = this.getPageNumberFromUrl();
+    const productsFilters = this.getFiltersFromUrl();
+
+    console.log(productsFilters);
 
     this.getCurrentCategoryProducts(currentPageUrl);
   }
@@ -67,6 +73,11 @@ export class ProductsCategoryComponent implements OnInit {
     } else {
       return 1;
     }
+  }
+
+  private getFiltersFromUrl(): string {
+    const filterss = this.filtersFromUrl = this.router.url.split('filters=')[1];
+    return filterss;
   }
 
   getCurrentCategoryProducts(page: number, filtersUrl?: string): void {
@@ -84,7 +95,7 @@ export class ProductsCategoryComponent implements OnInit {
 
         this.laptops = productsPage.products.content;
         this.productsFilters = productsPage.filters;
-        console.log(this.productsFilters);
+        //console.log(this.productsFilters);
 
         if (this.laptops.length > 0) {
           this.loading = false;
@@ -93,11 +104,11 @@ export class ProductsCategoryComponent implements OnInit {
         this.paginationConfig.currentPage = this.pageNumber;
         this.paginationConfig.totalItems = this.productsCount;
 
-        this.updateUrl(this.pageNumber);
+        this.updateUrl(this.pageNumber, this.url);
 
-        console.log('');
-        console.log(this.laptops);
-        console.log('');
+        // console.log('');
+        // console.log(this.laptops);
+        // console.log('');
       });
   }
 
@@ -109,28 +120,32 @@ export class ProductsCategoryComponent implements OnInit {
     }
   }
 
+
   getCategoryTypeFromUrl(): string {
     const type = this.router.url.split('/categories/')[1].toLocaleLowerCase().replace(new RegExp('\\?.+'), '');
     this.temp = filters.find((x) => x.name === type);
     return type;
   }
 
-  updateUrl(page: number): void {
+  updateUrl(page: number, str: string): void {
     const currentUrl: ActivatedRoute = new ActivatedRoute();
     currentUrl.url = of([new UrlSegment(this.router.url, {name: 'pageNumber'})]);
+
+    const queryParams = str ? {page, filters: str} : {page};
 
     this.router.navigate(
       [],
       {
         relativeTo: currentUrl,
-        queryParams: {page},
+        queryParams,
         queryParamsHandling: 'merge'
       });
   }
 
+
   onPageChange(page: number): void {
     this.loading = true;
-    this.updateUrl(page);
+    this.updateUrl(page, this.url);
   }
 
   changeProductsView(): void {
@@ -142,12 +157,20 @@ export class ProductsCategoryComponent implements OnInit {
   }
 
   url = '';
+  isChecked = false;
 
   filterClick(event: Event, mainProp: string, prop: string): void {
-    const isChecked = (event.target as HTMLInputElement).checked;
+    this.isChecked = (event.target as HTMLInputElement).checked;
     this.url += '&' + mainProp + '=' + prop;
     console.log(this.url);
-    this.getCurrentCategoryProducts(1, this.url);
+    if (this.isChecked) {
+      this.getCurrentCategoryProducts(1, this.url);
+      this.updateUrl(this.pageNumber, this.url);
+    }
+  }
+
+  setFilters(val: string): boolean {
+    return this.filtersFromUrl !== undefined && this.filtersFromUrl.includes(val);
   }
 }
 

@@ -17,7 +17,10 @@ export class ProductsService {
     //   (cat) => cat.endpointName == category
     // );
 
-    console.log(this.baseUrl + category + '?page=' + page + '&size=9' + filtersUrls);
+
+    // const mainUrl = `${this.baseUrl + category}?page=${page}&size=9 `;
+
+    // const url = filtersUrl ? mainUrl : mainUrl + filtersUrls;
 
     if (filtersUrls) {
       return this.http
