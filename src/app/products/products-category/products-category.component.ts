@@ -1,4 +1,4 @@
-import {ProductsService} from './../../core/services/products.service';
+import {ProductsService} from '../../core/services/products.service';
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {ActivatedRoute, NavigationEnd, NavigationStart, Router, UrlSegment} from '@angular/router';
 import {PaginationInstance} from 'ngx-pagination';
@@ -15,6 +15,14 @@ import {Filter} from '../../shared/model/Filter';
   styleUrls: ['./products-category.component.scss'],
 })
 export class ProductsCategoryComponent implements OnInit {
+
+  constructor(
+    private ref: ChangeDetectorRef,
+    private router: Router,
+    private productsService: ProductsService) {
+    this.loadProducts();
+  }
+
   showProductsInListView = false;
   showModal = false;
 
@@ -28,7 +36,7 @@ export class ProductsCategoryComponent implements OnInit {
   productsFilters: Filter[] = [];
   temp: any;
 
-  filtersFromUrl: string = '';
+  filtersFromUrl = '';
 
 
   paginationConfig: PaginationInstance = {
@@ -37,12 +45,17 @@ export class ProductsCategoryComponent implements OnInit {
     totalItems: this.productsCount,
   };
 
-  constructor(
-    private ref: ChangeDetectorRef,
-    private router: Router,
-    private productsService: ProductsService) {
-    this.loadProducts();
-  }
+  url = '';
+  isChecked = false;
+
+  // setProductsSortOrder(asc: boolean): void {
+  //   // TODO: find more efficient way of deleting from url
+  //   asc ? this.url += '&sort=price' : this.url.replace('&sort=price', '');
+  //   console.log(this.url);
+  //   this.getCurrentCategoryProducts(1, this.url);
+  // }
+
+  sortType = 'default';
 
   ngOnInit(): void {
     this.router.events.subscribe((val) => {
@@ -59,7 +72,7 @@ export class ProductsCategoryComponent implements OnInit {
     const currentPageUrl = this.getPageNumberFromUrl();
     const productsFilters = this.getFiltersFromUrl();
 
-    console.log(productsFilters);
+    // console.log(productsFilters);
 
     this.getCurrentCategoryProducts(currentPageUrl);
   }
@@ -156,13 +169,10 @@ export class ProductsCategoryComponent implements OnInit {
     this.showModal = !this.showModal;
   }
 
-  url = '';
-  isChecked = false;
-
   filterClick(event: Event, mainProp: string, prop: string): void {
     this.isChecked = (event.target as HTMLInputElement).checked;
     this.url += '&' + mainProp + '=' + prop;
-    console.log(this.url);
+
     if (this.isChecked) {
       this.getCurrentCategoryProducts(1, this.url);
       this.updateUrl(this.pageNumber, this.url);
@@ -172,5 +182,33 @@ export class ProductsCategoryComponent implements OnInit {
   setFilters(val: string): boolean {
     return this.filtersFromUrl !== undefined && this.filtersFromUrl.includes(val);
   }
+
+  sortProductsByPrice(): void {
+    const sortAsc = '&sort=price,asc';
+    const sortDesc = '&sort=price,desc';
+
+    if (this.url.includes('&sort=')) {
+
+      if (this.url.includes('price,asc')) {
+        this.url = this.url.replace('price,asc', 'price,desc');
+      } else {
+        this.url = this.url.replace('price,desc', 'price,asc');
+      }
+
+    } else {
+      if (this.sortType === 'asc') {
+        this.url += sortAsc;
+      } else {
+        this.url += sortDesc;
+      }
+    }
+
+    this.getCurrentCategoryProducts(1, this.url);
+  }
+
+  // deleteFromString(str: string, toRemove: string): string {
+  //   const start = str.indexOf(toRemove);
+  //   return str.substr(0, start) + str.substr(start + toRemove.length);
+  // }
 }
 

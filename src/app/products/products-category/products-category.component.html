@@ -63,8 +63,11 @@
           <div class="flex flex-col items-center space-x-4 md:flex-row">
             <div>
               <label for="sort" class="md:hidden">Sort by</label>
-              <select id="sort" class="w-32 my-2">
-                <option>Popularity</option>
+              <select [(ngModel)]="sortType" (change)=sortProductsByPrice() id="sort"
+                      class="w-32 my-2">
+                <option value="default">Choose</option>
+                <option value="asc">Price ASC</option>
+                <option value="desc">Price DESC</option>
               </select>
             </div>
             <pmp-pagination [config]="paginationConfig" (pageChangeEvent)="onPageChange($event)">

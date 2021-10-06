@@ -63,8 +63,9 @@
         <div id="sub-menu" class="absolute left-0 hidden rounded-b-lg top-10 bg-gray-50 animate-fade-in-down">
           <ul *ngFor="let subMenuItem of category.subMenu" class="pb-4">
             <li class="relative flex items-center p-3 hover:bg-gray-400">
-              {{ subMenuItem.name }}
-
+              <a routerLink='/categories/{{ subMenuItem.endpointName | lowercase }}' [queryParams]="{page: 1}">
+                {{ subMenuItem.name }}
+              </a>
               <div *ngIf="subMenuItem.innerMenu"
                    class="absolute top-0 rounded-tr-lg rounded-bl-lg rounded-br-lg left-full bg-gray-50 w-44">
                 <ul *ngFor="let innerMenuItem of subMenuItem.innerMenu" class="hidden pb-4 animate-fade-in-down">

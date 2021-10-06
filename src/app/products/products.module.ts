@@ -7,6 +7,7 @@ import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {ProductsRoutingModule} from './products-routing.module';
 import {PaginationComponent} from './pagination/pagination.component';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,7 @@ import {PaginationComponent} from './pagination/pagination.component';
     PaginationComponent,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  imports: [NgxPaginationModule, CommonModule, ProductsRoutingModule, SharedModule],
+  imports: [NgxPaginationModule, CommonModule, ProductsRoutingModule, SharedModule, FormsModule],
   exports: [ProductSmallComponent, ProductsCategoryComponent],
 })
 export class ProductsModule {
