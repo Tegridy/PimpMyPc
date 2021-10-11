@@ -16,7 +16,7 @@
                   <input id="{{ filterValue.id }}"
                          class="mr-1"
                          type="checkbox"
-                         [checked]="setFilters(filterValue.valueProperty)"
+                         [checked]="setFilters(filterValue.valueProperty, filterValue.id)"
                          (change)="filterClick($event, filter.filterProperty, filterValue.valueProperty)"/>
                   {{ filterValue.name }}
                 </label>

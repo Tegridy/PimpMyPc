@@ -179,7 +179,7 @@ export class ProductsCategoryComponent implements OnInit {
     }
   }
 
-  setFilters(val: string): boolean {
+  setFilters(val: string, id: number): boolean {
     return this.filtersFromUrl !== undefined && this.filtersFromUrl.includes(val);
   }
 

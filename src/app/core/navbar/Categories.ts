@@ -31,7 +31,7 @@ export const categories = [
       {name: 'Graphic cards', innerMenu: ['Nvidia', 'AMD'], endpointName: 'graphics'},
       {name: 'Motherboards', endpointName: 'motherboards'},
       {name: 'Hard drives', innerMenu: ['SSD', 'HDD'], endpointName: 'drives'},
-      {name: 'Power supply', endpointName: 'power'},
+      {name: 'Power supply', endpointName: 'power-supplies'},
       {name: 'Cases', endpointName: 'cases'},
     ],
   },
@@ -39,9 +39,9 @@ export const categories = [
     name: 'Peripherals',
     iconName: 'print-outline',
     subMenu: [
-      {name: 'Monitors'},
-      {name: 'Computer mouse'},
-      {name: 'Computer keyboard'},
+      {name: 'Monitors', endpointName: 'monitors'},
+      {name: 'Computer mouse', endpointName: 'mouses'},
+      {name: 'Computer keyboard', endpointName: 'keyboards'},
     ],
   },
 ];
