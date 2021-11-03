@@ -6,7 +6,7 @@ export interface Filter {
 }
 
 export interface FilterValue {
-  id: number;
+  id?: number;
   name: string;
-  valueProperty: string;
+  valueProperty: string | number;
 }

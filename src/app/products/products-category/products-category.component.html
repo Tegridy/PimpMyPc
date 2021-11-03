@@ -16,8 +16,8 @@
                   <input id="{{ filterValue.id }}"
                          class="mr-1"
                          type="checkbox"
-                         [checked]="setFilters(filterValue.valueProperty, filterValue.id)"
-                         (change)="filterClick($event, filter.filterProperty, filterValue.valueProperty)"/>
+                         [checked]="setFilters(filterValue)"
+                         (change)="filterClick($event, filter.filterProperty, filterValue)"/>
                   {{ filterValue.name }}
                 </label>
               </li>
@@ -66,8 +66,8 @@
               <select [(ngModel)]="sortType" (change)=sortProductsByPrice() id="sort"
                       class="w-32 my-2">
                 <option value="default">Choose</option>
-                <option value="asc">Price ASC</option>
-                <option value="desc">Price DESC</option>
+                <option value="price,asc">Price ASC</option>
+                <option value="price,desc">Price DESC</option>
               </select>
             </div>
             <pmp-pagination [config]="paginationConfig" (pageChangeEvent)="onPageChange($event)">

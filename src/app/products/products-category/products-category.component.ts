@@ -6,7 +6,9 @@ import {of} from 'rxjs';
 import {isNumeric} from 'rxjs/internal-compatibility';
 import {filters} from './ProductsFilters';
 import {BaseProduct} from '../../shared/model/BaseProduct';
-import {Filter} from '../../shared/model/Filter';
+import {Filter, FilterValue} from '../../shared/model/Filter';
+import {Param} from '../Param';
+import {parse} from 'search-params';
 
 
 @Component({
@@ -19,7 +21,8 @@ export class ProductsCategoryComponent implements OnInit {
   constructor(
     private ref: ChangeDetectorRef,
     private router: Router,
-    private productsService: ProductsService) {
+    private productsService: ProductsService,
+    private route: ActivatedRoute) {
     this.loadProducts();
   }
 
@@ -27,6 +30,7 @@ export class ProductsCategoryComponent implements OnInit {
   showModal = false;
 
   loading = true;
+  currentCategory = '';
 
   laptops: BaseProduct[] = [];
 
@@ -35,9 +39,6 @@ export class ProductsCategoryComponent implements OnInit {
 
   productsFilters: Filter[] = [];
   temp: any;
-
-  filtersFromUrl = '';
-
 
   paginationConfig: PaginationInstance = {
     itemsPerPage: 9,
@@ -48,16 +49,24 @@ export class ProductsCategoryComponent implements OnInit {
   url = '';
   isChecked = false;
 
-  // setProductsSortOrder(asc: boolean): void {
-  //   // TODO: find more efficient way of deleting from url
-  //   asc ? this.url += '&sort=price' : this.url.replace('&sort=price', '');
-  //   console.log(this.url);
-  //   this.getCurrentCategoryProducts(1, this.url);
-  // }
-
   sortType = 'default';
+  queryParams: Param[] = [];
 
   ngOnInit(): void {
+    const x = this.route.snapshot.queryParams;
+    for (const y of Object.entries(x)) {
+
+      if (Array.isArray(y[1])) {
+
+        for (const t of y[1]) {
+          this.queryParams.push(new Param(y[0], t));
+        }
+
+      } else {
+        this.queryParams.push(new Param(y[0], y[1]));
+      }
+    }
+
     this.router.events.subscribe((val) => {
       this.laptops = [];
       if (val instanceof NavigationStart) {
@@ -66,13 +75,15 @@ export class ProductsCategoryComponent implements OnInit {
         this.loadProducts();
       }
     });
+
+    const tempp: any[] = [];
+
+    const arr = this.route.snapshot.queryParamMap;
+
   }
 
   loadProducts(): void {
     const currentPageUrl = this.getPageNumberFromUrl();
-    const productsFilters = this.getFiltersFromUrl();
-
-    // console.log(productsFilters);
 
     this.getCurrentCategoryProducts(currentPageUrl);
   }
@@ -88,17 +99,12 @@ export class ProductsCategoryComponent implements OnInit {
     }
   }
 
-  private getFiltersFromUrl(): string {
-    const filterss = this.filtersFromUrl = this.router.url.split('filters=')[1];
-    return filterss;
-  }
-
-  getCurrentCategoryProducts(page: number, filtersUrl?: string): void {
-
+  getCurrentCategoryProducts(page: number): void {
     const categoryName = this.getCategoryTypeFromUrl();
+    const filtersUrl = this.buildUrl();
 
     this.productsService
-      .getProductsPage(page - 1, categoryName, this.url)
+      .getProductsPage(page - 1, categoryName, filtersUrl)
       .subscribe((productsPage) => {
 
         this.pageNumber = productsPage.products.number + 1;
@@ -108,7 +114,6 @@ export class ProductsCategoryComponent implements OnInit {
 
         this.laptops = productsPage.products.content;
         this.productsFilters = productsPage.filters;
-        //console.log(this.productsFilters);
 
         if (this.laptops.length > 0) {
           this.loading = false;
@@ -117,12 +122,24 @@ export class ProductsCategoryComponent implements OnInit {
         this.paginationConfig.currentPage = this.pageNumber;
         this.paginationConfig.totalItems = this.productsCount;
 
-        this.updateUrl(this.pageNumber, this.url);
-
-        // console.log('');
-        // console.log(this.laptops);
-        // console.log('');
+        this.updateUrl(this.pageNumber);
       });
+  }
+
+  getCategoryTypeFromUrl(): string {
+    const type = this.router.url.split('/categories/')[1].toLocaleLowerCase().replace(new RegExp('\\?.+'), '');
+    this.temp = filters.find((x) => x.name === type);
+    if (type !== this.currentCategory) {
+      this.queryParams.splice(1, this.queryParams.length);
+      this.currentCategory = type;
+    }
+    return type;
+  }
+
+  buildUrl(): string {
+    const url: string[] = [];
+    this.queryParams.forEach((x: Param) => url.push(`&${x.key}=${x.value}`));
+    return url.join('');
   }
 
   private validatePageNumber(page: number): void {
@@ -133,32 +150,89 @@ export class ProductsCategoryComponent implements OnInit {
     }
   }
 
-
-  getCategoryTypeFromUrl(): string {
-    const type = this.router.url.split('/categories/')[1].toLocaleLowerCase().replace(new RegExp('\\?.+'), '');
-    this.temp = filters.find((x) => x.name === type);
-    return type;
-  }
-
-  updateUrl(page: number, str: string): void {
+  updateUrl(page: number): void {
     const currentUrl: ActivatedRoute = new ActivatedRoute();
     currentUrl.url = of([new UrlSegment(this.router.url, {name: 'pageNumber'})]);
 
-    const queryParams = str ? {page, filters: str} : {page};
+    const params = parse(this.buildUrl());
 
     this.router.navigate(
       [],
       {
         relativeTo: currentUrl,
-        queryParams,
-        queryParamsHandling: 'merge'
+        queryParams: params,
+        queryParamsHandling: ''
       });
   }
 
+  filterClick(event: Event, mainProp: string, filterValue: FilterValue): void {
+    this.isChecked = (event.target as HTMLInputElement).checked;
+    const param = new Param(mainProp, filterValue.valueProperty, filterValue.id);
+
+
+    if (this.isChecked) {
+      this.queryParams.push(param);
+      this.updateUrl(this.pageNumber);
+      this.activeFiltersIds.push(filterValue.id);
+    } else {
+
+      const filterFound = this.queryParams.find(x => x.id === filterValue.id);
+
+      if (filterFound) {
+        const filterToRemoveIndex = this.queryParams.indexOf(filterFound);
+        this.queryParams.splice(filterToRemoveIndex, 1);
+      }
+      this.activeFiltersIds.splice(this.activeFiltersIds.indexOf(filterValue.id), 1);
+    }
+
+
+    this.getCurrentCategoryProducts(1);
+
+  }
+
+  sortProductsByPrice(): void {
+    const sortParam = new Param('sort', this.sortType);
+    const isSortedParamChosen = this.queryParams.find(x => x.key === 'sort');
+    const sortedParamIndex = this.queryParams.indexOf(sortParam);
+
+    if (isSortedParamChosen) {
+      if (this.sortType === 'price,asc') {
+        isSortedParamChosen.value = 'price,asc';
+      } else if (this.sortType === 'price,desc') {
+        isSortedParamChosen.value = 'price,desc';
+      } else {
+        this.queryParams.splice(sortedParamIndex, 1);
+      }
+    } else {
+      this.queryParams.push(sortParam);
+    }
+
+    this.getCurrentCategoryProducts(1);
+  }
+
+  // deleteFromString(str: string, toRemove: string): string {
+  //   const start = str.indexOf(toRemove);
+  //   return str.substr(0, start) + str.substr(start + toRemove.length);
+  // }
 
   onPageChange(page: number): void {
     this.loading = true;
-    this.updateUrl(page, this.url);
+    const pageNumParam = this.queryParams.find(x => x.key === 'page');
+    if (pageNumParam) {
+      pageNumParam.value = page;
+    }
+    this.updateUrl(page);
+  }
+
+  activeFiltersIds: any[] = [];
+
+  setFilters(str: FilterValue): boolean {
+    for (const x of this.queryParams) {
+      if (x.value === str.valueProperty) {
+        return true;
+      }
+    }
+    return false;
   }
 
   changeProductsView(): void {
@@ -168,47 +242,4 @@ export class ProductsCategoryComponent implements OnInit {
   toggleModal(): void {
     this.showModal = !this.showModal;
   }
-
-  filterClick(event: Event, mainProp: string, prop: string): void {
-    this.isChecked = (event.target as HTMLInputElement).checked;
-    this.url += '&' + mainProp + '=' + prop;
-
-    if (this.isChecked) {
-      this.getCurrentCategoryProducts(1, this.url);
-      this.updateUrl(this.pageNumber, this.url);
-    }
-  }
-
-  setFilters(val: string, id: number): boolean {
-    return this.filtersFromUrl !== undefined && this.filtersFromUrl.includes(val);
-  }
-
-  sortProductsByPrice(): void {
-    const sortAsc = '&sort=price,asc';
-    const sortDesc = '&sort=price,desc';
-
-    if (this.url.includes('&sort=')) {
-
-      if (this.url.includes('price,asc')) {
-        this.url = this.url.replace('price,asc', 'price,desc');
-      } else {
-        this.url = this.url.replace('price,desc', 'price,asc');
-      }
-
-    } else {
-      if (this.sortType === 'asc') {
-        this.url += sortAsc;
-      } else {
-        this.url += sortDesc;
-      }
-    }
-
-    this.getCurrentCategoryProducts(1, this.url);
-  }
-
-  // deleteFromString(str: string, toRemove: string): string {
-  //   const start = str.indexOf(toRemove);
-  //   return str.substr(0, start) + str.substr(start + toRemove.length);
-  // }
 }
-
