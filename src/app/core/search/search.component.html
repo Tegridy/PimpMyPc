@@ -1,0 +1,13 @@
+<section id="search-results" class="flex flex-col justify-center items-center">
+
+  <h3 *ngIf="searchedProducts.length < 1" class="mt-7 font-bold text-4xl text-center">No products found. Try again.</h3>
+
+  <div class="w-3/5">
+    <ul>
+      <li *ngFor="let x of searchedProducts">{{ x.title }}</li>
+    </ul>
+  </div>
+</section>
+
+
+

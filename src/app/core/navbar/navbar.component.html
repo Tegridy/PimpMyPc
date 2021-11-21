@@ -33,11 +33,17 @@
 
 
       <div class="flex items-center order-1 w-3/4 h-8 m-2 bg-white border-2 border-black rounded-full shadow">
-        <input class="w-10/12 h-6 ml-5" type="text" placeholder="Search">
-        <select class="hidden w-3/12 h-6 sm:block">
+        <input class="w-10/12 h-6 ml-5" type="text" placeholder="Search" [(ngModel)]="searchPhrase">
+        <select (change)="changeCurrentSearchCategory($event)"
+                class="hidden w-3/12 h-6 sm:block">
           <option selected>Everywhere</option>
+          <option *ngFor="let category of mainCategories">{{ category.name }}</option>
         </select>
-        <button class="relative flex items-center justify-center w-24 h-8 bg-gray-600 rounded-full -right-2">
+        <button (click)="searchProduct()"
+                class="relative flex items-center justify-center w-24 h-8 bg-gray-600 rounded-full -right-2">
+          <!--                        routerLink="/search"-->
+          <!--                        [queryParams]="{q: searchPhrase, cat: currentSearchCategory}"-->
+          <!--        class="relative flex items-center justify-center w-24 h-8 bg-gray-600 rounded-full -right-2">-->
           <ion-icon name="search"></ion-icon>
         </button>
       </div>
@@ -63,12 +69,14 @@
         <div id="sub-menu" class="absolute left-0 hidden rounded-b-lg top-10 bg-gray-50 animate-fade-in-down">
           <ul *ngFor="let subMenuItem of category.subMenu" class="pb-4">
             <li class="relative flex items-center p-3 hover:bg-gray-400">
-              <a routerLink='/categories/{{ subMenuItem.endpointName | lowercase }}' [queryParams]="{page: 1}">
+              <a routerLink='/categories/{{ subMenuItem.endpointName | lowercase }}'
+                 [queryParams]="{page: 1}">
                 {{ subMenuItem.name }}
               </a>
               <div *ngIf="subMenuItem.innerMenu"
                    class="absolute top-0 rounded-tr-lg rounded-bl-lg rounded-br-lg left-full bg-gray-50 w-44">
-                <ul *ngFor="let innerMenuItem of subMenuItem.innerMenu" class="hidden pb-4 animate-fade-in-down">
+                <ul *ngFor="let innerMenuItem of subMenuItem.innerMenu"
+                    class="hidden pb-4 animate-fade-in-down">
                   <li class="p-3 hover:bg-gray-400">
                     <a
                       routerLink="/categories/{{ category.name | lowercase}}/{{ innerMenuItem }}">

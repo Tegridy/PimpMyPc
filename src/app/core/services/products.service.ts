@@ -1,16 +1,21 @@
 import {Injectable} from '@angular/core';
-import {Observable, throwError} from 'rxjs';
+import {BehaviorSubject, Observable, throwError} from 'rxjs';
 import {catchError, delay} from 'rxjs/operators';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {ProductResponse} from '../../shared/model/ProductResponse';
+import {BaseProduct} from '../../shared/model/BaseProduct';
 
 @Injectable()
 export class ProductsService {
-  constructor(private http: HttpClient) {
-  }
 
   productsEndpointName: any = '';
   baseUrl = 'http://localhost:8080/api/v1/products/';
+
+  private productsSearchResultSource = new BehaviorSubject<BaseProduct[]>([]);
+  productsSearchResult = this.productsSearchResultSource.asObservable();
+
+  constructor(private http: HttpClient) {
+  }
 
   getProductsPage(page: number, category: string, filtersUrls?: string): Observable<ProductResponse> {
     // this.productsEndpointName = categories.find(
@@ -58,7 +63,23 @@ export class ProductsService {
     return throwError(errorMessage);
   }
 
-  setCurrentCategory(category: string) {
+  setCurrentCategory(category: string): void {
     this.productsEndpointName = category;
   }
+
+  getSearchedProductsByCategory(productName: string, categoryName: string): void {
+    // this._productsSearchResult = this.http.get<any>(this.baseUrl + 'search?productName=' + productName + '&categoryName=' + categoryName);
+  }
+
+
+  fetchProductsByCategory(productName: string, categoryName: string): Observable<BaseProduct[]> {
+    //let products: Observable<BaseProduct[]>;
+
+    return this.http.get<BaseProduct[]>(this.baseUrl + 'search?productName=' + productName + '&productCategory=' + categoryName);
+  }
+
+  setData(data: BaseProduct[]): void {
+    this.productsSearchResultSource.next(data);
+  }
+
 }

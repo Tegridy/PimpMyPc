@@ -7,6 +7,7 @@ import {AboutUsComponent} from './informations/about-us/about-us.component';
 import {RegulationsComponent} from './informations/regulations/regulations.component';
 import {PrivacyPolicyComponent} from './informations/privacy-policy/privacy-policy.component';
 import {ContactUsComponent} from './informations/contact-us/contact-us.component';
+import {SearchComponent} from './core/search/search.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -22,6 +23,7 @@ const routes: Routes = [
   {path: 'regulations', component: RegulationsComponent},
   {path: 'privacy-policy', component: PrivacyPolicyComponent},
   {path: 'contact-us', component: ContactUsComponent},
+  {path: 'search', component: SearchComponent},
   // { path: 'build' }
   {path: '**', component: PageNotFoundComponent}
 ];
