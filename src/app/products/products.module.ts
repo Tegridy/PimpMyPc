@@ -18,7 +18,7 @@ import {FormsModule} from '@angular/forms';
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [NgxPaginationModule, CommonModule, ProductsRoutingModule, SharedModule, FormsModule],
-  exports: [ProductSmallComponent, ProductsCategoryComponent],
+  exports: [ProductSmallComponent, ProductsCategoryComponent, PaginationComponent],
 })
 export class ProductsModule {
 }

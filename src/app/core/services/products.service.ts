@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable, throwError} from 'rxjs';
 import {catchError, delay} from 'rxjs/operators';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
-import {ProductResponse} from '../../shared/model/ProductResponse';
+import {ProductResponse, ProductsDto} from '../../shared/model/ProductResponse';
 import {BaseProduct} from '../../shared/model/BaseProduct';
 
 @Injectable()
@@ -10,6 +10,7 @@ export class ProductsService {
 
   productsEndpointName: any = '';
   baseUrl = 'http://localhost:8080/api/v1/products/';
+  pageSize = '&size=9';
 
   private productsSearchResultSource = new BehaviorSubject<BaseProduct[]>([]);
   productsSearchResult = this.productsSearchResultSource.asObservable();
@@ -30,7 +31,7 @@ export class ProductsService {
     if (filtersUrls) {
       return this.http
         .get<ProductResponse>(
-          this.baseUrl + category + '?page=' + page + '&size=9' + filtersUrls
+          this.baseUrl + category + '?page=' + page + filtersUrls + this.pageSize
         )
         .pipe(
           delay(1000),
@@ -38,7 +39,7 @@ export class ProductsService {
     } else {
       return this.http
         .get<ProductResponse>(
-          this.baseUrl + category + '?page=' + page + '&size=9'
+          this.baseUrl + category + '?page=' + page + this.pageSize
         )
         .pipe(
           delay(1000),
@@ -72,10 +73,14 @@ export class ProductsService {
   }
 
 
-  fetchProductsByCategory(productName: string, categoryName: string): Observable<BaseProduct[]> {
-    //let products: Observable<BaseProduct[]>;
+  fetchProductsByCategory(productName: string, categoryName: string, pageNumber: number): Observable<ProductsDto> {
+    let requestUrl = this.baseUrl + 'search?productName=' + productName;
 
-    return this.http.get<BaseProduct[]>(this.baseUrl + 'search?productName=' + productName + '&productCategory=' + categoryName);
+    if (categoryName !== undefined && categoryName !== 'Everywhere') {
+      requestUrl += '&productCategory=' + categoryName;
+    }
+
+    return this.http.get<ProductsDto>(requestUrl + this.pageSize + '&page=' + pageNumber);
   }
 
   setData(data: BaseProduct[]): void {

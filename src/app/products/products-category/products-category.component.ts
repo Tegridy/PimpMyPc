@@ -52,6 +52,8 @@ export class ProductsCategoryComponent implements OnInit {
   sortType = 'default';
   queryParams: Param[] = [];
 
+  activeFiltersIds: any[] = [];
+
   ngOnInit(): void {
     const x = this.route.snapshot.queryParams;
     for (const y of Object.entries(x)) {
@@ -75,11 +77,6 @@ export class ProductsCategoryComponent implements OnInit {
         this.loadProducts();
       }
     });
-
-    const tempp: any[] = [];
-
-    const arr = this.route.snapshot.queryParamMap;
-
   }
 
   loadProducts(): void {
@@ -122,7 +119,7 @@ export class ProductsCategoryComponent implements OnInit {
         this.paginationConfig.currentPage = this.pageNumber;
         this.paginationConfig.totalItems = this.productsCount;
 
-        this.updateUrl(this.pageNumber);
+        this.updateUrl();
       });
   }
 
@@ -150,7 +147,7 @@ export class ProductsCategoryComponent implements OnInit {
     }
   }
 
-  updateUrl(page: number): void {
+  updateUrl(): void {
     const currentUrl: ActivatedRoute = new ActivatedRoute();
     currentUrl.url = of([new UrlSegment(this.router.url, {name: 'pageNumber'})]);
 
@@ -172,7 +169,7 @@ export class ProductsCategoryComponent implements OnInit {
 
     if (this.isChecked) {
       this.queryParams.push(param);
-      this.updateUrl(this.pageNumber);
+      this.updateUrl();
       this.activeFiltersIds.push(filterValue.id);
     } else {
 
@@ -210,21 +207,14 @@ export class ProductsCategoryComponent implements OnInit {
     this.getCurrentCategoryProducts(1);
   }
 
-  // deleteFromString(str: string, toRemove: string): string {
-  //   const start = str.indexOf(toRemove);
-  //   return str.substr(0, start) + str.substr(start + toRemove.length);
-  // }
-
   onPageChange(page: number): void {
     this.loading = true;
     const pageNumParam = this.queryParams.find(x => x.key === 'page');
     if (pageNumParam) {
       pageNumParam.value = page;
     }
-    this.updateUrl(page);
+    this.updateUrl();
   }
-
-  activeFiltersIds: any[] = [];
 
   setFilters(str: FilterValue): boolean {
     for (const x of this.queryParams) {

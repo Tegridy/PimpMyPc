@@ -11,6 +11,7 @@ import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {SearchComponent} from './search/search.component';
 import {FormsModule} from '@angular/forms';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 @NgModule({
   declarations: [NavbarComponent, FooterComponent, HomeComponent, SearchComponent],
@@ -22,6 +23,7 @@ import {FormsModule} from '@angular/forms';
     ProductsModule,
     InformationsModule,
     FormsModule,
+    NgxPaginationModule,
   ],
   exports: [NavbarComponent, FooterComponent],
   providers: [ProductsService, CategoriesService],
