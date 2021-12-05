@@ -12,6 +12,7 @@ import {CommonModule} from '@angular/common';
 import {SearchComponent} from './search/search.component';
 import {FormsModule} from '@angular/forms';
 import {NgxPaginationModule} from 'ngx-pagination';
+import {NgxGlideModule} from 'ngx-glide';
 
 @NgModule({
   declarations: [NavbarComponent, FooterComponent, HomeComponent, SearchComponent],
@@ -24,6 +25,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
     InformationsModule,
     FormsModule,
     NgxPaginationModule,
+    NgxGlideModule
   ],
   exports: [NavbarComponent, FooterComponent],
   providers: [ProductsService, CategoriesService],
