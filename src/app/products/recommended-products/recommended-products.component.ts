@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import Glide from '@glidejs/glide';
+import {Component, OnInit} from '@angular/core';
 
 
 @Component({
@@ -9,10 +8,11 @@ import Glide from '@glidejs/glide';
 })
 export class RecommendedProductsComponent implements OnInit {
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
-    new Glide('.glide', { autoplay: 5000 }).mount();
+    // new Glide('.glide', { autoplay: 5000 }).mount();
   }
 
 }

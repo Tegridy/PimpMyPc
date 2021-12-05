@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import Glide from '@glidejs/glide';
-import { ProductSmallComponent } from '../../products/product-small/product-small.component';
+import {Component, Input, OnInit} from '@angular/core';
+import {IMovie} from '../model/IMovie';
+import {BaseProduct} from '../model/BaseProduct';
 
 @Component({
   selector: 'pmp-slider',
@@ -9,10 +9,22 @@ import { ProductSmallComponent } from '../../products/product-small/product-smal
 })
 export class SliderComponent implements OnInit {
 
-  constructor() { }
+  @Input() bestsellers: BaseProduct[] = [];
+  @Input() movies: IMovie[] = [];
+  @Input() isMovie = false;
+
+  constructor() {
+  }
 
   ngOnInit(): void {
-    new Glide('#slider').mount();
+    // new Glide('#slider', {
+    //   perView: 3, bound: true, breakpoints: {
+    //     1024: {
+    //       perView: 6,
+    //       bound: true
+    //     }
+    //   }
+    // }).mount();
   }
 
 }

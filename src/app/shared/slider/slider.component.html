@@ -1,43 +1,21 @@
-<div class="px-4 glide">
+<div class="px-4 glide" id="slider">
   <div class="relative">
     <div class="glide__track" data-glide-el="track">
 
-      <ul class="glide__slides">
-        <li class="glide__slide max-w-64">
-          <pmp-product-small></pmp-product-small>
-        </li>
-        <li class="glide__slide max-w-64">
-          <pmp-product-small></pmp-product-small>
-        </li>
-        <li class="glide__slide max-w-64">
-          <pmp-product-small></pmp-product-small>
-        </li>
-        <li class="glide__slide max-w-64">
-          <pmp-product-small></pmp-product-small>
-        </li>
-        <li class="glide__slide max-w-64">
-          <pmp-product-small></pmp-product-small>
-        </li>
-        <li class="glide__slide max-w-64">
-          <pmp-product-small></pmp-product-small>
-        </li>
-        <li class="glide__slide max-w-64">
-          <pmp-product-small></pmp-product-small>
-        </li>
-        <li class="glide__slide max-w-64">
-          <pmp-product-small></pmp-product-small>
-        </li>
-        <li class="glide__slide max-w-64">
-          <pmp-product-small></pmp-product-small>
-        </li>
-        <li class="glide__slide max-w-64">
-          <pmp-product-small></pmp-product-small>
-        </li>
-        <li class="glide__slide max-w-64">
-          <pmp-product-small></pmp-product-small>
-        </li>
 
+      <ul class="glide__slides">
+        <li class="glide__slide" *ngFor="let p of bestsellers">
+          {{ p.title }}
+          <!--          <pmp-product-small [product]="p"></pmp-product-small>-->
+        </li>
       </ul>
+
+      <!--      <ul *ngIf="isMovie" class="glide__slides">-->
+      <!--        <li class="glide__slide max-w-64" *ngFor="let m of movies">-->
+      <!--          <div>{{ m.title }}</div>-->
+      <!--          <img src="{{ m.thumbUrl }}">-->
+      <!--        </li>-->
+      <!--      </ul>-->
 
     </div>
 

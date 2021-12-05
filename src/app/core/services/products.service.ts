@@ -87,4 +87,8 @@ export class ProductsService {
     this.productsSearchResultSource.next(data);
   }
 
+  getTopSellingProducts(): Observable<BaseProduct[]> {
+    return this.http.get<BaseProduct[]>(this.baseUrl + 'top');
+  }
+
 }

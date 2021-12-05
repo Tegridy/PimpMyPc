@@ -1,5 +1,5 @@
-import { Currencies, Money } from 'ts-money';
-import { Component, Input, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {BaseProduct} from '../model/BaseProduct';
 
 @Component({
   selector: 'pmp-product-small',
@@ -10,14 +10,15 @@ export class ProductSmallComponent implements OnInit {
 
 
   @Input()
-  product: any;
+  product: BaseProduct = {id: 0, price: 999, quantity: 0, title: 'Product'};
 
   @Input()
   listView = false;
   @Input()
   productsParams: string[] = [];
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
   }

@@ -1,5 +1,8 @@
-import {AfterContentInit, AfterViewInit, Component, HostListener, OnInit} from '@angular/core';
-import Glide from '@glidejs/glide';
+import {Component, OnInit} from '@angular/core';
+import {ProductsService} from '../services/products.service';
+import {BaseProduct} from '../../shared/model/BaseProduct';
+import {IMovie} from '../../shared/model/IMovie';
+import {Observable, of} from 'rxjs';
 
 
 @Component({
@@ -13,27 +16,33 @@ export class HomeComponent implements OnInit {
   moviesSlider: any;
   bestsellersSlider: any;
 
-  constructor() {
+  bestsellersProducts: BaseProduct[] = [];
+  x: Observable<BaseProduct[]> = of([]);
+  movies: IMovie[] = [];
+
+  constructor(private productsService: ProductsService) {
+    // this.movies.push({title: 'Title 1', thumbUrl: 'https://img.youtube.com/vi/lezcu2KavS0/hqdefault.jpg'});
+    // this.movies.push({title: 'Title 2', thumbUrl: 'https://img.youtube.com/vi/lezcu2KavS0/hqdefault.jpg'});
+    // this.movies.push({title: 'Title 3', thumbUrl: 'https://img.youtube.com/vi/lezcu2KavS0/hqdefault.jpg'});
+    // this.movies.push({title: 'Title 4', thumbUrl: 'https://img.youtube.com/vi/lezcu2KavS0/hqdefault.jpg'});
+    // this.movies.push({title: 'Title 1', thumbUrl: 'https://img.youtube.com/vi/lezcu2KavS0/hqdefault.jpg'});
+    // this.movies.push({title: 'Title 2', thumbUrl: 'https://img.youtube.com/vi/lezcu2KavS0/hqdefault.jpg'});
+    // this.movies.push({title: 'Title 3', thumbUrl: 'https://img.youtube.com/vi/lezcu2KavS0/hqdefault.jpg'});
+    // this.movies.push({title: 'Title 4', thumbUrl: 'https://img.youtube.com/vi/lezcu2KavS0/hqdefault.jpg'});
+    // this.x = this.productsService.getTopSellingProducts();
 
   }
 
   ngOnInit(): void {
-    this.moviesSlider = new Glide('#movies-slider', {
-      perView: 6, bound: true, breakpoints: {
-        1024: {
-          perView: 2,
-          bound: true
-        }
-      }
-    }).mount();
-    this.bestsellersSlider = new Glide('#bestsellers-slider', {
-      perView: 6, bound: true, breakpoints: {
-        1024: {
-          perView: 2,
-          bound: true
-        }
-      }
-    }).mount();
+
+    // this.productsService.getTopSellingProducts().subscribe(prod => {
+    //   this.bestsellersProducts = prod;
+    //   new Glide('.glide').mount();
+    // });
+    this.x = this.productsService.getTopSellingProducts();
+
 
   }
+
+
 }

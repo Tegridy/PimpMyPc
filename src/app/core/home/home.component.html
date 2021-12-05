@@ -19,16 +19,12 @@
 
     <!--      TODO Make mobile display to max 6-8 rows -->
 
-    <div
+    <ul
       class="grid grid-cols-2 grid-rows-none row-auto gap-6 overflow-auto md:grid-cols-3 lg:grid-cols-3 sm:px-4 h-192 sm:h-auto sm:overflow-auto">
-      <pmp-product-small></pmp-product-small>
-      <pmp-product-small></pmp-product-small>
-      <pmp-product-small></pmp-product-small>
-      <pmp-product-small></pmp-product-small>
-      <pmp-product-small></pmp-product-small>
-      <pmp-product-small></pmp-product-small>
-
-    </div>
+      <li *ngFor="let p of bestsellersProducts">
+        <pmp-product-small [product]="p"></pmp-product-small>
+      </li>
+    </ul>
   </div>
 
 </section>
@@ -38,7 +34,8 @@
 <section id="bestsellers">
   <h1 class="my-4 text-4xl font-bold">Bestsellers </h1>
   <div id="bestsellers-slider">
-    <pmp-slider></pmp-slider>
+    <!--    <pmp-slider [bestsellers]="bestsellersProducts"></pmp-slider>-->
+
   </div>
 </section>
 
@@ -49,7 +46,7 @@
   <h1 class="my-4 text-4xl font-bold">Movies </h1>
 
   <div id="movies-slider">
-    <pmp-slider></pmp-slider>
+    <!--    <pmp-slider [isMovie]="true" [movies]="movies"></pmp-slider>-->
   </div>
 </section>
 
