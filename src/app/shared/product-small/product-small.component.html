@@ -1,5 +1,5 @@
 <div
-  class="h-full border-2 border-transparent rounded-lg shadow-lg cursor-pointer bg-gray-50 hover:border-black hover:shadow-lg">
+  class="max-w-64 h-full border-2 border-transparent rounded-lg shadow-lg cursor-pointer bg-gray-50 hover:border-black hover:shadow-lg">
 
   <a routerLink="/products/1">
 
@@ -8,15 +8,17 @@
       <!--    <div class="self-start px-4 m-2 border border-black shadow border-1 rounded-l-2xl rounded-r-2xl">New</div>-->
 
       <div class="self-center mt-4 sm:mt-0">
-        <img class="object-contain w-full h-48 shadow-lg" src="{{ product.imageUrl }}" alt="photo"/>
+        <img class="object-contain w-full h-48 shadow-lg" src="{{ product.imageUrl }}" alt="photo">
       </div>
 
       <div class="flex h-full ml-4 sm:justify-between"
            [ngClass]="listView ? 'flex-col sm:flex-row w-full lg:pl-8 lg:pr-16' : 'flex-col'">
-        <div class="space-y-4">
-          <span class="text-lg">
+        <div class="space-y-4 h-36 relative">
+          <div class="flex flex-wrap">
+          <span class="text-lg whitespace-normal">
             {{ product.title }}
           </span>
+          </div>
 
           <ng-container *ngIf="productsParams">
             <ul *ngFor="let productParams of productsParams">

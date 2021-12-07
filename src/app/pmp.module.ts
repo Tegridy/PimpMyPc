@@ -1,17 +1,18 @@
-import { HttpClientModule } from '@angular/common/http';
-import { ProductsModule } from './products/products.module';
-import { OrdersModule } from './orders/orders.module';
-import { InformationsModule } from './informations/informations.module';
-import { AccountModule } from './account/account.module';
-import { RegisterModule } from './register/register.module';
-import { LoginModule } from './login/login.module';
-import { SharedModule } from './shared/shared.module';
-import { CoreModule } from './core/core.module';
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import {HttpClientModule} from '@angular/common/http';
+import {ProductsModule} from './products/products.module';
+import {OrdersModule} from './orders/orders.module';
+import {InformationsModule} from './informations/informations.module';
+import {AccountModule} from './account/account.module';
+import {RegisterModule} from './register/register.module';
+import {LoginModule} from './login/login.module';
+import {SharedModule} from './shared/shared.module';
+import {CoreModule} from './core/core.module';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
 
-import { PmpRoutingModule } from './pmp-routing.module';
-import { PmpComponent } from './pmp.component';
+import {PmpRoutingModule} from './pmp-routing.module';
+import {PmpComponent} from './pmp.component';
+import {NgxGlideModule} from 'ngx-glide';
 
 @NgModule({
   declarations: [PmpComponent],
@@ -28,8 +29,10 @@ import { PmpComponent } from './pmp.component';
     LoginModule,
     RegisterModule,
     HttpClientModule,
+    NgxGlideModule,
   ],
   providers: [],
   bootstrap: [PmpComponent],
 })
-export class PmpModule {}
+export class PmpModule {
+}

@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {ProductsService} from '../services/products.service';
 import {BaseProduct} from '../../shared/model/BaseProduct';
 import {IMovie} from '../../shared/model/IMovie';
-import {Observable, of} from 'rxjs';
 
 
 @Component({
@@ -12,36 +11,37 @@ import {Observable, of} from 'rxjs';
 })
 export class HomeComponent implements OnInit {
 
-  slidesPerView = 6;
+  // Slider configs
+  slidesPerView = 7;
+  showBullets = false;
+  bound = true;
+
+
   moviesSlider: any;
   bestsellersSlider: any;
 
   bestsellersProducts: BaseProduct[] = [];
-  x: Observable<BaseProduct[]> = of([]);
+  ourChoiceProducts: BaseProduct[] = [];
   movies: IMovie[] = [];
 
-  constructor(private productsService: ProductsService) {
-    // this.movies.push({title: 'Title 1', thumbUrl: 'https://img.youtube.com/vi/lezcu2KavS0/hqdefault.jpg'});
-    // this.movies.push({title: 'Title 2', thumbUrl: 'https://img.youtube.com/vi/lezcu2KavS0/hqdefault.jpg'});
-    // this.movies.push({title: 'Title 3', thumbUrl: 'https://img.youtube.com/vi/lezcu2KavS0/hqdefault.jpg'});
-    // this.movies.push({title: 'Title 4', thumbUrl: 'https://img.youtube.com/vi/lezcu2KavS0/hqdefault.jpg'});
-    // this.movies.push({title: 'Title 1', thumbUrl: 'https://img.youtube.com/vi/lezcu2KavS0/hqdefault.jpg'});
-    // this.movies.push({title: 'Title 2', thumbUrl: 'https://img.youtube.com/vi/lezcu2KavS0/hqdefault.jpg'});
-    // this.movies.push({title: 'Title 3', thumbUrl: 'https://img.youtube.com/vi/lezcu2KavS0/hqdefault.jpg'});
-    // this.movies.push({title: 'Title 4', thumbUrl: 'https://img.youtube.com/vi/lezcu2KavS0/hqdefault.jpg'});
-    // this.x = this.productsService.getTopSellingProducts();
 
+  constructor(private productsService: ProductsService) {
+    this.movies.push({title: 'How to build PC', thumbUrl: 'https://img.youtube.com/vi/v7MYOpFONCU/hqdefault.jpg'});
+    this.movies.push({title: 'How to choose a graphics card', thumbUrl: 'https://img.youtube.com/vi/S1xkLWaMWxQ/hqdefault.jpg'});
+    this.movies.push({title: 'The Monitor Buying Guide', thumbUrl: 'https://img.youtube.com/vi/9ZwCDBBwSdU/hqdefault.jpg'});
+    this.movies.push({title: 'How to CORRECTLY choose your PC Parts', thumbUrl: 'https://img.youtube.com/vi/j_DcWgxMZ3k/hqdefault.jpg'});
+    this.movies.push({title: 'The BEST Smartphones of 2021', thumbUrl: 'https://img.youtube.com/vi/kwkjQRT42Qk/hqdefault.jpg'});
+    this.movies.push({
+      title: 'Galaxy S21 Ultra vs iPhone 12 Pro Test',
+      thumbUrl: 'https://img.youtube.com/vi/qxRpzr-862Q/hqdefault.jpg'
+    });
+    this.movies.push({title: 'The Fastest Gaming PC is now AMD!', thumbUrl: 'https://img.youtube.com/vi/Qa0jZnrQrIA/hqdefault.jpg'});
+    this.movies.push({title: 'Best Prebuilt Gaming PC 2021', thumbUrl: 'https://img.youtube.com/vi/hEE3s9QLfLE/hqdefault.jpg'});
   }
 
   ngOnInit(): void {
-
-    // this.productsService.getTopSellingProducts().subscribe(prod => {
-    //   this.bestsellersProducts = prod;
-    //   new Glide('.glide').mount();
-    // });
-    this.x = this.productsService.getTopSellingProducts();
-
-
+    this.productsService.getTopSellingProducts().subscribe(bestsellers => this.bestsellersProducts = bestsellers);
+    this.productsService.getOurChoice().subscribe(ourChoice => this.ourChoiceProducts = ourChoice);
   }
 
 

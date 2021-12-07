@@ -91,4 +91,8 @@ export class ProductsService {
     return this.http.get<BaseProduct[]>(this.baseUrl + 'top');
   }
 
+  getOurChoice(): Observable<BaseProduct[]> {
+    return this.http.get<BaseProduct[]>(this.baseUrl + 'our-choice');
+  }
+
 }
