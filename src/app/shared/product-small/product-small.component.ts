@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {BaseProduct} from '../model/BaseProduct';
+import {CartService} from '../../core/services/cart.service';
 
 @Component({
   selector: 'pmp-product-small',
@@ -17,10 +18,14 @@ export class ProductSmallComponent implements OnInit {
   @Input()
   productsParams: string[] = [];
 
-  constructor() {
+  constructor(private cartService: CartService) {
   }
 
   ngOnInit(): void {
+  }
+
+  addItemToCart(): void {
+    this.cartService.changeCart(this.product);
   }
 
 }

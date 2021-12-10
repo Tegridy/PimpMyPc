@@ -5,11 +5,12 @@ import {CommonModule} from '@angular/common';
 import {StarRatingModule} from 'angular-star-rating';
 import {SpinnerComponent} from './spinner/spinner.component';
 import {ProductSmallComponent} from './product-small/product-small.component';
+import {RouterModule} from '@angular/router';
 
 @NgModule({
   declarations: [ModalComponent, SliderComponent, SpinnerComponent, ProductSmallComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  imports: [CommonModule, StarRatingModule.forRoot()],
+  imports: [CommonModule, StarRatingModule.forRoot(), RouterModule],
   exports: [ModalComponent, SliderComponent, SpinnerComponent, ProductSmallComponent],
 })
 export class SharedModule {

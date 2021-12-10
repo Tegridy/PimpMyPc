@@ -5,12 +5,14 @@
 
   <div class="hidden w-2/5 min-h-full ml-8 border-2 border-black rounded-lg bg-gray-50 lg:block py-9">
     <div class="flex flex-col items-center justify-center">
-      <h2 class="mx-auto mb-6 text-xl">Newest product</h2>
+      <h2 class="mx-auto mb-6 text-2xl">Newest product</h2>
       <div class="w-10/12 mx-auto">
-        <img class="mx-auto" src="https://picsum.photos/400/400">
+        <img class="mx-auto object-contain w-4/5 shadow-lg" src="{{ newestProduct.imageUrl }}">
       </div>
-      <span class="text-3xl my-14">product long name of long product</span>
-      <span class="text-xl">product price</span>
+      <div class="w-3/5 mx-auto flex flex-col items-center">
+        <span class="text-3xl my-14">{{ newestProduct.title }}</span>
+        <span class="text-2xl mt-5">{{ newestProduct.price }}$</span>
+      </div>
     </div>
   </div>
 

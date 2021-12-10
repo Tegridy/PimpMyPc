@@ -15,10 +15,16 @@
         <ion-icon name="person-outline"></ion-icon>
         Account
       </a></li>
-      <li class="px-5 rounded cursor-pointer hover:bg-gray-200 hover:shadow"><a class="flex flex-col items-center"
-                                                                                routerLink="/basket">
+      <li class="px-5 rounded cursor-pointer hover:bg-gray-200 hover:shadow"><a
+        class="flex flex-col items-center relative"
+        routerLink="/cart">
         <ion-icon name="basket-outline"></ion-icon>
-        Basket
+        Cart
+        <ng-container *ngIf="numberOfItemsInCart > 0">
+          <div class="flex justify-center items-center h-6 w-6 bg-green-600 rounded-full absolute top-2.5 -left-5">
+            <span class="font-semibold">{{ numberOfItemsInCart }}</span>
+          </div>
+        </ng-container>
       </a></li>
     </ul>
 

@@ -1,0 +1,59 @@
+<section id="basket" class="pt-4">
+
+  <div class="flex flex-col justify-center w-full">
+
+    <div *ngIf="!basketItems" class="text-2xl text-center my-24">
+      <span>Your basket is empty, please add some products.</span><br>
+
+      <button class="m-4 px-4 py-2 bg-blue-600 rounded-full" routerLink="/">Homepage</button>
+    </div>
+
+    <div *ngIf="basketItems">
+      <h2 class="text-3xl mb-4 w-full">Basket ({{ numberOfItemsInBasket }})</h2>
+
+      <div class="flex flex-col sm:flex-row justify-between">
+
+        <ul class="w-full sm:w-3/5 space-y-4">
+          <li class="flex w-full justify-between border-2 border-black rounded-lg p-4" *ngFor="let item of basketItems">
+            <div class="flex">
+              <img class="object-contain w-full h-48 shadow-lg" src="{{ item.imageUrl }}" alt="Product img">
+              <h6 class="ml-4 my-auto">{{ item.title }}</h6>
+            </div>
+
+            <div class="flex flex-col items-center min-h-full">
+              <div class="h-4/5">
+                <span class="mr-4">{{ item.price }}$</span>
+                <select>
+                  <option>1</option>
+                </select>
+              </div>
+              <div class="h-1/5">
+                <button title="Remove from cart" (click)="removeProductFromCart(item.id)">
+                  <ion-icon class="w-8 h-8" name="close-circle-outline"></ion-icon>
+                </button>
+              </div>
+            </div>
+          </li>
+        </ul>
+
+
+        <div
+          class="w-1/5 mx-8 bg-gray-400 bg-opacity-40 flex items-center justify-between flex-col rounded-lg max-h-36">
+          <div class="mt-4 flex flex-col items-center">
+            <h3 class="">Total price</h3>
+            <span>{{ totalPrice }}$</span>
+          </div>
+
+          <div>
+            <button routerLink="/delivery" class="p-2 m-4 bg-blue-600 rounded-full">Go to delivery</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+
+
+</section>

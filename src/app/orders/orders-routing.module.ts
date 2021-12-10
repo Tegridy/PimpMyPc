@@ -1,15 +1,15 @@
-import { BasketComponent } from './basket/basket.component';
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import {CartComponent} from './cart/cart.component';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
 
 const routes: Routes = [
-  {path: '', component: BasketComponent}
+  {path: '', component: CartComponent}
 ];
 
 @NgModule({
-  imports: [ RouterModule.forChild(routes) ],
-  exports: [ RouterModule ]
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule]
 })
 export class OrdersRoutingModule {
-  static components = [BasketComponent];
+  static components = [CartComponent];
 }

@@ -23,6 +23,7 @@ export class HomeComponent implements OnInit {
   bestsellersProducts: BaseProduct[] = [];
   ourChoiceProducts: BaseProduct[] = [];
   movies: IMovie[] = [];
+  newestProduct!: BaseProduct;
 
 
   constructor(private productsService: ProductsService) {
@@ -42,6 +43,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.productsService.getTopSellingProducts().subscribe(bestsellers => this.bestsellersProducts = bestsellers);
     this.productsService.getOurChoice().subscribe(ourChoice => this.ourChoiceProducts = ourChoice);
+    this.productsService.getNewestProduct().subscribe(newestProduct => this.newestProduct = newestProduct);
   }
 
 

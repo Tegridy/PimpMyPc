@@ -95,4 +95,9 @@ export class ProductsService {
     return this.http.get<BaseProduct[]>(this.baseUrl + 'our-choice');
   }
 
+  getNewestProduct(): Observable<BaseProduct> {
+    return this.http.get<BaseProduct>(this.baseUrl + 'newest');
+  }
+
+
 }

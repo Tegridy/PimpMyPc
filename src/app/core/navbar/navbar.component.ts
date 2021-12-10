@@ -4,6 +4,7 @@ import {CategoriesService} from '../services/categories.service';
 import {Params, Router} from '@angular/router';
 import {ProductsService} from '../services/products.service';
 import {BaseProduct} from '../../shared/model/BaseProduct';
+import {CartService} from '../services/cart.service';
 
 @Component({
   selector: 'pmp-navbar',
@@ -22,11 +23,14 @@ export class NavbarComponent implements OnInit {
 
   searchPhrase: string = '';
 
-  constructor(private categoryService: CategoriesService, private router: Router, private productsService: ProductsService) {
+  numberOfItemsInCart = 0;
+
+  constructor(private cartService: CartService, private categoryService: CategoriesService, private router: Router, private productsService: ProductsService) {
   }
 
   ngOnInit(): void {
     this.mainCategories = categories;
+    this.cartService.currentCart.subscribe(cart => this.numberOfItemsInCart = cart.length);
   }
 
   toggleMenu(): void {

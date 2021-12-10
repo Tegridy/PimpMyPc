@@ -1,12 +1,11 @@
 <div
-  class="max-w-64 h-full border-2 border-transparent rounded-lg shadow-lg cursor-pointer bg-gray-50 hover:border-black hover:shadow-lg">
+  class="h-full border-2 border-transparent rounded-lg shadow-lg cursor-pointer bg-gray-50 hover:border-black hover:shadow-lg">
 
-  <a routerLink="/products/1">
 
-    <div class="flex h-full p-2 group" [ngClass]="listView ? 'flex-row items-start' : 'flex-col'">
+  <div class="flex h-full p-2 group" [ngClass]="listView ? 'flex-row items-start' : 'flex-col'">
 
-      <!--    <div class="self-start px-4 m-2 border border-black shadow border-1 rounded-l-2xl rounded-r-2xl">New</div>-->
-
+    <!--    <div class="self-start px-4 m-2 border border-black shadow border-1 rounded-l-2xl rounded-r-2xl">New</div>-->
+    <div routerLink="/product/{{ product.id }}">
       <div class="self-center mt-4 sm:mt-0">
         <img class="object-contain w-full h-48 shadow-lg" src="{{ product.imageUrl }}" alt="photo">
       </div>
@@ -25,20 +24,21 @@
               <li>{{ productParams }}</li>
             </ul>
           </ng-container>
-        </div>
-        <div class="flex justify-between" [ngClass]="listView ? 'flex-col' : 'flex-row items-center'">
-          <span class="self-end py-2 text-lg">{{ product.price }}</span>
 
-          <button
-            class="self-end hidden w-10 h-10 text-green-700 border-2 rounded-lg md:group-hover:block hover:border-green-700 hover:bg-green-700 hover:text-gray-50 sm:block">
+        </div>
+      </div>
+    </div>
+    <div class="flex justify-between" [ngClass]="listView ? 'flex-col' : 'flex-row items-center'">
+      <span class="self-end py-2 text-lg">{{ product.price }}</span>
+
+      <button (click)="addItemToCart()"
+              class="self-end hidden w-10 h-10 text-green-700 border-2 rounded-lg md:group-hover:block hover:border-green-700 hover:bg-green-700 hover:text-gray-50 sm:block">
             <span class="flex items-center justify-center">
               <ion-icon name="add-outline"></ion-icon>
             </span>
-          </button>
-        </div>
-      </div>
-
+      </button>
     </div>
 
-  </a>
+  </div>
+
 </div>
