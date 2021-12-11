@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {AuthService} from '../core/services/auth.service';
 
 @Component({
   selector: 'pmp-login',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  login = '';
+  password = '';
+
+  constructor(private authService: AuthService) {
+  }
 
   ngOnInit(): void {
   }
 
+  loginUser(): void {
+    this.authService.loginUser(this.login, this.password);
+  }
 }

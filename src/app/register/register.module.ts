@@ -1,18 +1,19 @@
-import { RegisterRoutingModule } from './register-routing.module';
-import { RegisterComponent } from './register.component';
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { CommonModule } from '@angular/common';
-
+import {RegisterRoutingModule} from './register-routing.module';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {ReactiveFormsModule} from '@angular/forms';
 
 
 @NgModule({
   declarations: [
     RegisterRoutingModule.components
   ],
-  schemas: [ CUSTOM_ELEMENTS_SCHEMA],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [
     CommonModule,
-    RegisterRoutingModule
+    RegisterRoutingModule,
+    ReactiveFormsModule
   ]
 })
-export class RegisterModule { }
+export class RegisterModule {
+}

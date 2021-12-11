@@ -8,12 +8,13 @@ import {RegulationsComponent} from './informations/regulations/regulations.compo
 import {PrivacyPolicyComponent} from './informations/privacy-policy/privacy-policy.component';
 import {ContactUsComponent} from './informations/contact-us/contact-us.component';
 import {SearchComponent} from './core/search/search.component';
+import {LoginGuard} from './core/guards/login.guard';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'login', loadChildren: () => import('./login/login.module').then(m => m.LoginModule)},
   {path: 'register', loadChildren: () => import('./register/register.module').then(m => m.RegisterModule)},
-  {path: 'account', loadChildren: () => import('./account/account.module').then(m => m.AccountModule)},
+  {path: 'account', canActivate: [LoginGuard], loadChildren: () => import('./account/account.module').then(m => m.AccountModule)},
   {path: 'orders', loadChildren: () => import('./orders/orders.module').then(m => m.OrdersModule)},
   // { path: 'about', loadChildren: () => import('./informations/informations.module').then(m => m.InformationsModule) },
   {path: 'categories', loadChildren: () => import('./products/products.module').then(m => m.ProductsModule)},

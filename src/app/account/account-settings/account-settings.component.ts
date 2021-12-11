@@ -1,4 +1,5 @@
-import { Component, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {UserService} from '../../core/services/user.service';
 
 @Component({
   selector: 'pmp-account-settings',
@@ -14,9 +15,11 @@ export class AccountSettingsComponent implements OnInit {
   emailAddressEditModal = 'E-mail address change';
   passwordEditModal = 'Password change';
 
-  constructor() { }
+  constructor(private userService: UserService) {
+  }
 
   ngOnInit(): void {
+    this.getUserDetails();
   }
 
   toggleModal(modalName: string): void {
@@ -26,6 +29,12 @@ export class AccountSettingsComponent implements OnInit {
 
   setModalStatus(modalStatus: boolean): void {
     this.showModal = modalStatus;
+  }
+
+  getUserDetails(): void {
+    this.userService.getUserAccountDetails().subscribe(
+      u => console.log(u)
+    );
   }
 
 }
