@@ -11,9 +11,9 @@
 
       <form class="flex flex-col p-2">
         <label class="text-lg">Username</label>
-        <input [(ngModel)]="login" class="my-4" type="text">
+        <input [(ngModel)]="login" name="login" class="my-4" type="text">
         <label class="text-lg">Password</label>
-        <input [(ngModel)]="password" class="my-4" type="password">
+        <input [(ngModel)]="password" name="password" class="my-4" type="password">
 
         <input (click)="loginUser()" type="submit" value="Sign in"
                class="bg-blue-600 py-2 px-4 rounded-full cursor-pointer">

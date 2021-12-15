@@ -97,6 +97,14 @@
                   "maximumError": "4kb"
                 }
               ]
+            },
+            "dev": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
             }
           }
         },
@@ -108,8 +116,12 @@
           "configurations": {
             "production": {
               "browserTarget": "PimpMyPc:build:production"
+            },
+            "dev": {
+              "browserTarget": "PimpMyPc:build:dev"
             }
-          }
+          },
+          "defaultConfiguration": "dev"
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",

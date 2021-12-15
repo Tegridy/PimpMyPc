@@ -18,4 +18,12 @@ export class UserEdit {
   set setPassword(value: string) {
     this.password = value;
   }
+
+  set setPhone(value: string) {
+    this.phone = value;
+  }
+
+  set setEmail(value: string) {
+    this.email = value;
+  }
 }

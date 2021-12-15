@@ -27,12 +27,12 @@
         <div class="flex pb-4 space-y-3 border-b-2 border-black">
           <div class="flex flex-col w-4/5 space-y-2">
             <h5 class="my-4">Address</h5>
-            <input [value]="personalDetailsForm.get('street')?.value" type="text" placeholder="Street" value="Long"
+            <input [value]="addressDetailsForm.get('street')?.value" type="text" placeholder="Street" value="Long"
                    disabled>
-            <input [value]="personalDetailsForm.get('city')?.value" placeholder="City" value="Denver" disabled>
-            <input [value]="personalDetailsForm.get('state')?.value" type="text" placeholder="State" value="New York"
+            <input [value]="addressDetailsForm.get('city')?.value" placeholder="City" value="Denver" disabled>
+            <input [value]="addressDetailsForm.get('state')?.value" type="text" placeholder="State" value="New York"
                    disabled>
-            <input [value]="personalDetailsForm.get('zip')?.value" type="text" placeholder="Zip code" value="00-000"
+            <input [value]="addressDetailsForm.get('zip')?.value" type="text" placeholder="Zip code" value="00-000"
                    disabled>
           </div>
           <div class="flex justify-center items-center w-1/5">
@@ -65,11 +65,11 @@
       <form novalidate (ngSubmit)="savePersonalData()" [formGroup]="personalDetailsForm">
         <input formControlName="firstName" [value]="personalDetailsForm.get('firstName')?.value" type="text"
                class="w-full rounded-lg border" placeholder="First name">
-        <input formControlName="firstName" [value]="personalDetailsForm.get('lastName')?.value" type="text"
+        <input formControlName="lastName" [value]="personalDetailsForm.get('lastName')?.value" type="text"
                class="w-full rounded-lg border" placeholder="Last name">
-        <input formControlName="firstName" [value]="personalDetailsForm.get('phone')?.value" type="text"
+        <input formControlName="phone" [value]="personalDetailsForm.get('phone')?.value" type="text"
                class="w-full rounded-lg border" placeholder="Phone number">
-        <input formControlName="firstName" [value]="personalDetailsForm.get('email')?.value"
+        <input formControlName="email" [value]="personalDetailsForm.get('email')?.value"
                class="w-full rounded-lg border" type="email" placeholder="E-mail address">
       </form>
     </ng-container>
@@ -89,22 +89,17 @@
 
     <ng-container *ngIf="currentModalSelected === passwordEditModal">
       <form novalidate (ngSubmit)="saveAuthData()" [formGroup]="authDetailsForm">
-        <input formControlName="newPassword1" [value]="authDetailsForm.get('newPassword1')?.value"
-               class="w-full rounded-lg border" type="password" placeholder="Old password">
-        <input formControlName="newPassword2" [value]="authDetailsForm.get('newPassword2')?.value"
+        <input formControlName="password" [value]="authDetailsForm.get('password')?.value"
+               class="w-full rounded-lg border" type="password" placeholder="New password">
+        <input formControlName="confirmPassword" [value]="authDetailsForm.get('confirmPassword')?.value"
                class="w-full rounded-lg border" [ngClass]="{'bg-red-700': authDetailsForm?.errors ||
-                                             ((authDetailsForm.get('newPassword2')?.touched ||
-                                              authDetailsForm.get('newPassword2')?.dirty) &&
-                                              !authDetailsForm.get('newPassword2')?.valid) }" type="password"
-               placeholder="New password">
+                                             ((authDetailsForm.get('confirmPassword')?.touched ||
+                                              authDetailsForm.get('confirmPassword')?.dirty) &&
+                                              !authDetailsForm.get('confirmPassword')?.valid) }" type="password"
+               placeholder="Confirm new password">
         <span *ngIf="authDetailsForm.errors?.match">
-                Please confirm your email address.
+                Passwords do not match.
         </span>
-        {{authDetailsForm?.errors}}
-        {{authDetailsForm.get('newPassword2')?.touched}}
-        {{authDetailsForm.get('newPassword2')?.dirty}}
-        {{!authDetailsForm.get('newPassword2')?.valid }}
-        {{'eee' + authDetailsForm.errors?.match }}
       </form>
     </ng-container>
 

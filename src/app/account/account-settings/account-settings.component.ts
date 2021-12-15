@@ -19,13 +19,12 @@ export class AccountSettingsComponent implements OnInit {
   addressDetailsEditModal = 'Address details change';
   passwordEditModal = 'Password change';
 
-  userDetailsForm!: FormGroup;
   personalDetailsForm!: FormGroup;
   addressDetailsForm!: FormGroup;
   authDetailsForm!: FormGroup;
 
 
-  constructor(private userService: UserService, private formBuilder: FormBuilder, private validators: ValidationService) {
+  constructor(private userService: UserService, private formBuilder: FormBuilder) {
   }
 
   ngOnInit(): void {
@@ -34,7 +33,7 @@ export class AccountSettingsComponent implements OnInit {
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       phone: ['', Validators.required],
-      email: ['', Validators.required, Validators.email]
+      email: ['', [Validators.required, Validators.email]]
     });
 
     this.addressDetailsForm = this.formBuilder.group({
@@ -45,8 +44,8 @@ export class AccountSettingsComponent implements OnInit {
     });
 
     this.authDetailsForm = this.formBuilder.group({
-      newPassword1: ['', [Validators.required]],
-      newPassword2: ['', [Validators.required]]
+      password: ['', [Validators.required]],
+      confirmPassword: ['', [Validators.required]]
     }, {validators: ValidationService.passwordMatcher});
   }
 
@@ -79,43 +78,27 @@ export class AccountSettingsComponent implements OnInit {
       city: userData.address.city,
       zip: userData.address.zip
     });
-  }
 
-  updateData(): void {
-    // this.setModalStatus(false);
-    // const u = new UserEdit(
-    //   this.firstName,
-    //   this.lastName,
-    //   new Address(
-    //     this.street,
-    //     this.city,
-    //     this.state,
-    //     this.zip,
-    //   ),
-    //   this.phone,
-    //   this.email,
-    //   this.newPassword
-    // );
-    // this.userService.updateUserAccountDetails(u);
+    console.log(this.addressDetailsForm.get('street')?.value);
   }
 
   savePersonalData(): void {
     const user = new UserEdit(
       this.personalDetailsForm.get('firstName')?.value,
-      this.personalDetailsForm.get('lastName')?.value,
-      this.personalDetailsForm.get('phone')?.value,
-      this.personalDetailsForm.get('email')?.value,
+      this.personalDetailsForm.get('lastName')?.value
     );
+    user.setPhone = this.personalDetailsForm.get('phone')?.value;
+    user.setEmail = this.personalDetailsForm.get('email')?.value;
     this.userService.updateUserPersonalDetails(user);
   }
 
   saveAddressData(): void {
     const user = new UserEdit();
     user.setAddress = new Address(
-      this.personalDetailsForm.get('street')?.value,
-      this.personalDetailsForm.get('state')?.value,
-      this.personalDetailsForm.get('city')?.value,
-      this.personalDetailsForm.get('zip')?.value
+      this.addressDetailsForm.get('street')?.value,
+      this.addressDetailsForm.get('state')?.value,
+      this.addressDetailsForm.get('city')?.value,
+      this.addressDetailsForm.get('zip')?.value
     );
     console.log('Addres');
     console.log(user);
@@ -124,7 +107,7 @@ export class AccountSettingsComponent implements OnInit {
 
   saveAuthData(): void {
     const user = new UserEdit();
-    user.setPassword = this.personalDetailsForm.get('newPassword')?.value;
+    user.setPassword = this.personalDetailsForm.get('password')?.value;
     this.userService.updateUserPersonalDetails(user);
   }
 }
