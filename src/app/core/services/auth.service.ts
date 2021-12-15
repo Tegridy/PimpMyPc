@@ -19,8 +19,8 @@ export class AuthService {
     this.http.post('http://localhost:8080/api/v1/auth/login', {username, password}).subscribe(
       (loginDetails) => {
         const x = loginDetails as LoginDetails;
-        localStorage.setItem('token', x.token);
-        localStorage.setItem('userId', String(x.userId));
+        sessionStorage.setItem('token', x.token);
+        sessionStorage.setItem('userId', String(x.userId));
         this.isUserLoggedIn = true;
         this.router.navigateByUrl('/').then();
       }
@@ -30,7 +30,7 @@ export class AuthService {
   signUpUser(user: User): void {
     this.http.post('http://localhost:8080/api/v1/auth/register', user).subscribe(
       token => {
-        localStorage.setItem('token', token as string);
+        sessionStorage.setItem('token', token as string);
         this.isUserLoggedIn = true;
       }
     );

@@ -9,16 +9,28 @@
             class="flex flex-col justify-center items-center">
         <input id="usernameId" formControlName="username" type="text" class="w-4/5 my-3"
                placeholder="Username (required)">
+        <input id="passwordId" formControlName="password" type="password" class="w-4/5"
+               placeholder="Password (required)">
         <input id="firstNameId" formControlName="firstName" type="text" class="w-4/5 my-3"
                placeholder="First name (required)">
         <input id="lastNameId" formControlName="lastName" type="text" class="w-4/5 mb-3"
                placeholder="Last name (required)">
+        <h3 class="text-xl font-semibold self-start ml-5 my-2">Address:</h3>
+        <div formGroupName="address" class="w-4/5 flex flex-col">
+          <input id="streetId" formControlName="street" type="text" class="mb-3"
+                 placeholder="Street name (required)">
+          <input id="cityId" formControlName="city" type="text" class="mb-3"
+                 placeholder="City name (required)">
+          <input id="stateId" formControlName="state" type="text" class=" mb-3"
+                 placeholder="State name (required)">
+          <input id="zipId" formControlName="zip" type="text" class="mb-3"
+                 placeholder="Zip code (required)">
+        </div>
+        <h3 class="text-xl font-semibold self-start ml-5 my-2">Other:</h3>
         <input id="phoneId" formControlName="phone" type="text" class="w-4/5 mb-3"
                placeholder="Phone number (optional)">
         <input id="emailId" formControlName="email" type="email" class="w-4/5 mb-3"
                placeholder="E-mail address (required)">
-        <input id="passwordId" formControlName="password" type="password" class="w-4/5"
-               placeholder="Password (required)">
         <div class="w-4/5 flex items-center mt-4">
           <input id="subscription" type="checkbox">
           <label for="subscription" class="ml-2 text-base">Subscribe for exclusive e-mail offers and discounts.</label>

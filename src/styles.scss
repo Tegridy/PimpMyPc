@@ -9,6 +9,10 @@
   body {
     @apply text-sm;
   }
+
+  .modal-button {
+    @apply w-2/5 h-8 my-4 bg-blue-600 rounded-full;
+  }
 }
 
 html {
@@ -33,6 +37,7 @@ ion-icon {
   svg {
     fill: #f18f01 !important;
   }
+
   i {
     color: #f18f01 !important;;
   }
@@ -42,6 +47,7 @@ ion-icon {
   svg {
     fill: #f18f01 !important;;
   }
+
   i {
     color: #f18f01 !important;;
   }
@@ -51,6 +57,7 @@ ion-icon {
   svg {
     fill: #f18f01 !important;;
   }
+
   i {
     color: #f18f01 !important;;
   }
@@ -60,6 +67,7 @@ ion-icon {
   svg {
     fill: #f18f01 !important;;
   }
+
   i {
     color: #f18f01 !important;;
   }

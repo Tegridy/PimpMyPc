@@ -4,6 +4,7 @@ import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {AuthInterceptor} from '../core/interceptors/auth.interceptor';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 
 @NgModule({
@@ -14,7 +15,9 @@ import {AuthInterceptor} from '../core/interceptors/auth.interceptor';
   imports: [
     CommonModule,
     SharedModule,
-    AccountRoutingModule
+    AccountRoutingModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}]
 })
