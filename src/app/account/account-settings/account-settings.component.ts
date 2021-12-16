@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {UserService} from '../../core/services/user.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Address, User} from '../../shared/model/User';
-import {UserEdit} from '../../shared/model/UserEdit';
+import {UserEdit, UserEditAuth} from '../../shared/model/UserEdit';
 import {ValidationService} from '../../core/services/validation.service';
 
 @Component({
@@ -54,7 +54,7 @@ export class AccountSettingsComponent implements OnInit {
     this.currentModalSelected = modalName;
   }
 
-  setModalStatus(modalStatus: boolean): void {
+  turnOnModal(modalStatus: boolean): void {
     this.showModal = modalStatus;
   }
 
@@ -85,29 +85,28 @@ export class AccountSettingsComponent implements OnInit {
   savePersonalData(): void {
     const user = new UserEdit(
       this.personalDetailsForm.get('firstName')?.value,
-      this.personalDetailsForm.get('lastName')?.value
+      this.personalDetailsForm.get('lastName')?.value,
+      this.personalDetailsForm.get('phone')?.value,
+      this.personalDetailsForm.get('email')?.value
     );
-    user.setPhone = this.personalDetailsForm.get('phone')?.value;
-    user.setEmail = this.personalDetailsForm.get('email')?.value;
     this.userService.updateUserPersonalDetails(user);
+    this.turnOnModal(false);
   }
 
   saveAddressData(): void {
-    const user = new UserEdit();
-    user.setAddress = new Address(
+    const address = new Address(
       this.addressDetailsForm.get('street')?.value,
       this.addressDetailsForm.get('state')?.value,
       this.addressDetailsForm.get('city')?.value,
       this.addressDetailsForm.get('zip')?.value
     );
-    console.log('Addres');
-    console.log(user);
-    this.userService.updateUserPersonalDetails(user);
+    this.userService.updateUserAddressDetails(address);
+    this.turnOnModal(false);
   }
 
   saveAuthData(): void {
-    const user = new UserEdit();
-    user.setPassword = this.personalDetailsForm.get('password')?.value;
-    this.userService.updateUserPersonalDetails(user);
+    const user = new UserEditAuth(this.authDetailsForm.get('password')?.value);
+    this.userService.updateUserAuthDetails(user);
+    this.turnOnModal(false);
   }
 }

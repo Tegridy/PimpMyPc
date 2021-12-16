@@ -59,7 +59,7 @@
   </div>
 
   <!--  Modal  -->
-  <pmp-modal [showModal]="showModal" [modalName]="currentModalSelected" (modalToggleEvent)="setModalStatus($event)">
+  <pmp-modal [showModal]="showModal" [modalName]="currentModalSelected" (modalToggleEvent)="turnOnModal($event)">
 
     <ng-container *ngIf="currentModalSelected === personalDetailsEditModal">
       <form novalidate (ngSubmit)="savePersonalData()" [formGroup]="personalDetailsForm">
@@ -71,6 +71,8 @@
                class="w-full rounded-lg border" placeholder="Phone number">
         <input formControlName="email" [value]="personalDetailsForm.get('email')?.value"
                class="w-full rounded-lg border" type="email" placeholder="E-mail address">
+        <input type="submit" class="modal-button" value="Save">
+
       </form>
     </ng-container>
 
@@ -84,6 +86,7 @@
                class="w-full rounded-lg border" placeholder="State name">
         <input formControlName="zip" [value]="addressDetailsForm.get('zip')?.value" type="text"
                class="w-full rounded-lg border" placeholder="Zip code">
+        <input type="submit" class="modal-button" value="Save">
       </form>
     </ng-container>
 
@@ -100,10 +103,9 @@
         <span *ngIf="authDetailsForm.errors?.match">
                 Passwords do not match.
         </span>
+        <input type="submit" class="modal-button" value="Save">
       </form>
     </ng-container>
-
-    <button class="modal-button" (click)="setModalStatus(false)">Save</button>
   </pmp-modal>
 
 </section>

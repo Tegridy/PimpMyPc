@@ -2,28 +2,24 @@ import {Address} from './User';
 
 export class UserEdit {
   constructor(
-    public firstName?: string,
-    public lastName?: string,
-    public address?: Address,
-    public phone?: string,
-    public email?: string,
-    public password?: string) {
+    public firstName: string,
+    public lastName: string,
+    public phone: string,
+    public email: string
+  ) {
   }
+}
 
-
-  set setAddress(value: Address) {
-    this.address = value;
+export class UserEditAddress {
+  constructor(
+    public address: Address
+  ) {
   }
+}
 
-  set setPassword(value: string) {
-    this.password = value;
-  }
-
-  set setPhone(value: string) {
-    this.phone = value;
-  }
-
-  set setEmail(value: string) {
-    this.email = value;
+export class UserEditAuth {
+  constructor(
+    public password: string
+  ) {
   }
 }
