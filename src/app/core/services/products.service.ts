@@ -99,5 +99,11 @@ export class ProductsService {
     return this.http.get<BaseProduct>(this.baseUrl + 'newest');
   }
 
+  getProductById(id: number): Observable<any> {
+    console.log(
+      this.baseUrl + id
+    );
+    return this.http.get<any>(this.baseUrl + id);
+  }
 
 }

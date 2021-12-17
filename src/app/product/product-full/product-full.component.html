@@ -7,7 +7,7 @@
     </div>
 
     <div class="w-1/2 ml-4">
-      <h3 class="text-xl md:text-2xl">Product name</h3>
+      <h3 class="text-xl md:text-2xl">{{ product.title }}</h3>
     </div>
 
   </section>
@@ -50,63 +50,64 @@
 
   </section>
 
-  <section id="opinions" class="px-2">
-    <h2 class="my-2 text-3xl">Opinions</h2>
+  <!--  <section id="opinions" class="px-2">-->
+  <!--    <h2 class="my-2 text-3xl">Opinions</h2>-->
 
 
-    <div class="flex items-center justify-center w-full">
-      <div class="w-4/5 p-6 border-2 border-black rounded-lg lg:w-3/5 xl:w-2/5 bg-gray-50 md:w-4/5">
-        <div class="md:flex">
-          <div class="w-full mr-8">
-            <h3 class="w-full my-2 text-xl text-center md:text-left md:text-2xl">Do you own this product ?</h3>
-            <p class="text-center md:text-left">Add your opinion about PRODUCT NAME HERE</p>
-          </div>
+  <!--    <div class="flex items-center justify-center w-full">-->
+  <!--      <div class="w-4/5 p-6 border-2 border-black rounded-lg lg:w-3/5 xl:w-2/5 bg-gray-50 md:w-4/5">-->
+  <!--        <div class="md:flex">-->
+  <!--          <div class="w-full mr-8">-->
+  <!--            <h3 class="w-full my-2 text-xl text-center md:text-left md:text-2xl">Do you own this product ?</h3>-->
+  <!--            <p class="text-center md:text-left">Add your opinion about PRODUCT NAME HERE</p>-->
+  <!--          </div>-->
 
-          <div class="self-end hidden md:block">
-            <star-rating (ratingChange)="onRatingChange($event)" [rating]="productStars" size="large"
-              [hoverEnabled]="true"></star-rating>
-          </div>
-        </div>
-        <div class="flex justify-center">
-          <button (click)="toggleModal()" class="w-full h-8 mt-4 bg-blue-600 rounded-full md:w-2/5">Add first
-            opinion</button>
-        </div>
-      </div>
-    </div>
+  <!--          <div class="self-end hidden md:block">-->
+  <!--            <star-rating (ratingChange)="onRatingChange($event)" [rating]="productStars" size="large"-->
+  <!--                         [hoverEnabled]="true"></star-rating>-->
+  <!--          </div>-->
+  <!--        </div>-->
+  <!--        <div class="flex justify-center">-->
+  <!--          <button (click)="toggleModal()" class="w-full h-8 mt-4 bg-blue-600 rounded-full md:w-2/5">Add first-->
+  <!--            opinion-->
+  <!--          </button>-->
+  <!--        </div>-->
+  <!--      </div>-->
+  <!--    </div>-->
 
 
-  </section>
+  <!--  </section>-->
 
 
 </section>
 
-<div class="fixed z-20 w-full overflow-auto rounded-lg md:left-1/3 sm:w-4/5 md:w-2/5 top-1/3 md:top-2/5"
-  [ngClass]="{'hidden': (!showModal)}">
+<!--<div class="fixed z-20 w-full overflow-auto rounded-lg md:left-1/3 sm:w-4/5 md:w-2/5 top-1/3 md:top-2/5"-->
+<!--     [ngClass]="{'hidden': (!showModal)}">-->
 
-  <div>
-    <div class="flex justify-between p-2 bg-gray-400">
-      <h3 class="text-2xl">Add your opinion</h3>
-      <span (click)="toggleModal()" class="flex items-center justify-center bg-gray-400 cursor-pointer">
-        <ion-icon name="close-outline"></ion-icon>
-      </span>
-    </div>
-    <div class="flex flex-col items-center bg-gray-50">
-      <h4 class="mt-4">Product name ...</h4>
-      <star-rating class="my-2" [rating]="productStars" size="large" [hoverEnabled]="true"></star-rating>
-      <!--       TODO Use tailwind forms module-->
-      <input type="text" class="w-4/5 mb-3 border rounded-lg" placeholder="Your name">
-      <textarea class="w-4/5 border rounded-lg" placeholder="Description"></textarea>
-      <button class="w-2/5 h-8 my-4 bg-blue-600 rounded-full">Add opinion</button>
-    </div>
-  </div>
+<!--  <div>-->
+<!--    <div class="flex justify-between p-2 bg-gray-400">-->
+<!--      <h3 class="text-2xl">Add your opinion</h3>-->
+<!--      <span (click)="toggleModal()" class="flex items-center justify-center bg-gray-400 cursor-pointer">-->
+<!--        <ion-icon name="close-outline"></ion-icon>-->
+<!--      </span>-->
+<!--    </div>-->
+<!--    <div class="flex flex-col items-center bg-gray-50">-->
+<!--      <h4 class="mt-4">Product name ...</h4>-->
+<!--      <star-rating class="my-2" [rating]="productStars" size="large" [hoverEnabled]="true"></star-rating>-->
+<!--      &lt;!&ndash;       TODO Use tailwind forms module&ndash;&gt;-->
+<!--      <input type="text" class="w-4/5 mb-3 border rounded-lg" placeholder="Your name">-->
+<!--      <textarea class="w-4/5 border rounded-lg" placeholder="Description"></textarea>-->
+<!--      <button class="w-2/5 h-8 my-4 bg-blue-600 rounded-full">Add opinion</button>-->
+<!--    </div>-->
+<!--  </div>-->
 
 
-</div>
+<!--</div>-->
 
-<div (click)="toggleModal()"
-  class="fixed top-0 left-0 z-10 flex items-center justify-center w-full h-screen bg-black opacity-50 animate-fade-bg"
-  [ngClass]="{'hidden': (!showModal)}">
-</div>
+<!--<div (click)="toggleModal()"-->
+<!--     class="fixed top-0 left-0 z-10 flex items-center justify-center w-full h-screen bg-black opacity-50 animate-fade-bg"-->
+<!--     [ngClass]="{'hidden': (!showModal)}">-->
+<!--</div>-->
 
 
 <pmp-newsletter></pmp-newsletter>

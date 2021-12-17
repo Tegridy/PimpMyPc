@@ -66,7 +66,7 @@
     <ul id="main-menu" class="flex flex-col lg:flex-row lg:justify-between">
       <li *ngFor="let category of mainCategories" (mouseenter)="toggleModal();" (mouseleave)="toggleModal()"
           class="relative p-2 rounded-t cursor-pointer hover:bg-gray-400">
-        <a routerLink='/categories/{{ category.name | lowercase }}' [queryParams]="{page: 1}"
+        <a routerLink='/categories/{{ category.endpointName | lowercase }}' [queryParams]="{page: 1}"
            class="flex items-center">
           <ion-icon name="{{ category.iconName }}" class="pr-2"></ion-icon>
           {{ category.name }}

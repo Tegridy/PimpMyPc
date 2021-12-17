@@ -129,6 +129,8 @@ export class ProductsCategoryComponent implements OnInit {
     if (type !== this.currentCategory) {
       this.queryParams.splice(1, this.queryParams.length);
       this.currentCategory = type;
+      this.sortType = 'default';
+      this.findAndUpdateQueryParam('page', '1');
     }
     return type;
   }
@@ -223,6 +225,13 @@ export class ProductsCategoryComponent implements OnInit {
       }
     }
     return false;
+  }
+
+  findAndUpdateQueryParam(paramName: string, valueToUpdate: string): void {
+    const qParam = this.queryParams.find(param => param.key === paramName);
+    if (qParam) {
+      qParam.value = valueToUpdate;
+    }
   }
 
   changeProductsView(): void {

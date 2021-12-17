@@ -18,7 +18,7 @@ const routes: Routes = [
   {path: 'orders', loadChildren: () => import('./orders/orders.module').then(m => m.OrdersModule)},
   // { path: 'about', loadChildren: () => import('./informations/informations.module').then(m => m.InformationsModule) },
   {path: 'categories', loadChildren: () => import('./products/products.module').then(m => m.ProductsModule)},
-  {path: 'products/:id', loadChildren: () => import('./product/product.module').then(m => m.ProductModule)},
+  {path: 'product/:id', loadChildren: () => import('./product/product.module').then(m => m.ProductModule)},
   {path: 'cart', component: CartComponent},
   {path: 'about-us', component: AboutUsComponent},
   {path: 'regulations', component: RegulationsComponent},

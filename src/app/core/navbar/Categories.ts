@@ -34,6 +34,7 @@ export const categories = [
       {name: 'Power supply', endpointName: 'power-supplies'},
       {name: 'Cases', endpointName: 'cases'},
     ],
+    endpointName: 'processors'
   },
   {
     name: 'Peripherals',
