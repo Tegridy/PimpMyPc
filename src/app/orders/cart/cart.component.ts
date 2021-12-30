@@ -15,12 +15,10 @@ export class CartComponent implements OnInit {
 
   constructor(private cartService: CartService) {
     this.cartService.currentCart.subscribe(c => {
-      this.basketItems = c;
-      console.log(this.cartService.totalPrice);
-      this.numberOfItemsInBasket = c.length;
+      this.basketItems = c.products;
+      this.numberOfItemsInBasket = c.products.length;
+      this.totalPrice = c.cartTotalPrice;
     });
-
-    this.cartService.totalPrice.subscribe(totalPrice => this.totalPrice = totalPrice);
   }
 
   ngOnInit(): void {

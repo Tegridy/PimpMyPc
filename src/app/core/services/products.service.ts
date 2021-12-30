@@ -29,6 +29,9 @@ export class ProductsService {
     // const url = filtersUrl ? mainUrl : mainUrl + filtersUrls;
 
     if (filtersUrls) {
+      filtersUrls = filtersUrls.replace(new RegExp('&page=\\d*'), '');
+
+      console.log(this.baseUrl + category + '?page=' + page + filtersUrls + this.pageSize);
       return this.http
         .get<ProductResponse>(
           this.baseUrl + category + '?page=' + page + filtersUrls + this.pageSize
@@ -37,6 +40,7 @@ export class ProductsService {
           delay(1000),
           catchError(this.handleError));
     } else {
+      console.log(this.baseUrl + category + '?page=' + page + this.pageSize);
       return this.http
         .get<ProductResponse>(
           this.baseUrl + category + '?page=' + page + this.pageSize

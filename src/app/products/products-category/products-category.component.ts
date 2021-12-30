@@ -26,6 +26,8 @@ export class ProductsCategoryComponent implements OnInit {
     this.loadProducts();
   }
 
+  pageParam = new Param('?page=', 1);
+
   showProductsInListView = false;
   showModal = false;
 
@@ -55,6 +57,33 @@ export class ProductsCategoryComponent implements OnInit {
   activeFiltersIds: any[] = [];
 
   ngOnInit(): void {
+    this.loadQueryParamsFromUrl();
+
+    // const x = this.route.snapshot.queryParams;
+    // for (const y of Object.entries(x)) {
+    //
+    //   if (Array.isArray(y[1])) {
+    //
+    //     for (const t of y[1]) {
+    //       this.queryParams.push(new Param(y[0], t));
+    //     }
+    //
+    //   } else {
+    //     this.queryParams.push(new Param(y[0], y[1]));
+    //   }
+    // }
+
+    this.router.events.subscribe((val) => {
+      this.laptops = [];
+      if (val instanceof NavigationStart) {
+        this.loading = true;
+      } else if (val instanceof NavigationEnd) {
+        this.loadProducts();
+      }
+    });
+  }
+
+  private loadQueryParamsFromUrl(): void {
     const x = this.route.snapshot.queryParams;
     for (const y of Object.entries(x)) {
 
@@ -68,15 +97,6 @@ export class ProductsCategoryComponent implements OnInit {
         this.queryParams.push(new Param(y[0], y[1]));
       }
     }
-
-    this.router.events.subscribe((val) => {
-      this.laptops = [];
-      if (val instanceof NavigationStart) {
-        this.loading = true;
-      } else if (val instanceof NavigationEnd) {
-        this.loadProducts();
-      }
-    });
   }
 
   loadProducts(): void {
@@ -86,6 +106,7 @@ export class ProductsCategoryComponent implements OnInit {
   }
 
   private getPageNumberFromUrl(): number {
+
 
     const currentPageNumber = Number(this.router.url.split('page=')[1]);
 
@@ -99,6 +120,8 @@ export class ProductsCategoryComponent implements OnInit {
   getCurrentCategoryProducts(page: number): void {
     const categoryName = this.getCategoryTypeFromUrl();
     const filtersUrl = this.buildUrl();
+
+    console.log(page);
 
     this.productsService
       .getProductsPage(page - 1, categoryName, filtersUrl)
@@ -137,6 +160,7 @@ export class ProductsCategoryComponent implements OnInit {
 
   buildUrl(): string {
     const url: string[] = [];
+
     this.queryParams.forEach((x: Param) => url.push(`&${x.key}=${x.value}`));
     return url.join('');
   }
@@ -168,7 +192,6 @@ export class ProductsCategoryComponent implements OnInit {
     this.isChecked = (event.target as HTMLInputElement).checked;
     const param = new Param(mainProp, filterValue.valueProperty, filterValue.id);
 
-
     if (this.isChecked) {
       this.queryParams.push(param);
       this.updateUrl();
@@ -184,9 +207,7 @@ export class ProductsCategoryComponent implements OnInit {
       this.activeFiltersIds.splice(this.activeFiltersIds.indexOf(filterValue.id), 1);
     }
 
-
     this.getCurrentCategoryProducts(1);
-
   }
 
   sortProductsByPrice(): void {
@@ -212,19 +233,11 @@ export class ProductsCategoryComponent implements OnInit {
   onPageChange(page: number): void {
     this.loading = true;
     const pageNumParam = this.queryParams.find(x => x.key === 'page');
+
     if (pageNumParam) {
       pageNumParam.value = page;
     }
     this.updateUrl();
-  }
-
-  setFilters(str: FilterValue): boolean {
-    for (const x of this.queryParams) {
-      if (x.value === str.valueProperty) {
-        return true;
-      }
-    }
-    return false;
   }
 
   findAndUpdateQueryParam(paramName: string, valueToUpdate: string): void {
@@ -240,5 +253,9 @@ export class ProductsCategoryComponent implements OnInit {
 
   toggleModal(): void {
     this.showModal = !this.showModal;
+  }
+
+  checkFilter(event: FilterValue, filterProperty: string): boolean {
+    return this.queryParams.some(param => param.value === event.valueProperty && param.key === filterProperty);
   }
 }

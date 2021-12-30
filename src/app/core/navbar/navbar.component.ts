@@ -5,6 +5,7 @@ import {Params, Router} from '@angular/router';
 import {ProductsService} from '../services/products.service';
 import {BaseProduct} from '../../shared/model/BaseProduct';
 import {CartService} from '../services/cart.service';
+import {Param} from '../../products/Param';
 
 @Component({
   selector: 'pmp-navbar',
@@ -12,25 +13,29 @@ import {CartService} from '../services/cart.service';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
+
+  constructor(private cartService: CartService, private categoryService: CategoriesService, private router: Router, private productsService: ProductsService) {
+  }
+
   showMenu = false;
   toggleBackdrop = true;
-
-  smth = '?page=1';
 
   mainCategories: any;
   currentProductsSelected = '';
   currentSearchCategory = '';
 
-  searchPhrase: string = '';
+  searchPhrase = '';
 
   numberOfItemsInCart = 0;
 
-  constructor(private cartService: CartService, private categoryService: CategoriesService, private router: Router, private productsService: ProductsService) {
-  }
+  data: BaseProduct[] = [];
+
+  queryParams: Params = {};
+
 
   ngOnInit(): void {
     this.mainCategories = categories;
-    this.cartService.currentCart.subscribe(cart => this.numberOfItemsInCart = cart.length);
+    this.cartService.currentCart.subscribe(cart => this.numberOfItemsInCart = cart.products.length);
   }
 
   toggleMenu(): void {
@@ -50,8 +55,6 @@ export class NavbarComponent implements OnInit {
     console.log('changing ' + categoryName);
     this.currentSearchCategory = categoryName;
   }
-
-  data: BaseProduct[] = [];
 
   searchProduct(): void {
     // this.productsService.getSearchedProductsByCategory('laptop', this.currentSearchCategory).subscribe(z => console.log(z));
@@ -73,5 +76,19 @@ export class NavbarComponent implements OnInit {
         queryParams: params
       });
     }
+  }
+
+  setFilter(x: Param): void {
+    console.log(x);
+    const paramKey = x.key;
+    const paramValue = x.value;
+
+    this.queryParams.page = 1;
+    this.queryParams[paramKey] = paramValue;
+    console.log(this.queryParams);
+
+    this.router.navigate(['/categories/laptops'], {
+      queryParams: this.queryParams
+    });
   }
 }

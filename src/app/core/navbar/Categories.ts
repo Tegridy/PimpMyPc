@@ -1,3 +1,5 @@
+import {Param} from '../../products/Param';
+
 export const categories = [
   {
     name: 'Laptops',
@@ -6,9 +8,9 @@ export const categories = [
       {
         name: 'Laptops/Ultrabooks/Notebooks',
         innerMenu: [
-          'Notebook/Laptop 15"',
-          'Notebook/Laptop 16"',
-          'Notebook/Laptop 17"',
+          {name: 'Notebook/Laptop 15"', filterParams: new Param('displaySize', 15)},
+          {name: 'Notebook/Laptop 16"', filterParams: new Param('displaySize', 16)},
+          {name: 'Notebook/Laptop 17"', filterParams: new Param('displaySize', 17)},
         ],
       },
     ],

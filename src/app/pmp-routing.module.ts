@@ -2,7 +2,6 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {HomeComponent} from './core/home/home.component';
 import {PageNotFoundComponent} from './core/page-not-found/page-not-found.component';
-import {CartComponent} from './orders/cart/cart.component';
 import {AboutUsComponent} from './informations/about-us/about-us.component';
 import {RegulationsComponent} from './informations/regulations/regulations.component';
 import {PrivacyPolicyComponent} from './informations/privacy-policy/privacy-policy.component';
@@ -15,11 +14,10 @@ const routes: Routes = [
   {path: 'login', loadChildren: () => import('./login/login.module').then(m => m.LoginModule)},
   {path: 'register', loadChildren: () => import('./register/register.module').then(m => m.RegisterModule)},
   {path: 'account', canActivate: [LoginGuard], loadChildren: () => import('./account/account.module').then(m => m.AccountModule)},
-  {path: 'orders', loadChildren: () => import('./orders/orders.module').then(m => m.OrdersModule)},
+  {path: 'order', loadChildren: () => import('./orders/orders.module').then(m => m.OrdersModule)},
   // { path: 'about', loadChildren: () => import('./informations/informations.module').then(m => m.InformationsModule) },
   {path: 'categories', loadChildren: () => import('./products/products.module').then(m => m.ProductsModule)},
   {path: 'product/:id', loadChildren: () => import('./product/product.module').then(m => m.ProductModule)},
-  {path: 'cart', component: CartComponent},
   {path: 'about-us', component: AboutUsComponent},
   {path: 'regulations', component: RegulationsComponent},
   {path: 'privacy-policy', component: PrivacyPolicyComponent},

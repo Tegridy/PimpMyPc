@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {OrderService} from '../../core/services/order.service';
 
 @Component({
   selector: 'pmp-my-orders',
@@ -7,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MyOrdersComponent implements OnInit {
 
-  constructor() { }
+  constructor(private orderService: OrderService) {
+  }
 
   ngOnInit(): void {
+    this.orderService.getUserOrders().subscribe(x => console.log(x));
   }
 
 }

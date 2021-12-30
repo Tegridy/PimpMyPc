@@ -1,17 +1,19 @@
-import { OrdersRoutingModule } from './orders-routing.module';
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-
+import {OrdersRoutingModule} from './orders-routing.module';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {ReactiveFormsModule} from '@angular/forms';
 
 
 @NgModule({
   declarations: [
     OrdersRoutingModule.components
   ],
-  schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [
     CommonModule,
-    OrdersRoutingModule
+    OrdersRoutingModule,
+    ReactiveFormsModule
   ]
 })
-export class OrdersModule { }
+export class OrdersModule {
+}

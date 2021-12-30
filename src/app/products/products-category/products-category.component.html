@@ -12,12 +12,12 @@
 
             <ul class="ml-4 my-2" *ngFor="let filterValue of filter.values">
               <li>
-                <label class="flex items-center" for="{{ filterValue.id }}">
-                  <input id="{{ filterValue.id }}"
+                <label class="flex items-center" for="{{ filterValue.name + filterValue.id }}">
+                  <input id="{{ filterValue.name + filterValue.id }}"
                          class="mr-1"
                          type="checkbox"
-                         [checked]="setFilters(filterValue)"
-                         (change)="filterClick($event, filter.filterProperty, filterValue)"/>
+                         [checked]="checkFilter(filterValue, filter.filterProperty)"
+                         (change)="filterClick($event, filter.filterProperty, filterValue)">
                   {{ filterValue.name }}
                 </label>
               </li>

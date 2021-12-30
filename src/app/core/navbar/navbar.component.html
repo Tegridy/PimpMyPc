@@ -17,7 +17,7 @@
       </a></li>
       <li class="px-5 rounded cursor-pointer hover:bg-gray-200 hover:shadow"><a
         class="flex flex-col items-center relative"
-        routerLink="/cart">
+        routerLink="/order/cart">
         <ion-icon name="basket-outline"></ion-icon>
         Cart
         <ng-container *ngIf="numberOfItemsInCart > 0">
@@ -83,11 +83,9 @@
                    class="absolute top-0 rounded-tr-lg rounded-bl-lg rounded-br-lg left-full bg-gray-50 w-44">
                 <ul *ngFor="let innerMenuItem of subMenuItem.innerMenu"
                     class="hidden pb-4 animate-fade-in-down">
-                  <li class="p-3 hover:bg-gray-400">
-                    <a
-                      routerLink="/categories/{{ category.name | lowercase}}/{{ innerMenuItem }}">
-                      {{ innerMenuItem }}
-                    </a>
+                  <li (click)="setFilter(innerMenuItem.filterParams)"
+                      class="p-3 hover:bg-gray-400">
+                    {{ innerMenuItem.name }}
                   </li>
                 </ul>
               </div>

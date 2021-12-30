@@ -3,22 +3,22 @@
   <section id="short-desc" class="flex py-6">
 
     <div class="w-1/2 mx-4 lg:mx-20">
-      <img src="https://picsum.photos/530/430">
+      <img src="{{ product.imageUrl }}" alt="{{product.title }} image">
     </div>
 
-    <div class="w-1/2 ml-4">
-      <h3 class="text-xl md:text-2xl">{{ product.title }}</h3>
+    <div class="w-full flex flex-col">
+      <div class="m-4">
+        <h3 class="text-center text-xl md:text-2xl">{{ product.title }}</h3>
+      </div>
+
+      <div class="m-4">
+        <h3 class="text-center text-xl md:text-2xl">{{ product.price | currency }}</h3>
+      </div>
     </div>
 
   </section>
 
-  <!--  <div class="hidden"><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A adipisci aspernatur atque dignissimos ducimus eius eveniet facere id inventore iure, odio placeat quam quasi quibusdam repudiandae rerum similique voluptates voluptatum!<br>-->
-
-  <!--  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis natus officia quidem tempore voluptas! Aspernatur corporis cumque delectus, deleniti doloribus error facilis in, molestias necessitatibus nostrum nulla perferendis quasi reprehenderit!<br>-->
-
-  <!--  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur at debitis deserunt dolores doloribus eligendi esse et hic impedit ipsum minus pariatur praesentium quaerat ratione sapiente sint, ullam unde voluptate!<br>-->
-
-  <!--  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aperiam consectetur eaque enim eos est expedita facilis maxime, mollitia nam necessitatibus nesciunt nihil omnis possimus quibusdam, quo totam veritatis, voluptate.</p></div>-->
+  <div class="m-5"><p class="text-lg tracking-wide">{{ product.description }}</p></div>
 
   <hr class="h-1 text-black bg-black">
 
@@ -27,21 +27,10 @@
     <h2 class="my-2 text-3xl">Details</h2>
 
     <table class="w-full border-collapse table-auto">
-      <tr class="odd:bg-gray-200">
-        <th class="border-t border-b border-gray-400">Hello</th>
-        <th class="border-t border-b border-gray-400"><span class="float-left">Hello</span></th>
-
-      </tr>
-
-      <tr class="odd:bg-gray-200">
-        <th class="border-t border-b border-gray-400">Hello</th>
-        <th class="border-t border-b border-gray-400"><span class="float-left">Hello</span></th>
-
-      </tr>
-
-      <tr class="odd:bg-gray-200">
-        <th class="border-t border-b border-gray-400">Hello</th>
-        <th class="border-t border-b border-gray-400"><span class="float-left">Hello</span></th>
+      <tr class="odd:bg-gray-200" *ngFor="let productDetail of productDetails">
+        <th class="border-t border-b border-gray-400">{{ (productDetail.key) | titlecase }}</th>
+        <th class="border-t border-b border-gray-400"><span
+          class="float-left">{{ productDetail.value }}</span></th>
 
       </tr>
 

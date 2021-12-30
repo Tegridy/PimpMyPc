@@ -1,0 +1,65 @@
+<h1 class="text-4xl font-bold text-center mb-5">Order summary</h1>
+
+<ng-container *ngIf="!orderComplete">
+  <section class="flex flex-col w-4/5 mx-auto mb-10" id="order-products">
+    <h3 class="text-2xl font-semibold">Ordered items:</h3>
+    <hr class="w-full border border-black my-2">
+    <ul class="flex flex-col items-center justify-center space-y-4">
+      <li *ngFor="let cartItem of cartProducts" class="flex items-center border border-black w-4/5 p-4 rounded">
+        <div class="w-2/5 flex justify-center items-center">
+          <img class="object-contain h-24 rounded" src="{{ cartItem.imageUrl }}" alt="{{ cartItem.title }} image">
+        </div>
+        <div class="w-3/5 flex items-center">
+          <span class="mx-5">{{ cartItem.title }}</span>
+          <span class="mx-5">{{ cartItem.price | currency}}</span>
+        </div>
+      </li>
+    </ul>
+
+    <h3 class="text-lg font-semibold text-center my-5">Total: {{ totalPrice | currency}}</h3>
+  </section>
+
+  <section id="customer-data">
+    <form novalidate (ngSubmit)="saveOrder()" [formGroup]="orderForm"
+          class="mx-auto w-3/5 p-5 border border-black rounded-xl">
+
+      <div class="flex flex-col w-3/5 mx-auto">
+        <label for="firstNameId">First name:</label>
+        <input formControlName="customerFirstName" id="firstNameId" type="text" placeholder="First name">
+
+        <label for="lastNameId">Last name:</label>
+        <input formControlName="customerLastName" id="lastNameId" type="text" placeholder="Last name">
+
+        <label for="emailId">E-mail address:</label>
+        <input formControlName="customerEmail" id="emailId" type="text" placeholder="E-mail address">
+
+        <label for="phoneNumberId">Phone:</label>
+        <input formControlName="customerPhone" id="phoneNumberId" type="text" placeholder="Phone number">
+        <div formGroupName="deliveryAddress" class="flex flex-col w-4/5 mx-auto">
+          <h3 class="text-xl font-semibold self-start my-2">Address:</h3>
+          <label for="stateId">State:</label>
+          <input formControlName="state" id="stateId" type="text" placeholder="State">
+
+          <label for="cityNameId">City:</label>
+          <input formControlName="city" id="cityNameId" type="text" placeholder="City name">
+
+          <label for="streetNameId">Street:</label>
+          <input formControlName="street" id="streetNameId" type="text" placeholder="Street name">
+
+          <label for="zipCodeId">Zip code:</label>
+          <input formControlName="zip" id="zipCodeId" type="text" placeholder="Zip code">
+        </div>
+
+        <button type="submit" class="p-2 bg-blue-500 rounded-2xl w-3/5 mx-auto mt-8">Place order</button>
+      </div>
+    </form>
+  </section>
+</ng-container>
+
+<div *ngIf="orderComplete" class="flex flex-col text-center">
+  <h3 class="text-3xl font-bold">Order is now complete, let us take it from now</h3>
+  <h3 class="text-3xl font-bold">Congratulations you win 100% discount and you don't have to pay! Yay :)</h3>
+  <h4 class="my-4">Order id: #928129102</h4>
+  <h4 class="mb-4">Order status: Proceeding...</h4>
+  <button routerLink="/" class="p-2 bg-blue-500 rounded-2xl my-5 w-2/5 mx-auto">Go to Homepage</button>
+</div>
