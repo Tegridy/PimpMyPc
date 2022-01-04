@@ -16,7 +16,7 @@
                   <input id="{{ filterValue.name + filterValue.id }}"
                          class="mr-1"
                          type="checkbox"
-                         [checked]="checkFilter(filterValue, filter.filterProperty)"
+                         [checked]="filterValue.isChecked"
                          (change)="filterClick($event, filter.filterProperty, filterValue)">
                   {{ filterValue.name }}
                 </label>

@@ -83,7 +83,7 @@
                    class="absolute top-0 rounded-tr-lg rounded-bl-lg rounded-br-lg left-full bg-gray-50 w-44">
                 <ul *ngFor="let innerMenuItem of subMenuItem.innerMenu"
                     class="hidden pb-4 animate-fade-in-down">
-                  <li (click)="setFilter(innerMenuItem.filterParams)"
+                  <li (click)="setFilter(innerMenuItem.filterParams, subMenuItem.endpointName)"
                       class="p-3 hover:bg-gray-400">
                     {{ innerMenuItem.name }}
                   </li>

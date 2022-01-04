@@ -19,17 +19,12 @@ export class ProductsService {
   }
 
   getProductsPage(page: number, category: string, filtersUrls?: string): Observable<ProductResponse> {
-    // this.productsEndpointName = categories.find(
-    //   (cat) => cat.endpointName == category
-    // );
-
-
-    // const mainUrl = `${this.baseUrl + category}?page=${page}&size=9 `;
-
-    // const url = filtersUrl ? mainUrl : mainUrl + filtersUrls;
-
     if (filtersUrls) {
       filtersUrls = filtersUrls.replace(new RegExp('&page=\\d*'), '');
+
+      if (page === -1) {
+        page = 1;
+      }
 
       console.log(this.baseUrl + category + '?page=' + page + filtersUrls + this.pageSize);
       return this.http
@@ -40,7 +35,6 @@ export class ProductsService {
           delay(1000),
           catchError(this.handleError));
     } else {
-      console.log(this.baseUrl + category + '?page=' + page + this.pageSize);
       return this.http
         .get<ProductResponse>(
           this.baseUrl + category + '?page=' + page + this.pageSize

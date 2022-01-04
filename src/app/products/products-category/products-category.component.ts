@@ -1,12 +1,10 @@
 import {ProductsService} from '../../core/services/products.service';
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
-import {ActivatedRoute, NavigationEnd, NavigationStart, Router, UrlSegment} from '@angular/router';
+import {ActivatedRoute, NavigationEnd, Router, UrlSegment} from '@angular/router';
 import {PaginationInstance} from 'ngx-pagination';
 import {of} from 'rxjs';
-import {isNumeric} from 'rxjs/internal-compatibility';
-import {filters} from './ProductsFilters';
 import {BaseProduct} from '../../shared/model/BaseProduct';
-import {Filter, FilterValue} from '../../shared/model/Filter';
+import {Filter, FilterGroup} from '../../shared/model/FilterGroup';
 import {Param} from '../Param';
 import {parse} from 'search-params';
 
@@ -23,10 +21,8 @@ export class ProductsCategoryComponent implements OnInit {
     private router: Router,
     private productsService: ProductsService,
     private route: ActivatedRoute) {
-    this.loadProducts();
+    this.loadQueryParamsFromUrl();
   }
-
-  pageParam = new Param('?page=', 1);
 
   showProductsInListView = false;
   showModal = false;
@@ -39,8 +35,7 @@ export class ProductsCategoryComponent implements OnInit {
   pageNumber = 1;
   productsCount = 1;
 
-  productsFilters: Filter[] = [];
-  temp: any;
+  productsFilters: FilterGroup[] = [];
 
   paginationConfig: PaginationInstance = {
     itemsPerPage: 9,
@@ -48,80 +43,46 @@ export class ProductsCategoryComponent implements OnInit {
     totalItems: this.productsCount,
   };
 
-  url = '';
-  isChecked = false;
-
   sortType = 'default';
   queryParams: Param[] = [];
 
-  activeFiltersIds: any[] = [];
-
   ngOnInit(): void {
-    this.loadQueryParamsFromUrl();
-
-    // const x = this.route.snapshot.queryParams;
-    // for (const y of Object.entries(x)) {
-    //
-    //   if (Array.isArray(y[1])) {
-    //
-    //     for (const t of y[1]) {
-    //       this.queryParams.push(new Param(y[0], t));
-    //     }
-    //
-    //   } else {
-    //     this.queryParams.push(new Param(y[0], y[1]));
-    //   }
-    // }
-
-    this.router.events.subscribe((val) => {
-      this.laptops = [];
-      if (val instanceof NavigationStart) {
-        this.loading = true;
-      } else if (val instanceof NavigationEnd) {
-        this.loadProducts();
+    this.router.events.subscribe(ev => {
+      if (ev instanceof NavigationEnd) {
+        this.queryParams = [];
+        this.loadQueryParamsFromUrl();
       }
     });
   }
 
   private loadQueryParamsFromUrl(): void {
-    const x = this.route.snapshot.queryParams;
-    for (const y of Object.entries(x)) {
+    const queryParamsSnapshot = this.route.snapshot.queryParams;
 
-      if (Array.isArray(y[1])) {
-
-        for (const t of y[1]) {
-          this.queryParams.push(new Param(y[0], t));
-        }
-
+    for (const param of Object.entries(queryParamsSnapshot)) {
+      if (Array.isArray(param[1])) {
+        param[1].forEach(p => this.queryParams.push(new Param(param[0], p)));
       } else {
-        this.queryParams.push(new Param(y[0], y[1]));
+        this.queryParams.push(new Param(param[0], param[1]));
       }
     }
+    this.getCurrentCategoryProducts(this.findCurrentPageNumber());
   }
 
-  loadProducts(): void {
-    const currentPageUrl = this.getPageNumberFromUrl();
+  private findCurrentPageNumber(): number {
+    const pageNumber = this.queryParams.find(p => p.key === 'page');
 
-    this.getCurrentCategoryProducts(currentPageUrl);
-  }
-
-  private getPageNumberFromUrl(): number {
-
-
-    const currentPageNumber = Number(this.router.url.split('page=')[1]);
-
-    if (isNumeric(currentPageNumber)) {
-      return Math.abs(currentPageNumber);
+    if (pageNumber) {
+      return Math.abs(pageNumber.value as number);
     } else {
       return 1;
     }
   }
 
   getCurrentCategoryProducts(page: number): void {
-    const categoryName = this.getCategoryTypeFromUrl();
-    const filtersUrl = this.buildUrl();
 
-    console.log(page);
+    const categoryName = this.getCategoryTypeFromUrl();
+
+    const filtersUrl = this.buildUrl();
 
     this.productsService
       .getProductsPage(page - 1, categoryName, filtersUrl)
@@ -134,6 +95,8 @@ export class ProductsCategoryComponent implements OnInit {
 
         this.laptops = productsPage.products.content;
         this.productsFilters = productsPage.filters;
+        this.loadFiltersFromQueryParams();
+
 
         if (this.laptops.length > 0) {
           this.loading = false;
@@ -141,26 +104,31 @@ export class ProductsCategoryComponent implements OnInit {
 
         this.paginationConfig.currentPage = this.pageNumber;
         this.paginationConfig.totalItems = this.productsCount;
-
-        this.updateUrl();
       });
   }
 
-  getCategoryTypeFromUrl(): string {
-    const type = this.router.url.split('/categories/')[1].toLocaleLowerCase().replace(new RegExp('\\?.+'), '');
-    this.temp = filters.find((x) => x.name === type);
-    if (type !== this.currentCategory) {
-      this.queryParams.splice(1, this.queryParams.length);
-      this.currentCategory = type;
+  private loadFiltersFromQueryParams(): void {
+    this.productsFilters.forEach(v => {
+      v.values.forEach(v2 => {
+        if (this.queryParams.find(param => param.key === v.filterProperty && param.value === v2.valueProperty)) {
+          v2.isChecked = true;
+        }
+      });
+    });
+  }
+
+  private getCategoryTypeFromUrl(): string {
+    const category = this.router.url.split('/categories/')[1].toLocaleLowerCase().replace(new RegExp('\\?.+'), '');
+    if (category !== this.currentCategory) {
+      this.currentCategory = category;
       this.sortType = 'default';
       this.findAndUpdateQueryParam('page', '1');
     }
-    return type;
+    return category;
   }
 
   buildUrl(): string {
     const url: string[] = [];
-
     this.queryParams.forEach((x: Param) => url.push(`&${x.key}=${x.value}`));
     return url.join('');
   }
@@ -183,31 +151,22 @@ export class ProductsCategoryComponent implements OnInit {
       [],
       {
         relativeTo: currentUrl,
-        queryParams: params,
-        queryParamsHandling: ''
+        queryParams: params
       });
   }
 
-  filterClick(event: Event, mainProp: string, filterValue: FilterValue): void {
-    this.isChecked = (event.target as HTMLInputElement).checked;
-    const param = new Param(mainProp, filterValue.valueProperty, filterValue.id);
+  filterClick(event: Event, mainProp: string, filterValue: Filter): void {
+    filterValue.isChecked = !filterValue.isChecked;
 
-    if (this.isChecked) {
-      this.queryParams.push(param);
-      this.updateUrl();
-      this.activeFiltersIds.push(filterValue.id);
+    if (filterValue.isChecked) {
+      this.queryParams.push(new Param(mainProp, filterValue.valueProperty));
     } else {
-
-      const filterFound = this.queryParams.find(x => x.id === filterValue.id);
-
-      if (filterFound) {
-        const filterToRemoveIndex = this.queryParams.indexOf(filterFound);
-        this.queryParams.splice(filterToRemoveIndex, 1);
-      }
-      this.activeFiltersIds.splice(this.activeFiltersIds.indexOf(filterValue.id), 1);
+      const idx = this.queryParams.findIndex(p => p.key === mainProp && p.value === filterValue.valueProperty);
+      this.queryParams.splice(idx, 1);
     }
 
-    this.getCurrentCategoryProducts(1);
+    this.findAndUpdateQueryParam('page', '1');
+    this.updateUrl();
   }
 
   sortProductsByPrice(): void {
@@ -232,15 +191,13 @@ export class ProductsCategoryComponent implements OnInit {
 
   onPageChange(page: number): void {
     this.loading = true;
-    const pageNumParam = this.queryParams.find(x => x.key === 'page');
 
-    if (pageNumParam) {
-      pageNumParam.value = page;
-    }
+    this.findAndUpdateQueryParam('page', page);
+
     this.updateUrl();
   }
 
-  findAndUpdateQueryParam(paramName: string, valueToUpdate: string): void {
+  findAndUpdateQueryParam(paramName: string, valueToUpdate: string | number): void {
     const qParam = this.queryParams.find(param => param.key === paramName);
     if (qParam) {
       qParam.value = valueToUpdate;
@@ -253,9 +210,5 @@ export class ProductsCategoryComponent implements OnInit {
 
   toggleModal(): void {
     this.showModal = !this.showModal;
-  }
-
-  checkFilter(event: FilterValue, filterProperty: string): boolean {
-    return this.queryParams.some(param => param.value === event.valueProperty && param.key === filterProperty);
   }
 }

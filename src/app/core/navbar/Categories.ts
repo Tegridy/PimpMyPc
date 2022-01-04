@@ -19,7 +19,7 @@ export const categories = [
   {
     name: 'Computers',
     iconName: 'desktop-outline',
-    subMenu: [{name: 'Personal Computers'}, {name: 'Gaming Computers'}],
+    subMenu: [{name: 'Personal Computers', endpointName: 'computers'}, {name: 'Gaming Computers', endpointName: 'computers'}],
     endpointName: 'computers'
   },
   {name: 'Smartphones', iconName: 'phone-portrait-outline', endpointName: 'smartphones'},
@@ -28,11 +28,20 @@ export const categories = [
     name: 'Computer assets',
     iconName: 'hardware-chip-outline',
     subMenu: [
-      {name: 'Processors', innerMenu: ['Intel', 'AMD'], endpointName: 'processors'},
+      {
+        name: 'Processors', innerMenu: [{name: 'Intel', filterParams: new Param('title', 'intel')},
+          {name: 'AMD', filterParams: new Param('title', 'amd')}], endpointName: 'processors'
+      },
       {name: 'Memory RAM', endpointName: 'rams'},
-      {name: 'Graphic cards', innerMenu: ['Nvidia', 'AMD'], endpointName: 'graphics'},
+      {
+        name: 'Graphic cards', innerMenu: [{name: 'Nvidia', filterParams: new Param('title', 'nvidia')},
+          {name: 'AMD', filterParams: new Param('title', 'amd')}], endpointName: 'graphics'
+      },
       {name: 'Motherboards', endpointName: 'motherboards'},
-      {name: 'Hard drives', innerMenu: ['SSD', 'HDD'], endpointName: 'drives'},
+      {
+        name: 'Hard drives', innerMenu: [{name: 'SSD', filterParams: new Param('type', 'ssd')},
+          {name: 'HDD', filterParams: new Param('type', 'hdd')}], endpointName: 'drives'
+      },
       {name: 'Power supply', endpointName: 'power-supplies'},
       {name: 'Cases', endpointName: 'cases'},
     ],

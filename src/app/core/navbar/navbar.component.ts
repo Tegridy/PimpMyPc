@@ -78,16 +78,14 @@ export class NavbarComponent implements OnInit {
     }
   }
 
-  setFilter(x: Param): void {
-    console.log(x);
-    const paramKey = x.key;
-    const paramValue = x.value;
+  setFilter(param: Param, endpointName: string): void {
+    const paramKey = param.key;
+    const paramValue = param.value;
 
     this.queryParams.page = 1;
     this.queryParams[paramKey] = paramValue;
-    console.log(this.queryParams);
 
-    this.router.navigate(['/categories/laptops'], {
+    this.router.navigate([`/categories/${endpointName}/`], {
       queryParams: this.queryParams
     });
   }

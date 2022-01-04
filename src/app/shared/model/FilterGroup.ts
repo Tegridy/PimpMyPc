@@ -1,12 +1,13 @@
-export interface Filter {
+export interface FilterGroup {
   id: number;
   name: string;
   filterProperty: string;
-  values: FilterValue[];
+  values: Filter[];
 }
 
-export interface FilterValue {
+export interface Filter {
   id?: number;
   name: string;
   valueProperty: string | number;
+  isChecked: boolean;
 }
