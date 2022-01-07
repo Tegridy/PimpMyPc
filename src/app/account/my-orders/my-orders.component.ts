@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {OrderService} from '../../core/services/order.service';
+import {SingleOrder} from '../../shared/model/Order';
 
 @Component({
   selector: 'pmp-my-orders',
@@ -8,11 +9,16 @@ import {OrderService} from '../../core/services/order.service';
 })
 export class MyOrdersComponent implements OnInit {
 
+  userOrders: SingleOrder[] = [];
+
   constructor(private orderService: OrderService) {
   }
 
   ngOnInit(): void {
-    this.orderService.getUserOrders().subscribe(x => console.log(x));
+    this.orderService.getUserOrders().subscribe(orders => {
+      this.userOrders = orders.content;
+      console.log(this.userOrders);
+    });
   }
 
 }

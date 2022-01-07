@@ -13,6 +13,10 @@
   .modal-button {
     @apply w-2/5 h-8 my-4 bg-blue-600 rounded-full;
   }
+
+  .table-element {
+    @apply border-t border-b border-gray-400 w-1/2 text-center;
+  }
 }
 
 html {

@@ -54,6 +54,5 @@ export class CartService {
   clearCart(): void {
     this.cart = new Cart([], 0);
     this.cartSource.next(this.cart);
-    this.updateCart();
   }
 }

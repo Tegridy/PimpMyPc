@@ -1,0 +1,47 @@
+<section id="Order-{{order.id}}">
+  <div class="p-8 bg-white border border-b-2 rounded-lg">
+    <h3 class="text-center text-2xl">{{ order.title }}</h3>
+    <h3 class="text-center text-xl">Status: {{ order.orderStatus }}</h3>
+
+    <div>
+      <ul class="space-y-8 divide-y-2 divide-black">
+        <li *ngFor="let product of orderProducts" class="flex items-center w-full py-4">
+          <img class="object-contain w-2/5 h-32" src="{{ product.imageUrl }}" alt="{{ product.title }} img">
+          <h4 class="w-2/5">{{ product.title }}</h4>
+          <span class="w-1/5">Price: {{ product.price | currency }}</span>
+        </li>
+      </ul>
+    </div>
+
+    <span class="mb-4 text-center text-xl">Total: {{ order.price | currency }}</span>
+
+    <h3 class="text-center text-xl my-4">Delivery address</h3>
+    <div>
+
+      <table class="w-3/5 border-collapse table-auto mx-auto">
+
+        <tr class="odd:bg-gray-200">
+          <th class="table-element">State:</th>
+          <td class="table-element">{{ orderAddress.state }}</td>
+        </tr>
+        <tr class="odd:bg-gray-200">
+          <th class="table-element">City:</th>
+          <td class="table-element">{{ orderAddress.city }}</td>
+        </tr>
+        <tr class="odd:bg-gray-200">
+          <th class="table-element">Street:</th>
+          <td class="table-element">{{ orderAddress.street }}</td>
+        </tr>
+        <tr class="odd:bg-gray-200">
+          <th class="table-element">Zip:</th>
+          <td class="table-element">{{ orderAddress.zip }}</td>
+        </tr>
+
+      </table>
+    </div>
+  </div>
+
+
+</section>
+
+

@@ -5,11 +5,13 @@ import {CommonModule} from '@angular/common';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {AuthInterceptor} from '../core/interceptors/auth.interceptor';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { OrderDetailsComponent } from './order-details/order-details.component';
 
 
 @NgModule({
   declarations: [
-    AccountRoutingModule.components
+    AccountRoutingModule.components,
+    OrderDetailsComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [
