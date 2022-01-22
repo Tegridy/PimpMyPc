@@ -8,6 +8,7 @@ import {PrivacyPolicyComponent} from './informations/privacy-policy/privacy-poli
 import {ContactUsComponent} from './informations/contact-us/contact-us.component';
 import {SearchComponent} from './core/search/search.component';
 import {LoginGuard} from './core/guards/login.guard';
+import {BuildPcComponent} from './build-pc/build-pc.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -23,7 +24,7 @@ const routes: Routes = [
   {path: 'privacy-policy', component: PrivacyPolicyComponent},
   {path: 'contact-us', component: ContactUsComponent},
   {path: 'search', component: SearchComponent},
-  // { path: 'build' }
+  {path: 'build-pc', component: BuildPcComponent},
   {path: '**', component: PageNotFoundComponent}
 ];
 

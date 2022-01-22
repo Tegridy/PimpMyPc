@@ -67,8 +67,7 @@
               "node_modules/@glidejs/glide/src/assets/sass/glide.core.scss",
               "node_modules/@glidejs/glide/src/assets/sass/glide.theme.scss"
             ],
-            "scripts": [
-            ]
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -155,8 +154,7 @@
               "node_modules/@glidejs/glide/src/assets/sass/glide.core.scss",
               "node_modules/@glidejs/glide/src/assets/sass/glide.theme.scss"
             ],
-            "scripts": [
-            ]
+            "scripts": []
           }
         },
         "e2e": {

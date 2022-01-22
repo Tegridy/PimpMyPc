@@ -10,14 +10,12 @@
         <ul class="p-1.5" *ngFor="let filter of productsFilters">
           <li><span class="font-bold">{{ filter.name }}</span>
 
-            <ul class="ml-4 my-2" *ngFor="let filterValue of filter.values">
+            <ul class="my-2 ml-4" *ngFor="let filterValue of filter.values">
               <li>
                 <label class="flex items-center" for="{{ filterValue.name + filterValue.id }}">
-                  <input id="{{ filterValue.name + filterValue.id }}"
-                         class="mr-1"
-                         type="checkbox"
-                         [checked]="filterValue.isChecked"
-                         (change)="filterClick($event, filter.filterProperty, filterValue)">
+                  <input id="{{ filterValue.name + filterValue.id }}" class="mr-1" type="checkbox"
+                    [checked]="filterValue.isChecked"
+                    (change)="filterClick($event, filter.filterProperty, filterValue)">
                   {{ filterValue.name }}
                 </label>
               </li>
@@ -51,11 +49,11 @@
 
           <div class="flex">
             <button class="flex items-center justify-center p-2 mr-4 rounded-lg"
-                    [ngClass]="{'bg-gray-400' : !showProductsInListView}" (click)="changeProductsView()">
+              [ngClass]="{'bg-gray-400' : !showProductsInListView}" (click)="changeProductsView()">
               <ion-icon name="grid-outline"></ion-icon>
             </button>
             <button class="flex items-center justify-center p-2 rounded-lg" (click)="changeProductsView()"
-                    [ngClass]="{'bg-gray-400' : showProductsInListView}">
+              [ngClass]="{'bg-gray-400' : showProductsInListView}">
               <ion-icon name="list-outline"></ion-icon>
             </button>
           </div>
@@ -63,8 +61,7 @@
           <div class="flex flex-col items-center space-x-4 md:flex-row">
             <div>
               <label for="sort" class="md:hidden">Sort by</label>
-              <select [(ngModel)]="sortType" (change)=sortProductsByPrice() id="sort"
-                      class="w-32 my-2">
+              <select [(ngModel)]="sortType" (change)=sortProductsByPrice() id="sort" class="w-32 my-2">
                 <option value="default">Choose</option>
                 <option value="price,asc">Price ASC</option>
                 <option value="price,desc">Price DESC</option>
@@ -86,7 +83,8 @@
 
             <ng-container *ngFor="let laptop of laptops | paginate: paginationConfig ">
 
-              <pmp-product-small [listView]=showProductsInListView [product]=laptop></pmp-product-small>
+              <pmp-product-small [listView]=showProductsInListView [product]=laptop [configMode]=configurator>
+              </pmp-product-small>
 
             </ng-container>
           </div>

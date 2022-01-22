@@ -11,27 +11,26 @@
 
     <ul class="flex items-center md:order-2">
       <li class="px-5 rounded cursor-pointer hover:bg-gray-200 hover:shadow"><a class="flex flex-col items-center"
-                                                                                routerLink="/account">
-        <ion-icon name="person-outline"></ion-icon>
-        Account
-      </a></li>
+          routerLink="/account">
+          <ion-icon name="person-outline"></ion-icon>
+          Account
+        </a></li>
       <li class="px-5 rounded cursor-pointer hover:bg-gray-200 hover:shadow"><a
-        class="flex flex-col items-center relative"
-        routerLink="/order/cart">
-        <ion-icon name="basket-outline"></ion-icon>
-        Cart
-        <ng-container *ngIf="numberOfItemsInCart > 0">
-          <div class="flex justify-center items-center h-6 w-6 bg-green-600 rounded-full absolute top-2.5 -left-5">
-            <span class="font-semibold">{{ numberOfItemsInCart }}</span>
-          </div>
-        </ng-container>
-      </a></li>
+          class="relative flex flex-col items-center" routerLink="/order/cart">
+          <ion-icon name="basket-outline"></ion-icon>
+          Cart
+          <ng-container *ngIf="numberOfItemsInCart > 0">
+            <div class="flex justify-center items-center h-6 w-6 bg-green-600 rounded-full absolute top-2.5 -left-5">
+              <span class="font-semibold">{{ numberOfItemsInCart }}</span>
+            </div>
+          </ng-container>
+        </a></li>
     </ul>
 
     <div class="flex items-center justify-center w-full">
 
       <button (click)="toggleMenu()" class="hamburger hamburger--collapse-r lg:hidden"
-              [ngClass]="{'is-active': showMenu}" type="button" id="navbar-btn">
+        [ngClass]="{'is-active': showMenu}" type="button" id="navbar-btn">
         <span class="hamburger-box">
           <span class="hamburger-inner"></span>
         </span>
@@ -40,13 +39,12 @@
 
       <div class="flex items-center order-1 w-3/4 h-8 m-2 bg-white border-2 border-black rounded-full shadow">
         <input class="w-10/12 h-6 ml-5" type="text" placeholder="Search" [(ngModel)]="searchPhrase">
-        <select (change)="changeCurrentSearchCategory($event)"
-                class="hidden w-3/12 h-6 sm:block">
+        <select (change)="changeCurrentSearchCategory($event)" class="hidden w-3/12 h-6 sm:block">
           <option selected>Everywhere</option>
           <option *ngFor="let category of mainCategories">{{ category.name }}</option>
         </select>
         <button (click)="searchProduct()"
-                class="relative flex items-center justify-center w-24 h-8 bg-gray-600 rounded-full -right-2">
+          class="relative flex items-center justify-center w-24 h-8 bg-gray-600 rounded-full -right-2">
           <!--                        routerLink="/search"-->
           <!--                        [queryParams]="{q: searchPhrase, cat: currentSearchCategory}"-->
           <!--        class="relative flex items-center justify-center w-24 h-8 bg-gray-600 rounded-full -right-2">-->
@@ -65,9 +63,9 @@
     <hr class="my-1.5">
     <ul id="main-menu" class="flex flex-col lg:flex-row lg:justify-between">
       <li *ngFor="let category of mainCategories" (mouseenter)="toggleModal();" (mouseleave)="toggleModal()"
-          class="relative p-2 rounded-t cursor-pointer hover:bg-gray-400">
+        class="relative p-2 rounded-t cursor-pointer hover:bg-gray-400">
         <a routerLink='/categories/{{ category.endpointName | lowercase }}' [queryParams]="{page: 1}"
-           class="flex items-center">
+          class="flex items-center">
           <ion-icon name="{{ category.iconName }}" class="pr-2"></ion-icon>
           {{ category.name }}
         </a>
@@ -75,25 +73,27 @@
         <div id="sub-menu" class="absolute left-0 hidden rounded-b-lg top-10 bg-gray-50 animate-fade-in-down">
           <ul *ngFor="let subMenuItem of category.subMenu" class="pb-4">
             <li class="relative flex items-center p-3 hover:bg-gray-400">
-              <a routerLink='/categories/{{ subMenuItem.endpointName | lowercase }}'
-                 [queryParams]="{page: 1}">
+              <a routerLink='/categories/{{ subMenuItem.endpointName | lowercase }}' [queryParams]="{page: 1}">
                 {{ subMenuItem.name }}
               </a>
-              <div *ngIf="subMenuItem.innerMenu"
-                   class="absolute top-0 rounded-tr-lg rounded-bl-lg rounded-br-lg left-full bg-gray-50 w-44">
-                <ul *ngFor="let innerMenuItem of subMenuItem.innerMenu"
-                    class="hidden pb-4 animate-fade-in-down">
+              <ng-container *ngIf="subMenuItem.innerMenu"
+                class="absolute top-0 rounded-tr-lg rounded-bl-lg rounded-br-lg left-full bg-gray-50 w-44">
+                <ul *ngFor="let innerMenuItem of subMenuItem.innerMenu" class="hidden pb-4 animate-fade-in-down">
                   <li (click)="setFilter(innerMenuItem.filterParams, subMenuItem.endpointName)"
-                      class="p-3 hover:bg-gray-400">
+                    class="p-3 hover:bg-gray-400">
                     {{ innerMenuItem.name }}
                   </li>
                 </ul>
-              </div>
+              </ng-container>
 
             </li>
           </ul>
         </div>
 
+      </li>
+      <li class="flex items-center">
+        <ion-icon class="mr-2" name='hammer-outline'></ion-icon>
+        <a routerLink='/build-pc'>Build PC</a>
       </li>
     </ul>
   </nav>
@@ -153,6 +153,6 @@
 
 
 <div (click)="toggleMenu()"
-     class="fixed top-0 left-0 z-10 flex items-center justify-center w-full h-screen bg-black opacity-50 animate-fade-bg"
-     [ngClass]="{'hidden': (!showMenu && toggleBackdrop)}">
+  class="fixed top-0 left-0 z-10 flex items-center justify-center w-full h-screen bg-black opacity-50 animate-fade-bg"
+  [ngClass]="{'hidden': (!showMenu && toggleBackdrop)}">
 </div>

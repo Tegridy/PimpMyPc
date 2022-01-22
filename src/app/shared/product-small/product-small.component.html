@@ -11,12 +11,12 @@
       </div>
 
       <div class="flex h-full ml-4 sm:justify-between"
-           [ngClass]="listView ? 'flex-col sm:flex-row w-full lg:pl-8 lg:pr-16' : 'flex-col'">
-        <div class="space-y-4 h-36 relative">
+        [ngClass]="listView ? 'flex-col sm:flex-row w-full lg:pl-8 lg:pr-16' : 'flex-col'">
+        <div class="relative space-y-4 h-36">
           <div class="flex flex-wrap">
-          <span class="text-lg whitespace-normal">
-            {{ product.title }}
-          </span>
+            <span class="text-lg whitespace-normal">
+              {{ product.title }}
+            </span>
           </div>
 
           <ng-container *ngIf="productsParams">
@@ -31,12 +31,24 @@
     <div class="flex justify-between" [ngClass]="listView ? 'flex-col' : 'flex-row items-center'">
       <span class="self-end py-2 text-lg">{{ product.price }}</span>
 
-      <button (click)="addItemToCart()"
-              class="self-end hidden w-10 h-10 text-green-700 border-2 rounded-lg md:group-hover:block hover:border-green-700 hover:bg-green-700 hover:text-gray-50 sm:block">
-            <span class="flex items-center justify-center">
-              <ion-icon name="add-outline"></ion-icon>
-            </span>
-      </button>
+      <ng-container *ngIf="!configMode; else configAdd">
+
+        <button (click)="addItemToCart()" class="rotate-animation self-end hidden w-10 h-10 text-green-700 border-2 rounded-lg md:group-hover:block
+          hover:border-green-700 hover:bg-green-700 hover:text-gray-50 sm:block">
+          <span class="flex items-center justify-center">
+            <ion-icon name="add-outline"></ion-icon>
+          </span>
+        </button>
+
+      </ng-container>
+      <ng-template #configAdd>
+        <button (click)="addItemToConfigurator()" class="rotate-animation self-end hidden w-10 h-10 text-green-700 border-2 rounded-lg md:group-hover:block
+          hover:border-green-700 hover:bg-green-700 hover:text-gray-50 sm:block">
+          <span class="flex items-center justify-center">
+            <ion-icon name="add-outline"></ion-icon>
+          </span>
+        </button>
+      </ng-template>
     </div>
 
   </div>

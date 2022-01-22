@@ -1,13 +1,17 @@
-import {ProductsService} from '../../core/services/products.service';
-import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
-import {ActivatedRoute, NavigationEnd, Router, UrlSegment} from '@angular/router';
-import {PaginationInstance} from 'ngx-pagination';
-import {of} from 'rxjs';
-import {BaseProduct} from '../../shared/model/BaseProduct';
-import {Filter, FilterGroup} from '../../shared/model/FilterGroup';
-import {Param} from '../Param';
-import {parse} from 'search-params';
-
+import { ProductsService } from '../../core/services/products.service';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import {
+  ActivatedRoute,
+  NavigationEnd,
+  Router,
+  UrlSegment,
+} from '@angular/router';
+import { PaginationInstance } from 'ngx-pagination';
+import { of } from 'rxjs';
+import { BaseProduct } from '../../shared/model/BaseProduct';
+import { Filter, FilterGroup } from '../../shared/model/FilterGroup';
+import { Param } from '../Param';
+import { parse } from 'search-params';
 
 @Component({
   selector: 'pmp-products-category',
@@ -15,12 +19,12 @@ import {parse} from 'search-params';
   styleUrls: ['./products-category.component.scss'],
 })
 export class ProductsCategoryComponent implements OnInit {
-
   constructor(
     private ref: ChangeDetectorRef,
     private router: Router,
     private productsService: ProductsService,
-    private route: ActivatedRoute) {
+    private route: ActivatedRoute
+  ) {
     this.loadQueryParamsFromUrl();
   }
 
@@ -46,8 +50,10 @@ export class ProductsCategoryComponent implements OnInit {
   sortType = 'default';
   queryParams: Param[] = [];
 
+  configurator = false;
+
   ngOnInit(): void {
-    this.router.events.subscribe(ev => {
+    this.router.events.subscribe((ev) => {
       if (ev instanceof NavigationEnd) {
         this.queryParams = [];
         this.loadQueryParamsFromUrl();
@@ -60,16 +66,24 @@ export class ProductsCategoryComponent implements OnInit {
 
     for (const param of Object.entries(queryParamsSnapshot)) {
       if (Array.isArray(param[1])) {
-        param[1].forEach(p => this.queryParams.push(new Param(param[0], p)));
+        param[1].forEach((p) => this.queryParams.push(new Param(param[0], p)));
       } else {
         this.queryParams.push(new Param(param[0], param[1]));
       }
     }
+    this.checkIfConfig();
     this.getCurrentCategoryProducts(this.findCurrentPageNumber());
   }
 
+  checkIfConfig(): void {
+    const config = this.queryParams.find(
+      (param) => param.key === 'config'
+    )?.value;
+    this.configurator = config as boolean;
+  }
+
   private findCurrentPageNumber(): number {
-    const pageNumber = this.queryParams.find(p => p.key === 'page');
+    const pageNumber = this.queryParams.find((p) => p.key === 'page');
 
     if (pageNumber) {
       return Math.abs(pageNumber.value as number);
@@ -79,7 +93,6 @@ export class ProductsCategoryComponent implements OnInit {
   }
 
   getCurrentCategoryProducts(page: number): void {
-
     const categoryName = this.getCategoryTypeFromUrl();
 
     const filtersUrl = this.buildUrl();
@@ -87,7 +100,6 @@ export class ProductsCategoryComponent implements OnInit {
     this.productsService
       .getProductsPage(page - 1, categoryName, filtersUrl)
       .subscribe((productsPage) => {
-
         this.pageNumber = productsPage.products.number + 1;
         this.productsCount = productsPage.products.totalElements;
 
@@ -96,7 +108,6 @@ export class ProductsCategoryComponent implements OnInit {
         this.laptops = productsPage.products.content;
         this.productsFilters = productsPage.filters;
         this.loadFiltersFromQueryParams();
-
 
         if (this.laptops.length > 0) {
           this.loading = false;
@@ -108,9 +119,14 @@ export class ProductsCategoryComponent implements OnInit {
   }
 
   private loadFiltersFromQueryParams(): void {
-    this.productsFilters.forEach(v => {
-      v.values.forEach(v2 => {
-        if (this.queryParams.find(param => param.key === v.filterProperty && param.value === v2.valueProperty)) {
+    this.productsFilters.forEach((v) => {
+      v.values.forEach((v2) => {
+        if (
+          this.queryParams.find(
+            (param) =>
+              param.key === v.filterProperty && param.value === v2.valueProperty
+          )
+        ) {
           v2.isChecked = true;
         }
       });
@@ -118,7 +134,10 @@ export class ProductsCategoryComponent implements OnInit {
   }
 
   private getCategoryTypeFromUrl(): string {
-    const category = this.router.url.split('/categories/')[1].toLocaleLowerCase().replace(new RegExp('\\?.+'), '');
+    const category = this.router.url
+      .split('/categories/')[1]
+      .toLocaleLowerCase()
+      .replace(new RegExp('\\?.+'), '');
     if (category !== this.currentCategory) {
       this.currentCategory = category;
       this.sortType = 'default';
@@ -143,16 +162,16 @@ export class ProductsCategoryComponent implements OnInit {
 
   updateUrl(): void {
     const currentUrl: ActivatedRoute = new ActivatedRoute();
-    currentUrl.url = of([new UrlSegment(this.router.url, {name: 'pageNumber'})]);
+    currentUrl.url = of([
+      new UrlSegment(this.router.url, { name: 'pageNumber' }),
+    ]);
 
     const params = parse(this.buildUrl());
 
-    this.router.navigate(
-      [],
-      {
-        relativeTo: currentUrl,
-        queryParams: params
-      });
+    this.router.navigate([], {
+      relativeTo: currentUrl,
+      queryParams: params,
+    });
   }
 
   filterClick(event: Event, mainProp: string, filterValue: Filter): void {
@@ -161,7 +180,9 @@ export class ProductsCategoryComponent implements OnInit {
     if (filterValue.isChecked) {
       this.queryParams.push(new Param(mainProp, filterValue.valueProperty));
     } else {
-      const idx = this.queryParams.findIndex(p => p.key === mainProp && p.value === filterValue.valueProperty);
+      const idx = this.queryParams.findIndex(
+        (p) => p.key === mainProp && p.value === filterValue.valueProperty
+      );
       this.queryParams.splice(idx, 1);
     }
 
@@ -171,7 +192,7 @@ export class ProductsCategoryComponent implements OnInit {
 
   sortProductsByPrice(): void {
     const sortParam = new Param('sort', this.sortType);
-    const isSortedParamChosen = this.queryParams.find(x => x.key === 'sort');
+    const isSortedParamChosen = this.queryParams.find((x) => x.key === 'sort');
     const sortedParamIndex = this.queryParams.indexOf(sortParam);
 
     if (isSortedParamChosen) {
@@ -197,8 +218,11 @@ export class ProductsCategoryComponent implements OnInit {
     this.updateUrl();
   }
 
-  findAndUpdateQueryParam(paramName: string, valueToUpdate: string | number): void {
-    const qParam = this.queryParams.find(param => param.key === paramName);
+  findAndUpdateQueryParam(
+    paramName: string,
+    valueToUpdate: string | number
+  ): void {
+    const qParam = this.queryParams.find((param) => param.key === paramName);
     if (qParam) {
       qParam.value = valueToUpdate;
     }
