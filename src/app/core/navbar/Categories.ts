@@ -82,5 +82,6 @@ export const categories = [
       { name: 'Computer mouse', endpointName: 'mouses' },
       { name: 'Computer keyboard', endpointName: 'keyboards' },
     ],
+    endpointName: 'monitors',
   },
 ];

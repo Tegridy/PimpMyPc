@@ -1,19 +1,22 @@
-import {Component, OnInit} from '@angular/core';
-import {ProductsService} from '../../core/services/products.service';
-import {BaseProduct} from '../../shared/model/BaseProduct';
-import {ActivatedRoute} from '@angular/router';
-import {HttpClient} from '@angular/common/http';
-import {ProductDetail} from '../../shared/model/ProductDetail';
+import { Component, OnInit } from '@angular/core';
+import { ProductsService } from '../../core/services/products.service';
+import { BaseProduct } from '../../shared/model/BaseProduct';
+import { ActivatedRoute } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { ProductDetail } from '../../shared/model/ProductDetail';
 
 @Component({
   selector: 'pmp-product-full',
   templateUrl: './product-full.component.html',
-  styleUrls: ['./product-full.component.scss']
+  styleUrls: ['./product-full.component.scss'],
 })
 export class ProductFullComponent implements OnInit {
-
-  constructor(private productsService: ProductsService, private route: ActivatedRoute, private http: HttpClient) {
-    this.product = {title: 'Product title', price: 0, id: -1, quantity: -1};
+  constructor(
+    private productsService: ProductsService,
+    private route: ActivatedRoute,
+    private http: HttpClient
+  ) {
+    this.product = { title: 'Product title', price: 0, id: -1, quantity: -1 };
   }
 
   showModal = false;
@@ -25,19 +28,28 @@ export class ProductFullComponent implements OnInit {
   productParamsToFilter = ['id', 'title', 'description', 'price', 'imageUrl'];
 
   ngOnInit(): void {
-    this.route.params.subscribe(params => {
+    this.route.params.subscribe((params) => {
       this.productId = params.id;
     });
 
-    this.productsService.getProductById(this.productId).subscribe(
-      product => {
-        this.product = product;
-        for (let i = 0; i < Object.keys(this.product).length; i++) {
-          this.productDetails.push(new ProductDetail(Object.keys(this.product)[i], Object.values(this.product)[i]));
+    this.productsService.getProductById(this.productId).subscribe((product) => {
+      this.product = product;
+      for (let i = 0; i < Object.keys(this.product).length; i++) {
+        if (
+          Object.values(this.product)[i] !== 0 &&
+          Object.values(this.product)[i] !== null
+        ) {
+          this.productDetails.push(
+            new ProductDetail(
+              Object.keys(this.product)[i],
+              Object.values(this.product)[i]
+            )
+          );
         }
-        this.filterProductParams();
+        console.log(product);
       }
-    );
+      this.filterProductParams();
+    });
   }
 
   toggleModal(): void {
@@ -49,6 +61,8 @@ export class ProductFullComponent implements OnInit {
   }
 
   filterProductParams(): void {
-    this.productDetails = this.productDetails.filter(pd => !this.productParamsToFilter.includes(pd.key));
+    this.productDetails = this.productDetails.filter(
+      (pd) => !this.productParamsToFilter.includes(pd.key)
+    );
   }
 }
