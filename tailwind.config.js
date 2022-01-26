@@ -96,5 +96,6 @@ module.exports = {
 
       addUtilities(utilities, variants('borderColor'));
     },
+    require('@tailwindcss/forms')
   ],
 }

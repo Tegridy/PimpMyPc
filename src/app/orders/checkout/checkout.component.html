@@ -1,56 +1,146 @@
-<h1 class="text-4xl font-bold text-center mb-5">Order summary</h1>
+<h1 class="mb-5 text-4xl font-bold text-center">Order summary</h1>
 
 <ng-container *ngIf="!orderComplete">
   <section class="flex flex-col w-4/5 mx-auto mb-10" id="order-products">
-    <h3 class="text-2xl font-semibold">Ordered items:</h3>
-    <hr class="w-full border border-black my-2">
+    <h3 class="text-2xl font-semibold">Order items:</h3>
+    <hr class="w-full my-2 border border-black">
     <ul class="flex flex-col items-center justify-center space-y-4">
-      <li *ngFor="let cartItem of cartProducts" class="flex items-center border border-black w-4/5 p-4 rounded">
-        <div class="w-2/5 flex justify-center items-center">
+      <li *ngFor="let cartItem of cartProducts" class="flex items-center w-4/5 p-4 border border-black rounded">
+        <div class="flex items-center justify-center w-2/5">
           <img class="object-contain h-24 rounded" src="{{ cartItem.imageUrl }}" alt="{{ cartItem.title }} image">
         </div>
-        <div class="w-3/5 flex items-center">
+        <div class="flex items-center w-3/5">
           <span class="mx-5">{{ cartItem.title }}</span>
           <span class="mx-5">{{ cartItem.price | currency}}</span>
         </div>
       </li>
     </ul>
 
-    <h3 class="text-lg font-semibold text-center my-5">Total: {{ totalPrice | currency}}</h3>
+    <h3 class="my-5 text-lg font-semibold text-center">Total: {{ totalPrice | currency}}</h3>
   </section>
 
   <section id="customer-data">
     <form novalidate (ngSubmit)="saveOrder()" [formGroup]="orderForm"
-          class="mx-auto w-3/5 p-5 border border-black rounded-xl">
+      class="w-3/5 p-5 mx-auto border border-black rounded-xl">
 
       <div class="flex flex-col w-3/5 mx-auto">
-        <label for="firstNameId">First name:</label>
-        <input formControlName="customerFirstName" id="firstNameId" type="text" placeholder="First name">
+        <h3 class="self-start my-2 text-xl font-semibold">Personal data:</h3>
 
-        <label for="lastNameId">Last name:</label>
-        <input formControlName="customerLastName" id="lastNameId" type="text" placeholder="Last name">
 
-        <label for="emailId">E-mail address:</label>
-        <input formControlName="customerEmail" id="emailId" type="text" placeholder="E-mail address">
+        <label for="firstNameId" class="input-label">First name:</label>
+        <input formControlName="customerFirstName" id="firstNameId" type="text" placeholder="First name" [ngClass]="{'is-invalid': (orderForm.get('customerFirstName')?.touched ||
+         orderForm.get('customerFirstName')?.dirty) &&
+         !orderForm.get('customerFirstName')?.valid }" />
 
-        <label for="phoneNumberId">Phone:</label>
-        <input formControlName="customerPhone" id="phoneNumberId" type="text" placeholder="Phone number">
+        <span class="error-message"
+          *ngIf="orderForm.get('customerFirstName')?.errors?.required && orderForm.get('customerFirstName')?.touched">
+          Please enter your first name.
+        </span>
+        <span class="error-message" *ngIf="orderForm.get('customerFirstName')?.errors?.minlength">
+          The first name must be longer than 3 characters.
+        </span>
+
+        <label for="lastNameId" class="input-label">Last name:</label>
+        <input formControlName="customerLastName" id="lastNameId" type="text" placeholder="Last name" [ngClass]="{'is-invalid': (orderForm.get('customerLastName')?.touched ||
+                                            orderForm.get('customerLastName')?.dirty) &&
+                                            !orderForm.get('customerLastName')?.valid }" />
+
+
+        <span class="error-message" *ngIf="orderForm.get('customerLastName')?.errors?.required &&
+        orderForm.get('customerLastName')?.touched">
+          Please enter your last name.
+        </span>
+        <span class="error-message" *ngIf="orderForm.get('customerLastName')?.errors?.minlength">
+          The last name must be longer than 3 characters.
+        </span>
+
+        <label for="emailId" class="input-label">E-mail address:</label>
+        <input formControlName="customerEmail" id="emailId" type="text" placeholder="E-mail address" [ngClass]="{'is-invalid': (orderForm.get('customerEmail')?.touched ||
+                                            orderForm.get('customerEmail')?.dirty) &&
+                                            !orderForm.get('customerEmail')?.valid }" />
+
+        <span class="error-message" *ngIf="orderForm.get('customerEmail')?.errors?.required &&
+        orderForm.get('customerEmail')?.touched">
+          E-mail address is required.
+        </span>
+        <span class="error-message" *ngIf="orderForm.get('customerEmail')?.errors?.email">
+          E-mail address is not valid.
+        </span>
+
+        <label for="phoneNumberId" class="input-label">Phone:</label>
+        <input formControlName="customerPhone" id="phoneNumberId" type="text" placeholder="Phone number" [ngClass]="{'is-invalid': (orderForm.get('customerPhone')?.touched ||
+                                            orderForm.get('customerPhone')?.dirty) &&
+                                            !orderForm.get('customerPhone')?.valid }" />
+
+        <span class="error-message" *ngIf="orderForm.get('customercustomerPhoneEmail')?.errors?.required &&
+        orderForm.get('customerPhone')?.touched">
+          Phone number is required.
+        </span>
+        <span class="error-message" *ngIf="orderForm.get('customerPhone')?.errors?.pattern">
+          Phone number is not valid.
+        </span>
+
+
+
+
         <div formGroupName="deliveryAddress" class="flex flex-col w-4/5 mx-auto">
-          <h3 class="text-xl font-semibold self-start my-2">Address:</h3>
-          <label for="stateId">State:</label>
-          <input formControlName="state" id="stateId" type="text" placeholder="State">
+          <h3 class="self-start my-2 text-xl font-semibold">Address:</h3>
+          <label for="stateId" class="input-label">State:</label>
+          <input formControlName="state" id="stateId" type="text" placeholder="State" [ngClass]="{'is-invalid': (orderForm.get('deliveryAddress.state')?.touched ||
+                                            orderForm.get('deliveryAddress.state')?.dirty) &&
+                                            !orderForm.get('deliveryAddress.state')?.valid }" />
 
-          <label for="cityNameId">City:</label>
-          <input formControlName="city" id="cityNameId" type="text" placeholder="City name">
+          <span class="error-message" *ngIf="orderForm.get('deliveryAddress.state')?.errors?.required &&
+        orderForm.get('deliveryAddress.state')?.touched">
+            Please enter your state name.
+          </span>
+          <span class="error-message" *ngIf="orderForm.get('deliveryAddress.state')?.errors?.minlength">
+            The state name must be longer than 3 characters.
+          </span>
 
-          <label for="streetNameId">Street:</label>
-          <input formControlName="street" id="streetNameId" type="text" placeholder="Street name">
+          <label for="cityNameId" class="input-label">City:</label>
+          <input formControlName="city" id="cityNameId" type="text" placeholder="City name" [ngClass]="{'is-invalid': (orderForm.get('deliveryAddress.city')?.touched ||
+                                            orderForm.get('deliveryAddress.city')?.dirty) &&
+                                            !orderForm.get('deliveryAddress.city')?.valid }" />
 
-          <label for="zipCodeId">Zip code:</label>
-          <input formControlName="zip" id="zipCodeId" type="text" placeholder="Zip code">
+
+          <span class="error-message" *ngIf="orderForm.get('deliveryAddress.city')?.errors?.required &&
+        orderForm.get('deliveryAddress.city')?.touched">
+            Please enter your city name.
+          </span>
+          <span class="error-message" *ngIf="orderForm.get('deliveryAddress.city')?.errors?.minlength">
+            The city name must be longer than 3 characters.
+          </span>
+
+
+          <label for="streetNameId" class="input-label">Street:</label>
+          <input formControlName="street" id="streetNameId" type="text" placeholder="Street name" [ngClass]="{'is-invalid': (orderForm.get('deliveryAddress.street')?.touched ||
+                                            orderForm.get('deliveryAddress.street')?.dirty) &&
+                                            !orderForm.get('deliveryAddress.street')?.valid }" />
+
+          <span class="error-message" *ngIf="orderForm.get('deliveryAddress.street')?.errors?.required &&
+        orderForm.get('deliveryAddress.street')?.touched">
+            Please enter your street name.
+          </span>
+          <span class="error-message" *ngIf="orderForm.get('deliveryAddress.street')?.errors?.minlength">
+            The street name must be longer than 3 characters.
+          </span>
+
+          <label for="zipCodeId" class="input-label">Zip code:</label>
+          <input formControlName="zip" id="zipCodeId" type="text" placeholder="Zip code" [ngClass]="{'is-invalid': (orderForm.get('deliveryAddress.zip')?.touched ||
+                                            orderForm.get('deliveryAddress.zip')?.dirty) &&
+                                            !orderForm.get('deliveryAddress.zip')?.valid }" />
+
+          <span class="error-message" *ngIf="orderForm.get('deliveryAddress.zip')?.errors?.required &&
+        orderForm.get('deliveryAddress.zip')?.touched">
+            Please enter your zip code.
+          </span>
+          <span class="error-message" *ngIf="orderForm.get('deliveryAddress.zip')?.errors?.minlength">
+            The zip code must be longer than 3 characters.
+          </span>
         </div>
 
-        <button type="submit" class="p-2 bg-blue-500 rounded-2xl w-3/5 mx-auto mt-8">Place order</button>
+        <button type="submit" class="w-3/5 p-2 mx-auto mt-8 bg-blue-500 rounded-2xl">Place order</button>
       </div>
     </form>
   </section>
@@ -61,5 +151,5 @@
   <h3 class="text-3xl font-bold">Congratulations you win 100% discount and you don't have to pay! Yay :)</h3>
   <h4 class="my-4">Order id: #928129102</h4>
   <h4 class="mb-4">Order status: Proceeding...</h4>
-  <button routerLink="/" class="p-2 bg-blue-500 rounded-2xl my-5 w-2/5 mx-auto">Go to Homepage</button>
+  <button routerLink="/" class="w-2/5 p-2 mx-auto my-5 bg-blue-500 rounded-2xl">Go to Homepage</button>
 </div>

@@ -1,3 +1,4 @@
+import { filters } from './ProductsFilters';
 import { ProductsService } from '../../core/services/products.service';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import {
@@ -115,6 +116,8 @@ export class ProductsCategoryComponent implements OnInit {
 
         this.paginationConfig.currentPage = this.pageNumber;
         this.paginationConfig.totalItems = this.productsCount;
+
+        this.sortFilters();
       });
   }
 
@@ -208,6 +211,14 @@ export class ProductsCategoryComponent implements OnInit {
     }
 
     this.getCurrentCategoryProducts(1);
+  }
+
+  sortFilters(): void {
+    this.productsFilters.forEach((mainFilter) =>
+      mainFilter.values.sort((f1, f2) =>
+        f1.name.localeCompare(f2.name, 'en', { numeric: true })
+      )
+    );
   }
 
   onPageChange(page: number): void {

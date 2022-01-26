@@ -17,6 +17,43 @@
   .table-element {
     @apply border-t border-b border-gray-400 w-1/2 text-center;
   }
+
+   [type="text"],
+   [type="email"],
+   [type="url"],
+   [type="password"],
+   [type="number"],
+   [type="date"],
+   [type="month"],
+   [type="tel"],
+   [type="time"],
+   [type="week"],
+   [multiple],
+   textarea
+    {
+    //  @apply w-full border-gray-300 rounded-lg shadow-sm focus: border-indigo-500 focus:ring-indigo-500;
+    @apply rounded-2xl shadow-sm focus:border-blue-500 focus:ring-blue-500;
+   }
+
+   [type="search"],
+select {
+    @apply w-10/12 h-6 ml-5 focus:ring-0 focus:outline-none;
+}
+  // .form-input {
+  //   @apply w-full border-gray-300 rounded-lg shadow-sm focus:border-blue-500 focus:ring-blue-500;
+  // }
+
+  .is-invalid {
+    @apply border-2 border-red-500 bg-red-500 bg-opacity-30;
+  }
+
+  .error-message {
+    @apply my-2 font-bold text-red-500;
+  }
+
+  .input-label {
+    @apply text-sm font-bold text-gray-700;
+  }
 }
 
 html {
