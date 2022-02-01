@@ -1,38 +1,80 @@
-import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {User} from '../../shared/model/User';
-import {Router} from '@angular/router';
-import {LoginDetails} from '../../shared/model/LoginDetails';
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { User } from '../../shared/model/User';
+import { Router } from '@angular/router';
+import { LoginDetails } from '../../shared/model/LoginDetails';
+import { map, catchError, tap, debounce, debounceTime } from 'rxjs/operators';
+import { throwError, Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-
   // Temp
   isUserLoggedIn = false;
 
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(private http: HttpClient) {}
+
+  loginUser(username: string, password: string): Observable<any> {
+    return this.http
+      .post('http://localhost:8080/api/v1/auth/login', { username, password })
+      .pipe(
+        map((loginDetails) => {
+          const details = loginDetails as LoginDetails;
+          sessionStorage.setItem('token', details.token);
+          sessionStorage.setItem('userId', String(details.userId));
+          this.isUserLoggedIn = true;
+        }),
+        catchError((error) => {
+          let errorMsg: string = '';
+
+          if (error.error instanceof ErrorEvent) {
+            errorMsg = `Error: ${error.error.message}`;
+          } else {
+            errorMsg = this.getServerErrorMessage(error);
+          }
+
+          return throwError(errorMsg);
+        })
+      );
   }
 
-  loginUser(username: string, password: string): void {
-    this.http.post('http://localhost:8080/api/v1/auth/login', {username, password}).subscribe(
-      (loginDetails) => {
-        const x = loginDetails as LoginDetails;
-        sessionStorage.setItem('token', x.token);
-        sessionStorage.setItem('userId', String(x.userId));
-        this.isUserLoggedIn = true;
-        this.router.navigateByUrl('/').then();
-      }
-    );
+  signUpUser(user: User): Observable<any> {
+    return this.http
+      .post('http://localhost:8080/api/v1/auth/register', user)
+      .pipe(
+        map((token) => {
+          sessionStorage.setItem('token', token as string);
+          this.isUserLoggedIn = true;
+        }),
+        catchError((error) => {
+          let errorMsg: string = '';
+
+          if (error.error instanceof ErrorEvent) {
+            errorMsg = `Error: ${error.error.message}`;
+          } else {
+            errorMsg = this.getServerErrorMessage(error);
+          }
+
+          return throwError(errorMsg);
+        })
+      );
   }
 
-  signUpUser(user: User): void {
-    this.http.post('http://localhost:8080/api/v1/auth/register', user).subscribe(
-      token => {
-        sessionStorage.setItem('token', token as string);
-        this.isUserLoggedIn = true;
+  private getServerErrorMessage(error: HttpErrorResponse): string {
+    switch (error.status) {
+      case 404: {
+        return `User not found. Try again.`;
       }
-    );
+      case 403: {
+        return `Username or password incorrect. Try again.`;
+      }
+      case 500: {
+        return `Internal Server Error. Please try again later.`;
+      }
+      default: {
+        return `Unknown Server Error. Please try again later.`;
+      }
+    }
   }
 }

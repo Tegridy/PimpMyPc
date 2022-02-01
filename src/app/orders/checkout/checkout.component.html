@@ -28,7 +28,8 @@
 
 
         <label for="firstNameId" class="input-label">First name:</label>
-        <input formControlName="customerFirstName" id="firstNameId" type="text" placeholder="First name" [ngClass]="{'is-invalid': (orderForm.get('customerFirstName')?.touched ||
+        <input formControlName="customerFirstName" id="firstNameId" type="text" class="mb-3" placeholder="First name"
+          [ngClass]="{'is-invalid': (orderForm.get('customerFirstName')?.touched ||
          orderForm.get('customerFirstName')?.dirty) &&
          !orderForm.get('customerFirstName')?.valid }" />
 
@@ -41,7 +42,8 @@
         </span>
 
         <label for="lastNameId" class="input-label">Last name:</label>
-        <input formControlName="customerLastName" id="lastNameId" type="text" placeholder="Last name" [ngClass]="{'is-invalid': (orderForm.get('customerLastName')?.touched ||
+        <input formControlName="customerLastName" id="lastNameId" type="text" class="mb-3" placeholder="Last name"
+          [ngClass]="{'is-invalid': (orderForm.get('customerLastName')?.touched ||
                                             orderForm.get('customerLastName')?.dirty) &&
                                             !orderForm.get('customerLastName')?.valid }" />
 
@@ -55,7 +57,8 @@
         </span>
 
         <label for="emailId" class="input-label">E-mail address:</label>
-        <input formControlName="customerEmail" id="emailId" type="text" placeholder="E-mail address" [ngClass]="{'is-invalid': (orderForm.get('customerEmail')?.touched ||
+        <input formControlName="customerEmail" id="emailId" type="text" class="mb-3" placeholder="E-mail address"
+          [ngClass]="{'is-invalid': (orderForm.get('customerEmail')?.touched ||
                                             orderForm.get('customerEmail')?.dirty) &&
                                             !orderForm.get('customerEmail')?.valid }" />
 
@@ -68,11 +71,12 @@
         </span>
 
         <label for="phoneNumberId" class="input-label">Phone:</label>
-        <input formControlName="customerPhone" id="phoneNumberId" type="text" placeholder="Phone number" [ngClass]="{'is-invalid': (orderForm.get('customerPhone')?.touched ||
+        <input formControlName="customerPhone" id="phoneNumberId" type="text" class="mb-3" placeholder="Phone number"
+          [ngClass]="{'is-invalid': (orderForm.get('customerPhone')?.touched ||
                                             orderForm.get('customerPhone')?.dirty) &&
                                             !orderForm.get('customerPhone')?.valid }" />
 
-        <span class="error-message" *ngIf="orderForm.get('customercustomerPhoneEmail')?.errors?.required &&
+        <span class="error-message" *ngIf="orderForm.get('customerPhone')?.errors?.required &&
         orderForm.get('customerPhone')?.touched">
           Phone number is required.
         </span>
@@ -86,7 +90,7 @@
         <div formGroupName="deliveryAddress" class="flex flex-col w-4/5 mx-auto">
           <h3 class="self-start my-2 text-xl font-semibold">Address:</h3>
           <label for="stateId" class="input-label">State:</label>
-          <input formControlName="state" id="stateId" type="text" placeholder="State" [ngClass]="{'is-invalid': (orderForm.get('deliveryAddress.state')?.touched ||
+          <input formControlName="state" id="stateId" type="text" class="mb-3" placeholder="State" [ngClass]="{'is-invalid': (orderForm.get('deliveryAddress.state')?.touched ||
                                             orderForm.get('deliveryAddress.state')?.dirty) &&
                                             !orderForm.get('deliveryAddress.state')?.valid }" />
 
@@ -99,7 +103,7 @@
           </span>
 
           <label for="cityNameId" class="input-label">City:</label>
-          <input formControlName="city" id="cityNameId" type="text" placeholder="City name" [ngClass]="{'is-invalid': (orderForm.get('deliveryAddress.city')?.touched ||
+          <input formControlName="city" id="cityNameId" type="text" class="mb-3" placeholder="City name" [ngClass]="{'is-invalid': (orderForm.get('deliveryAddress.city')?.touched ||
                                             orderForm.get('deliveryAddress.city')?.dirty) &&
                                             !orderForm.get('deliveryAddress.city')?.valid }" />
 
@@ -114,7 +118,8 @@
 
 
           <label for="streetNameId" class="input-label">Street:</label>
-          <input formControlName="street" id="streetNameId" type="text" placeholder="Street name" [ngClass]="{'is-invalid': (orderForm.get('deliveryAddress.street')?.touched ||
+          <input formControlName="street" id="streetNameId" type="text" class="mb-3" placeholder="Street name"
+            [ngClass]="{'is-invalid': (orderForm.get('deliveryAddress.street')?.touched ||
                                             orderForm.get('deliveryAddress.street')?.dirty) &&
                                             !orderForm.get('deliveryAddress.street')?.valid }" />
 
@@ -127,7 +132,7 @@
           </span>
 
           <label for="zipCodeId" class="input-label">Zip code:</label>
-          <input formControlName="zip" id="zipCodeId" type="text" placeholder="Zip code" [ngClass]="{'is-invalid': (orderForm.get('deliveryAddress.zip')?.touched ||
+          <input formControlName="zip" id="zipCodeId" type="text" class="mb-3" placeholder="Zip code" [ngClass]="{'is-invalid': (orderForm.get('deliveryAddress.zip')?.touched ||
                                             orderForm.get('deliveryAddress.zip')?.dirty) &&
                                             !orderForm.get('deliveryAddress.zip')?.valid }" />
 

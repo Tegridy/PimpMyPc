@@ -1,23 +1,50 @@
-import {Component, OnInit} from '@angular/core';
-import {AuthService} from '../core/services/auth.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { ThrowStmt } from '@angular/compiler';
+import { Component, OnInit } from '@angular/core';
+import { of } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
+import { AuthService } from '../core/services/auth.service';
 
 @Component({
   selector: 'pmp-login',
   templateUrl: './login.component.html',
-  styleUrls: []
+  styleUrls: [],
 })
 export class LoginComponent implements OnInit {
+  // login = '';
+  // password = '';
+  loading = false;
 
-  login = '';
-  password = '';
+  errorMsg = '';
 
-  constructor(private authService: AuthService) {
+  loginForm: FormGroup;
+
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private formBuilder: FormBuilder
+  ) {
+    this.loginForm = this.formBuilder.group({
+      username: ['', Validators.required],
+      password: ['', Validators.required],
+    });
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   loginUser(): void {
-    this.authService.loginUser(this.login, this.password);
+    this.loading = true;
+
+    const username = this.loginForm.get('username')?.value;
+    const password = this.loginForm.get('password')?.value;
+
+    this.authService.loginUser(username, password).subscribe(
+      () => this.router.navigateByUrl('/').then(),
+      (error) => {
+        this.errorMsg = error;
+        this.loading = false;
+      }
+    );
   }
 }
