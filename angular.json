@@ -65,7 +65,8 @@
             "styles": [
               "src/styles.scss",
               "node_modules/@glidejs/glide/src/assets/sass/glide.core.scss",
-              "node_modules/@glidejs/glide/src/assets/sass/glide.theme.scss"
+              "node_modules/@glidejs/glide/src/assets/sass/glide.theme.scss",
+              "node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": []
           },

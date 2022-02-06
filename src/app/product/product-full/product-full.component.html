@@ -3,22 +3,40 @@
   <section id="short-desc" class="flex py-6">
 
     <div class="w-1/2 mx-4 lg:mx-20">
-      <img src="{{ product.imageUrl }}" alt="{{product.title }} image">
+      <img class="rounded-lg" src="{{ product.imageUrl }}" alt="{{ product.title }} image">
     </div>
 
-    <div class="w-full flex flex-col">
+    <div class="w-full flex justify-center flex-col">
       <div class="m-4">
-        <h3 class="text-center text-xl md:text-2xl">{{ product.title }}</h3>
+        <h3 class="text-center text-3xl">{{ product.title }}</h3>
       </div>
 
       <div class="m-4">
-        <h3 class="text-center text-xl md:text-2xl">{{ product.price | currency }}</h3>
+        <h3 class="text-center text-2xl">{{ product.price | currency }}</h3>
+      </div>
+
+      <div class="mx-auto mt-8">
+        <button (click)="addProductToCart()" class="bg-white border-green-700 p-4 text-green-700 border-4 rounded-lg md:group-hover:block
+          hover:border-green-700 hover:bg-green-700 hover:text-gray-50 sm:block">
+          <div class="flex justify-items-center items-center text-center">
+            <ion-icon class="w-8 h-8" name="bag-add-outline"></ion-icon>
+            <span class="ml-2">Add to basket</span>
+          </div>
+        </button>
       </div>
     </div>
 
   </section>
 
-  <div class="m-5"><p class="text-lg tracking-wide">{{ product.description }}</p></div>
+  <div class="m-5">
+
+    <div class="w-3/4 flex flex-col items-center mx-auto">
+      <ion-icon class="w-20 h-20" name="clipboard-outline"></ion-icon>
+      <p class="text-lg tracking-wide">
+        {{ product.description }}
+      </p>
+    </div>
+  </div>
 
   <hr class="h-1 text-black bg-black">
 
@@ -26,16 +44,17 @@
 
     <h2 class="my-2 text-3xl">Details</h2>
 
-    <table class="w-full border-collapse table-auto">
-      <tr class="odd:bg-gray-200" *ngFor="let productDetail of productDetails">
-        <th class="border-t border-b border-gray-400">{{ (productDetail.key) | titlecase }}</th>
-        <th class="border-t border-b border-gray-400"><span
-          class="float-left">{{ productDetail.value }}</span></th>
-
-      </tr>
-
-
-    </table>
+    <div class="flex justify-center items-center">
+      <table class="border-collapse table-auto my-4 w-3/4">
+        <tr class="odd:bg-gray-200 w-full" *ngFor="let productDetail of productDetails">
+          <th class="border-t border-b border-gray-400 w-1/2 text-left"><span
+              class="ml-8">{{ (productDetail.key) | titlecase }}</span>
+          </th>
+          <th class="border-t border-b border-gray-400 w-1/2"><span class="float-left">{{ productDetail.value }}</span>
+          </th>
+        </tr>
+      </table>
+    </div>
 
   </section>
 

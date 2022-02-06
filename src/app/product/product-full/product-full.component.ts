@@ -1,3 +1,4 @@
+import { CartService } from './../../core/services/cart.service';
 import { Component, OnInit } from '@angular/core';
 import { ProductsService } from '../../core/services/products.service';
 import { BaseProduct } from '../../shared/model/BaseProduct';
@@ -14,7 +15,7 @@ export class ProductFullComponent implements OnInit {
   constructor(
     private productsService: ProductsService,
     private route: ActivatedRoute,
-    private http: HttpClient
+    private cartService: CartService
   ) {
     this.product = { title: 'Product title', price: 0, id: -1, quantity: -1 };
   }
@@ -35,21 +36,19 @@ export class ProductFullComponent implements OnInit {
     this.productsService.getProductById(this.productId).subscribe((product) => {
       this.product = product;
       for (let i = 0; i < Object.keys(this.product).length; i++) {
-        if (
-          Object.values(this.product)[i] !== 0 &&
-          Object.values(this.product)[i] !== null
-        ) {
-          this.productDetails.push(
-            new ProductDetail(
-              Object.keys(this.product)[i],
-              Object.values(this.product)[i]
-            )
-          );
-        }
-        console.log(product);
+        this.productDetails.push(
+          new ProductDetail(
+            Object.keys(this.product)[i],
+            Object.values(this.product)[i]
+          )
+        );
       }
       this.filterProductParams();
     });
+  }
+
+  addProductToCart() {
+    this.cartService.addProductToCart(this.product);
   }
 
   toggleModal(): void {

@@ -2,34 +2,34 @@
   class="h-full border-2 border-transparent rounded-lg shadow-lg cursor-pointer bg-gray-50 hover:border-black hover:shadow-lg">
 
 
-  <div class="flex h-full p-2 group" [ngClass]="listView ? 'flex-row items-start' : 'flex-col'">
+  <div class="flex h-full p-2 group" [ngClass]="listView ? 'flex-row p-8 items-start justify-between' : 'flex-col'"
+    routerLink="/product/{{ product.id }}">
 
-    <!--    <div class="self-start px-4 m-2 border border-black shadow border-1 rounded-l-2xl rounded-r-2xl">New</div>-->
-    <div routerLink="/product/{{ product.id }}">
-      <div class="self-center mt-4 sm:mt-0">
-        <img class="object-contain w-full h-48 shadow-lg" src="{{ product.imageUrl }}" alt="photo">
-      </div>
 
-      <div class="flex h-full ml-4 sm:justify-between"
-        [ngClass]="listView ? 'flex-col sm:flex-row w-full lg:pl-8 lg:pr-16' : 'flex-col'">
-        <div class="relative space-y-4 h-36">
-          <div class="flex flex-wrap">
-            <span class="text-lg whitespace-normal">
-              {{ product.title }}
-            </span>
-          </div>
+    <div class="self-center mt-4 sm:mt-0">
+      <img class="object-contain h-48 w-48 rounded-lg" src="{{ product.imageUrl }}" alt="photo">
+    </div>
 
-          <ng-container *ngIf="productsParams">
-            <ul *ngFor="let productParams of productsParams">
-              <li>{{ productParams }}</li>
-            </ul>
-          </ng-container>
-
+    <div class="flex h-full items-center ml-4 sm:justify-between"
+      [ngClass]="listView ? 'flex-col sm:flex-row w-full lg:pl-8 lg:pr-16' : 'flex-col'">
+      <div class="relative space-y-4">
+        <div class="flex flex-wrap">
+          <span class="text-lg whitespace-normal">
+            {{ product.title }}
+          </span>
         </div>
+
+        <ng-container *ngIf="productsParams">
+          <ul *ngFor="let productParams of productsParams">
+            <li>{{ productParams }}</li>
+          </ul>
+        </ng-container>
+
       </div>
     </div>
-    <div class="flex justify-between" [ngClass]="listView ? 'flex-col' : 'flex-row items-center'">
-      <span class="self-end py-2 text-lg">{{ product.price }}</span>
+
+    <div class="flex justify-between h-full" [ngClass]="listView ? 'flex-col' : 'flex-row items-center'">
+      <span class="self-end py-2 text-lg">{{ product.price | currency }}</span>
 
       <ng-container *ngIf="!configMode; else configAdd">
 

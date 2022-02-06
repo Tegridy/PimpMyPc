@@ -1,5 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpResponse,
+} from '@angular/common/http';
 import { User } from '../../shared/model/User';
 import { Router } from '@angular/router';
 import { LoginDetails } from '../../shared/model/LoginDetails';
@@ -21,6 +25,7 @@ export class AuthService {
       .pipe(
         map((loginDetails) => {
           const details = loginDetails as LoginDetails;
+          sessionStorage.setItem('username', details.username);
           sessionStorage.setItem('token', details.token);
           sessionStorage.setItem('userId', String(details.userId));
           this.isUserLoggedIn = true;
@@ -43,9 +48,8 @@ export class AuthService {
     return this.http
       .post('http://localhost:8080/api/v1/auth/register', user)
       .pipe(
-        map((token) => {
-          sessionStorage.setItem('token', token as string);
-          this.isUserLoggedIn = true;
+        map((username) => {
+          sessionStorage.setItem('username', username as string);
         }),
         catchError((error) => {
           let errorMsg: string = '';
@@ -62,19 +66,24 @@ export class AuthService {
   }
 
   private getServerErrorMessage(error: HttpErrorResponse): string {
-    switch (error.status) {
-      case 404: {
-        return `User not found. Try again.`;
-      }
-      case 403: {
-        return `Username or password incorrect. Try again.`;
-      }
-      case 500: {
-        return `Internal Server Error. Please try again later.`;
-      }
-      default: {
-        return `Unknown Server Error. Please try again later.`;
-      }
-    }
+    // switch (error.status) {
+    //   case 403: {
+    //     return error.error.message;
+    //   }
+    //   case 404: {
+    //     return error.error.message;
+    //   }
+    //   case 409: {
+    //     return error.error.message;
+    //   }
+    //   case 500: {
+    //     return error.error.message;
+    //   }
+    //   default: {
+    //     return `Unknown Server Error. Please try again later.`;
+    //   }
+    // }
+
+    return error.error.message;
   }
 }

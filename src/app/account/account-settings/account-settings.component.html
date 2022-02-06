@@ -1,43 +1,39 @@
 <section id="account-settings">
   <h3 class="mb-4 text-3xl font-bold">Account settings</h3>
 
-  <div class="p-4 mx-auto w-full sm:w-2/3 rounded-lg border border-black mb-4 sm:mb-0">
+  <div class="w-full p-4 mx-auto mb-4 border border-black rounded-lg sm:w-2/3 sm:mb-0">
     <h4 class="my-4 text-2xl">Account details</h4>
     <div>
       <div class="flex flex-col">
         <div class="flex pb-4 space-y-3 border-b-2 border-black">
           <div class="flex flex-col w-4/5 space-y-2">
-            <h5 class="mb-4">Personal data</h5>
-            <input type="text" placeholder="First name"
-                   [value]="personalDetailsForm.get('firstName')?.value" disabled>
-            <input type="text" placeholder="Last name"
-                   [value]="personalDetailsForm.get('lastName')?.value" disabled>
-            <input type="text" placeholder="Phone number"
-                   [value]="personalDetailsForm.get('phone')?.value" disabled>
+            <h5 class="mb-4 font-bold">Personal data</h5>
+            <input type="text" placeholder="First name" [value]="personalDetailsForm.get('firstName')?.value" disabled>
+            <input type="text" placeholder="Last name" [value]="personalDetailsForm.get('lastName')?.value" disabled>
+            <input type="text" placeholder="Phone number" [value]="personalDetailsForm.get('phone')?.value" disabled>
             <input [value]="personalDetailsForm.get('email')?.value" class="w-full" type="email"
-                   placeholder="E-mail address" disabled>
+              placeholder="E-mail address" disabled>
           </div>
-          <div class="flex justify-center items-center w-1/5">
-            <button (click)="toggleModal(personalDetailsEditModal)"
-                    class="flex justify-center items-center p-1 rounded-lg border-2 border-black hover:bg-gray-50">
+          <div class="flex items-center justify-center w-1/5">
+            <button (click)="setModal(personalDetailsEditModalName)"
+              class="flex items-center justify-center p-1 border-2 border-black rounded-lg hover:bg-gray-50">
               <ion-icon name="create-outline"></ion-icon>
             </button>
           </div>
         </div>
         <div class="flex pb-4 space-y-3 border-b-2 border-black">
           <div class="flex flex-col w-4/5 space-y-2">
-            <h5 class="my-4">Address</h5>
+            <h5 class="my-4 font-bold">Address</h5>
             <input [value]="addressDetailsForm.get('street')?.value" type="text" placeholder="Street" value="Long"
-                   disabled>
-            <input [value]="addressDetailsForm.get('city')?.value" placeholder="City" value="Denver" disabled>
-            <input [value]="addressDetailsForm.get('state')?.value" type="text" placeholder="State" value="New York"
-                   disabled>
+              disabled>
+            <input [value]="addressDetailsForm.get('city')?.value" type="text" placeholder="City" disabled>
+            <input [value]="addressDetailsForm.get('state')?.value" type="text" placeholder="State" disabled>
             <input [value]="addressDetailsForm.get('zip')?.value" type="text" placeholder="Zip code" value="00-000"
-                   disabled>
+              disabled>
           </div>
-          <div class="flex justify-center items-center w-1/5">
-            <button (click)="toggleModal(addressDetailsEditModal)"
-                    class="flex justify-center items-center p-1 rounded-lg border-2 border-black hover:bg-gray-50">
+          <div class="flex items-center justify-center w-1/5">
+            <button (click)="setModal(addressDetailsEditModalName)"
+              class="flex items-center justify-center p-1 border-2 border-black rounded-lg hover:bg-gray-50">
               <ion-icon name="create-outline"></ion-icon>
             </button>
           </div>
@@ -45,12 +41,12 @@
       </div>
       <div class="flex pb-4 border-b-2 border-black">
         <div class="w-4/5">
-          <h5 class="my-4">Password</h5>
+          <h5 class="my-4 font-bold">Password</h5>
           <input class="w-full" type="password" value="12345678" placeholder="Password" disabled>
         </div>
-        <div class="flex justify-center items-center w-1/5">
-          <button (click)="toggleModal(passwordEditModal)"
-                  class="flex justify-center items-center p-1 rounded-lg border-2 border-black hover:bg-gray-50">
+        <div class="flex self-end justify-center w-1/5">
+          <button (click)="setModal(passwordEditModalName)"
+            class="flex items-center justify-center p-1 border-2 border-black rounded-lg hover:bg-gray-50">
             <ion-icon name="create-outline"></ion-icon>
           </button>
         </div>
@@ -59,57 +55,171 @@
   </div>
 
   <!--  Modal  -->
-  <pmp-modal [showModal]="showModal" [modalName]="currentModalSelected" (modalToggleEvent)="turnOnModal($event)">
+  <pmp-modal [showModal]="showModal" [modalName]="currentModal" (modalToggleEvent)="showModal = $event">
 
-    <ng-container *ngIf="currentModalSelected === personalDetailsEditModal">
+    <ng-container *ngIf="currentModal === personalDetailsEditModalName">
       <form novalidate (ngSubmit)="savePersonalData()" [formGroup]="personalDetailsForm">
-        <input formControlName="firstName" [value]="personalDetailsForm.get('firstName')?.value" type="text"
-               class="w-full rounded-lg border" placeholder="First name">
-        <input formControlName="lastName" [value]="personalDetailsForm.get('lastName')?.value" type="text"
-               class="w-full rounded-lg border" placeholder="Last name">
-        <input formControlName="phone" [value]="personalDetailsForm.get('phone')?.value" type="text"
-               class="w-full rounded-lg border" placeholder="Phone number">
-        <input formControlName="email" [value]="personalDetailsForm.get('email')?.value"
-               class="w-full rounded-lg border" type="email" placeholder="E-mail address">
-        <input type="submit" class="modal-button" value="Save">
+        <input id="firstNameId" formControlName="firstName" type="text" class="w-4/5 my-3"
+          placeholder="First name (required)" [ngClass]="{'is-invalid': (personalDetailsForm.get('firstName')?.touched
+          ||
+          personalDetailsForm.get('firstName')?.dirty) &&
+          !personalDetailsForm.get('firstName')?.valid }" />
 
+        <span class="error-message" *ngIf="personalDetailsForm.get('firstName')?.errors?.required &&
+          personalDetailsForm.get('firstName')?.touched">
+          Please enter your first name.
+        </span>
+        <span class="error-message" *ngIf="personalDetailsForm.get('firstName')?.errors?.minlength">
+          The first name must be longer than 3 characters.
+        </span>
+
+        <input id="lastNameId" formControlName="lastName" type="text" class="w-4/5 mb-3"
+          placeholder="Last name (required)" [ngClass]="{'is-invalid': (personalDetailsForm.get('lastName')?.touched
+          ||
+          personalDetailsForm.get('lastName')?.dirty) &&
+          !personalDetailsForm.get('lastName')?.valid }" />
+
+        <span class="error-message" *ngIf="personalDetailsForm.get('lastName')?.errors?.required &&
+        personalDetailsForm.get('lastName')?.touched">
+          Please enter your last name.
+        </span>
+        <span class="error-message" *ngIf="personalDetailsForm.get('lastName')?.errors?.minlength">
+          The last name must be longer than 3 characters.
+        </span>
+
+        <input id="phoneId" formControlName="phone" type="text" class="w-4/5 mb-3" placeholder="Phone number (optional)"
+          [ngClass]="{'is-invalid': (personalDetailsForm.get('phone')?.touched ||
+          personalDetailsForm.get('phone')?.dirty) &&
+          !personalDetailsForm.get('phone')?.valid }" />
+
+        <span class="error-message" *ngIf="personalDetailsForm.get('phone')?.errors?.required &&
+        personalDetailsForm.get('phone')?.touched">
+          Phone number is required.
+        </span>
+        <span class="error-message" *ngIf="personalDetailsForm.get('phone')?.errors?.pattern">
+          Phone number is not valid.
+        </span>
+
+        <input id="emailId" formControlName="email" type="email" class="w-4/5 mb-3"
+          placeholder="E-mail address (required)" [ngClass]="{'is-invalid': (personalDetailsForm.get('email')?.touched
+          ||
+          personalDetailsForm.get('email')?.dirty) &&
+          !personalDetailsForm.get('email')?.valid }" />
+
+        <span class="error-message" *ngIf="personalDetailsForm.get('email')?.errors?.required &&
+        personalDetailsForm.get('email')?.touched">
+          E-mail address is required.
+        </span>
+        <span class="error-message" *ngIf="personalDetailsForm.get('email')?.errors?.email">
+          E-mail address is not valid.
+        </span>
+        <div class="text-center">
+          <input type="submit" class="modal-button" value="Save">
+        </div>
       </form>
     </ng-container>
 
-    <ng-container *ngIf="currentModalSelected === addressDetailsEditModal">
+    <ng-container *ngIf="currentModal === addressDetailsEditModalName">
       <form novalidate (ngSubmit)="saveAddressData()" [formGroup]="addressDetailsForm">
-        <input formControlName="street" [value]="addressDetailsForm.get('street')?.value" type="text"
-               class="w-full rounded-lg border" placeholder="Street name">
-        <input formControlName="city" [value]="addressDetailsForm.get('city')?.value" type="text"
-               class="w-full rounded-lg border" placeholder="City name">
-        <input formControlName="state" [value]="addressDetailsForm.get('state')?.value" type="text"
-               class="w-full rounded-lg border" placeholder="State name">
-        <input formControlName="zip" [value]="addressDetailsForm.get('zip')?.value" type="text"
-               class="w-full rounded-lg border" placeholder="Zip code">
-        <input type="submit" class="modal-button" value="Save">
+        <input id="streetId" formControlName="street" type="text" class="w-4/5 mb-3"
+          placeholder="Street name (required)" [ngClass]="{'is-invalid': (addressDetailsForm.get('street')?.touched
+          ||
+          addressDetailsForm.get('street')?.dirty) &&
+          !addressDetailsForm.get('street')?.valid }" />
+
+        <span class="error-message" *ngIf="addressDetailsForm.get('street')?.errors?.required &&
+        addressDetailsForm.get('street')?.touched">
+          Please enter your state name.
+        </span>
+        <span class="error-message" *ngIf="addressDetailsForm.get('street')?.errors?.minlength">
+          The state name must be longer than 3 characters.
+        </span>
+
+        <input id="cityId" formControlName="city" type="text" class="w-4/5 mb-3" placeholder="City name (required)"
+          [ngClass]="{'is-invalid': (addressDetailsForm.get('city')?.touched
+          ||
+          addressDetailsForm.get('city')?.dirty) &&
+          !addressDetailsForm.get('city')?.valid }" />
+
+        <span class="error-message" *ngIf="addressDetailsForm.get('city')?.errors?.required &&
+        addressDetailsForm.get('city')?.touched">
+          Please enter your city name.
+        </span>
+        <span class="error-message" *ngIf="addressDetailsForm.get('city')?.errors?.minlength">
+          The city name must be longer than 3 characters.
+        </span>
+
+        <input id="stateId" formControlName="state" type="text" class="w-4/5 mb-3 " placeholder="State name (required)"
+          [ngClass]="{'is-invalid': (addressDetailsForm.get('state')?.touched
+          ||
+          addressDetailsForm.get('state')?.dirty) &&
+          !addressDetailsForm.get('state')?.valid }" />
+
+        <span class="error-message" *ngIf="addressDetailsForm.get('state')?.errors?.required &&
+        addressDetailsForm.get('state')?.touched">
+          Please enter your state name.
+        </span>
+        <span class="error-message" *ngIf="addressDetailsForm.get('state')?.errors?.minlength">
+          The state name must be longer than 3 characters.
+        </span>
+
+        <input id="zipId" formControlName="zip" type="text" class="w-4/5 mb-3" placeholder="Zip code (required)"
+          [ngClass]="{'is-invalid': (addressDetailsForm.get('zip')?.touched
+          ||
+          addressDetailsForm.get('zip')?.dirty) &&
+          !addressDetailsForm.get('zip')?.valid }" />
+
+        <span class="error-message" *ngIf="addressDetailsForm.get('zip')?.errors?.required &&
+        addressDetailsForm.get('zip')?.touched">
+          Please enter your zip code.
+        </span>
+        <span class="error-message" *ngIf="addressDetailsForm.get('zip')?.errors?.minlength">
+          The zip code must be longer than 3 characters.
+        </span>
+        <div class="text-center">
+          <input type="submit" class="modal-button" value="Save">
+        </div>
       </form>
     </ng-container>
 
-    <ng-container *ngIf="currentModalSelected === passwordEditModal">
+    <ng-container *ngIf="currentModal === passwordEditModalName">
       <form novalidate (ngSubmit)="saveAuthData()" [formGroup]="authDetailsForm">
         <input formControlName="password" [value]="authDetailsForm.get('password')?.value"
-               class="w-full rounded-lg border" type="password" placeholder="New password">
+          class="w-4/5 mb-4 border rounded-lg" type="password" placeholder="New password">
         <input formControlName="confirmPassword" [value]="authDetailsForm.get('confirmPassword')?.value"
-               class="w-full rounded-lg border" [ngClass]="{'bg-red-700': authDetailsForm?.errors ||
+          class="w-4/5 mb-4 border rounded-lg" [ngClass]="{'bg-red-700': authDetailsForm?.errors ||
                                              ((authDetailsForm.get('confirmPassword')?.touched ||
                                               authDetailsForm.get('confirmPassword')?.dirty) &&
                                               !authDetailsForm.get('confirmPassword')?.valid) }" type="password"
-               placeholder="Confirm new password">
+          placeholder="Confirm new password">
         <span *ngIf="authDetailsForm.errors?.match">
-                Passwords do not match.
+          Passwords do not match.
         </span>
-        <input type="submit" class="modal-button" value="Save">
+
+        <span class="error-message" *ngIf="authDetailsForm.get('password')?.errors?.required &&
+          authDetailsForm.get('password')?.touched">
+          Please enter your password.
+        </span>
+
+        <span class="error-message" *ngIf="authDetailsForm.get('confirmPassword')?.errors?.required &&
+          authDetailsForm.get('confirmPassword')?.touched">
+          Please enter your password.
+        </span>
+
+        <span class="error-message" *ngIf="authDetailsForm.get('password')?.errors?.minlength">
+          The password must be longer than 8 characters.
+        </span>
+
+        <span class="error-message" *ngIf="authDetailsForm.get('confirmPassword')?.errors?.minlength">
+          The password must be longer than 8 characters.
+        </span>
+
+
+        <div class="text-center">
+          <input type="submit" class="modal-button" value="Save">
+        </div>
       </form>
     </ng-container>
   </pmp-modal>
 
 </section>
-
-
-
-

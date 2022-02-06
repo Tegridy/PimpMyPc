@@ -38,10 +38,8 @@
 
 
       <div class="flex items-center order-1 w-3/4 h-8 m-2 bg-white border-2 border-black rounded-full shadow">
-        <input class="" type="search" placeholder="Search"
-          [(ngModel)]="searchPhrase">
-        <select (change)="changeCurrentSearchCategory($event)"
-          class="hidden w-3/12 h-6 border-l-2 border-blue-600 sm:block focus:ring-0 focus:outline-none">
+        <input class="border-0" type="search" placeholder="Search" [(ngModel)]="searchPhrase">
+        <select (change)="changeCurrentSearchCategory($event)">
           <option selected>Everywhere</option>
           <option *ngFor="let category of mainCategories">{{ category.name }}</option>
         </select>

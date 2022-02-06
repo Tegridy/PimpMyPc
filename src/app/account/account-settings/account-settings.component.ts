@@ -1,67 +1,70 @@
-import {Component, OnInit} from '@angular/core';
-import {UserService} from '../../core/services/user.service';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {Address, User} from '../../shared/model/User';
-import {UserEdit, UserEditAuth} from '../../shared/model/UserEdit';
-import {ValidationService} from '../../core/services/validation.service';
+import { Component, OnInit } from '@angular/core';
+import { UserService } from '../../core/services/user.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Address, User } from '../../shared/model/User';
+import { UserEdit, UserEditAuth } from '../../shared/model/UserEdit';
+import { ValidationService } from '../../core/services/validation.service';
 
 @Component({
   selector: 'pmp-account-settings',
   templateUrl: './account-settings.component.html',
-  styleUrls: ['./account-settings.component.scss']
+  styleUrls: [],
 })
 export class AccountSettingsComponent implements OnInit {
-
-  currentModalSelected = '';
+  currentModal = '';
   showModal = false;
 
-  personalDetailsEditModal = 'Personal details change';
-  addressDetailsEditModal = 'Address details change';
-  passwordEditModal = 'Password change';
+  personalDetailsEditModalName = 'Personal details change';
+  addressDetailsEditModalName = 'Address details change';
+  passwordEditModalName = 'Password change';
 
   personalDetailsForm!: FormGroup;
   addressDetailsForm!: FormGroup;
   authDetailsForm!: FormGroup;
 
-
-  constructor(private userService: UserService, private formBuilder: FormBuilder) {
-  }
+  constructor(
+    private userService: UserService,
+    private formBuilder: FormBuilder
+  ) {}
 
   ngOnInit(): void {
     this.getUserDetails();
     this.personalDetailsForm = this.formBuilder.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      phone: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]]
+      firstName: ['', [Validators.required, Validators.minLength(3)]],
+      lastName: ['', [Validators.required, Validators.minLength(3)]],
+      email: ['', [Validators.required, Validators.email]],
+      phone: ['', [Validators.required, Validators.pattern('[- +()0-9]+')]],
     });
 
     this.addressDetailsForm = this.formBuilder.group({
-      street: ['', Validators.required],
-      state: ['', Validators.required],
-      city: ['', Validators.required],
-      zip: ['', Validators.required],
+      street: ['', [Validators.required, Validators.minLength(3)]],
+      city: ['', [Validators.required, Validators.minLength(3)]],
+      state: ['', [Validators.required, Validators.minLength(3)]],
+      zip: ['', [Validators.required, Validators.minLength(3)]],
     });
 
-    this.authDetailsForm = this.formBuilder.group({
-      password: ['', [Validators.required]],
-      confirmPassword: ['', [Validators.required]]
-    }, {validators: ValidationService.passwordMatcher});
+    this.authDetailsForm = this.formBuilder.group(
+      {
+        password: ['', [Validators.required, Validators.minLength(8)]],
+        confirmPassword: ['', [Validators.required, Validators.minLength(8)]],
+      },
+      { validators: ValidationService.passwordMatcher }
+    );
   }
 
-  toggleModal(modalName: string): void {
+  setModal(modalName: string): void {
+    this.currentModal = modalName;
+    this.toggleModal();
+  }
+
+  toggleModal(): void {
     this.showModal = !this.showModal;
-    this.currentModalSelected = modalName;
-  }
-
-  turnOnModal(modalStatus: boolean): void {
-    this.showModal = modalStatus;
   }
 
   getUserDetails(): void {
-    this.userService.getUserAccountDetails().subscribe(
-      u => this.loadFormData(u)
-    );
+    this.userService
+      .getUserAccountDetails()
+      .subscribe((user) => this.loadFormData(user));
   }
 
   loadFormData(userData: User): void {
@@ -69,17 +72,15 @@ export class AccountSettingsComponent implements OnInit {
       firstName: userData.firstName,
       lastName: userData.lastName,
       phone: userData.phone,
-      email: userData.email
+      email: userData.email,
     });
 
     this.addressDetailsForm.patchValue({
       street: userData.address.street,
       state: userData.address.state,
       city: userData.address.city,
-      zip: userData.address.zip
+      zip: userData.address.zip,
     });
-
-    console.log(this.addressDetailsForm.get('street')?.value);
   }
 
   savePersonalData(): void {
@@ -90,7 +91,7 @@ export class AccountSettingsComponent implements OnInit {
       this.personalDetailsForm.get('email')?.value
     );
     this.userService.updateUserPersonalDetails(user);
-    this.turnOnModal(false);
+    this.toggleModal();
   }
 
   saveAddressData(): void {
@@ -101,12 +102,12 @@ export class AccountSettingsComponent implements OnInit {
       this.addressDetailsForm.get('zip')?.value
     );
     this.userService.updateUserAddressDetails(address);
-    this.turnOnModal(false);
+    this.toggleModal();
   }
 
   saveAuthData(): void {
     const user = new UserEditAuth(this.authDetailsForm.get('password')?.value);
     this.userService.updateUserAuthDetails(user);
-    this.turnOnModal(false);
+    this.toggleModal();
   }
 }

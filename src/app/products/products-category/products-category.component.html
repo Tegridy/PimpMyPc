@@ -12,12 +12,14 @@
 
             <ul class="my-2 ml-4" *ngFor="let filterValue of filter.values">
               <li>
-                <label class="flex items-center" for="{{ filterValue.name + filterValue.id }}">
+
+                <label class="flex" for="{{ filterValue.name + filterValue.id }}">
                   <input id="{{ filterValue.name + filterValue.id }}" class="mr-1" type="checkbox"
                     [checked]="filterValue.isChecked"
                     (change)="filterClick($event, filter.filterProperty, filterValue)">
                   {{ filterValue.name }}
                 </label>
+
               </li>
             </ul>
 
@@ -27,14 +29,6 @@
 
       </nav>
 
-
-      <!--      <ng-container *ngFor="let filter of filters">-->
-      <!--      <h3 class="text-xl">{{ filter.name }}</h3>-->
-      <!--        <ul>-->
-      <!--          <li class="flex items-center"><input type="checkbox" id="producer-{{ filter.id}}"><label for="producer-{{ filter.id}}">{{ filter.type}}</label></li>-->
-      <!--        </ul>-->
-      <!--    </ng-container>-->
-
     </div>
 
     <div id="products" class="w-full min-h-100vh md:w-4/5 ">
@@ -42,10 +36,6 @@
       <div class="flex flex-col min-h-100vh">
 
         <div class="flex flex-col items-center justify-between p-2 md:flex-row bg-gray-50">
-
-          <!--          <button (click)="toggleModal()" class="block p-2 m-2 bg-blue-600 rounded-full md:hidden">Categories and-->
-          <!--            filters-->
-          <!--          </button>-->
 
           <div class="flex">
             <button class="flex items-center justify-center p-2 mr-4 rounded-lg"
@@ -83,7 +73,7 @@
 
             <ng-container *ngFor="let laptop of laptops | paginate: paginationConfig ">
 
-              <pmp-product-small [listView]=showProductsInListView [product]=laptop [configMode]=configurator>
+              <pmp-product-small [listView]="showProductsInListView" [product]="laptop" [configMode]="configurator">
               </pmp-product-small>
 
             </ng-container>

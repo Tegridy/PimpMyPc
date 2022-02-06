@@ -4,6 +4,7 @@
 @tailwind utilities;
 @import "node_modules/hamburgers/_sass/hamburgers/hamburgers";
 @import '~css-star-rating/css/star-rating.min.css';
+@import '~ngx-toastr/toastr';
 
 @layer base {
   body {
@@ -31,17 +32,22 @@
    [multiple],
    textarea
     {
-    //  @apply w-full border-gray-300 rounded-lg shadow-sm focus: border-indigo-500 focus:ring-indigo-500;
     @apply rounded-2xl shadow-sm focus:border-blue-500 focus:ring-blue-500;
    }
 
-   [type="search"],
-select {
+   [type="search"] {
     @apply w-10/12 h-6 ml-5 focus:ring-0 focus:outline-none;
 }
-  // .form-input {
-  //   @apply w-full border-gray-300 rounded-lg shadow-sm focus:border-blue-500 focus:ring-blue-500;
-  // }
+
+input[type="text"]:disabled,
+input[type="email"]:disabled,
+input[type="password"]:disabled {
+  @apply bg-gray-300;
+}
+
+  select {
+    @apply pl-2 border-0 p-0 hidden w-3/12 h-6 border-l-2 border-blue-600 sm:block focus:ring-0 focus:outline-none;
+  }
 
   .is-invalid {
     @apply border-2 border-red-500 bg-red-500 bg-opacity-30;

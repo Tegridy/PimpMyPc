@@ -1,13 +1,12 @@
 <section id="search-results" class="flex flex-col justify-center items-center">
-  <pmp-pagination [config]="paginationConfig"
-                  (pageChangeEvent)="onPageChange($event)"></pmp-pagination>
+  <pmp-pagination [config]="paginationConfig" (pageChangeEvent)="onPageChange($event)"></pmp-pagination>
 
   <h3 *ngIf="searchedProducts.length < 1" class="mt-7 font-bold text-4xl text-center">No products found. Try again.</h3>
 
   <div class="w-3/5">
     <ul class="space-y-2">
-      <li class="p-5 bg-white rounded-2xl border border-2 h-auto cursor-pointer hover:bg-black hover:bg-opacity-20"
-          *ngFor="let x of searchedProducts | paginate: paginationConfig">
+      <li class="p-5 bg-white rounded-2xl border-2 h-auto cursor-pointer hover:bg-black hover:bg-opacity-20"
+        *ngFor="let x of searchedProducts | paginate: paginationConfig">
 
         <div id="product-wrapper" class="flex h-auto w-full">
           <div class="w-2/5">
@@ -21,10 +20,6 @@
       </li>
     </ul>
 
-    <pmp-pagination [config]="paginationConfig"
-                    (pageChangeEvent)="onPageChange($event)"></pmp-pagination>
+    <pmp-pagination [config]="paginationConfig" (pageChangeEvent)="onPageChange($event)"></pmp-pagination>
   </div>
 </section>
-
-
-
