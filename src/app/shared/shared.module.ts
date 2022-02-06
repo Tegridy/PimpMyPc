@@ -7,6 +7,7 @@ import { SpinnerComponent } from './spinner/spinner.component';
 import { ProductSmallComponent } from './product-small/product-small.component';
 import { RouterModule } from '@angular/router';
 import { LoadingDotsComponent } from './loading-dots/loading-dots.component';
+import { OrderStatusPipe } from './pipes/order-status.pipe';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { LoadingDotsComponent } from './loading-dots/loading-dots.component';
     SpinnerComponent,
     ProductSmallComponent,
     LoadingDotsComponent,
+    OrderStatusPipe,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [CommonModule, StarRatingModule.forRoot(), RouterModule],
@@ -24,6 +26,7 @@ import { LoadingDotsComponent } from './loading-dots/loading-dots.component';
     SpinnerComponent,
     ProductSmallComponent,
     LoadingDotsComponent,
+    OrderStatusPipe,
   ],
 })
 export class SharedModule {}

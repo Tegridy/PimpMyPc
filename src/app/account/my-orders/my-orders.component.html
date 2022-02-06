@@ -1,26 +1,22 @@
 <section id="orders">
   <h3 class="text-3xl font-bold mb-4">Orders</h3>
-  <ng-container *ngIf="userOrders; else noOrders">
+
+  <ng-container *ngIf="userOrders.length > 0; else noOrders">
     <ul class="mb-4 sm:mb-0" *ngFor="let order of userOrders">
-      <li class="cursor-pointer mb-4" routerLink="/account/orders/{{ order.id }}">
-        <div class="flex flex-col sm:flex-row w-full border border-black shadow-lg rounded-lg">
-          <div class="bg-gray-400 bg-opacity-40 p-4 w-full  sm:w-1/3 rounded-t-lg sm:rounded-l-lg">
-            <h4 class="mb-4 font-bold text-2xl">Status: <span class="text-green-700">{{ order.orderStatus }}</span></h4>
+      <li class="mb-4 flex justify-center">
+        <div class="flex flex-col sm:flex-row w-1/2 border border-black shadow-lg rounded-lg cursor-pointer "
+          routerLink="/account/orders/{{ order.id }}">
+
+          <div class="bg-gray-400 bg-opacity-40 p-4 w-full rounded-t-lg sm:rounded-l-lg">
+            <h4 class="mb-4 font-bold text-2xl">Status: <span
+                class="text-green-700">{{ order.orderStatus | orderStatus }}</span></h4>
             <div class="flex flex-col mb-4">
-              {{ order.orderDate }}
+              <span>Order date: {{ order.orderDate }}</span>
               <span>Order id: {{ order.id }}</span>
             </div>
-            <span class="text-lg">{{ order.price }}</span>
+            <span class="text-lg">{{ order.price | currency }}</span>
           </div>
 
-          <div class="bg-white w-full sm:w-2/3 flex items-center px-8 rounded-b-lg sm:rounded-r-lg">
-            <div class="m-4">
-              <!--              <img src="{{ }}" alt="{{ order.title }} img">-->
-            </div>
-            <div class="m-4">
-              {{ order.title }}
-            </div>
-          </div>
         </div>
       </li>
 
@@ -28,7 +24,7 @@
   </ng-container>
 
   <ng-template #noOrders>
-    Content to render when condition is false.
+    <h4 class="text-2xl text-center m-4">There is no orders yet</h4>
   </ng-template>
 
 </section>
