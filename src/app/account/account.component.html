@@ -3,10 +3,10 @@
   <div class="sm:p-12 flex flex-col sm:flex-row w-full">
 
     <div class="flex flex-col sm:border-r-2 sm:border-black sm:w-1/3 sm:min-h-100vh">
-    <span class="pt-6 pl-6 sm:pt-0 sm:pl-0">
-      <h6>Hello,</h6>
-      <h3 class="text-2xl font-bold">User</h3>
-    </span>
+      <span class="pt-6 pl-6 sm:pt-0 sm:pl-0">
+        <h6>Hello,</h6>
+        <h3 class="text-2xl font-bold">{{ username }}</h3>
+      </span>
 
       <div class="flex justify-center my-4 sm:hidden" [ngClass]="showAccountMenu ? 'block' : 'hidden'">
         <button (click)="toggleAccountMenu()" class="px-2 py-2 bg-blue-600 rounded-full w-4/5">Go back to menu</button>
@@ -15,21 +15,25 @@
       <nav class="mt-4 sm:mt-8 sm:block" [ngClass]="showAccountMenu ? 'hidden' : 'block'">
         <ul>
           <li (click)="toggleAccountMenu()" class="hover:bg-gray-500 p-3">
-            <a routerLink="orders" class="w-full flex items-center justify-between">
-              <div class="flex items-center">
-                <ion-icon name="albums-outline" class="mr-2"></ion-icon>
-                Orders
+            <a routerLink="orders">
+              <div class="w-full flex items-center justify-between">
+                <div class="flex items-center">
+                  <ion-icon name="albums-outline" class="mr-2"></ion-icon>
+                  Orders
+                </div>
+                <ion-icon name="chevron-forward-outline"></ion-icon>
               </div>
-              <ion-icon name="chevron-forward-outline"></ion-icon>
             </a>
           </li>
           <li (click)="toggleAccountMenu()" class="hover:bg-gray-500 p-3">
-            <a routerLink="settings" class="w-full flex items-center justify-between">
-              <div class="flex items-center">
-                <ion-icon name="settings-outline" class="mr-2"></ion-icon>
-                Account settings
+            <a routerLink="settings">
+              <div class="w-full flex items-center justify-between">
+                <div class="flex items-center">
+                  <ion-icon name="settings-outline" class="mr-2"></ion-icon>
+                  Account settings
+                </div>
+                <ion-icon name="chevron-forward-outline"></ion-icon>
               </div>
-              <ion-icon name="chevron-forward-outline"></ion-icon>
             </a>
           </li>
         </ul>
