@@ -1,29 +1,18 @@
-import {Address} from './User';
+import { Address } from './User';
 
 export class Order {
-
   constructor(
     public customerFirstName: string,
     public customerLastName: string,
     public customerPhone: string,
     public customerEmail: string,
-    public deliveryAddress: Address) {
-  }
+    public deliveryAddress: Address
+  ) {}
 }
 
 export interface OrderResponse {
-
   id: number;
   content: SingleOrder[];
-
-
-  //
-  // constructor(id: number, content: SingleProduct[], orderStatus: string, price: number) {
-  //   this.id = id;
-  //   this.content = content;
-  //   this.orderStatus = orderStatus;
-  //   this.price = price;
-  // }
 }
 
 export interface SingleOrder {
@@ -33,6 +22,6 @@ export interface SingleOrder {
   address: Address;
   imgUrl: string;
   products: any[];
-  orderStatus: string;
+  status: string;
   orderDate: Date;
 }
