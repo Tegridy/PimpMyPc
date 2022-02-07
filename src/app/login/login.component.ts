@@ -1,9 +1,6 @@
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ThrowStmt } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
-import { of } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
 import { AuthService } from '../core/services/auth.service';
 import { ToastrService } from 'ngx-toastr';
 
@@ -13,27 +10,23 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: [],
 })
 export class LoginComponent implements OnInit {
-  // login = '';
-  // password = '';
   loading = false;
-
   errorMsg = '';
-
-  loginForm: FormGroup;
+  loginForm!: FormGroup;
 
   constructor(
     private authService: AuthService,
     private router: Router,
     private formBuilder: FormBuilder,
     private toastr: ToastrService
-  ) {
+  ) {}
+
+  ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
-      username: ['', Validators.required],
-      password: ['', Validators.required],
+      username: ['', [Validators.required]],
+      password: ['', [Validators.required]],
     });
   }
-
-  ngOnInit(): void {}
 
   loginUser(): void {
     this.loading = true;
@@ -43,7 +36,7 @@ export class LoginComponent implements OnInit {
 
     this.authService.loginUser(username, password).subscribe(
       () => {
-        this.router.navigateByUrl('/').then();
+        this.router.navigateByUrl('/');
         this.toastr.success(
           'Login successful!',
           'Welcome ' + sessionStorage.getItem('username'),
@@ -52,8 +45,8 @@ export class LoginComponent implements OnInit {
           }
         );
       },
-      (error) => {
-        this.errorMsg = error;
+      (errorMessage) => {
+        this.errorMsg = errorMessage;
         this.loading = false;
       }
     );

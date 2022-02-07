@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Address, User } from '../shared/model/User';
 import { AuthService } from '../core/services/auth.service';
-import { debounce, debounceTime } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -38,7 +37,7 @@ export class RegisterComponent implements OnInit {
   saveForm(): void {
     this.loading = true;
 
-    const u = new User(
+    const user = new User(
       this.registerForm.get('username')?.value,
       this.registerForm.get('password')?.value,
       this.registerForm.get('firstName')?.value,
@@ -52,11 +51,9 @@ export class RegisterComponent implements OnInit {
       this.registerForm.get('phone')?.value,
       this.registerForm.get('email')?.value
     );
-    this.auth.signUpUser(u).subscribe(
+    this.auth.signUpUser(user).subscribe(
       () => {
-        console.log('Account created');
         this.loading = false;
-        // this.router.navigate(['/login'], {});
         this.toastr.success(
           'Account created!',
           'Welcome ' + sessionStorage.getItem('username'),
@@ -64,9 +61,10 @@ export class RegisterComponent implements OnInit {
             positionClass: 'toast-bottom-right',
           }
         );
+        this.router.navigateByUrl('/login');
       },
-      (error) => {
-        this.errorMsg = error;
+      (errorMessage) => {
+        this.errorMsg = errorMessage;
         this.loading = false;
       }
     );
