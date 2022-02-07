@@ -2,19 +2,19 @@
 
   <div class="flex flex-col justify-center w-full">
 
-    <div *ngIf="!basketItems" class="my-24 text-2xl text-center">
-      <span>Your basket is empty, please add some products.</span><br>
+    <div *ngIf="cartItems">
+      <h2 class="w-full mb-4 text-3xl">Cart ({{ numberOfItemsInCart }})</h2>
 
-      <button class="px-4 py-2 m-4 bg-blue-600 rounded-full" routerLink="/">Homepage</button>
-    </div>
+      <div *ngIf="cartItems.length < 1" class="my-24 text-2xl text-center">
+        <span>Your cart is empty, please add some products</span><br>
 
-    <div *ngIf="basketItems">
-      <h2 class="w-full mb-4 text-3xl">Basket ({{ numberOfItemsInBasket }})</h2>
+        <button class="px-4 py-2 m-4 bg-blue-600 rounded-full" routerLink="/">Homepage</button>
+      </div>
 
       <div class="flex flex-col justify-between sm:flex-row">
 
         <ul class="w-full space-y-4 sm:w-3/5">
-          <li class="flex justify-between w-full p-4 border-2 border-black rounded-lg" *ngFor="let item of basketItems">
+          <li class="flex justify-between w-full p-4 border-2 border-black rounded-lg" *ngFor="let item of cartItems">
             <div class="flex">
               <img class="object-contain w-48 h-48 rounded-lg" src="{{ item.imageUrl }}" alt="Product img">
               <h6 class="my-auto ml-4">{{ item.title }}</h6>
@@ -23,9 +23,6 @@
             <div class="flex flex-col items-center min-h-full">
               <div class="h-4/5">
                 <span class="mr-4">{{ item.price }}$</span>
-                <select>
-                  <option>1</option>
-                </select>
               </div>
               <div class="h-1/5">
                 <button title="Remove from cart" (click)="removeProductFromCart(item.id)">
@@ -37,15 +34,15 @@
         </ul>
 
 
-        <div
+        <div *ngIf="cartItems.length > 0"
           class="flex flex-col items-center justify-between w-1/5 mx-8 bg-gray-400 rounded-lg bg-opacity-40 max-h-36">
           <div class="flex flex-col items-center mt-4">
-            <h3 class="">Total price</h3>
-            <span>{{ totalPrice }}$</span>
+            <h3 class="text-xl font bold">Total price</h3>
+            <span class="text-xl font bold">{{ totalPrice }}$</span>
           </div>
 
           <div>
-            <button routerLink="/order/checkout" class="p-2 m-4 bg-blue-600 rounded-full">Go to checkout</button>
+            <button routerLink="/order/checkout" class="p-3 m-4 bg-blue-600 rounded-full">Go to checkout</button>
           </div>
 
         </div>

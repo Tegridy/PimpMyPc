@@ -25,3 +25,8 @@ export interface SingleOrder {
   status: string;
   orderDate: Date;
 }
+
+export interface OrderDto {
+  id: number;
+  status: string;
+}

@@ -1,31 +1,24 @@
-import {Component, OnInit} from '@angular/core';
-import {CartService} from '../../core/services/cart.service';
-import {BaseProduct} from '../../shared/model/BaseProduct';
+import { Component, OnInit } from '@angular/core';
+import { CartService } from '../../core/services/cart.service';
+import { BaseProduct } from '../../shared/model/BaseProduct';
 
 @Component({
   selector: 'pmp-cart',
-  templateUrl: './cart.component.html'
+  templateUrl: './cart.component.html',
 })
 export class CartComponent implements OnInit {
-
-  numberOfItemsInBasket = 0;
-  basketItems: BaseProduct[] = [];
-  basketItemsIds: number[] = [];
+  numberOfItemsInCart = 0;
+  cartItems: BaseProduct[] = [];
   totalPrice = 0;
 
-  constructor(private cartService: CartService) {
-    this.cartService.currentCart.subscribe(c => {
-      this.basketItems = c.products;
-      this.numberOfItemsInBasket = c.products.length;
-      this.totalPrice = c.cartTotalPrice;
-    });
-  }
+  constructor(private cartService: CartService) {}
 
   ngOnInit(): void {
-  }
-
-  calculateTotalPrice(): number {
-    return 0;
+    this.cartService.currentCart.subscribe((cart) => {
+      this.cartItems = cart.products;
+      this.numberOfItemsInCart = cart.products.length;
+      this.totalPrice = cart.cartTotalPrice;
+    });
   }
 
   removeProductFromCart(id: number): void {

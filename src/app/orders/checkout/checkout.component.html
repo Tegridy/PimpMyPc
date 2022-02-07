@@ -83,6 +83,9 @@
         <span class="error-message" *ngIf="orderForm.get('customerPhone')?.errors?.pattern">
           Phone number is not valid.
         </span>
+        <span class="error-message" *ngIf="orderForm.get('customerPhone')?.errors?.minlength">
+          Phone number too short(at least 5 numbers).
+        </span>
 
 
 
@@ -145,7 +148,12 @@
           </span>
         </div>
 
-        <button type="submit" class="w-3/5 p-2 mx-auto mt-8 bg-blue-500 rounded-2xl">Place order</button>
+        <input type="submit" class="w-3/5 p-2 mx-auto mt-8 bg-blue-500 cursor-pointer rounded-2xl"
+          [disabled]="cartProducts.length < 1" value="Place order">
+
+        <span class="mt-2 text-center text-blue-600" *ngIf="cartProducts.length < 1"> You need at least one item
+          in
+          the cart</span>
       </div>
     </form>
   </section>
@@ -154,7 +162,7 @@
 <div *ngIf="orderComplete" class="flex flex-col text-center">
   <h3 class="text-3xl font-bold">Order is now complete, let us take it from now</h3>
   <h3 class="text-3xl font-bold">Congratulations you win 100% discount and you don't have to pay! Yay :)</h3>
-  <h4 class="my-4">Order id: #928129102</h4>
-  <h4 class="mb-4">Order status: Proceeding...</h4>
+  <h4 class="my-4">Order id: {{ orderId }}</h4>
+  <h4 class="mb-4 font-bold">Order status: {{ orderStatus | orderStatus}}</h4>
   <button routerLink="/" class="w-2/5 p-2 mx-auto my-5 bg-blue-500 rounded-2xl">Go to Homepage</button>
 </div>

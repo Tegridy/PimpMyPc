@@ -41,7 +41,8 @@
 
 input[type="text"]:disabled,
 input[type="email"]:disabled,
-input[type="password"]:disabled {
+input[type="password"]:disabled,
+input[type="submit"]:disabled {
   @apply bg-gray-300;
 }
 

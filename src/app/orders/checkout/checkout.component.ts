@@ -11,19 +11,20 @@ import { Address } from '../../shared/model/User';
 @Component({
   selector: 'pmp-checkout',
   templateUrl: './checkout.component.html',
-  styleUrls: ['./checkout.component.scss'],
+  styleUrls: [],
 })
 export class CheckoutComponent implements OnInit {
   orderForm!: FormGroup;
   cartProducts: BaseProduct[] = [];
   productIDs: number[] = [];
   totalPrice = 0;
-
-  // Temp
   orderComplete = false;
 
+  orderId = 0;
+  orderStatus = '';
+
   constructor(
-    private auth: AuthService,
+    private authService: AuthService,
     private formBuilder: FormBuilder,
     private cartService: CartService,
     private userService: UserService,
@@ -37,7 +38,11 @@ export class CheckoutComponent implements OnInit {
       customerEmail: ['', [Validators.required, Validators.email]],
       customerPhone: [
         '',
-        [Validators.required, Validators.pattern('[- +()0-9]+')],
+        [
+          Validators.required,
+          Validators.minLength(5),
+          Validators.pattern('[- +()0-9]+'),
+        ],
       ],
       deliveryAddress: this.formBuilder.group({
         street: ['', [Validators.required, Validators.minLength(3)]],
@@ -47,13 +52,13 @@ export class CheckoutComponent implements OnInit {
       }),
     });
 
-    if (this.auth.isUserLoggedIn) {
+    if (this.authService.isUserLoggedIn) {
       this.userService.getUserAccountDetails().subscribe((userData) => {
         this.orderForm.patchValue({
-          firstName: userData.firstName,
-          lastName: userData.lastName,
-          email: userData.email,
-          phone: userData.phone,
+          customerFirstName: userData.firstName,
+          customerLastName: userData.lastName,
+          customerEmail: userData.email,
+          customerPhone: userData.phone,
           deliveryAddress: {
             street: userData.address.street,
             city: userData.address.city,
@@ -72,23 +77,30 @@ export class CheckoutComponent implements OnInit {
   }
 
   saveOrder(): void {
-    const o: Order = new Order(
-      this.orderForm.get('customerFirstName')?.value,
-      this.orderForm.get('customerLastName')?.value,
-      this.orderForm.get('customerPhone')?.value,
-      this.orderForm.get('customerEmail')?.value,
-      new Address(
-        this.orderForm.get('deliveryAddress.street')?.value,
-        this.orderForm.get('deliveryAddress.city')?.value,
-        this.orderForm.get('deliveryAddress.state')?.value,
-        this.orderForm.get('deliveryAddress.zip')?.value
-      )
-    );
-    console.log(o);
+    if (this.orderForm.valid) {
+      const order: Order = new Order(
+        this.orderForm.get('customerFirstName')?.value,
+        this.orderForm.get('customerLastName')?.value,
+        this.orderForm.get('customerPhone')?.value,
+        this.orderForm.get('customerEmail')?.value,
+        new Address(
+          this.orderForm.get('deliveryAddress.street')?.value,
+          this.orderForm.get('deliveryAddress.city')?.value,
+          this.orderForm.get('deliveryAddress.state')?.value,
+          this.orderForm.get('deliveryAddress.zip')?.value
+        )
+      );
 
-    this.orderService.sendOrderRequest(o);
-    this.orderComplete = true;
+      this.orderService.sendOrderRequest(order).subscribe((orderDto) => {
+        this.orderId = orderDto.id;
+        this.orderStatus = orderDto.status;
+      });
 
-    this.cartService.clearCart();
+      this.orderComplete = true;
+
+      this.cartService.clearCart();
+    } else {
+      this.orderForm.markAllAsTouched();
+    }
   }
 }
