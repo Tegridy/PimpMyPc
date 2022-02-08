@@ -3,13 +3,10 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'pmp-spinner',
   templateUrl: './spinner.component.html',
-  styleUrls: ['./spinner.component.scss']
+  styleUrls: [],
 })
 export class SpinnerComponent implements OnInit {
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

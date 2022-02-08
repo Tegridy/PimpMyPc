@@ -12,7 +12,7 @@ import { BaseProduct } from '../../shared/model/BaseProduct';
 export class ProductsService {
   productsEndpointName: any = '';
   baseUrl = 'http://localhost:8080/api/v1/products/';
-  pageSize = '&size=9';
+  pageSizeUrl = '&size=9';
 
   private productsSearchResultSource = new BehaviorSubject<BaseProduct[]>([]);
   productsSearchResult = this.productsSearchResultSource.asObservable();
@@ -32,7 +32,12 @@ export class ProductsService {
       }
 
       console.log(
-        this.baseUrl + category + '?page=' + page + filtersUrls + this.pageSize
+        this.baseUrl +
+          category +
+          '?page=' +
+          page +
+          filtersUrls +
+          this.pageSizeUrl
       );
       return this.http
         .get<ProductResponse>(
@@ -41,23 +46,17 @@ export class ProductsService {
             '?page=' +
             page +
             filtersUrls +
-            this.pageSize
+            this.pageSizeUrl
         )
         .pipe(catchError(this.handleError));
     } else {
       return this.http
         .get<ProductResponse>(
-          this.baseUrl + category + '?page=' + page + this.pageSize
+          this.baseUrl + category + '?page=' + page + this.pageSizeUrl
         )
         .pipe(catchError(this.handleError));
     }
   }
-
-  // getAllLaptops(page: number): Observable<ProductResponse> {
-  //   return this.http
-  //     .get<ProductResponse>(this.baseUrl + 'laptops?page=' + page)
-  //     .pipe(catchError(this.handleError));
-  // }
 
   private handleError(err: HttpErrorResponse): Observable<never> {
     let errorMessage = '';
@@ -74,14 +73,7 @@ export class ProductsService {
     this.productsEndpointName = category;
   }
 
-  getSearchedProductsByCategory(
-    productName: string,
-    categoryName: string
-  ): void {
-    // this._productsSearchResult = this.http.get<any>(this.baseUrl + 'search?productName=' + productName + '&categoryName=' + categoryName);
-  }
-
-  fetchProductsByCategory(
+  getProductsByCategory(
     productName: string,
     categoryName: string,
     pageNumber: number
@@ -93,7 +85,7 @@ export class ProductsService {
     }
 
     return this.http.get<ProductsDto>(
-      requestUrl + this.pageSize + '&page=' + pageNumber
+      requestUrl + this.pageSizeUrl + '&page=' + pageNumber
     );
   }
 

@@ -1,3 +1,4 @@
+import { SearchModule } from './search/search.module';
 import { HttpClientModule } from '@angular/common/http';
 import { ProductsModule } from './products/products.module';
 import { OrdersModule } from './orders/orders.module';
@@ -31,6 +32,7 @@ import { BuildPcComponent } from './build-pc/build-pc.component';
     RegisterModule,
     HttpClientModule,
     NgxGlideModule,
+    SearchModule,
   ],
   providers: [],
   bootstrap: [PmpComponent],

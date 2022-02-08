@@ -1,11 +1,11 @@
-import {Component, OnInit} from '@angular/core';
-import {categories} from './Categories';
-import {CategoriesService} from '../services/categories.service';
-import {Params, Router} from '@angular/router';
-import {ProductsService} from '../services/products.service';
-import {BaseProduct} from '../../shared/model/BaseProduct';
-import {CartService} from '../services/cart.service';
-import {Param} from '../../products/Param';
+import { Component, OnInit } from '@angular/core';
+import { categories } from './Categories';
+import { CategoriesService } from '../services/categories.service';
+import { Params, Router } from '@angular/router';
+import { ProductsService } from '../services/products.service';
+import { BaseProduct } from '../../shared/model/BaseProduct';
+import { CartService } from '../services/cart.service';
+import { Param } from '../../products/Param';
 
 @Component({
   selector: 'pmp-navbar',
@@ -13,9 +13,12 @@ import {Param} from '../../products/Param';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
-
-  constructor(private cartService: CartService, private categoryService: CategoriesService, private router: Router, private productsService: ProductsService) {
-  }
+  constructor(
+    private cartService: CartService,
+    private categoryService: CategoriesService,
+    private router: Router,
+    private productsService: ProductsService
+  ) {}
 
   showMenu = false;
   toggleBackdrop = true;
@@ -32,10 +35,11 @@ export class NavbarComponent implements OnInit {
 
   queryParams: Params = {};
 
-
   ngOnInit(): void {
     this.mainCategories = categories;
-    this.cartService.currentCart.subscribe(cart => this.numberOfItemsInCart = cart.products.length);
+    this.cartService.currentCart.subscribe(
+      (cart) => (this.numberOfItemsInCart = cart.products.length)
+    );
   }
 
   toggleMenu(): void {
@@ -57,13 +61,6 @@ export class NavbarComponent implements OnInit {
   }
 
   searchProduct(): void {
-    // this.productsService.getSearchedProductsByCategory('laptop', this.currentSearchCategory).subscribe(z => console.log(z));
-    // console.log(this.searchPhrase);
-    // console.log(this.currentSearchCategory);
-    // this.productsService.fetchProductsByCategory(this.searchPhrase, this.currentSearchCategory).subscribe(data => {
-    //     this.data = data;
-    //     this.productsService.setData(data);
-    // });
     if (this.searchPhrase) {
       const params: Params = {};
       params.query = this.searchPhrase;
@@ -73,9 +70,10 @@ export class NavbarComponent implements OnInit {
 
       params.page = 1;
       this.router.navigate(['/search'], {
-        queryParams: params
+        queryParams: params,
       });
     }
+    this.searchPhrase = '';
   }
 
   setFilter(param: Param, endpointName: string): void {
@@ -86,7 +84,7 @@ export class NavbarComponent implements OnInit {
     this.queryParams[paramKey] = paramValue;
 
     this.router.navigate([`/categories/${endpointName}/`], {
-      queryParams: this.queryParams
+      queryParams: this.queryParams,
     });
   }
 }

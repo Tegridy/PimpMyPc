@@ -3,7 +3,7 @@ import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 @Component({
   selector: 'pmp-modal',
   templateUrl: './modal.component.html',
-  styleUrls: ['./modal.component.scss'],
+  styleUrls: [],
 })
 export class ModalComponent implements OnInit {
   @Input()
