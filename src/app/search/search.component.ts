@@ -31,31 +31,13 @@ export class SearchComponent implements OnInit {
     private router: Router
   ) {
     this.route.queryParams.subscribe((params) => {
-      this.pageNumber = this.validatePageNumber(params.page);
+      this.pageNumber = Utils.validatePageNumber(params.page);
       this.queryParams = params;
       this.getProducts(this.queryParams);
     });
   }
 
   ngOnInit(): void {}
-
-  validatePageNumber(pageNumber: number): number {
-    if (
-      this.isPageNumberExceeded(pageNumber) ||
-      isNaN(pageNumber) ||
-      pageNumber < 1
-    ) {
-      return 1;
-    } else {
-      return pageNumber;
-    }
-  }
-
-  isPageNumberExceeded(pageNumber: number): boolean {
-    return (
-      pageNumber > this.productsCount / this.paginationConfig.itemsPerPage + 1
-    );
-  }
 
   private getProducts(params: Params): void {
     this.productService

@@ -1,3 +1,5 @@
+import { NgxPaginationModule } from 'ngx-pagination';
+import { PaginationComponent } from './pagination/pagination.component';
 import { SliderComponent } from './slider/slider.component';
 import { ModalComponent } from './modal/modal.component';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
@@ -17,9 +19,15 @@ import { OrderStatusPipe } from './pipes/order-status.pipe';
     ProductSmallComponent,
     LoadingDotsComponent,
     OrderStatusPipe,
+    PaginationComponent,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  imports: [CommonModule, StarRatingModule.forRoot(), RouterModule],
+  imports: [
+    CommonModule,
+    NgxPaginationModule,
+    StarRatingModule.forRoot(),
+    RouterModule,
+  ],
   exports: [
     ModalComponent,
     SliderComponent,
@@ -27,6 +35,7 @@ import { OrderStatusPipe } from './pipes/order-status.pipe';
     ProductSmallComponent,
     LoadingDotsComponent,
     OrderStatusPipe,
+    PaginationComponent,
   ],
 })
 export class SharedModule {}

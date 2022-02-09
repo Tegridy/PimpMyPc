@@ -16,7 +16,6 @@ import { SearchRoutingModule } from './search-routing.module';
     SharedModule,
     SearchRoutingModule,
     NgxPaginationModule,
-    ProductsModule,
   ],
 })
 export class SearchModule {}

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
-import { catchError, delay } from 'rxjs/operators';
+import { catchError, delay, debounceTime } from 'rxjs/operators';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import {
   ProductResponse,
@@ -31,14 +31,6 @@ export class ProductsService {
         page = 1;
       }
 
-      console.log(
-        this.baseUrl +
-          category +
-          '?page=' +
-          page +
-          filtersUrls +
-          this.pageSizeUrl
-      );
       return this.http
         .get<ProductResponse>(
           this.baseUrl +
@@ -62,6 +54,9 @@ export class ProductsService {
     let errorMessage = '';
     if (err.error instanceof ErrorEvent) {
       errorMessage = `An error occurred: ${err.error.message}`;
+    } else if (err.status == 0) {
+      errorMessage =
+        'An error occurred while products loading. Try again later.';
     } else {
       errorMessage = `Server returned code: ${err.status}, error message is: ${err.message}`;
     }

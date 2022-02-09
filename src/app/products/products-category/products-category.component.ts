@@ -1,46 +1,37 @@
-import { filters } from './ProductsFilters';
 import { ProductsService } from '../../core/services/products.service';
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import {
-  ActivatedRoute,
-  NavigationEnd,
-  Router,
-  UrlSegment,
-} from '@angular/router';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { PaginationInstance } from 'ngx-pagination';
-import { of } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { BaseProduct } from '../../shared/model/BaseProduct';
 import { Filter, FilterGroup } from '../../shared/model/FilterGroup';
-import { Param } from '../Param';
+import { Param } from '../../shared/model/Param';
 import { parse } from 'search-params';
+import Utils from 'src/app/shared/utils/Utils';
 
 @Component({
   selector: 'pmp-products-category',
   templateUrl: './products-category.component.html',
-  styleUrls: ['./products-category.component.scss'],
+  styleUrls: [],
 })
-export class ProductsCategoryComponent implements OnInit {
-  constructor(
-    private ref: ChangeDetectorRef,
-    private router: Router,
-    private productsService: ProductsService,
-    private route: ActivatedRoute
-  ) {
-    this.loadQueryParamsFromUrl();
-  }
-
+export class ProductsCategoryComponent implements OnInit, OnDestroy {
   showProductsInListView = false;
   showModal = false;
-
   loading = true;
-  currentCategory = '';
+  configurator = false;
 
-  laptops: BaseProduct[] = [];
+  currentCategory = '';
+  errorMessage = '';
+  sortType = 'default';
 
   pageNumber = 1;
-  productsCount = 1;
+  productsCount = 0;
 
+  products: BaseProduct[] = [];
   productsFilters: FilterGroup[] = [];
+  queryParams: Param[] = [];
+
+  subscription: Subscription = new Subscription();
 
   paginationConfig: PaginationInstance = {
     itemsPerPage: 9,
@@ -48,18 +39,27 @@ export class ProductsCategoryComponent implements OnInit {
     totalItems: this.productsCount,
   };
 
-  sortType = 'default';
-  queryParams: Param[] = [];
-
-  configurator = false;
+  constructor(
+    private router: Router,
+    private productsService: ProductsService,
+    private route: ActivatedRoute
+  ) {
+    this.loadQueryParamsFromUrl();
+  }
 
   ngOnInit(): void {
-    this.router.events.subscribe((ev) => {
-      if (ev instanceof NavigationEnd) {
-        this.queryParams = [];
-        this.loadQueryParamsFromUrl();
-      }
-    });
+    this.subscription.add(
+      this.router.events.subscribe((navigationEvent) => {
+        if (navigationEvent instanceof NavigationEnd) {
+          this.queryParams = [];
+          this.loadQueryParamsFromUrl();
+        }
+      })
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
   private loadQueryParamsFromUrl(): void {
@@ -67,70 +67,90 @@ export class ProductsCategoryComponent implements OnInit {
 
     for (const param of Object.entries(queryParamsSnapshot)) {
       if (Array.isArray(param[1])) {
-        param[1].forEach((p) => this.queryParams.push(new Param(param[0], p)));
+        param[1].forEach((param) =>
+          this.queryParams.push(new Param(param[0], param))
+        );
       } else {
         this.queryParams.push(new Param(param[0], param[1]));
       }
     }
-    this.checkIfConfig();
+    this.checkIfConfigMode();
     this.getCurrentCategoryProducts(this.findCurrentPageNumber());
   }
 
-  checkIfConfig(): void {
+  checkIfConfigMode(): void {
     const config = this.queryParams.find(
       (param) => param.key === 'config'
     )?.value;
     this.configurator = config as boolean;
   }
 
-  private findCurrentPageNumber(): number {
-    const pageNumber = this.queryParams.find((p) => p.key === 'page');
-
-    if (pageNumber) {
-      return Math.abs(pageNumber.value as number);
-    } else {
-      return 1;
-    }
-  }
-
   getCurrentCategoryProducts(page: number): void {
-    const categoryName = this.getCategoryTypeFromUrl();
+    page = Utils.validatePageNumber(page);
 
-    const filtersUrl = this.buildUrl();
+    const categoryName = this.getCategoryTypeFromUrl();
+    const filtersUrl = Utils.buildUrl(this.queryParams);
 
     this.productsService
       .getProductsPage(page - 1, categoryName, filtersUrl)
-      .subscribe((productsPage) => {
-        this.pageNumber = productsPage.products.number + 1;
-        this.productsCount = productsPage.products.totalElements;
+      .subscribe(
+        (productsPage) => {
+          this.pageNumber = productsPage.products.number + 1;
+          this.productsCount = productsPage.products.totalElements;
 
-        this.validatePageNumber(page);
+          this.loadPaginationConfig();
 
-        this.laptops = productsPage.products.content;
-        this.productsFilters = productsPage.filters;
-        this.loadFiltersFromQueryParams();
+          this.products = productsPage.products.content;
 
-        if (this.laptops.length > 0) {
+          this.checkIfProductsExists();
+
+          this.productsFilters = productsPage.filters;
+
+          this.loadFiltersFromQueryParams();
+
+          this.sortFiltersByName();
+
+          this.loading = false;
+        },
+        (error) => {
+          this.errorMessage = error;
           this.loading = false;
         }
+      );
+  }
 
-        this.paginationConfig.currentPage = this.pageNumber;
-        this.paginationConfig.totalItems = this.productsCount;
+  private loadPaginationConfig(): void {
+    this.paginationConfig.currentPage = this.pageNumber;
+    this.paginationConfig.totalItems = this.productsCount;
+  }
 
-        this.sortFilters();
-      });
+  private checkIfProductsExists() {
+    if (this.products.length < 1) {
+      this.errorMessage = 'No products found.';
+    } else {
+      this.errorMessage = '';
+    }
+  }
+
+  private findCurrentPageNumber(): number {
+    const pageNumber = this.queryParams.find(
+      (pageNumberParam) => pageNumberParam.key === 'page'
+    );
+
+    return Utils.validatePageNumber(pageNumber?.value as number);
   }
 
   private loadFiltersFromQueryParams(): void {
-    this.productsFilters.forEach((v) => {
-      v.values.forEach((v2) => {
+    this.productsFilters.forEach((filterGroup) => {
+      filterGroup.values.forEach((filter) => {
         if (
           this.queryParams.find(
             (param) =>
-              param.key === v.filterProperty && param.value === v2.valueProperty
+              param.key === filterGroup.filterProperty &&
+              param.value === filter.valueProperty
           )
         ) {
-          v2.isChecked = true;
+          filter.isChecked = true;
         }
       });
     });
@@ -141,68 +161,54 @@ export class ProductsCategoryComponent implements OnInit {
       .split('/categories/')[1]
       .toLocaleLowerCase()
       .replace(new RegExp('\\?.+'), '');
+
+    this.resetUrlIfCategoryChanged(category);
+
+    return category;
+  }
+
+  private resetUrlIfCategoryChanged(category: string) {
     if (category !== this.currentCategory) {
       this.currentCategory = category;
       this.sortType = 'default';
       this.findAndUpdateQueryParam('page', '1');
     }
-    return category;
   }
 
-  buildUrl(): string {
-    const url: string[] = [];
-    this.queryParams.forEach((x: Param) => url.push(`&${x.key}=${x.value}`));
-    return url.join('');
-  }
+  filterClick(filterGroup: FilterGroup, filter: Filter): void {
+    this.toggleFilter(filter);
 
-  private validatePageNumber(page: number): void {
-    const lastPageNumber = Math.ceil(this.productsCount / 9);
-
-    if (page > lastPageNumber) {
-      this.getCurrentCategoryProducts(lastPageNumber);
-    }
-  }
-
-  updateUrl(): void {
-    const currentUrl: ActivatedRoute = new ActivatedRoute();
-    currentUrl.url = of([
-      new UrlSegment(this.router.url, { name: 'pageNumber' }),
-    ]);
-
-    const params = parse(this.buildUrl());
-
-    this.router.navigate([], {
-      relativeTo: currentUrl,
-      queryParams: params,
-    });
-  }
-
-  filterClick(event: Event, mainProp: string, filterValue: Filter): void {
-    filterValue.isChecked = !filterValue.isChecked;
-
-    if (filterValue.isChecked) {
-      this.queryParams.push(new Param(mainProp, filterValue.valueProperty));
-    } else {
-      const idx = this.queryParams.findIndex(
-        (p) => p.key === mainProp && p.value === filterValue.valueProperty
+    if (filter.isChecked) {
+      this.queryParams.push(
+        new Param(filterGroup.filterProperty, filter.valueProperty)
       );
-      this.queryParams.splice(idx, 1);
+    } else {
+      const index = this.queryParams.findIndex(
+        (param) =>
+          param.key === filterGroup.filterProperty &&
+          param.value === filter.valueProperty
+      );
+      this.queryParams.splice(index, 1);
     }
 
     this.findAndUpdateQueryParam('page', '1');
-    this.updateUrl();
+    Utils.updateUrl(this.queryParams, this.router);
+  }
+
+  toggleFilter(filter: Filter) {
+    filter.isChecked = !filter.isChecked;
   }
 
   sortProductsByPrice(): void {
     const sortParam = new Param('sort', this.sortType);
-    const isSortedParamChosen = this.queryParams.find((x) => x.key === 'sort');
+    const sortedParam = this.queryParams.find((param) => param.key === 'sort');
     const sortedParamIndex = this.queryParams.indexOf(sortParam);
 
-    if (isSortedParamChosen) {
+    if (sortedParam) {
       if (this.sortType === 'price,asc') {
-        isSortedParamChosen.value = 'price,asc';
+        sortedParam.value = 'price,asc';
       } else if (this.sortType === 'price,desc') {
-        isSortedParamChosen.value = 'price,desc';
+        sortedParam.value = 'price,desc';
       } else {
         this.queryParams.splice(sortedParamIndex, 1);
       }
@@ -213,10 +219,12 @@ export class ProductsCategoryComponent implements OnInit {
     this.getCurrentCategoryProducts(1);
   }
 
-  sortFilters(): void {
+  sortFiltersByName(): void {
     this.productsFilters.forEach((mainFilter) =>
-      mainFilter.values.sort((f1, f2) =>
-        f1.name.localeCompare(f2.name, 'en', { numeric: true })
+      mainFilter.values.sort((firstFilter, secondFilter) =>
+        firstFilter.name.localeCompare(secondFilter.name, 'en', {
+          numeric: true,
+        })
       )
     );
   }
@@ -226,7 +234,7 @@ export class ProductsCategoryComponent implements OnInit {
 
     this.findAndUpdateQueryParam('page', page);
 
-    this.updateUrl();
+    Utils.updateUrl(this.queryParams, this.router);
   }
 
   findAndUpdateQueryParam(

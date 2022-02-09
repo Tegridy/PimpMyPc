@@ -10,7 +10,6 @@ export interface BaseProduct {
   model?: string;
   imageUrl?: string;
   price: number;
-  quantity: number;
   categories?: Category[];
 }
 

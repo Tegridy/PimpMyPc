@@ -1,4 +1,4 @@
-<section id="product-categories" class="my-4 md:my-0">
+<section id="products-by-category" class="my-4 md:my-0">
 
   <div id="categories" class="flex min-h-100vh">
 
@@ -7,16 +7,15 @@
 
       <nav class="border-2 border-black rounded-lg bg-gray-50">
 
-        <ul class="p-1.5" *ngFor="let filter of productsFilters">
-          <li><span class="font-bold">{{ filter.name }}</span>
+        <ul class="p-1.5" *ngFor="let filterGroup of productsFilters">
+          <li><span class="font-bold">{{ filterGroup.name }}</span>
 
-            <ul class="my-2 ml-4" *ngFor="let filterValue of filter.values">
+            <ul class="my-2 ml-4" *ngFor="let filterValue of filterGroup.values">
               <li>
 
                 <label class="flex" for="{{ filterValue.name + filterValue.id }}">
                   <input id="{{ filterValue.name + filterValue.id }}" class="mr-1" type="checkbox"
-                    [checked]="filterValue.isChecked"
-                    (change)="filterClick($event, filter.filterProperty, filterValue)">
+                    [checked]="filterValue.isChecked" (change)="filterClick(filterGroup, filterValue)">
                   {{ filterValue.name }}
                 </label>
 
@@ -64,16 +63,20 @@
 
         <hr class="h-1 mb-4 bg-black rounded-full">
 
-
         <div class="mb-4 min-h-100vh">
+
+          <div class="text-center">
+            <span class="font-bold text-xl">{{ errorMessage }}</span>
+          </div>
           <pmp-spinner *ngIf="loading"></pmp-spinner>
+
           <div
             [ngClass]="showProductsInListView ? 'grid grid-cols-1 gap-4' : 'grid grid-cols-1 sm:grid-rows-3 sm:grid-cols-3 gap-4'">
 
 
-            <ng-container *ngFor="let laptop of laptops | paginate: paginationConfig ">
+            <ng-container *ngFor="let product of products | paginate: paginationConfig ">
 
-              <pmp-product-small [listView]="showProductsInListView" [product]="laptop" [configMode]="configurator">
+              <pmp-product-small [listView]="showProductsInListView" [product]="product" [configMode]="configurator">
               </pmp-product-small>
 
             </ng-container>
@@ -87,32 +90,5 @@
     </div>
 
   </div>
-
-  <!--  Modal  -->
-
-  <!--  <div class="fixed z-20 w-full overflow-auto rounded-lg md:left-1/3 top-1/3 md:top-2/5"-->
-  <!--       [ngClass]="{'hidden': (!showModal)}">-->
-
-  <!--    <div>-->
-  <!--      <div class="flex justify-between p-2 bg-gray-400">-->
-  <!--        <h3 class="text-2xl">Categories and filters</h3>-->
-  <!--        <span (click)="toggleModal()" class="flex items-center justify-center bg-gray-400 cursor-pointer">-->
-  <!--          <ion-icon name="close-outline"></ion-icon>-->
-  <!--        </span>-->
-  <!--      </div>-->
-
-  <!--      <div>-->
-  <!--        <button><span>Categories </span></button>-->
-  <!--      </div>-->
-
-
-  <!--    </div>-->
-  <!--  </div>-->
-
-
-  <!--  <div (click)="toggleModal()"-->
-  <!--       class="fixed top-0 left-0 z-10 flex items-center justify-center w-full h-screen bg-black opacity-50 animate-fade-bg"-->
-  <!--       [ngClass]="{'hidden': (!showModal)}">-->
-  <!--  </div>-->
 
 </section>

@@ -1,4 +1,4 @@
-import { Param } from '../../products/Param';
+import { Param } from '../../shared/model/Param';
 
 export const categories = [
   {

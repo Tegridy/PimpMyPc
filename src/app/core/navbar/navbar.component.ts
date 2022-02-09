@@ -5,7 +5,7 @@ import { Params, Router } from '@angular/router';
 import { ProductsService } from '../services/products.service';
 import { BaseProduct } from '../../shared/model/BaseProduct';
 import { CartService } from '../services/cart.service';
-import { Param } from '../../products/Param';
+import { Param } from '../../shared/model/Param';
 
 @Component({
   selector: 'pmp-navbar',

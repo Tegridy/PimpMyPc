@@ -1,0 +1,154 @@
+# Details
+
+Date : 2022-02-08 19:12:16
+
+Directory c:\Users\Ja\WebstormProjects\PimpMyPc
+
+Total : 139 files,  29991 codes, 150 comments, 868 blanks, all 31009 lines
+
+[summary](results.md) / details / [diff summary](diff.md) / [diff details](diff-details.md)
+
+## Files
+| filename | language | code | comment | blank | total |
+| :--- | :--- | ---: | ---: | ---: | ---: |
+| [README.md](/README.md) | Markdown | 2 | 0 | 2 | 4 |
+| [angular.json](/angular.json) | JSON | 169 | 8 | 1 | 178 |
+| [e2e/protractor.conf.js](/e2e/protractor.conf.js) | JavaScript | 29 | 6 | 2 | 37 |
+| [e2e/src/app.e2e-spec.ts](/e2e/src/app.e2e-spec.ts) | TypeScript | 18 | 1 | 5 | 24 |
+| [e2e/src/app.po.ts](/e2e/src/app.po.ts) | TypeScript | 9 | 0 | 3 | 12 |
+| [e2e/tsconfig.json](/e2e/tsconfig.json) | JSON with Comments | 12 | 1 | 1 | 14 |
+| [karma.conf.js](/karma.conf.js) | JavaScript | 37 | 6 | 2 | 45 |
+| [package-lock.json](/package-lock.json) | JSON | 25,211 | 0 | 1 | 25,212 |
+| [package.json](/package.json) | JSON | 58 | 0 | 1 | 59 |
+| [src/app/account/account-routing.module.ts](/src/app/account/account-routing.module.ts) | TypeScript | 23 | 0 | 4 | 27 |
+| [src/app/account/account-settings/account-settings.component.html](/src/app/account/account-settings/account-settings.component.html) | HTML | 198 | 1 | 27 | 226 |
+| [src/app/account/account-settings/account-settings.component.ts](/src/app/account/account-settings/account-settings.component.ts) | TypeScript | 98 | 0 | 16 | 114 |
+| [src/app/account/account.component.html](/src/app/account/account.component.html) | HTML | 44 | 0 | 10 | 54 |
+| [src/app/account/account.component.ts](/src/app/account/account.component.ts) | TypeScript | 17 | 0 | 5 | 22 |
+| [src/app/account/account.module.ts](/src/app/account/account.module.ts) | TypeScript | 23 | 0 | 2 | 25 |
+| [src/app/account/my-orders/my-orders.component.html](/src/app/account/my-orders/my-orders.component.html) | HTML | 24 | 0 | 7 | 31 |
+| [src/app/account/my-orders/my-orders.component.ts](/src/app/account/my-orders/my-orders.component.ts) | TypeScript | 17 | 0 | 4 | 21 |
+| [src/app/account/order-details/order-details.component.html](/src/app/account/order-details/order-details.component.html) | HTML | 39 | 0 | 10 | 49 |
+| [src/app/account/order-details/order-details.component.ts](/src/app/account/order-details/order-details.component.ts) | TypeScript | 29 | 2 | 4 | 35 |
+| [src/app/build-pc/build-pc.component.html](/src/app/build-pc/build-pc.component.html) | HTML | 133 | 0 | 19 | 152 |
+| [src/app/build-pc/build-pc.component.scss](/src/app/build-pc/build-pc.component.scss) | SCSS | 0 | 0 | 1 | 1 |
+| [src/app/build-pc/build-pc.component.ts](/src/app/build-pc/build-pc.component.ts) | TypeScript | 92 | 2 | 16 | 110 |
+| [src/app/core/core.module.ts](/src/app/core/core.module.ts) | TypeScript | 31 | 0 | 2 | 33 |
+| [src/app/core/footer/footer.component.html](/src/app/core/footer/footer.component.html) | HTML | 36 | 0 | 5 | 41 |
+| [src/app/core/footer/footer.component.scss](/src/app/core/footer/footer.component.scss) | SCSS | 0 | 0 | 1 | 1 |
+| [src/app/core/footer/footer.component.ts](/src/app/core/footer/footer.component.ts) | TypeScript | 11 | 0 | 5 | 16 |
+| [src/app/core/guards/login.guard.ts](/src/app/core/guards/login.guard.ts) | TypeScript | 22 | 1 | 4 | 27 |
+| [src/app/core/home/home.component.html](/src/app/core/home/home.component.html) | HTML | 74 | 0 | 20 | 94 |
+| [src/app/core/home/home.component.scss](/src/app/core/home/home.component.scss) | SCSS | 0 | 0 | 1 | 1 |
+| [src/app/core/home/home.component.ts](/src/app/core/home/home.component.ts) | TypeScript | 65 | 1 | 6 | 72 |
+| [src/app/core/interceptors/auth.interceptor.ts](/src/app/core/interceptors/auth.interceptor.ts) | TypeScript | 18 | 0 | 7 | 25 |
+| [src/app/core/navbar/Categories.ts](/src/app/core/navbar/Categories.ts) | TypeScript | 86 | 0 | 2 | 88 |
+| [src/app/core/navbar/navbar.component.html](/src/app/core/navbar/navbar.component.html) | HTML | 109 | 20 | 28 | 157 |
+| [src/app/core/navbar/navbar.component.scss](/src/app/core/navbar/navbar.component.scss) | SCSS | 23 | 0 | 11 | 34 |
+| [src/app/core/navbar/navbar.component.ts](/src/app/core/navbar/navbar.component.ts) | TypeScript | 73 | 0 | 18 | 91 |
+| [src/app/core/page-not-found/page-not-found.component.html](/src/app/core/page-not-found/page-not-found.component.html) | HTML | 8 | 0 | 7 | 15 |
+| [src/app/core/page-not-found/page-not-found.component.scss](/src/app/core/page-not-found/page-not-found.component.scss) | SCSS | 0 | 0 | 1 | 1 |
+| [src/app/core/page-not-found/page-not-found.component.ts](/src/app/core/page-not-found/page-not-found.component.ts) | TypeScript | 11 | 0 | 5 | 16 |
+| [src/app/core/services/auth.service.ts](/src/app/core/services/auth.service.ts) | TypeScript | 61 | 18 | 11 | 90 |
+| [src/app/core/services/cart.service.ts](/src/app/core/services/cart.service.ts) | TypeScript | 40 | 0 | 10 | 50 |
+| [src/app/core/services/categories.service.ts](/src/app/core/services/categories.service.ts) | TypeScript | 18 | 0 | 5 | 23 |
+| [src/app/core/services/configurator.service.ts](/src/app/core/services/configurator.service.ts) | TypeScript | 46 | 0 | 6 | 52 |
+| [src/app/core/services/filters.service.ts](/src/app/core/services/filters.service.ts) | TypeScript | 9 | 0 | 6 | 15 |
+| [src/app/core/services/order.service.ts](/src/app/core/services/order.service.ts) | TypeScript | 22 | 0 | 5 | 27 |
+| [src/app/core/services/products.service.spec.ts](/src/app/core/services/products.service.spec.ts) | TypeScript | 0 | 10 | 4 | 14 |
+| [src/app/core/services/products.service.ts](/src/app/core/services/products.service.ts) | TypeScript | 96 | 0 | 17 | 113 |
+| [src/app/core/services/user.service.ts](/src/app/core/services/user.service.ts) | TypeScript | 28 | 4 | 8 | 40 |
+| [src/app/core/services/validation.service.ts](/src/app/core/services/validation.service.ts) | TypeScript | 18 | 0 | 4 | 22 |
+| [src/app/informations/about-us/about-us.component.html](/src/app/informations/about-us/about-us.component.html) | HTML | 40 | 0 | 5 | 45 |
+| [src/app/informations/about-us/about-us.component.ts](/src/app/informations/about-us/about-us.component.ts) | TypeScript | 10 | 0 | 3 | 13 |
+| [src/app/informations/contact-us/contact-us.component.html](/src/app/informations/contact-us/contact-us.component.html) | HTML | 61 | 0 | 13 | 74 |
+| [src/app/informations/contact-us/contact-us.component.ts](/src/app/informations/contact-us/contact-us.component.ts) | TypeScript | 16 | 0 | 4 | 20 |
+| [src/app/informations/informations-routing.module.ts](/src/app/informations/informations-routing.module.ts) | TypeScript | 25 | 0 | 3 | 28 |
+| [src/app/informations/informations.module.ts](/src/app/informations/informations.module.ts) | TypeScript | 12 | 0 | 3 | 15 |
+| [src/app/informations/newsletter/newsletter.component.html](/src/app/informations/newsletter/newsletter.component.html) | HTML | 18 | 0 | 4 | 22 |
+| [src/app/informations/newsletter/newsletter.component.ts](/src/app/informations/newsletter/newsletter.component.ts) | TypeScript | 10 | 0 | 3 | 13 |
+| [src/app/informations/privacy-policy/privacy-policy.component.html](/src/app/informations/privacy-policy/privacy-policy.component.html) | HTML | 40 | 0 | 6 | 46 |
+| [src/app/informations/privacy-policy/privacy-policy.component.ts](/src/app/informations/privacy-policy/privacy-policy.component.ts) | TypeScript | 10 | 0 | 3 | 13 |
+| [src/app/informations/regulations/regulations.component.html](/src/app/informations/regulations/regulations.component.html) | HTML | 41 | 0 | 5 | 46 |
+| [src/app/informations/regulations/regulations.component.ts](/src/app/informations/regulations/regulations.component.ts) | TypeScript | 10 | 0 | 3 | 13 |
+| [src/app/login/login-routing.module.ts](/src/app/login/login-routing.module.ts) | TypeScript | 13 | 0 | 3 | 16 |
+| [src/app/login/login.component.html](/src/app/login/login.component.html) | HTML | 61 | 0 | 22 | 83 |
+| [src/app/login/login.component.ts](/src/app/login/login.component.ts) | TypeScript | 48 | 0 | 7 | 55 |
+| [src/app/login/login.module.ts](/src/app/login/login.module.ts) | TypeScript | 19 | 0 | 2 | 21 |
+| [src/app/orders/cart/cart.component.html](/src/app/orders/cart/cart.component.html) | HTML | 41 | 0 | 16 | 57 |
+| [src/app/orders/cart/cart.component.ts](/src/app/orders/cart/cart.component.ts) | TypeScript | 23 | 0 | 5 | 28 |
+| [src/app/orders/checkout/checkout.component.html](/src/app/orders/checkout/checkout.component.html) | HTML | 138 | 0 | 31 | 169 |
+| [src/app/orders/checkout/checkout.component.ts](/src/app/orders/checkout/checkout.component.ts) | TypeScript | 96 | 0 | 11 | 107 |
+| [src/app/orders/orders-routing.module.ts](/src/app/orders/orders-routing.module.ts) | TypeScript | 15 | 0 | 3 | 18 |
+| [src/app/orders/orders.module.ts](/src/app/orders/orders.module.ts) | TypeScript | 16 | 0 | 2 | 18 |
+| [src/app/pmp-routing.module.ts](/src/app/pmp-routing.module.ts) | TypeScript | 62 | 0 | 3 | 65 |
+| [src/app/pmp.component.html](/src/app/pmp.component.html) | HTML | 25 | 0 | 3 | 28 |
+| [src/app/pmp.component.scss](/src/app/pmp.component.scss) | SCSS | 0 | 0 | 1 | 1 |
+| [src/app/pmp.component.ts](/src/app/pmp.component.ts) | TypeScript | 9 | 0 | 2 | 11 |
+| [src/app/pmp.module.ts](/src/app/pmp.module.ts) | TypeScript | 38 | 0 | 3 | 41 |
+| [src/app/product/product-full/product-full.component.html](/src/app/product/product-full/product-full.component.html) | HTML | 48 | 0 | 15 | 63 |
+| [src/app/product/product-full/product-full.component.ts](/src/app/product/product-full/product-full.component.ts) | TypeScript | 59 | 0 | 11 | 70 |
+| [src/app/product/product.module.ts](/src/app/product/product.module.ts) | TypeScript | 19 | 0 | 4 | 23 |
+| [src/app/product/products-routing.module.ts](/src/app/product/products-routing.module.ts) | TypeScript | 13 | 0 | 4 | 17 |
+| [src/app/products/products-category/ProductsFilters.ts](/src/app/products/products-category/ProductsFilters.ts) | TypeScript | 9 | 0 | 1 | 10 |
+| [src/app/products/products-category/products-category.component.html](/src/app/products/products-category/products-category.component.html) | HTML | 63 | 0 | 29 | 92 |
+| [src/app/products/products-category/products-category.component.ts](/src/app/products/products-category/products-category.component.ts) | TypeScript | 204 | 0 | 45 | 249 |
+| [src/app/products/products-routing.module.ts](/src/app/products/products-routing.module.ts) | TypeScript | 17 | 0 | 4 | 21 |
+| [src/app/products/products.module.ts](/src/app/products/products.module.ts) | TypeScript | 20 | 0 | 2 | 22 |
+| [src/app/register/register-routing.module.ts](/src/app/register/register-routing.module.ts) | TypeScript | 13 | 0 | 3 | 16 |
+| [src/app/register/register.component.html](/src/app/register/register.component.html) | HTML | 165 | 0 | 34 | 199 |
+| [src/app/register/register.component.ts](/src/app/register/register.component.ts) | TypeScript | 75 | 0 | 7 | 82 |
+| [src/app/register/register.module.ts](/src/app/register/register.module.ts) | TypeScript | 18 | 0 | 2 | 20 |
+| [src/app/search/search-routing.module.ts](/src/app/search/search-routing.module.ts) | TypeScript | 11 | 0 | 3 | 14 |
+| [src/app/search/search.component.html](/src/app/search/search.component.html) | HTML | 26 | 0 | 5 | 31 |
+| [src/app/search/search.component.scss](/src/app/search/search.component.scss) | SCSS | 0 | 0 | 1 | 1 |
+| [src/app/search/search.component.ts](/src/app/search/search.component.ts) | TypeScript | 86 | 0 | 14 | 100 |
+| [src/app/search/search.module.ts](/src/app/search/search.module.ts) | TypeScript | 20 | 0 | 2 | 22 |
+| [src/app/shared/loading-dots/loading-dots.component.html](/src/app/shared/loading-dots/loading-dots.component.html) | HTML | 20 | 0 | 1 | 21 |
+| [src/app/shared/loading-dots/loading-dots.component.ts](/src/app/shared/loading-dots/loading-dots.component.ts) | TypeScript | 9 | 0 | 3 | 12 |
+| [src/app/shared/modal/modal.component.html](/src/app/shared/modal/modal.component.html) | HTML | 20 | 0 | 7 | 27 |
+| [src/app/shared/modal/modal.component.ts](/src/app/shared/modal/modal.component.ts) | TypeScript | 20 | 0 | 7 | 27 |
+| [src/app/shared/model/BaseProduct.ts](/src/app/shared/model/BaseProduct.ts) | TypeScript | 33 | 0 | 8 | 41 |
+| [src/app/shared/model/Cart.ts](/src/app/shared/model/Cart.ts) | TypeScript | 9 | 0 | 4 | 13 |
+| [src/app/shared/model/Category.ts](/src/app/shared/model/Category.ts) | TypeScript | 4 | 0 | 1 | 5 |
+| [src/app/shared/model/Computer.ts](/src/app/shared/model/Computer.ts) | TypeScript | 11 | 0 | 1 | 12 |
+| [src/app/shared/model/FilterGroup.ts](/src/app/shared/model/FilterGroup.ts) | TypeScript | 12 | 0 | 2 | 14 |
+| [src/app/shared/model/Laptop.ts](/src/app/shared/model/Laptop.ts) | TypeScript | 16 | 0 | 1 | 17 |
+| [src/app/shared/model/LoginDetails.ts](/src/app/shared/model/LoginDetails.ts) | TypeScript | 5 | 0 | 1 | 6 |
+| [src/app/shared/model/Movie.ts](/src/app/shared/model/Movie.ts) | TypeScript | 4 | 0 | 1 | 5 |
+| [src/app/shared/model/Order.ts](/src/app/shared/model/Order.ts) | TypeScript | 28 | 0 | 5 | 33 |
+| [src/app/shared/model/Param.ts](/src/app/shared/model/Param.ts) | TypeScript | 8 | 0 | 2 | 10 |
+| [src/app/shared/model/Product.ts](/src/app/shared/model/Product.ts) | TypeScript | 6 | 0 | 1 | 7 |
+| [src/app/shared/model/ProductDetail.ts](/src/app/shared/model/ProductDetail.ts) | TypeScript | 7 | 1 | 1 | 9 |
+| [src/app/shared/model/ProductResponse.ts](/src/app/shared/model/ProductResponse.ts) | TypeScript | 11 | 0 | 2 | 13 |
+| [src/app/shared/model/User.ts](/src/app/shared/model/User.ts) | TypeScript | 19 | 0 | 3 | 22 |
+| [src/app/shared/model/UserEdit.ts](/src/app/shared/model/UserEdit.ts) | TypeScript | 22 | 0 | 4 | 26 |
+| [src/app/shared/pagination/pagination.component.html](/src/app/shared/pagination/pagination.component.html) | HTML | 22 | 0 | 9 | 31 |
+| [src/app/shared/pagination/pagination.component.scss](/src/app/shared/pagination/pagination.component.scss) | SCSS | 0 | 0 | 1 | 1 |
+| [src/app/shared/pagination/pagination.component.ts](/src/app/shared/pagination/pagination.component.ts) | TypeScript | 15 | 0 | 5 | 20 |
+| [src/app/shared/pipes/order-status.pipe.ts](/src/app/shared/pipes/order-status.pipe.ts) | TypeScript | 9 | 0 | 2 | 11 |
+| [src/app/shared/product-small/product-small.component.html](/src/app/shared/product-small/product-small.component.html) | HTML | 43 | 0 | 14 | 57 |
+| [src/app/shared/product-small/product-small.component.scss](/src/app/shared/product-small/product-small.component.scss) | SCSS | 0 | 0 | 1 | 1 |
+| [src/app/shared/product-small/product-small.component.ts](/src/app/shared/product-small/product-small.component.ts) | TypeScript | 34 | 0 | 8 | 42 |
+| [src/app/shared/shared.module.ts](/src/app/shared/shared.module.ts) | TypeScript | 40 | 0 | 2 | 42 |
+| [src/app/shared/slider/slider.component.html](/src/app/shared/slider/slider.component.html) | HTML | 23 | 0 | 5 | 28 |
+| [src/app/shared/slider/slider.component.ts](/src/app/shared/slider/slider.component.ts) | TypeScript | 15 | 0 | 4 | 19 |
+| [src/app/shared/spinner/spinner.component.html](/src/app/shared/spinner/spinner.component.html) | HTML | 33 | 0 | 1 | 34 |
+| [src/app/shared/spinner/spinner.component.ts](/src/app/shared/spinner/spinner.component.ts) | TypeScript | 10 | 0 | 3 | 13 |
+| [src/app/shared/utils/Utils.ts](/src/app/shared/utils/Utils.ts) | TypeScript | 10 | 0 | 2 | 12 |
+| [src/assets/images/star-rating.icons.svg](/src/assets/images/star-rating.icons.svg) | XML | 20 | 0 | 5 | 25 |
+| [src/assets/logo.svg](/src/assets/logo.svg) | XML | 44 | 0 | 2 | 46 |
+| [src/environments/environment.prod.ts](/src/environments/environment.prod.ts) | TypeScript | 3 | 0 | 1 | 4 |
+| [src/environments/environment.ts](/src/environments/environment.ts) | TypeScript | 3 | 11 | 3 | 17 |
+| [src/index.html](/src/index.html) | HTML | 16 | 0 | 2 | 18 |
+| [src/main.ts](/src/main.ts) | TypeScript | 9 | 0 | 4 | 13 |
+| [src/polyfills.ts](/src/polyfills.ts) | TypeScript | 1 | 47 | 6 | 54 |
+| [src/styles.scss](/src/styles.scss) | SCSS | 98 | 2 | 23 | 123 |
+| [src/test.ts](/src/test.ts) | TypeScript | 20 | 4 | 4 | 28 |
+| [tailwind.config.js](/tailwind.config.js) | JavaScript | 96 | 1 | 5 | 102 |
+| [tsconfig.app.json](/tsconfig.app.json) | JSON | 14 | 1 | 1 | 16 |
+| [tsconfig.json](/tsconfig.json) | JSON with Comments | 30 | 1 | 1 | 32 |
+| [tsconfig.spec.json](/tsconfig.spec.json) | JSON | 17 | 1 | 1 | 19 |
+| [tslint.json](/tslint.json) | JSON | 152 | 0 | 1 | 153 |
+
+[summary](results.md) / details / [diff summary](diff.md) / [diff details](diff-details.md)

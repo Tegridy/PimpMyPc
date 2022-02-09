@@ -3,65 +3,67 @@ import { Component, OnInit } from '@angular/core';
 import { ProductsService } from '../../core/services/products.service';
 import { BaseProduct } from '../../shared/model/BaseProduct';
 import { ActivatedRoute } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
 import { ProductDetail } from '../../shared/model/ProductDetail';
 
 @Component({
   selector: 'pmp-product-full',
   templateUrl: './product-full.component.html',
-  styleUrls: ['./product-full.component.scss'],
+  styleUrls: [],
 })
 export class ProductFullComponent implements OnInit {
-  constructor(
-    private productsService: ProductsService,
-    private route: ActivatedRoute,
-    private cartService: CartService
-  ) {
-    this.product = { title: 'Product title', price: 0, id: -1, quantity: -1 };
-  }
-
   showModal = false;
   productStars = 0;
   productId = 0;
 
   product: BaseProduct;
   productDetails: ProductDetail[] = [];
-  productParamsToFilter = ['id', 'title', 'description', 'price', 'imageUrl'];
+  productDetailsToFilter = ['id', 'title', 'description', 'price', 'imageUrl'];
+
+  constructor(
+    private productsService: ProductsService,
+    private route: ActivatedRoute,
+    private cartService: CartService
+  ) {
+    this.product = { title: 'Product title', price: 0, id: -1 };
+  }
 
   ngOnInit(): void {
-    this.route.params.subscribe((params) => {
-      this.productId = params.id;
-    });
+    this.getProductId();
 
     this.productsService.getProductById(this.productId).subscribe((product) => {
       this.product = product;
-      for (let i = 0; i < Object.keys(this.product).length; i++) {
-        this.productDetails.push(
-          new ProductDetail(
-            Object.keys(this.product)[i],
-            Object.values(this.product)[i]
-          )
-        );
-      }
+      this.getProductDetails();
       this.filterProductParams();
     });
   }
 
+  getProductId(): void {
+    this.productId = this.route.snapshot.params.id;
+  }
+
+  getProductDetails(): void {
+    for (let i = 0; i < Object.keys(this.product).length; i++) {
+      this.productDetails.push(
+        new ProductDetail(
+          Object.keys(this.product)[i],
+          Object.values(this.product)[i]
+        )
+      );
+    }
+  }
+
   addProductToCart() {
-    this.cartService.addProductToCart(this.product);
+    this.cartService.changeCart(this.product);
   }
 
   toggleModal(): void {
     this.showModal = !this.showModal;
   }
 
-  onRatingChange($event: any): void {
-    this.productStars = $event.rating;
-  }
-
   filterProductParams(): void {
     this.productDetails = this.productDetails.filter(
-      (pd) => !this.productParamsToFilter.includes(pd.key)
+      (productDetail) =>
+        !this.productDetailsToFilter.includes(productDetail.key)
     );
   }
 }

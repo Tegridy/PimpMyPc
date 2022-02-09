@@ -1,0 +1,216 @@
+Date : 2022-02-08 19:12:16
+Directory : c:\Users\Ja\WebstormProjects\PimpMyPc
+Total : 139 files,  29991 codes, 150 comments, 868 blanks, all 31009 lines
+
+Languages
++--------------------+------------+------------+------------+------------+------------+
+| language           | files      | code       | comment    | blank      | total      |
++--------------------+------------+------------+------------+------------+------------+
+| JSON               |          6 |     25,621 |         10 |          6 |     25,637 |
+| TypeScript         |         86 |      2,370 |        102 |        440 |      2,912 |
+| HTML               |         29 |      1,609 |         21 |        360 |      1,990 |
+| JavaScript         |          3 |        162 |         13 |          9 |        184 |
+| SCSS               |         10 |        121 |          2 |         42 |        165 |
+| XML                |          2 |         64 |          0 |          7 |         71 |
+| JSON with Comments |          2 |         42 |          2 |          2 |         46 |
+| Markdown           |          1 |          2 |          0 |          2 |          4 |
++--------------------+------------+------------+------------+------------+------------+
+
+Directories
++-----------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                      | files      | code       | comment    | blank      | total      |
++-----------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                         |        139 |     29,991 |        150 |        868 |     31,009 |
+| e2e                                                                                                       |          4 |         68 |          8 |         11 |         87 |
+| e2e\src                                                                                                   |          2 |         27 |          1 |          8 |         36 |
+| src                                                                                                       |        125 |      4,137 |        124 |        841 |      5,102 |
+| src\app                                                                                                   |        116 |      3,923 |         60 |        791 |      4,774 |
+| src\app\account                                                                                           |         10 |        512 |          3 |         89 |        604 |
+| src\app\account\account-settings                                                                          |          2 |        296 |          1 |         43 |        340 |
+| src\app\account\my-orders                                                                                 |          2 |         41 |          0 |         11 |         52 |
+| src\app\account\order-details                                                                             |          2 |         68 |          2 |         14 |         84 |
+| src\app\build-pc                                                                                          |          3 |        225 |          2 |         36 |        263 |
+| src\app\core                                                                                              |         26 |        905 |         54 |        199 |      1,158 |
+| src\app\core\footer                                                                                       |          3 |         47 |          0 |         11 |         58 |
+| src\app\core\guards                                                                                       |          1 |         22 |          1 |          4 |         27 |
+| src\app\core\home                                                                                         |          3 |        139 |          1 |         27 |        167 |
+| src\app\core\interceptors                                                                                 |          1 |         18 |          0 |          7 |         25 |
+| src\app\core\navbar                                                                                       |          4 |        291 |         20 |         59 |        370 |
+| src\app\core\page-not-found                                                                               |          3 |         19 |          0 |         13 |         32 |
+| src\app\core\services                                                                                     |         10 |        338 |         32 |         76 |        446 |
+| src\app\informations                                                                                      |         12 |        293 |          0 |         55 |        348 |
+| src\app\informations\about-us                                                                             |          2 |         50 |          0 |          8 |         58 |
+| src\app\informations\contact-us                                                                           |          2 |         77 |          0 |         17 |         94 |
+| src\app\informations\newsletter                                                                           |          2 |         28 |          0 |          7 |         35 |
+| src\app\informations\privacy-policy                                                                       |          2 |         50 |          0 |          9 |         59 |
+| src\app\informations\regulations                                                                          |          2 |         51 |          0 |          8 |         59 |
+| src\app\login                                                                                             |          4 |        141 |          0 |         34 |        175 |
+| src\app\orders                                                                                            |          6 |        329 |          0 |         68 |        397 |
+| src\app\orders\cart                                                                                       |          2 |         64 |          0 |         21 |         85 |
+| src\app\orders\checkout                                                                                   |          2 |        234 |          0 |         42 |        276 |
+| src\app\product                                                                                           |          4 |        139 |          0 |         34 |        173 |
+| src\app\product\product-full                                                                              |          2 |        107 |          0 |         26 |        133 |
+| src\app\products                                                                                          |          5 |        313 |          0 |         81 |        394 |
+| src\app\products\products-category                                                                        |          3 |        276 |          0 |         75 |        351 |
+| src\app\register                                                                                          |          4 |        271 |          0 |         46 |        317 |
+| src\app\search                                                                                            |          5 |        143 |          0 |         25 |        168 |
+| src\app\shared                                                                                            |         32 |        518 |          1 |        112 |        631 |
+| src\app\shared\loading-dots                                                                               |          2 |         29 |          0 |          4 |         33 |
+| src\app\shared\modal                                                                                      |          2 |         40 |          0 |         14 |         54 |
+| src\app\shared\model                                                                                      |         15 |        195 |          1 |         37 |        233 |
+| src\app\shared\pagination                                                                                 |          3 |         37 |          0 |         15 |         52 |
+| src\app\shared\pipes                                                                                      |          1 |          9 |          0 |          2 |         11 |
+| src\app\shared\product-small                                                                              |          3 |         77 |          0 |         23 |        100 |
+| src\app\shared\slider                                                                                     |          2 |         38 |          0 |          9 |         47 |
+| src\app\shared\spinner                                                                                    |          2 |         43 |          0 |          4 |         47 |
+| src\app\shared\utils                                                                                      |          1 |         10 |          0 |          2 |         12 |
+| src\assets                                                                                                |          2 |         64 |          0 |          7 |         71 |
+| src\assets\images                                                                                         |          1 |         20 |          0 |          5 |         25 |
+| src\environments                                                                                          |          2 |          6 |         11 |          4 |         21 |
++-----------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++-----------------------------------------------------------------------------------------------------------+--------------------+------------+------------+------------+------------+
+| filename                                                                                                  | language           | code       | comment    | blank      | total      |
++-----------------------------------------------------------------------------------------------------------+--------------------+------------+------------+------------+------------+
+| c:\Users\Ja\WebstormProjects\PimpMyPc\README.md                                                           | Markdown           |          2 |          0 |          2 |          4 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\angular.json                                                        | JSON               |        169 |          8 |          1 |        178 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\e2e\protractor.conf.js                                              | JavaScript         |         29 |          6 |          2 |         37 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\e2e\src\app.e2e-spec.ts                                             | TypeScript         |         18 |          1 |          5 |         24 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\e2e\src\app.po.ts                                                   | TypeScript         |          9 |          0 |          3 |         12 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\e2e\tsconfig.json                                                   | JSON with Comments |         12 |          1 |          1 |         14 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\karma.conf.js                                                       | JavaScript         |         37 |          6 |          2 |         45 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\package-lock.json                                                   | JSON               |     25,211 |          0 |          1 |     25,212 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\package.json                                                        | JSON               |         58 |          0 |          1 |         59 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\account\account-routing.module.ts                           | TypeScript         |         23 |          0 |          4 |         27 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\account\account-settings\account-settings.component.html    | HTML               |        198 |          1 |         27 |        226 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\account\account-settings\account-settings.component.ts      | TypeScript         |         98 |          0 |         16 |        114 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\account\account.component.html                              | HTML               |         44 |          0 |         10 |         54 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\account\account.component.ts                                | TypeScript         |         17 |          0 |          5 |         22 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\account\account.module.ts                                   | TypeScript         |         23 |          0 |          2 |         25 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\account\my-orders\my-orders.component.html                  | HTML               |         24 |          0 |          7 |         31 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\account\my-orders\my-orders.component.ts                    | TypeScript         |         17 |          0 |          4 |         21 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\account\order-details\order-details.component.html          | HTML               |         39 |          0 |         10 |         49 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\account\order-details\order-details.component.ts            | TypeScript         |         29 |          2 |          4 |         35 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\build-pc\build-pc.component.html                            | HTML               |        133 |          0 |         19 |        152 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\build-pc\build-pc.component.scss                            | SCSS               |          0 |          0 |          1 |          1 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\build-pc\build-pc.component.ts                              | TypeScript         |         92 |          2 |         16 |        110 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\core\core.module.ts                                         | TypeScript         |         31 |          0 |          2 |         33 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\core\footer\footer.component.html                           | HTML               |         36 |          0 |          5 |         41 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\core\footer\footer.component.scss                           | SCSS               |          0 |          0 |          1 |          1 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\core\footer\footer.component.ts                             | TypeScript         |         11 |          0 |          5 |         16 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\core\guards\login.guard.ts                                  | TypeScript         |         22 |          1 |          4 |         27 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\core\home\home.component.html                               | HTML               |         74 |          0 |         20 |         94 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\core\home\home.component.scss                               | SCSS               |          0 |          0 |          1 |          1 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\core\home\home.component.ts                                 | TypeScript         |         65 |          1 |          6 |         72 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\core\interceptors\auth.interceptor.ts                       | TypeScript         |         18 |          0 |          7 |         25 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\core\navbar\Categories.ts                                   | TypeScript         |         86 |          0 |          2 |         88 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\core\navbar\navbar.component.html                           | HTML               |        109 |         20 |         28 |        157 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\core\navbar\navbar.component.scss                           | SCSS               |         23 |          0 |         11 |         34 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\core\navbar\navbar.component.ts                             | TypeScript         |         73 |          0 |         18 |         91 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\core\page-not-found\page-not-found.component.html           | HTML               |          8 |          0 |          7 |         15 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\core\page-not-found\page-not-found.component.scss           | SCSS               |          0 |          0 |          1 |          1 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\core\page-not-found\page-not-found.component.ts             | TypeScript         |         11 |          0 |          5 |         16 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\core\services\auth.service.ts                               | TypeScript         |         61 |         18 |         11 |         90 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\core\services\cart.service.ts                               | TypeScript         |         40 |          0 |         10 |         50 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\core\services\categories.service.ts                         | TypeScript         |         18 |          0 |          5 |         23 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\core\services\configurator.service.ts                       | TypeScript         |         46 |          0 |          6 |         52 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\core\services\filters.service.ts                            | TypeScript         |          9 |          0 |          6 |         15 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\core\services\order.service.ts                              | TypeScript         |         22 |          0 |          5 |         27 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\core\services\products.service.spec.ts                      | TypeScript         |          0 |         10 |          4 |         14 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\core\services\products.service.ts                           | TypeScript         |         96 |          0 |         17 |        113 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\core\services\user.service.ts                               | TypeScript         |         28 |          4 |          8 |         40 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\core\services\validation.service.ts                         | TypeScript         |         18 |          0 |          4 |         22 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\informations\about-us\about-us.component.html               | HTML               |         40 |          0 |          5 |         45 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\informations\about-us\about-us.component.ts                 | TypeScript         |         10 |          0 |          3 |         13 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\informations\contact-us\contact-us.component.html           | HTML               |         61 |          0 |         13 |         74 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\informations\contact-us\contact-us.component.ts             | TypeScript         |         16 |          0 |          4 |         20 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\informations\informations-routing.module.ts                 | TypeScript         |         25 |          0 |          3 |         28 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\informations\informations.module.ts                         | TypeScript         |         12 |          0 |          3 |         15 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\informations\newsletter\newsletter.component.html           | HTML               |         18 |          0 |          4 |         22 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\informations\newsletter\newsletter.component.ts             | TypeScript         |         10 |          0 |          3 |         13 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\informations\privacy-policy\privacy-policy.component.html   | HTML               |         40 |          0 |          6 |         46 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\informations\privacy-policy\privacy-policy.component.ts     | TypeScript         |         10 |          0 |          3 |         13 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\informations\regulations\regulations.component.html         | HTML               |         41 |          0 |          5 |         46 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\informations\regulations\regulations.component.ts           | TypeScript         |         10 |          0 |          3 |         13 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\login\login-routing.module.ts                               | TypeScript         |         13 |          0 |          3 |         16 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\login\login.component.html                                  | HTML               |         61 |          0 |         22 |         83 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\login\login.component.ts                                    | TypeScript         |         48 |          0 |          7 |         55 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\login\login.module.ts                                       | TypeScript         |         19 |          0 |          2 |         21 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\orders\cart\cart.component.html                             | HTML               |         41 |          0 |         16 |         57 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\orders\cart\cart.component.ts                               | TypeScript         |         23 |          0 |          5 |         28 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\orders\checkout\checkout.component.html                     | HTML               |        138 |          0 |         31 |        169 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\orders\checkout\checkout.component.ts                       | TypeScript         |         96 |          0 |         11 |        107 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\orders\orders-routing.module.ts                             | TypeScript         |         15 |          0 |          3 |         18 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\orders\orders.module.ts                                     | TypeScript         |         16 |          0 |          2 |         18 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\pmp-routing.module.ts                                       | TypeScript         |         62 |          0 |          3 |         65 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\pmp.component.html                                          | HTML               |         25 |          0 |          3 |         28 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\pmp.component.scss                                          | SCSS               |          0 |          0 |          1 |          1 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\pmp.component.ts                                            | TypeScript         |          9 |          0 |          2 |         11 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\pmp.module.ts                                               | TypeScript         |         38 |          0 |          3 |         41 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\product\product-full\product-full.component.html            | HTML               |         48 |          0 |         15 |         63 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\product\product-full\product-full.component.ts              | TypeScript         |         59 |          0 |         11 |         70 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\product\product.module.ts                                   | TypeScript         |         19 |          0 |          4 |         23 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\product\products-routing.module.ts                          | TypeScript         |         13 |          0 |          4 |         17 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\products\products-category\ProductsFilters.ts               | TypeScript         |          9 |          0 |          1 |         10 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\products\products-category\products-category.component.html | HTML               |         63 |          0 |         29 |         92 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\products\products-category\products-category.component.ts   | TypeScript         |        204 |          0 |         45 |        249 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\products\products-routing.module.ts                         | TypeScript         |         17 |          0 |          4 |         21 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\products\products.module.ts                                 | TypeScript         |         20 |          0 |          2 |         22 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\register\register-routing.module.ts                         | TypeScript         |         13 |          0 |          3 |         16 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\register\register.component.html                            | HTML               |        165 |          0 |         34 |        199 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\register\register.component.ts                              | TypeScript         |         75 |          0 |          7 |         82 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\register\register.module.ts                                 | TypeScript         |         18 |          0 |          2 |         20 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\search\search-routing.module.ts                             | TypeScript         |         11 |          0 |          3 |         14 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\search\search.component.html                                | HTML               |         26 |          0 |          5 |         31 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\search\search.component.scss                                | SCSS               |          0 |          0 |          1 |          1 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\search\search.component.ts                                  | TypeScript         |         86 |          0 |         14 |        100 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\search\search.module.ts                                     | TypeScript         |         20 |          0 |          2 |         22 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\shared\loading-dots\loading-dots.component.html             | HTML               |         20 |          0 |          1 |         21 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\shared\loading-dots\loading-dots.component.ts               | TypeScript         |          9 |          0 |          3 |         12 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\shared\modal\modal.component.html                           | HTML               |         20 |          0 |          7 |         27 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\shared\modal\modal.component.ts                             | TypeScript         |         20 |          0 |          7 |         27 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\shared\model\BaseProduct.ts                                 | TypeScript         |         33 |          0 |          8 |         41 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\shared\model\Cart.ts                                        | TypeScript         |          9 |          0 |          4 |         13 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\shared\model\Category.ts                                    | TypeScript         |          4 |          0 |          1 |          5 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\shared\model\Computer.ts                                    | TypeScript         |         11 |          0 |          1 |         12 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\shared\model\FilterGroup.ts                                 | TypeScript         |         12 |          0 |          2 |         14 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\shared\model\Laptop.ts                                      | TypeScript         |         16 |          0 |          1 |         17 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\shared\model\LoginDetails.ts                                | TypeScript         |          5 |          0 |          1 |          6 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\shared\model\Movie.ts                                       | TypeScript         |          4 |          0 |          1 |          5 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\shared\model\Order.ts                                       | TypeScript         |         28 |          0 |          5 |         33 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\shared\model\Param.ts                                       | TypeScript         |          8 |          0 |          2 |         10 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\shared\model\Product.ts                                     | TypeScript         |          6 |          0 |          1 |          7 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\shared\model\ProductDetail.ts                               | TypeScript         |          7 |          1 |          1 |          9 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\shared\model\ProductResponse.ts                             | TypeScript         |         11 |          0 |          2 |         13 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\shared\model\User.ts                                        | TypeScript         |         19 |          0 |          3 |         22 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\shared\model\UserEdit.ts                                    | TypeScript         |         22 |          0 |          4 |         26 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\shared\pagination\pagination.component.html                 | HTML               |         22 |          0 |          9 |         31 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\shared\pagination\pagination.component.scss                 | SCSS               |          0 |          0 |          1 |          1 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\shared\pagination\pagination.component.ts                   | TypeScript         |         15 |          0 |          5 |         20 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\shared\pipes\order-status.pipe.ts                           | TypeScript         |          9 |          0 |          2 |         11 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\shared\product-small\product-small.component.html           | HTML               |         43 |          0 |         14 |         57 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\shared\product-small\product-small.component.scss           | SCSS               |          0 |          0 |          1 |          1 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\shared\product-small\product-small.component.ts             | TypeScript         |         34 |          0 |          8 |         42 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\shared\shared.module.ts                                     | TypeScript         |         40 |          0 |          2 |         42 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\shared\slider\slider.component.html                         | HTML               |         23 |          0 |          5 |         28 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\shared\slider\slider.component.ts                           | TypeScript         |         15 |          0 |          4 |         19 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\shared\spinner\spinner.component.html                       | HTML               |         33 |          0 |          1 |         34 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\shared\spinner\spinner.component.ts                         | TypeScript         |         10 |          0 |          3 |         13 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\app\shared\utils\Utils.ts                                       | TypeScript         |         10 |          0 |          2 |         12 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\assets\images\star-rating.icons.svg                             | XML                |         20 |          0 |          5 |         25 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\assets\logo.svg                                                 | XML                |         44 |          0 |          2 |         46 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\environments\environment.prod.ts                                | TypeScript         |          3 |          0 |          1 |          4 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\environments\environment.ts                                     | TypeScript         |          3 |         11 |          3 |         17 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\index.html                                                      | HTML               |         16 |          0 |          2 |         18 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\main.ts                                                         | TypeScript         |          9 |          0 |          4 |         13 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\polyfills.ts                                                    | TypeScript         |          1 |         47 |          6 |         54 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\styles.scss                                                     | SCSS               |         98 |          2 |         23 |        123 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\src\test.ts                                                         | TypeScript         |         20 |          4 |          4 |         28 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\tailwind.config.js                                                  | JavaScript         |         96 |          1 |          5 |        102 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\tsconfig.app.json                                                   | JSON               |         14 |          1 |          1 |         16 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\tsconfig.json                                                       | JSON with Comments |         30 |          1 |          1 |         32 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\tsconfig.spec.json                                                  | JSON               |         17 |          1 |          1 |         19 |
+| c:\Users\Ja\WebstormProjects\PimpMyPc\tslint.json                                                         | JSON               |        152 |          0 |          1 |        153 |
+| Total                                                                                                     |                    |     29,991 |        150 |        868 |     31,009 |
++-----------------------------------------------------------------------------------------------------------+--------------------+------------+------------+------------+------------+

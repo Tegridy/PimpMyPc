@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { IMovie } from '../model/IMovie';
+import { Movie } from '../model/Movie';
 import { BaseProduct } from '../model/BaseProduct';
 
 @Component({
@@ -9,7 +9,7 @@ import { BaseProduct } from '../model/BaseProduct';
 })
 export class SliderComponent implements OnInit {
   @Input() bestsellers: BaseProduct[] = [];
-  @Input() movies: IMovie[] = [];
+  @Input() movies: Movie[] = [];
   @Input() isMovie = false;
 
   constructor() {}

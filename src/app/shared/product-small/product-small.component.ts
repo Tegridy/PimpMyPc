@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 })
 export class ProductSmallComponent implements OnInit {
   @Input()
-  product: BaseProduct = { id: 0, price: 999, quantity: 0, title: 'Product' };
+  product: BaseProduct = { id: 0, price: 999, title: 'Product' };
 
   @Input()
   listView = false;
