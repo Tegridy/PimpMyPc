@@ -4,11 +4,11 @@ import { PaginationInstance } from 'ngx-pagination';
 @Component({
   selector: 'pmp-pagination',
   templateUrl: './pagination.component.html',
-  styleUrls: ['./pagination.component.scss'],
+  styleUrls: [],
 })
 export class PaginationComponent implements OnInit {
   @Input()
-  config: any = {};
+  config: PaginationInstance = { itemsPerPage: 9, currentPage: 1 };
 
   @Output()
   pageChangeEvent = new EventEmitter<number>();

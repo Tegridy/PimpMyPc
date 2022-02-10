@@ -8,11 +8,11 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'pmp-product-small',
   templateUrl: './product-small.component.html',
-  styleUrls: ['./product-small.component.scss'],
+  styleUrls: [],
 })
 export class ProductSmallComponent implements OnInit {
   @Input()
-  product: BaseProduct = { id: 0, price: 999, title: 'Product' };
+  product!: BaseProduct;
 
   @Input()
   listView = false;
@@ -36,6 +36,6 @@ export class ProductSmallComponent implements OnInit {
   addItemToConfigurator(): void {
     this.configuratorService.addPart(this.product);
 
-    this.router.navigate(['/build-pc'], {});
+    this.router.navigateByUrl('/build-pc');
   }
 }
