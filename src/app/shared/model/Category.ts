@@ -1,4 +1,6 @@
 export interface Category {
-  id: number;
-  title: string;
+  name: string;
+  iconName?: string;
+  firstLevelMenu?: any[];
+  endpointName?: string;
 }

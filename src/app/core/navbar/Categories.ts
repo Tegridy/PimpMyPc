@@ -1,26 +1,28 @@
+import { Category } from './../../shared/model/Category';
 import { Param } from '../../shared/model/Param';
 
-export const categories = [
+export const categories: Category[] = [
   {
     name: 'Laptops',
     iconName: 'laptop-outline',
-    subMenu: [
+    firstLevelMenu: [
       {
         name: 'Laptops/Ultrabooks/Notebooks',
-        innerMenu: [
+        secondLevelMenu: [
           {
             name: 'Notebook/Laptop 15"',
-            filterParams: new Param('displaySize', 15),
+            filterParams: { page: 1, displaySize: 15 },
           },
           {
             name: 'Notebook/Laptop 16"',
-            filterParams: new Param('displaySize', 16),
+            filterParams: { page: 1, displaySize: 16 },
           },
           {
             name: 'Notebook/Laptop 17"',
-            filterParams: new Param('displaySize', 17),
+            filterParams: { page: 1, displaySize: 17 },
           },
         ],
+        endpointName: 'laptops',
       },
     ],
     endpointName: 'laptops',
@@ -28,10 +30,6 @@ export const categories = [
   {
     name: 'Computers',
     iconName: 'desktop-outline',
-    subMenu: [
-      { name: 'Personal Computers', endpointName: 'computers' },
-      { name: 'Gaming Computers', endpointName: 'computers' },
-    ],
     endpointName: 'computers',
   },
   {
@@ -42,30 +40,30 @@ export const categories = [
   {
     name: 'Computer assets',
     iconName: 'hardware-chip-outline',
-    subMenu: [
+    firstLevelMenu: [
       {
         name: 'Processors',
-        innerMenu: [
-          { name: 'Intel', filterParams: new Param('title', 'intel') },
-          { name: 'AMD', filterParams: new Param('title', 'amd') },
+        secondLevelMenu: [
+          { name: 'Intel', filterParams: { page: 1, title: 'intel' } },
+          { name: 'AMD', filterParams: { page: 1, title: 'amd' } },
         ],
         endpointName: 'processors',
       },
       { name: 'Memory RAM', endpointName: 'rams' },
       {
         name: 'Graphic cards',
-        innerMenu: [
-          { name: 'Nvidia', filterParams: new Param('title', 'nvidia') },
-          { name: 'AMD', filterParams: new Param('title', 'amd') },
+        secondLevelMenu: [
+          { name: 'Nvidia', filterParams: { page: 1, title: 'nvidia' } },
+          { name: 'AMD', filterParams: { page: 1, title: 'amd' } },
         ],
         endpointName: 'graphics',
       },
       { name: 'Motherboards', endpointName: 'motherboards' },
       {
         name: 'Hard drives',
-        innerMenu: [
-          { name: 'SSD', filterParams: new Param('type', 'ssd') },
-          { name: 'HDD', filterParams: new Param('type', 'hdd') },
+        secondLevelMenu: [
+          { name: 'SSD', filterParams: { page: 1, storageType: 'SSD' } },
+          { name: 'HDD', filterParams: { page: 1, storageType: 'HDD' } },
         ],
         endpointName: 'drives',
       },
@@ -77,7 +75,7 @@ export const categories = [
   {
     name: 'Peripherals',
     iconName: 'print-outline',
-    subMenu: [
+    firstLevelMenu: [
       { name: 'Monitors', endpointName: 'monitors' },
       { name: 'Computer mouse', endpointName: 'mouses' },
       { name: 'Computer keyboard', endpointName: 'keyboards' },

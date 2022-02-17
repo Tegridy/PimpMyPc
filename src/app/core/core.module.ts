@@ -1,4 +1,3 @@
-import { CategoriesService } from './services/categories.service';
 import { ProductsService } from './services/products.service';
 import { ProductsModule } from './../products/products.module';
 import { InformationsModule } from './../informations/informations.module';
@@ -27,6 +26,6 @@ import { NgxGlideModule } from 'ngx-glide';
     NgxGlideModule,
   ],
   exports: [NavbarComponent, FooterComponent],
-  providers: [ProductsService, CategoriesService],
+  providers: [ProductsService],
 })
 export class CoreModule {}

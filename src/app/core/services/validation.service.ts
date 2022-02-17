@@ -1,11 +1,13 @@
-import {Injectable} from '@angular/core';
-import {AbstractControl} from '@angular/forms';
+import { Injectable } from '@angular/core';
+import { AbstractControl } from '@angular/forms';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ValidationService {
-  static passwordMatcher(c: AbstractControl): { [key: string]: boolean } | null {
+  public static passwordMatcher(
+    c: AbstractControl
+  ): { [key: string]: boolean } | null {
     const password1Control = c.get('password');
     const password2Control = c.get('confirmPassword');
 
@@ -16,6 +18,6 @@ export class ValidationService {
     if (password1Control?.value === password2Control?.value) {
       return null;
     }
-    return {match: true};
+    return { match: true };
   }
 }

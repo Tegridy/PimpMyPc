@@ -10,7 +10,6 @@ import { BaseProduct } from '../../shared/model/BaseProduct';
 
 @Injectable()
 export class ProductsService {
-  productsEndpointName: any = '';
   baseUrl = 'http://localhost:8080/api/v1/products/';
   pageSizeUrl = '&size=9';
 
@@ -64,10 +63,6 @@ export class ProductsService {
     return throwError(errorMessage);
   }
 
-  setCurrentCategory(category: string): void {
-    this.productsEndpointName = category;
-  }
-
   getProductsByCategory(
     productName: string,
     categoryName: string,
@@ -89,19 +84,27 @@ export class ProductsService {
   }
 
   getTopSellingProducts(): Observable<BaseProduct[]> {
-    return this.http.get<BaseProduct[]>(this.baseUrl + 'top');
+    return this.http
+      .get<BaseProduct[]>(this.baseUrl + 'top')
+      .pipe(catchError(this.handleError));
   }
 
   getOurChoice(): Observable<BaseProduct[]> {
-    return this.http.get<BaseProduct[]>(this.baseUrl + 'our-choice');
+    return this.http
+      .get<BaseProduct[]>(this.baseUrl + 'our-choice')
+      .pipe(catchError(this.handleError));
   }
 
   getNewestProduct(): Observable<BaseProduct> {
-    return this.http.get<BaseProduct>(this.baseUrl + 'newest');
+    return this.http
+      .get<BaseProduct>(this.baseUrl + 'newest')
+      .pipe(catchError(this.handleError));
   }
 
   getProductById(id: number): Observable<any> {
     console.log(this.baseUrl + id);
-    return this.http.get<any>(this.baseUrl + id);
+    return this.http
+      .get<any>(this.baseUrl + id)
+      .pipe(catchError(this.handleError));
   }
 }

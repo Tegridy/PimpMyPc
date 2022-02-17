@@ -14,7 +14,6 @@ import { throwError, Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class AuthService {
-  // Temp
   isUserLoggedIn = false;
 
   constructor(private http: HttpClient) {}

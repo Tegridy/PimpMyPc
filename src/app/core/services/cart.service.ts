@@ -15,13 +15,15 @@ export class CartService {
 
   constructor(private http: HttpClient) {}
 
-  public addProductToCart(product: BaseProduct): void {
+  addProductToCart(product: BaseProduct): void {
     this.cart.products.push(product);
   }
 
-  public removeProductFromCart(id: number): void {
-    const productIdx = this.cart.products.findIndex((prod) => prod.id === id);
-    this.cart.products.splice(productIdx, 1);
+  removeProductFromCart(id: number): void {
+    const productIndex = this.cart.products.findIndex(
+      (product) => product.id === id
+    );
+    this.cart.products.splice(productIndex, 1);
     this.cartSource.next(this.cart);
     this.updateCart();
   }
@@ -32,11 +34,11 @@ export class CartService {
     this.updateCart();
   }
 
-  updateCart(): void {
-    const y = this.cart.products.map((p) => p.id);
+  private updateCart(): void {
+    const productsIndexes = this.cart.products.map((product) => product.id);
 
     this.http
-      .post('http://localhost:8080/api/v1/cart/x', y)
+      .post('http://localhost:8080/api/v1/cart/x', productsIndexes)
       .subscribe((totalPrice) => {
         this.cart.cartTotalPrice = totalPrice as number;
       });

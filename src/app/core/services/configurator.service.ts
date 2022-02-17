@@ -17,8 +17,7 @@ export class ConfiguratorService {
 
   addPart(product: BaseProduct) {
     if (product.categories) {
-      console.log(product.categories[0].title);
-      switch (product.categories[0].title) {
+      switch (product.categories[0].name) {
         case 'Motherboards':
           this.computer.motherboard = product;
           break;

@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { categories } from './Categories';
-import { CategoriesService } from '../services/categories.service';
 import { Params, Router } from '@angular/router';
-import { ProductsService } from '../services/products.service';
-import { BaseProduct } from '../../shared/model/BaseProduct';
 import { CartService } from '../services/cart.service';
 import { Param } from '../../shared/model/Param';
+import { Category } from 'src/app/shared/model/Category';
 
 @Component({
   selector: 'pmp-navbar',
@@ -13,27 +11,18 @@ import { Param } from '../../shared/model/Param';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
-  constructor(
-    private cartService: CartService,
-    private categoryService: CategoriesService,
-    private router: Router,
-    private productsService: ProductsService
-  ) {}
+  constructor(private cartService: CartService, private router: Router) {}
 
   showMenu = false;
   toggleBackdrop = true;
 
-  mainCategories: any;
-  currentProductsSelected = '';
   currentSearchCategory = '';
-
   searchPhrase = '';
 
   numberOfItemsInCart = 0;
 
-  data: BaseProduct[] = [];
-
-  queryParams: Params = {};
+  mainCategories: Category[] = [];
+  queryParams!: Params;
 
   ngOnInit(): void {
     this.mainCategories = categories;
@@ -42,21 +31,8 @@ export class NavbarComponent implements OnInit {
     );
   }
 
-  toggleMenu(): void {
-    this.showMenu = !this.showMenu;
-  }
-
-  toggleModal(): void {
-    this.toggleBackdrop = !this.toggleBackdrop;
-  }
-
-  setCurrentCategory(category: string): void {
-    this.categoryService.setCurrentCategoryName = category;
-  }
-
   changeCurrentSearchCategory(event: Event): void {
     const categoryName = (event.target as HTMLInputElement).value;
-    console.log('changing ' + categoryName);
     this.currentSearchCategory = categoryName;
   }
 
@@ -76,15 +52,27 @@ export class NavbarComponent implements OnInit {
     this.searchPhrase = '';
   }
 
-  setFilter(param: Param, endpointName: string): void {
+  setFilter(param: Param): void {
     const paramKey = param.key;
     const paramValue = param.value;
 
     this.queryParams.page = 1;
     this.queryParams[paramKey] = paramValue;
+  }
 
-    this.router.navigate([`/categories/${endpointName}/`], {
-      queryParams: this.queryParams,
-    });
+  toggleMenu(): void {
+    this.showMenu = !this.showMenu;
+  }
+
+  toggleModal(): void {
+    this.toggleBackdrop = !this.toggleBackdrop;
+  }
+
+  canMoveDeeperInMenu(menuItem: any): string | undefined {
+    if (menuItem.firstLevelMenu || menuItem.secondLevelMenu) {
+      return;
+    } else {
+      return '/categories/' + menuItem.endpointName;
+    }
   }
 }
