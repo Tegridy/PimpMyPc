@@ -6,6 +6,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from '../core/interceptors/auth.interceptor';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { OrderDetailsComponent } from './order-details/order-details.component';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [AccountRoutingModule.components, OrderDetailsComponent],
@@ -16,6 +17,7 @@ import { OrderDetailsComponent } from './order-details/order-details.component';
     AccountRoutingModule,
     ReactiveFormsModule,
     FormsModule,
+    ToastrModule.forRoot(),
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

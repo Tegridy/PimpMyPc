@@ -33,7 +33,7 @@ export class BuildPcComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.configuratorService.customerComputer$.subscribe((computer) => {
+    this.configuratorService.customerComputer.subscribe((computer) => {
       this.customerComputer = computer;
       this.checkPartsCompatibility();
     });

@@ -1,4 +1,4 @@
-import {Address} from './User';
+import { Address } from './User';
 
 export class UserEdit {
   constructor(
@@ -6,20 +6,13 @@ export class UserEdit {
     public lastName: string,
     public phone: string,
     public email: string
-  ) {
-  }
+  ) {}
 }
 
 export class UserEditAddress {
-  constructor(
-    public address: Address
-  ) {
-  }
+  constructor(public address: Address) {}
 }
 
 export class UserEditAuth {
-  constructor(
-    public password: string
-  ) {
-  }
+  constructor(public password: string) {}
 }

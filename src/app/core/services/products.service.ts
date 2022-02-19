@@ -7,6 +7,7 @@ import {
   ProductsDto,
 } from '../../shared/model/ProductResponse';
 import { BaseProduct } from '../../shared/model/BaseProduct';
+import Utils from 'src/app/shared/utils/Utils';
 
 @Injectable()
 export class ProductsService {
@@ -26,8 +27,8 @@ export class ProductsService {
     if (filtersUrls) {
       filtersUrls = filtersUrls.replace(new RegExp('&page=\\d*'), '');
 
-      if (page === -1) {
-        page = 1;
+      if (page < 0) {
+        page = 0;
       }
 
       return this.http
@@ -39,35 +40,25 @@ export class ProductsService {
             filtersUrls +
             this.pageSizeUrl
         )
-        .pipe(catchError(this.handleError));
+        .pipe(catchError(Utils.handleError));
     } else {
       return this.http
         .get<ProductResponse>(
           this.baseUrl + category + '?page=' + page + this.pageSizeUrl
         )
-        .pipe(catchError(this.handleError));
+        .pipe(catchError(Utils.handleError));
     }
-  }
-
-  private handleError(err: HttpErrorResponse): Observable<never> {
-    let errorMessage = '';
-    if (err.error instanceof ErrorEvent) {
-      errorMessage = `An error occurred: ${err.error.message}`;
-    } else if (err.status == 0) {
-      errorMessage =
-        'An error occurred while products loading. Try again later.';
-    } else {
-      errorMessage = `Server returned code: ${err.status}, error message is: ${err.message}`;
-    }
-    console.error(errorMessage);
-    return throwError(errorMessage);
   }
 
   getProductsByCategory(
     productName: string,
     categoryName: string,
-    pageNumber: number
+    page: number
   ): Observable<ProductsDto> {
+    if (page < 0) {
+      page = 0;
+    }
+
     let requestUrl = this.baseUrl + 'search?productName=' + productName;
 
     if (categoryName !== undefined && categoryName !== 'Everywhere') {
@@ -75,36 +66,32 @@ export class ProductsService {
     }
 
     return this.http.get<ProductsDto>(
-      requestUrl + this.pageSizeUrl + '&page=' + pageNumber
+      requestUrl + this.pageSizeUrl + '&page=' + page
     );
-  }
-
-  setData(data: BaseProduct[]): void {
-    this.productsSearchResultSource.next(data);
   }
 
   getTopSellingProducts(): Observable<BaseProduct[]> {
     return this.http
       .get<BaseProduct[]>(this.baseUrl + 'top')
-      .pipe(catchError(this.handleError));
+      .pipe(catchError(Utils.handleError));
   }
 
   getOurChoice(): Observable<BaseProduct[]> {
     return this.http
       .get<BaseProduct[]>(this.baseUrl + 'our-choice')
-      .pipe(catchError(this.handleError));
+      .pipe(catchError(Utils.handleError));
   }
 
   getNewestProduct(): Observable<BaseProduct> {
     return this.http
       .get<BaseProduct>(this.baseUrl + 'newest')
-      .pipe(catchError(this.handleError));
+      .pipe(catchError(Utils.handleError));
   }
 
-  getProductById(id: number): Observable<any> {
+  getProductById(id: number): Observable<BaseProduct> {
     console.log(this.baseUrl + id);
     return this.http
-      .get<any>(this.baseUrl + id)
-      .pipe(catchError(this.handleError));
+      .get<BaseProduct>(this.baseUrl + id)
+      .pipe(catchError(Utils.handleError));
   }
 }

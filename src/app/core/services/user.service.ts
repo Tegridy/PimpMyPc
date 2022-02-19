@@ -1,39 +1,53 @@
-import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
-import {Address, User} from '../../shared/model/User';
-import {UserEdit, UserEditAuth} from '../../shared/model/UserEdit';
+import { catchError } from 'rxjs/operators';
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { Address, User } from '../../shared/model/User';
+import { UserEdit, UserEditAuth } from '../../shared/model/UserEdit';
+import Utils from 'src/app/shared/utils/Utils';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserService {
+  baseUrl = 'http://localhost:8080/api/v1/user/';
 
-  constructor(private http: HttpClient) {
-  }
+  constructor(private http: HttpClient) {}
 
   getUserAccountDetails(): Observable<User> {
     const userId = sessionStorage.getItem('userId');
-    return this.http.get<User>('http://localhost:8080/api/v1/user/' + userId + '/account-details');
+    return this.http
+      .get<User>(this.baseUrl + userId)
+      .pipe(catchError((error) => Utils.handleError(error)));
   }
 
-  // updateUserAccountDetails(user: UserEdit): void {
-  //   const userId = sessionStorage.getItem('userId');
-  //   this.http.put('http://localhost:8080/api/v1/user/update/' + userId, user).subscribe();
-  // }
-
-  updateUserPersonalDetails(user: UserEdit): void {
+  updateUserPersonalDetails(user: UserEdit): Observable<any> {
     const userId = sessionStorage.getItem('userId');
-    this.http.put('http://localhost:8080/api/v1/user/' + userId + '/personal-details', user).subscribe();
+    return this.http
+      .patch<User>(this.baseUrl + userId + '/personal', user)
+      .pipe(catchError((error) => Utils.handleError(error)));
   }
 
-  updateUserAddressDetails(user: Address): void {
+  updateUserAddressDetails(user: Address): Observable<any> {
     const userId = sessionStorage.getItem('userId');
-    this.http.put('http://localhost:8080/api/v1/user/' + userId + '/address-details', user).subscribe();
+    return this.http
+      .patch(this.baseUrl + userId + '/address', user)
+      .pipe(catchError((error) => Utils.handleError(error)));
   }
 
-  updateUserAuthDetails(user: UserEditAuth): void {
+  updateUserAuthDetails(user: UserEditAuth): Observable<any> {
     const userId = sessionStorage.getItem('userId');
-    this.http.put('http://localhost:8080/api/v1/user/' + userId + '/auth-details', user).subscribe();
+    return this.http
+      .patch(this.baseUrl + userId + '/auth', user)
+      .pipe(catchError((error) => Utils.handleError(error)));
+  }
+
+  private getUserId(): number {
+    const id = sessionStorage.getItem('userId');
+    if (id) {
+      return Number(id);
+    } else {
+      return -1;
+    }
   }
 }

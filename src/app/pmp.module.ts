@@ -15,12 +15,14 @@ import { PmpRoutingModule } from './pmp-routing.module';
 import { PmpComponent } from './pmp.component';
 import { NgxGlideModule } from 'ngx-glide';
 import { BuildPcComponent } from './build-pc/build-pc.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [PmpComponent, BuildPcComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     PmpRoutingModule,
     AccountModule,
     InformationsModule,

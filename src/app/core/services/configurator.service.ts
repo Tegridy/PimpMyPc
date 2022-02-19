@@ -1,4 +1,3 @@
-import { Product } from './../../shared/model/Product';
 import { Computer } from './../../shared/model/Computer';
 import { Injectable } from '@angular/core';
 import { BaseProduct } from 'src/app/shared/model/BaseProduct';
@@ -11,7 +10,7 @@ export class ConfiguratorService {
   private computer: Computer = {} as Computer;
 
   private customerComputerSource = new BehaviorSubject<Computer>(this.computer);
-  customerComputer$ = this.customerComputerSource.asObservable();
+  customerComputer = this.customerComputerSource.asObservable();
 
   constructor() {}
 
@@ -38,10 +37,7 @@ export class ConfiguratorService {
           break;
       }
       this.updateCustomerComputer(this.computer);
-    } else {
-      console.log('Product has no category');
     }
-    console.log(this.computer);
   }
 
   private updateCustomerComputer(computer: Computer) {

@@ -6,10 +6,10 @@ import { AbstractControl } from '@angular/forms';
 })
 export class ValidationService {
   public static passwordMatcher(
-    c: AbstractControl
+    control: AbstractControl
   ): { [key: string]: boolean } | null {
-    const password1Control = c.get('password');
-    const password2Control = c.get('confirmPassword');
+    const password1Control = control.get('password');
+    const password2Control = control.get('confirmPassword');
 
     if (password1Control?.pristine || password2Control?.pristine) {
       return null;

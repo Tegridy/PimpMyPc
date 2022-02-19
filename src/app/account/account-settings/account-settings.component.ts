@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Address, User } from '../../shared/model/User';
 import { UserEdit, UserEditAuth } from '../../shared/model/UserEdit';
 import { ValidationService } from '../../core/services/validation.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'pmp-account-settings',
@@ -24,7 +25,8 @@ export class AccountSettingsComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -90,7 +92,12 @@ export class AccountSettingsComponent implements OnInit {
       this.personalDetailsForm.get('phone')?.value,
       this.personalDetailsForm.get('email')?.value
     );
-    this.userService.updateUserPersonalDetails(user);
+    this.userService.updateUserPersonalDetails(user).subscribe(
+      () => {
+        this.showSuccessToast();
+      },
+      (error) => this.showErrorToast(error)
+    );
     this.toggleModal();
   }
 
@@ -101,13 +108,35 @@ export class AccountSettingsComponent implements OnInit {
       this.addressDetailsForm.get('city')?.value,
       this.addressDetailsForm.get('zip')?.value
     );
-    this.userService.updateUserAddressDetails(address);
+    this.userService.updateUserAddressDetails(address).subscribe(
+      () => {
+        this.showSuccessToast();
+      },
+      (error) => this.showErrorToast(error)
+    );
     this.toggleModal();
   }
 
   saveAuthData(): void {
     const user = new UserEditAuth(this.authDetailsForm.get('password')?.value);
-    this.userService.updateUserAuthDetails(user);
+    this.userService.updateUserAuthDetails(user).subscribe(
+      () => {
+        this.showSuccessToast();
+      },
+      (error) => this.showErrorToast(error)
+    );
     this.toggleModal();
+  }
+
+  private showSuccessToast(): void {
+    this.toastr.success('User data updated successfuly!', 'Update', {
+      positionClass: 'toast-bottom-right',
+    });
+  }
+
+  private showErrorToast(errorMessage: string): void {
+    this.toastr.error(errorMessage, 'Update error', {
+      positionClass: 'toast-bottom-right',
+    });
   }
 }

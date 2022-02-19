@@ -52,11 +52,13 @@ export class RegisterComponent implements OnInit {
       this.registerForm.get('email')?.value
     );
     this.auth.signUpUser(user).subscribe(
-      () => {
+      (registerResponse) => {
         this.loading = false;
+        console.log(registerResponse.username);
+
         this.toastr.success(
           'Account created!',
-          'Welcome ' + sessionStorage.getItem('username'),
+          'Welcome ' + registerResponse.username,
           {
             positionClass: 'toast-bottom-right',
           }

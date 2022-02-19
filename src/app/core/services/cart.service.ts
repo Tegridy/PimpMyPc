@@ -1,3 +1,4 @@
+import { catchError, map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { BaseProduct } from '../../shared/model/BaseProduct';
 import { BehaviorSubject } from 'rxjs';
@@ -37,11 +38,11 @@ export class CartService {
   private updateCart(): void {
     const productsIndexes = this.cart.products.map((product) => product.id);
 
-    this.http
-      .post('http://localhost:8080/api/v1/cart/x', productsIndexes)
-      .subscribe((totalPrice) => {
+    this.http.put('http://localhost:8080/api/v1/cart', productsIndexes).pipe(
+      map((totalPrice) => {
         this.cart.cartTotalPrice = totalPrice as number;
-      });
+      })
+    );
   }
 
   clearCart(): void {
