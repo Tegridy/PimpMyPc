@@ -7,14 +7,12 @@ import { Address } from '../../shared/model/User';
 @Component({
   selector: 'pmp-order-details',
   templateUrl: './order-details.component.html',
-  styleUrls: ['./order-details.component.scss'],
+  styleUrls: [],
 })
 export class OrderDetailsComponent implements OnInit {
-  // @ts-ignore
-  order: SingleOrder;
+  order!: SingleOrder;
   orderProducts: any;
-  // @ts-ignore
-  orderAddress: Address;
+  orderAddress!: Address;
   id = 0;
 
   constructor(
