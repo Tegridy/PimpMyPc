@@ -15,7 +15,7 @@ export class ProductFullComponent implements OnInit {
   productStars = 0;
   productId = 0;
 
-  product: BaseProduct;
+  product!: BaseProduct;
   productDetails: ProductDetail[] = [];
   productDetailsToFilter = ['id', 'title', 'description', 'price', 'imageUrl'];
 
@@ -23,9 +23,7 @@ export class ProductFullComponent implements OnInit {
     private productsService: ProductsService,
     private route: ActivatedRoute,
     private cartService: CartService
-  ) {
-    this.product = { title: 'Product title', price: 0, id: -1 };
-  }
+  ) {}
 
   ngOnInit(): void {
     this.getProductId();

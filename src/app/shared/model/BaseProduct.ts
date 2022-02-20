@@ -9,6 +9,7 @@ export interface BaseProduct {
   brand?: string;
   model?: string;
   imageUrl?: string;
+  quantity: number;
   price: number;
   categories?: Category[];
 }
