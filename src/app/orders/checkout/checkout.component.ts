@@ -23,6 +23,8 @@ export class CheckoutComponent implements OnInit {
   orderId = 0;
   orderStatus = '';
 
+  isUserLoggedIn = false;
+
   constructor(
     private authService: AuthService,
     private formBuilder: FormBuilder,
@@ -52,22 +54,24 @@ export class CheckoutComponent implements OnInit {
       }),
     });
 
-    if (this.authService.isUserLoggedIn) {
-      this.userService.getUserAccountDetails().subscribe((userData) => {
-        this.orderForm.patchValue({
-          customerFirstName: userData.firstName,
-          customerLastName: userData.lastName,
-          customerEmail: userData.email,
-          customerPhone: userData.phone,
-          deliveryAddress: {
-            street: userData.address.street,
-            city: userData.address.city,
-            state: userData.address.state,
-            zip: userData.address.zip,
-          },
+    this.authService.isUserLoggedIn.subscribe((isLoggedIn) => {
+      if (isLoggedIn) {
+        this.userService.getUserAccountDetails().subscribe((userData) => {
+          this.orderForm.patchValue({
+            customerFirstName: userData.firstName,
+            customerLastName: userData.lastName,
+            customerEmail: userData.email,
+            customerPhone: userData.phone,
+            deliveryAddress: {
+              street: userData.address.street,
+              city: userData.address.city,
+              state: userData.address.state,
+              zip: userData.address.zip,
+            },
+          });
         });
-      });
-    }
+      }
+    });
 
     this.cartService.currentCart.subscribe((cart) => {
       cart.products.forEach((cartItem) => this.productIDs.push(cartItem.id));

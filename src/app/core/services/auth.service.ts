@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { User } from '../../shared/model/User';
 import { LoginDetails } from '../../shared/model/LoginDetails';
 import { map, catchError } from 'rxjs/operators';
-import { throwError, Observable } from 'rxjs';
+import { throwError, Observable, BehaviorSubject } from 'rxjs';
 import Utils from 'src/app/shared/utils/Utils';
 import { RegisterResponse } from 'src/app/shared/model/RegisterResponse';
 
@@ -11,7 +11,9 @@ import { RegisterResponse } from 'src/app/shared/model/RegisterResponse';
   providedIn: 'root',
 })
 export class AuthService {
-  isUserLoggedIn = false;
+  private isUserLoggedInSource = new BehaviorSubject<boolean>(false);
+  isUserLoggedIn = this.isUserLoggedInSource.asObservable();
+
   baseUrl = 'http://localhost:8080/api/v1/auth/';
 
   constructor(private http: HttpClient) {}
@@ -23,7 +25,7 @@ export class AuthService {
         sessionStorage.setItem('username', details.username);
         sessionStorage.setItem('token', details.token);
         sessionStorage.setItem('userId', String(details.userId));
-        this.isUserLoggedIn = true;
+        this.isUserLoggedInSource.next(true);
       }),
       catchError((error) => Utils.handleError(error))
     );
@@ -33,5 +35,9 @@ export class AuthService {
     return this.http
       .post<RegisterResponse>(this.baseUrl + 'register', user)
       .pipe(catchError((error) => Utils.handleError(error)));
+  }
+
+  logoutUser(): void {
+    this.isUserLoggedInSource.next(false);
   }
 }

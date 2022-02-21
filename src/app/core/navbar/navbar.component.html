@@ -10,6 +10,12 @@
 
 
     <ul class="flex items-center md:order-2">
+      <li *ngIf="isUserLoggedIn" class="h-full">
+        <button (click)="logout()"
+          class="px-5 rounded cursor-pointer bg-gray-300 hover:bg-blue-500 hover:shadow h-full flex justify-center items-center">
+          Logout
+        </button>
+      </li>
       <li class="px-5 rounded cursor-pointer hover:bg-gray-200 hover:shadow"><a class="flex flex-col items-center"
           routerLink="/account">
           <ion-icon name="person-outline"></ion-icon>

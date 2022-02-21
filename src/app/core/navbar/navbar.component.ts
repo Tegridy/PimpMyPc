@@ -1,9 +1,11 @@
+import { AuthService } from './../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { categories } from './Categories';
 import { Params, Router } from '@angular/router';
 import { CartService } from '../services/cart.service';
 import { Param } from '../../shared/model/Param';
 import { Category } from 'src/app/shared/model/Category';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'pmp-navbar',
@@ -11,7 +13,12 @@ import { Category } from 'src/app/shared/model/Category';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
-  constructor(private cartService: CartService, private router: Router) {}
+  constructor(
+    private cartService: CartService,
+    private router: Router,
+    private authService: AuthService,
+    private toastr: ToastrService
+  ) {}
 
   showMenu = false;
   toggleBackdrop = true;
@@ -24,10 +31,16 @@ export class NavbarComponent implements OnInit {
   mainCategories: Category[] = [];
   queryParams!: Params;
 
+  isUserLoggedIn = false;
+
   ngOnInit(): void {
     this.mainCategories = categories;
     this.cartService.currentCart.subscribe(
       (cart) => (this.numberOfItemsInCart = cart.products.length)
+    );
+
+    this.authService.isUserLoggedIn.subscribe(
+      (isLoggedIn) => (this.isUserLoggedIn = isLoggedIn)
     );
   }
 
@@ -74,5 +87,13 @@ export class NavbarComponent implements OnInit {
     } else {
       return '/categories/' + menuItem.endpointName;
     }
+  }
+
+  logout(): void {
+    this.authService.logoutUser();
+
+    this.toastr.info('Logout successful!', 'Good bye!', {
+      positionClass: 'toast-bottom-right',
+    });
   }
 }
