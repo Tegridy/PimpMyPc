@@ -66,14 +66,18 @@ export class ProductsCategoryComponent implements OnInit, OnDestroy {
     const queryParamsSnapshot = this.route.snapshot.queryParams;
 
     for (const param of Object.entries(queryParamsSnapshot)) {
-      if (Array.isArray(param[1])) {
-        param[1].forEach((param) =>
-          this.queryParams.push(new Param(param[0], param))
-        );
+      const paramKey = param[0];
+      const paramValues = param[1];
+
+      if (Array.isArray(paramValues)) {
+        paramValues.forEach((value) => {
+          this.queryParams.push(new Param(paramKey, value));
+        });
       } else {
-        this.queryParams.push(new Param(param[0], param[1]));
+        this.queryParams.push(new Param(paramKey, paramValues));
       }
     }
+
     this.checkIfConfigMode();
     this.getCurrentCategoryProducts(this.findCurrentPageNumber());
   }
@@ -176,6 +180,10 @@ export class ProductsCategoryComponent implements OnInit, OnDestroy {
   }
 
   filterClick(filterGroup: FilterGroup, filter: Filter): void {
+    console.log(filterGroup);
+    console.log(filter);
+    console.log('');
+
     this.toggleFilter(filter);
 
     if (filter.isChecked) {
@@ -193,6 +201,7 @@ export class ProductsCategoryComponent implements OnInit, OnDestroy {
 
     this.findAndUpdateQueryParam('page', '1');
     Utils.updateUrl(this.queryParams, this.router);
+    console.log(this.queryParams);
   }
 
   toggleFilter(filter: Filter) {
