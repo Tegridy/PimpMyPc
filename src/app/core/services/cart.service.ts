@@ -25,24 +25,25 @@ export class CartService {
       (product) => product.id === id
     );
     this.cart.products.splice(productIndex, 1);
-    this.cartSource.next(this.cart);
     this.updateCart();
   }
 
   changeCart(product: BaseProduct): void {
     this.addProductToCart(product);
-    this.cartSource.next(this.cart);
     this.updateCart();
   }
 
   private updateCart(): void {
     const productsIndexes = this.cart.products.map((product) => product.id);
 
-    this.http.put('http://localhost:8080/api/v1/cart', productsIndexes).pipe(
-      map((totalPrice) => {
+    this.http
+      .put('http://localhost:8080/api/v1/cart', productsIndexes)
+      .subscribe((totalPrice) => {
         this.cart.cartTotalPrice = totalPrice as number;
-      })
-    );
+        console.log(this.cart);
+
+        this.cartSource.next(this.cart);
+      });
   }
 
   clearCart(): void {
