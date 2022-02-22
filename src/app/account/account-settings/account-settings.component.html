@@ -1,7 +1,7 @@
 <section id="account-settings">
   <h3 class="mb-4 text-3xl font-bold">Account settings</h3>
 
-  <div class="w-full p-4 mx-auto mb-4 border border-black rounded-lg sm:w-2/3 sm:mb-0">
+  <div class="w-full md:w-2/3 p-4 mx-auto mb-4 border border-black rounded-lg ">
     <h4 class="my-4 text-2xl">Account details</h4>
     <div>
       <div class="flex flex-col">
@@ -59,7 +59,7 @@
 
     <ng-container *ngIf="currentModal === personalDetailsEditModalName">
       <form novalidate (ngSubmit)="savePersonalData()" [formGroup]="personalDetailsForm">
-        <input id="firstNameId" formControlName="firstName" type="text" class="w-4/5 my-3"
+        <input id="firstNameId" formControlName="firstName" type="text" class="w-full my-3"
           placeholder="First name (required)" [ngClass]="{'is-invalid': (personalDetailsForm.get('firstName')?.touched
           ||
           personalDetailsForm.get('firstName')?.dirty) &&
@@ -73,7 +73,7 @@
           The first name must be longer than 3 characters.
         </span>
 
-        <input id="lastNameId" formControlName="lastName" type="text" class="w-4/5 mb-3"
+        <input id="lastNameId" formControlName="lastName" type="text" class="w-full mb-3"
           placeholder="Last name (required)" [ngClass]="{'is-invalid': (personalDetailsForm.get('lastName')?.touched
           ||
           personalDetailsForm.get('lastName')?.dirty) &&
@@ -87,8 +87,8 @@
           The last name must be longer than 3 characters.
         </span>
 
-        <input id="phoneId" formControlName="phone" type="text" class="w-4/5 mb-3" placeholder="Phone number (optional)"
-          [ngClass]="{'is-invalid': (personalDetailsForm.get('phone')?.touched ||
+        <input id="phoneId" formControlName="phone" type="text" class="w-full mb-3"
+          placeholder="Phone number (optional)" [ngClass]="{'is-invalid': (personalDetailsForm.get('phone')?.touched ||
           personalDetailsForm.get('phone')?.dirty) &&
           !personalDetailsForm.get('phone')?.valid }" />
 
@@ -100,7 +100,7 @@
           Phone number is not valid.
         </span>
 
-        <input id="emailId" formControlName="email" type="email" class="w-4/5 mb-3"
+        <input id="emailId" formControlName="email" type="email" class="w-full mb-3"
           placeholder="E-mail address (required)" [ngClass]="{'is-invalid': (personalDetailsForm.get('email')?.touched
           ||
           personalDetailsForm.get('email')?.dirty) &&
@@ -121,7 +121,7 @@
 
     <ng-container *ngIf="currentModal === addressDetailsEditModalName">
       <form novalidate (ngSubmit)="saveAddressData()" [formGroup]="addressDetailsForm">
-        <input id="streetId" formControlName="street" type="text" class="w-4/5 mb-3"
+        <input id="streetId" formControlName="street" type="text" class="w-full mb-3"
           placeholder="Street name (required)" [ngClass]="{'is-invalid': (addressDetailsForm.get('street')?.touched
           ||
           addressDetailsForm.get('street')?.dirty) &&
@@ -135,7 +135,7 @@
           The state name must be longer than 3 characters.
         </span>
 
-        <input id="cityId" formControlName="city" type="text" class="w-4/5 mb-3" placeholder="City name (required)"
+        <input id="cityId" formControlName="city" type="text" class="w-full mb-3" placeholder="City name (required)"
           [ngClass]="{'is-invalid': (addressDetailsForm.get('city')?.touched
           ||
           addressDetailsForm.get('city')?.dirty) &&
@@ -149,7 +149,7 @@
           The city name must be longer than 3 characters.
         </span>
 
-        <input id="stateId" formControlName="state" type="text" class="w-4/5 mb-3 " placeholder="State name (required)"
+        <input id="stateId" formControlName="state" type="text" class="w-full mb-3 " placeholder="State name (required)"
           [ngClass]="{'is-invalid': (addressDetailsForm.get('state')?.touched
           ||
           addressDetailsForm.get('state')?.dirty) &&
@@ -163,7 +163,7 @@
           The state name must be longer than 3 characters.
         </span>
 
-        <input id="zipId" formControlName="zip" type="text" class="w-4/5 mb-3" placeholder="Zip code (required)"
+        <input id="zipId" formControlName="zip" type="text" class="w-full mb-3" placeholder="Zip code (required)"
           [ngClass]="{'is-invalid': (addressDetailsForm.get('zip')?.touched
           ||
           addressDetailsForm.get('zip')?.dirty) &&
@@ -185,9 +185,9 @@
     <ng-container *ngIf="currentModal === passwordEditModalName">
       <form novalidate (ngSubmit)="saveAuthData()" [formGroup]="authDetailsForm">
         <input formControlName="password" [value]="authDetailsForm.get('password')?.value"
-          class="w-4/5 mb-4 border rounded-lg" type="password" placeholder="New password">
+          class="w-full mb-4 border rounded-lg" type="password" placeholder="New password">
         <input formControlName="confirmPassword" [value]="authDetailsForm.get('confirmPassword')?.value"
-          class="w-4/5 mb-4 border rounded-lg" [ngClass]="{'bg-red-700': authDetailsForm?.errors ||
+          class="w-full mb-4 border rounded-lg" [ngClass]="{'bg-red-700': authDetailsForm?.errors ||
                                              ((authDetailsForm.get('confirmPassword')?.touched ||
                                               authDetailsForm.get('confirmPassword')?.dirty) &&
                                               !authDetailsForm.get('confirmPassword')?.valid) }" type="password"

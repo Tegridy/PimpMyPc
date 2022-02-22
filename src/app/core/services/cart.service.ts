@@ -40,7 +40,6 @@ export class CartService {
       .put('http://localhost:8080/api/v1/cart', productsIndexes)
       .subscribe((totalPrice) => {
         this.cart.cartTotalPrice = totalPrice as number;
-        console.log(this.cart);
 
         this.cartSource.next(this.cart);
       });

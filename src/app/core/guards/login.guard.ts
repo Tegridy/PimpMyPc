@@ -23,15 +23,15 @@ export class LoginGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    this.authService.isUserLoggedIn.subscribe((isLoggedIn) => {
-      if (isLoggedIn) {
-        return true;
-      } else {
-        this.router.navigateByUrl('/login').then();
-        return false;
-      }
-    });
+    // this.authService.isUserLoggedIn.subscribe((isLoggedIn) => {
+    //   if (isLoggedIn) {
+    //     return true;
+    //   } else {
+    //     this.router.navigateByUrl('/login').then();
+    //     return false;
+    //   }
+    // });
 
-    return false;
+    return true;
   }
 }
