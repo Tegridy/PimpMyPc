@@ -2,8 +2,11 @@
   <pmp-pagination *ngIf="searchedProducts.length > 0" [config]="paginationConfig"
     (pageChangeEvent)="onPageChange($event)"></pmp-pagination>
 
-  <h3 *ngIf="searchedProducts.length < 1" class="mt-12 text-4xl font-bold text-center">No products found. Try again.
+  <h3 *ngIf="searchedProducts.length < 1 && !loading" class="mt-12 text-4xl font-bold text-center">No products found.
+    Try again.
   </h3>
+
+  <pmp-spinner *ngIf="loading"></pmp-spinner>
 
   <div class="w-11/12 md:w-3/5">
     <ul class="space-y-2">

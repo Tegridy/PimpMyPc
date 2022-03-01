@@ -15,6 +15,7 @@ import { of } from 'rxjs';
 export class SearchComponent implements OnInit {
   searchedProducts: BaseProduct[] = [];
 
+  loading = true;
   pageNumber = 1;
   productsCount = 1;
   queryParams: Params = {};
@@ -34,6 +35,7 @@ export class SearchComponent implements OnInit {
       this.pageNumber = Utils.validatePageNumber(params.page);
       this.queryParams = params;
       this.getProducts(this.queryParams);
+      this.loading = true;
     });
   }
 
@@ -47,6 +49,8 @@ export class SearchComponent implements OnInit {
         this.productsCount = products.totalElements;
         this.paginationConfig.totalItems = this.productsCount;
         this.paginationConfig.currentPage = this.pageNumber;
+
+        this.loading = false;
       });
   }
 

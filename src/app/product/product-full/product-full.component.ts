@@ -13,6 +13,7 @@ import { ProductDetail } from '../../shared/model/ProductDetail';
 export class ProductFullComponent implements OnInit {
   showModal = false;
   showFullDescription = false;
+  loading = false;
   productStars = 0;
   productId = 0;
 
