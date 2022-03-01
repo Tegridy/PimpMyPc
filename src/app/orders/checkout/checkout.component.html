@@ -1,15 +1,16 @@
-<h1 class="mb-5 text-4xl font-bold text-center">Order summary</h1>
+<h1 class="mt-4 mb-5 text-4xl font-bold text-center">Order summary</h1>
 
 <ng-container *ngIf="!orderComplete">
-  <section class="flex flex-col w-4/5 mx-auto mb-10" id="order-products">
+  <section class="flex flex-col w-full md:w-4/5 mx-auto mb-10" id="order-products">
     <h3 class="text-2xl font-semibold">Order items:</h3>
     <hr class="w-full my-2 border border-black">
     <ul class="flex flex-col items-center justify-center space-y-4">
-      <li *ngFor="let cartItem of cartProducts" class="flex items-center w-4/5 p-4 border border-black rounded">
-        <div class="flex items-center justify-center w-2/5">
+      <li *ngFor="let cartItem of cartProducts"
+        class="flex flex-col md:flex-row items-center w-11/12 mx-auto md:w-4/5 p-4 border border-black rounded">
+        <div class="flex items-center justify-center w-4/5 md:w-2/5">
           <img class="object-contain h-24 rounded" src="{{ cartItem.imageUrl }}" alt="{{ cartItem.title }} image">
         </div>
-        <div class="flex items-center w-3/5">
+        <div class="flex items-center mt-4 md:mt-0 w-4/5 md:w-3/5">
           <span class="mx-5">{{ cartItem.title }}</span>
           <span class="mx-5">{{ cartItem.price | currency}}</span>
         </div>
@@ -19,11 +20,11 @@
     <h3 class="my-5 text-lg font-semibold text-center">Total: {{ totalPrice | currency}}</h3>
   </section>
 
-  <section id="customer-data">
+  <section id="customer-data" class="pb-8">
     <form novalidate (ngSubmit)="saveOrder()" [formGroup]="orderForm"
-      class="w-3/5 p-5 mx-auto border border-black rounded-xl">
+      class="w-11/12 md:w-3/5 p-5 mx-auto border border-black rounded-xl">
 
-      <div class="flex flex-col w-3/5 mx-auto">
+      <div class="flex flex-col w-full md:w-3/5 mx-auto">
         <h3 class="self-start my-2 text-xl font-semibold">Personal data:</h3>
 
 
@@ -160,8 +161,9 @@
 </ng-container>
 
 <div *ngIf="orderComplete" class="flex flex-col text-center">
-  <h3 class="text-3xl font-bold">Order is now complete, let us take it from now</h3>
-  <h3 class="text-3xl font-bold">Congratulations you win 100% discount and you don't have to pay! Yay :)</h3>
+  <h3 class="mx-4 text-xl md:text-3xl font-bold">Order is now complete, let us take it from now</h3>
+  <h3 class="mx-4 text-xl md:text-3xl font-bold">Congratulations you win 100% discount and you don't have to pay! Yay :)
+  </h3>
   <h4 class="my-4">Order id: {{ orderId }}</h4>
   <h4 class="mb-4 font-bold">Order status: {{ orderStatus | orderStatus}}</h4>
   <button routerLink="/" class="w-2/5 p-2 mx-auto my-5 bg-blue-500 rounded-2xl">Go to Homepage</button>

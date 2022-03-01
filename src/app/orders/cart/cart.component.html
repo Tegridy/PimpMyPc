@@ -3,7 +3,7 @@
   <div class="flex flex-col justify-center w-full">
 
     <div *ngIf="cartItems">
-      <h2 class="w-full mb-4 text-3xl">Cart ({{ numberOfItemsInCart }})</h2>
+      <h2 class="ml-4 md:ml-0 w-full mb-4 text-3xl">Cart ({{ numberOfItemsInCart }})</h2>
 
       <div *ngIf="cartItems.length < 1" class="my-24 text-2xl text-center">
         <span>Your cart is empty, please add some products</span><br>
@@ -35,7 +35,7 @@
 
 
         <div *ngIf="cartItems.length > 0"
-          class="flex flex-col items-center justify-between w-1/5 mx-8 bg-gray-400 rounded-lg bg-opacity-40 max-h-36">
+          class="w-3/4 mt-4 md:mt-0 mx-auto flex flex-col items-center justify-between md:w-1/5 md:mx-8 bg-gray-400 rounded-lg bg-opacity-40 max-h-36">
           <div class="flex flex-col items-center mt-4">
             <h3 class="text-xl font bold">Total price</h3>
             <span class="text-xl font bold">{{ totalPrice }}$</span>

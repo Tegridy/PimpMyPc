@@ -25,7 +25,7 @@
   <div class="w-full mx-8 lg:w-3/5">
     <h1 class="my-4 text-4xl font-bold">Our choice </h1>
 
-    <ul class="grid grid-cols-1 grid-rows-none row-auto gap-6 md:grid-cols-2 xl:grid-cols-3 sm:px-4 h-192 sm:h-auto">
+    <ul class="grid grid-cols-1 grid-rows-none row-auto gap-6 sm:grid-cols-2 xl:grid-cols-3 sm:px-4 h-auto">
       <li *ngFor="let product of ourChoiceProducts" class="flex justify-center">
         <pmp-product-small [product]="product"></pmp-product-small>
       </li>
@@ -37,12 +37,12 @@
 <hr class="my-4 bg-black border-black rounded-lg">
 
 <section id="bestsellers">
-  <h1 class="my-4 text-4xl font-bold">Bestsellers </h1>
+  <h1 class="ml-4 md:ml-0 my-4 text-4xl font-bold">Bestsellers </h1>
   <div id="bestsellers-slider">
     <ng-container *ngIf="bestsellersProducts && bestsellersProducts.length > 0">
       <ngx-glide #ngxGlide [perView]="slidesPerView" [showBullets]="showBullets" [arrowLeftTemplate]="leftArrow"
         [arrowRightTemplate]="rightArrow" [bound]="bound"
-        [breakpoints]="{'400': {perView: 1}, '1010': { perView: 2 }, '1270': { perView: 4 }}" class="m-5">
+        [breakpoints]="{'400': {perView: 1}, '1010': { perView: 2 }, '1280': { perView: 4 }}" class="m-5">
         <ng-container *ngFor="let product of bestsellersProducts">
           <pmp-product-small [product]="product"></pmp-product-small>
         </ng-container>
@@ -55,20 +55,20 @@
 
 <section id="movies">
 
-  <h1 class="my-4 text-4xl font-bold">Movies </h1>
+  <h1 class="ml-4 md:ml-0 my-4 text-4xl font-bold">Movies </h1>
 
   <div id="movies-slider">
     <ng-container *ngIf="movies && movies.length > 0">
       <ngx-glide #ngxGlide [perView]=4 [showBullets]="showBullets" [arrowLeftTemplate]="leftArrow"
         [arrowRightTemplate]="rightArrow" [bound]="bound"
-        [breakpoints]="{'400': {perView: 1},'1010': { perView: 2 }, '1270': { perView: 4 }}">
+        [breakpoints]="{'400': {perView: 1},'1010': { perView: 2 }, '1280': { perView: 4 }}">
         <ng-container *ngFor="let movie of movies">
 
-          <div class="m-5 min-h-37vh w-80 min-w-min p-4 flex flex-col justify-between rounded-lg shadow-lg cursor-pointer bg-gray-50
+          <a href="{{ movie.url }}" class="min-h-37vh w-80 min-w-min p-4 flex flex-col justify-between rounded-lg shadow-lg cursor-pointer bg-gray-50
             hover:border-2 hover:border-black hover:shadow-lg">
             <span class="text-2xl h-24 text-left whitespace-normal pb-5">{{ movie.title }}</span>
             <img src="{{ movie.thumbUrl }}">
-          </div>
+          </a>
 
         </ng-container>
       </ngx-glide>

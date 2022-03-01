@@ -12,7 +12,7 @@
     <ul class="flex items-center md:order-2">
       <li *ngIf="isUserLoggedIn" class="h-full">
         <button (click)="logout()"
-          class="px-5 rounded cursor-pointer bg-gray-300 hover:bg-blue-500 hover:shadow h-full flex justify-center items-center">
+          class="flex items-center justify-center h-full px-5 bg-gray-300 rounded cursor-pointer hover:bg-blue-500 hover:shadow">
           Logout
         </button>
       </li>
@@ -46,7 +46,7 @@
       <div class="flex items-center order-1 w-3/4 h-8 m-2 bg-white border-2 border-black rounded-full shadow">
         <input class="border-0" type="search" placeholder="Search" [(ngModel)]="searchPhrase"
           (keyup.enter)="searchProduct()">
-        <select (change)="changeCurrentSearchCategory($event)">
+        <select id="search-bar" class="hidden lg:block" (change)="changeCurrentSearchCategory($event)">
           <option selected>Everywhere</option>
           <option *ngFor="let category of mainCategories">{{ category.name }}</option>
         </select>
@@ -64,8 +64,8 @@
   <nav class="hidden px-1 lg:block" role="navigation">
     <hr class="my-1.5">
     <ul id="main-menu" class="flex flex-col lg:flex-row lg:justify-between">
-      <li *ngFor="let category of mainCategories" (mouseenter)="toggleModal();" (mouseleave)="toggleModal()"
-        class="relative p-2 rounded-t cursor-pointer hover:bg-gray-400">
+      <li *ngFor="let category of mainCategories" (mouseenter)="toggleMenuBackdrop();"
+        (mouseleave)="toggleMenuBackdrop()" class="relative p-2 rounded-t cursor-pointer hover:bg-gray-400">
         <a routerLink='/categories/{{ category.endpointName | lowercase }}' [queryParams]="{page: 1}"
           class="flex items-center">
           <ion-icon name="{{ category.iconName }}" class="pr-2"></ion-icon>
@@ -76,7 +76,7 @@
           <ul *ngFor="let firstLevelMenuItem of category.firstLevelMenu" class="pb-4">
 
             <li class="relative flex items-center w-full">
-              <a class="p-3 hover:bg-gray-400 w-full flex justify-between items-center"
+              <a class="flex items-center justify-between w-full p-3 hover:bg-gray-400"
                 routerLink='/categories/{{ firstLevelMenuItem.endpointName | lowercase }}' [queryParams]="{page: 1}">
                 <span>{{ firstLevelMenuItem.name }}</span>
 
@@ -88,7 +88,7 @@
                 <ul class="hidden pb-4 animate-fade-in-down">
                   <li class="relative flex items-center w-full"
                     *ngFor="let secondLevelMenuItem of firstLevelMenuItem.secondLevelMenu">
-                    <a class="p-3 hover:bg-gray-400 w-full" (click)="setFilter(secondLevelMenuItem.filterParams)"
+                    <a class="w-full p-3 hover:bg-gray-400" (click)="setFilter(secondLevelMenuItem.filterParams)"
                       routerLink="/categories/{{ firstLevelMenuItem.endpointName | lowercase }}"
                       [queryParams]="secondLevelMenuItem.filterParams">
                       {{ secondLevelMenuItem.name }}
@@ -122,7 +122,7 @@
 
     <ul class="divide-y-2 divide-gray-300">
       <li *ngFor="let category of mainCategories" class="divide-y-2 ">
-        <a [routerLink]="canMoveDeeperInMenu(category)">
+        <a (click)="checkIfMenuCanBeClosed(category)" [routerLink]="canMoveDeeperInMenu(category)">
           <label class="flex m-3 cursor-pointer" for="menu-{{ category.name }}">
             <ion-icon name="{{ category.iconName }}" class="pr-2"></ion-icon>
             {{ category.name }}
@@ -133,7 +133,8 @@
         <div *ngIf="category.firstLevelMenu" class="menu">
           <ul *ngFor="let firstLevelMenuItem of category.firstLevelMenu">
             <li>
-              <a [routerLink]="canMoveDeeperInMenu(firstLevelMenuItem)">
+              <a (click)="checkIfMenuCanBeClosed(firstLevelMenuItem)"
+                [routerLink]="canMoveDeeperInMenu(firstLevelMenuItem)">
 
                 <label class="p-3 label-style" for="menu-{{ firstLevelMenuItem.name }}">
                   {{ firstLevelMenuItem.name }}
@@ -145,7 +146,7 @@
                 <div class="menu">
                   <ul *ngFor="let secondLevelMenuItem of firstLevelMenuItem.secondLevelMenu">
                     <li class="p-3">
-                      <a routerLink="/categories/{{ firstLevelMenuItem.endpointName }}"
+                      <a (click)="toggleMenu()" routerLink="/categories/{{ firstLevelMenuItem.endpointName }}"
                         [queryParams]="secondLevelMenuItem.filterParams">
                         <label class="label-style">{{ secondLevelMenuItem.name }}</label>
                       </a>

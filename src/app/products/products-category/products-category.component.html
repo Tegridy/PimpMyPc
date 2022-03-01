@@ -36,7 +36,7 @@
 
         <div class="flex flex-col items-center justify-between p-2 md:flex-row bg-gray-50">
 
-          <div class="flex">
+          <div class="hidden md:flex">
             <button class="flex items-center justify-center p-2 mr-4 rounded-lg"
               [ngClass]="{'bg-gray-400' : !showProductsInListView}" (click)="changeProductsView()">
               <ion-icon name="grid-outline"></ion-icon>
@@ -48,14 +48,13 @@
           </div>
 
           <div class="flex flex-col items-center space-x-4 md:flex-row">
-            <div>
-              <label for="sort" class="md:hidden">Sort by</label>
-              <select [(ngModel)]="sortType" (change)=sortProductsByPrice() id="sort" class="w-32 my-2">
-                <option value="default">Choose</option>
-                <option value="price,asc">Price ASC</option>
-                <option value="price,desc">Price DESC</option>
-              </select>
-            </div>
+            <label for="sort" class="m-2">Sort by</label>
+            <select [(ngModel)]="sortType" (change)="sortProductsByPrice()" id="sort" class="w-32 p-2 m-2">
+              <option value="default">Choose</option>
+              <option value="price,asc">Price ASC</option>
+              <option value="price,desc">Price DESC</option>
+            </select>
+
             <pmp-pagination [config]="paginationConfig" (pageChangeEvent)="onPageChange($event)">
             </pmp-pagination>
           </div>

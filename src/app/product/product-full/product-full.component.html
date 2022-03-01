@@ -1,8 +1,8 @@
 <section id="product-full" class="container">
 
-  <div id="product-description" class="flex py-6">
+  <div id="product-description" class="flex flex-col py-6 md:flex-row">
 
-    <div class="w-1/2 mx-4 lg:mx-20">
+    <div class="w-3/4 mx-auto lg:mx-20">
       <img class="rounded-lg" src="{{ product.imageUrl }}" alt="{{ product.title }} image">
     </div>
 
@@ -16,7 +16,7 @@
       </div>
 
       <div class="mx-auto mt-8">
-        <span class="text-center font-bold" *ngIf="product.quantity < 1">Product is not available at the moment.</span>
+        <span class="font-bold text-center" *ngIf="product.quantity < 1">Product is not available at the moment.</span>
         <button *ngIf="product.quantity > 0" (click)="addProductToCart()"
           class="p-4 text-green-700 bg-white border-4 border-green-700 rounded-lg md:group-hover:block hover:border-green-700 hover:bg-green-700 hover:text-gray-50 sm:block">
           <div class="flex items-center text-center justify-items-center">
@@ -32,10 +32,14 @@
   <div class="m-5">
 
     <div class="flex flex-col items-center w-3/4 mx-auto">
-      <ion-icon class="w-20 h-20" name="clipboard-outline"></ion-icon>
-      <p class="text-lg tracking-wide">
+      <ion-icon (click)="showFullText()" class="w-20 h-20 cursor-pointer" name="clipboard-outline"></ion-icon>
+
+      <p id="description" (click)="showFullText()"
+        class="w-full text-lg tracking-wide text-left truncate md:overflow-visible md:whitespace-normal"
+        [ngClass]="showFullDescription ? 'overflow-visible whitespace-normal' : 'truncate'">
         {{ product.description }}
       </p>
+
     </div>
   </div>
 
@@ -48,10 +52,11 @@
     <div class="flex items-center justify-center">
       <table class="w-3/4 my-4 border-collapse table-auto">
         <tr class="w-full odd:bg-gray-200" *ngFor="let productDetail of productDetails">
-          <th class="w-1/2 text-left border-t border-b border-gray-400"><span
+          <th class="w-1/2 py-2 text-left border-t border-b border-gray-400"><span
               class="ml-8">{{ (productDetail.key) | titlecase }}</span>
           </th>
-          <th class="w-1/2 border-t border-b border-gray-400"><span class="float-left">{{ productDetail.value }}</span>
+          <th class="w-1/2 py-2 border-t border-b border-gray-400"><span
+              class="float-left">{{ productDetail.value }}</span>
           </th>
         </tr>
       </table>

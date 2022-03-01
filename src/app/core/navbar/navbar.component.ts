@@ -77,8 +77,14 @@ export class NavbarComponent implements OnInit {
     this.showMenu = !this.showMenu;
   }
 
-  toggleModal(): void {
+  toggleMenuBackdrop(): void {
     this.toggleBackdrop = !this.toggleBackdrop;
+  }
+
+  checkIfMenuCanBeClosed(menuItem: any): void {
+    if (!menuItem.firstLevelMenu && !menuItem.secondLevelMenu) {
+      this.toggleMenu();
+    }
   }
 
   canMoveDeeperInMenu(menuItem: any): string | undefined {

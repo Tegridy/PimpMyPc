@@ -12,6 +12,7 @@ import { ProductDetail } from '../../shared/model/ProductDetail';
 })
 export class ProductFullComponent implements OnInit {
   showModal = false;
+  showFullDescription = false;
   productStars = 0;
   productId = 0;
 
@@ -63,5 +64,9 @@ export class ProductFullComponent implements OnInit {
       (productDetail) =>
         !this.productDetailsToFilter.includes(productDetail.key)
     );
+  }
+
+  showFullText(): void {
+    this.showFullDescription = !this.showFullDescription;
   }
 }
