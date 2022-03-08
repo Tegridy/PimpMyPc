@@ -1,4 +1,3 @@
-import { mockUser } from './auth.service.spec';
 import { Address } from './../../shared/model/User';
 import { AuthService } from './auth.service';
 import {
@@ -11,7 +10,7 @@ import {
   HttpHeaderResponse,
   HttpHeaders,
 } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 import { User } from 'src/app/shared/model/User';
 import { TestBed } from '@angular/core/testing';
 
@@ -55,55 +54,114 @@ describe('AuthService', () => {
   });
 
   it('should send POST to signup', () => {
-    service.signUpUser(mockUser).subscribe();
+    service.signUpUser(mockUser).subscribe((user) => {
+      expect(user.username).toEqual('Tester');
+    });
 
-    const req = httpMock.expectOne('http://localhost:8080/api/auth/register');
-    expect(req.request.method).toEqual('POST');
+    const request = httpMock.expectOne(
+      'http://localhost:8080/api/v1/auth/register'
+    );
+    expect(request.request.method).toEqual('POST');
   });
 
   it('should create user account', () => {
-    service.signUpUser(mockUser).subscribe();
+    service.signUpUser(mockUser).subscribe((user) => {
+      expect(user.username).toEqual('Tester');
+    });
 
-    const req = httpMock.expectOne('http://localhost:8080/api/auth/register');
-    req.flush({ username: 'test' });
+    const request = httpMock.expectOne(
+      'http://localhost:8080/api/v1/auth/register'
+    );
 
-    expect(req.request.responseType).toEqual('json');
-    expect(req.request.body.username).toEqual('test');
+    expect(request.request.responseType).toEqual('json');
+    expect(request.request.body.username).toEqual('Tester');
   });
 
-  it('should send POST to login', () => {
-    service.loginUser('test', 'test');
+  it('should throw error after bad register attempt', () => {});
 
-    const req = httpMock.expectOne('http://localhost:8080/api/auth/login');
-    expect(req.request.method).toEqual('POST');
+  it('should send POST to login', () => {
+    service.loginUser('Tester', 'test').subscribe();
+
+    const request = httpMock.expectOne(
+      'http://localhost:8080/api/v1/auth/login'
+    );
+    request.flush({ username: 'Tester', userId: 1, token: 'JWT-token' });
+
+    expect(request.request.method).toEqual('POST');
   });
 
   it('should login user', () => {
-    service.loginUser('test', 'test');
+    service.loginUser('Tester', 'test').subscribe((user) => {
+      expect(sessionStorage.getItem('username')).toEqual('Tester');
+      expect(sessionStorage.getItem('userId')).toEqual('1');
+      expect(sessionStorage.getItem('token')).toEqual('JWT-token');
 
-    const req = httpMock.expectOne('http://localhost:8080/api/auth/login');
-    req.flush({ username: 'test', userId: 1, token: 'JWT-token' });
+      service.isUserLoggedIn.subscribe((isLoggedIn) =>
+        expect(isLoggedIn).toBeTrue()
+      );
+    });
 
-    expect(req.request.responseType).toEqual('json');
-    expect(req.request.body.username).toEqual('test');
-    expect(req.request.body.userId).toEqual(1);
-    expect(req.request.body.token).toEqual('JWT-token');
+    const request = httpMock.expectOne(
+      'http://localhost:8080/api/v1/auth/login'
+    );
+    request.flush({ username: 'Tester', userId: 1, token: 'JWT-token' });
+
+    expect(request.request.responseType).toEqual('json');
+    expect(request.request.body.username).toEqual('Tester');
   });
 
-  //   it('should show user alert on login error', () => {
-  //     spyOn(window, 'alert');
+  it('should throw error after bad login attempt', () => {
+    service.signUpUser(mockUser).subscribe(
+      () => fail('should not success'),
+      (error) => {
+        expect(error).toBeTruthy();
+        expect(error).toContain('code: 500');
+        expect(error).toContain('Server error occurred');
+      },
+      () => fail('should not finalize')
+    );
 
-  //     service.login('test', 'test');
-  //     httpMock
-  //       .expectOne('http://localhost:8080/api/auth/login')
-  //       .error(new ErrorEvent('500'));
+    const error = new ErrorEvent('Server error', {
+      message: 'Server error occurred',
+    });
 
-  //     expect(window.alert).toHaveBeenCalledWith(
-  //       'Błąd podczas logowania. Proszę spróbować pózniej.'
-  //     );
-  //   });
+    const request = httpMock
+      .expectOne('http://localhost:8080/api/v1/auth/register')
+      .error(error, { status: 500 });
+  });
+
+  it('should show user alert on login error', () => {
+    service.loginUser('test', 'test').subscribe(
+      () => fail('should not success'),
+      (error) => {
+        expect(error).toBeTruthy();
+        expect(error).toContain('code: 500');
+        expect(error).toContain('Server error occurred');
+      },
+      () => fail('should not finalize')
+    );
+
+    const error = new ErrorEvent('Server error', {
+      message: 'Server error occurred',
+    });
+
+    const request = httpMock
+      .expectOne('http://localhost:8080/api/v1/auth/login')
+      .error(error, { status: 500 });
+  });
 
   it('should logout user', () => {
+    service.loginUser('test', 'test').subscribe(() => {
+      expect(sessionStorage.getItem('username')).toEqual('Tester');
+      expect(sessionStorage.getItem('userId')).toEqual('1');
+      expect(sessionStorage.getItem('token')).toEqual('JWT-token');
+    });
+
+    const request = httpMock.expectOne(
+      'http://localhost:8080/api/v1/auth/login'
+    );
+    request.flush({ username: 'Tester', userId: 1, token: 'JWT-token' });
+
     service.logoutUser();
     service.isUserLoggedIn.subscribe((isLoggedIn) =>
       expect(isLoggedIn).toBeFalse()

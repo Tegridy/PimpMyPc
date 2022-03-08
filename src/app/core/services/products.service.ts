@@ -4,12 +4,14 @@ import { catchError, delay, debounceTime } from 'rxjs/operators';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import {
   ProductResponse,
-  ProductsDto,
+  ProductDto,
 } from '../../shared/model/ProductResponse';
 import { BaseProduct } from '../../shared/model/BaseProduct';
 import Utils from 'src/app/shared/utils/Utils';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class ProductsService {
   baseUrl = 'http://localhost:8080/api/v1/products/';
   pageSizeUrl = '&size=9';
@@ -27,9 +29,7 @@ export class ProductsService {
     if (filtersUrls) {
       filtersUrls = filtersUrls.replace(new RegExp('&page=\\d*'), '');
 
-      if (page < 0) {
-        page = 0;
-      }
+      page = this.validatePageNumber(page);
 
       return this.http
         .get<ProductResponse>(
@@ -42,6 +42,8 @@ export class ProductsService {
         )
         .pipe(catchError(Utils.handleError));
     } else {
+      page = this.validatePageNumber(page);
+
       return this.http
         .get<ProductResponse>(
           this.baseUrl + category + '?page=' + page + this.pageSizeUrl
@@ -50,14 +52,12 @@ export class ProductsService {
     }
   }
 
-  getProductsByCategory(
+  findProductsByCategory(
     productName: string,
-    categoryName: string,
-    page: number
-  ): Observable<ProductsDto> {
-    if (page < 0) {
-      page = 0;
-    }
+    page: number,
+    categoryName?: string
+  ): Observable<ProductDto> {
+    page = this.validatePageNumber(page);
 
     let requestUrl = this.baseUrl + 'search?productName=' + productName;
 
@@ -65,7 +65,7 @@ export class ProductsService {
       requestUrl += '&productCategory=' + categoryName;
     }
 
-    return this.http.get<ProductsDto>(
+    return this.http.get<ProductDto>(
       requestUrl + this.pageSizeUrl + '&page=' + page
     );
   }
@@ -93,5 +93,13 @@ export class ProductsService {
     return this.http
       .get<BaseProduct>(this.baseUrl + id)
       .pipe(catchError(Utils.handleError));
+  }
+
+  private validatePageNumber(page: number): number {
+    if (page < 0) {
+      return (page = 0);
+    } else {
+      return page;
+    }
   }
 }

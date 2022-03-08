@@ -21,17 +21,17 @@ export class UserService {
       .pipe(catchError((error) => Utils.handleError(error)));
   }
 
-  updateUserPersonalDetails(user: UserEdit): Observable<any> {
+  updateUserPersonalDetails(user: UserEdit): Observable<UserEdit> {
     const userId = sessionStorage.getItem('userId');
     return this.http
       .patch<User>(this.baseUrl + userId + '/personal', user)
       .pipe(catchError((error) => Utils.handleError(error)));
   }
 
-  updateUserAddressDetails(user: Address): Observable<any> {
+  updateUserAddressDetails(userAddress: Address): Observable<any> {
     const userId = sessionStorage.getItem('userId');
     return this.http
-      .patch(this.baseUrl + userId + '/address', user)
+      .patch(this.baseUrl + userId + '/address', userAddress)
       .pipe(catchError((error) => Utils.handleError(error)));
   }
 

@@ -1,6 +1,7 @@
+import { BaseProduct } from './BaseProduct';
 import { Address } from './User';
 
-export class Order {
+export class CustomerOrderDetails {
   constructor(
     public customerFirstName: string,
     public customerLastName: string,
@@ -12,18 +13,18 @@ export class Order {
 
 export interface OrderResponse {
   id: number;
-  content: SingleOrder[];
+  content: Order[];
 }
 
-export interface SingleOrder {
+export interface Order {
   id: number;
   title: string;
   price: number;
   address: Address;
   imgUrl: string;
-  products: any[];
   status: string;
   orderDate: Date;
+  products: BaseProduct[];
 }
 
 export interface OrderDto {

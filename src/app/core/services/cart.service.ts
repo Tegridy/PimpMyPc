@@ -9,16 +9,12 @@ import { Cart } from '../../shared/model/Cart';
   providedIn: 'root',
 })
 export class CartService {
-  cart: Cart = new Cart([], 0);
+  private cart: Cart = new Cart([], 0);
 
   private cartSource = new BehaviorSubject<Cart>(this.cart);
   currentCart = this.cartSource.asObservable();
 
   constructor(private http: HttpClient) {}
-
-  addProductToCart(product: BaseProduct): void {
-    this.cart.products.push(product);
-  }
 
   removeProductFromCart(id: number): void {
     const productIndex = this.cart.products.findIndex(
@@ -28,8 +24,8 @@ export class CartService {
     this.updateCart();
   }
 
-  changeCart(product: BaseProduct): void {
-    this.addProductToCart(product);
+  addProductToCart(product: BaseProduct): void {
+    this.cart.products.push(product);
     this.updateCart();
   }
 
@@ -48,5 +44,6 @@ export class CartService {
   clearCart(): void {
     this.cart = new Cart([], 0);
     this.cartSource.next(this.cart);
+    this.updateCart();
   }
 }

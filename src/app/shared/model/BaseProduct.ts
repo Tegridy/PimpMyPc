@@ -1,15 +1,11 @@
 import { Category } from './Category';
 export interface BaseProduct {
   id: number;
-  createdAt?: any;
-  modifiedAt?: any;
-
   title: string;
   description?: string;
   brand?: string;
   model?: string;
   imageUrl?: string;
-  quantity: number;
   price: number;
   categories?: Category[];
 }

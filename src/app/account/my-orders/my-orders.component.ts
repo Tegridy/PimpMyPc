@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { OrderService } from '../../core/services/order.service';
-import { SingleOrder } from '../../shared/model/Order';
+import { Order } from '../../shared/model/Order';
 
 @Component({
   selector: 'pmp-my-orders',
@@ -8,7 +8,7 @@ import { SingleOrder } from '../../shared/model/Order';
   styleUrls: [],
 })
 export class MyOrdersComponent implements OnInit {
-  userOrders: SingleOrder[] = [];
+  userOrders: Order[] = [];
 
   constructor(private orderService: OrderService) {}
 

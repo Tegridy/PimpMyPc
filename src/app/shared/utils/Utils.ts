@@ -43,11 +43,9 @@ export default class Utils {
 
   public static handleError(error: HttpErrorResponse): Observable<never> {
     let errorMessage = 'Something went wrong. Try again later.';
-    if (error.error instanceof ErrorEvent) {
-      errorMessage = `An error occurred: ${error.error.message}`;
-    } else {
-      errorMessage = `Server returned code: ${error.status}, error message is: ${error.error.message}`;
-    }
+
+    errorMessage = `Server returned code: ${error.status}, error message is: ${error.error.message}`;
+
     return throwError(errorMessage);
   }
 }

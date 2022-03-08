@@ -30,7 +30,7 @@ export class ProductSmallComponent implements OnInit {
   ngOnInit(): void {}
 
   addItemToCart(): void {
-    this.cartService.changeCart(this.product);
+    this.cartService.addProductToCart(this.product);
   }
 
   addItemToConfigurator(): void {

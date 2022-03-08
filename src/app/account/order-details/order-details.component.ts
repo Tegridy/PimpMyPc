@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { OrderService } from '../../core/services/order.service';
 import { ActivatedRoute } from '@angular/router';
-import { SingleOrder } from '../../shared/model/Order';
+import { Order } from '../../shared/model/Order';
 import { Address } from '../../shared/model/User';
 
 @Component({
@@ -10,7 +10,7 @@ import { Address } from '../../shared/model/User';
   styleUrls: [],
 })
 export class OrderDetailsComponent implements OnInit {
-  order!: SingleOrder;
+  order!: Order;
   orderProducts: any;
   orderAddress!: Address;
   id = 0;

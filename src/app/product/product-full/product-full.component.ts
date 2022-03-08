@@ -53,7 +53,7 @@ export class ProductFullComponent implements OnInit {
   }
 
   addProductToCart() {
-    this.cartService.changeCart(this.product);
+    this.cartService.addProductToCart(this.product);
   }
 
   toggleModal(): void {

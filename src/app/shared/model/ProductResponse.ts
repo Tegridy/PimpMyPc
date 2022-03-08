@@ -1,12 +1,11 @@
+import { BaseProduct } from 'src/app/shared/model/BaseProduct';
 export interface ProductResponse {
-  products: ProductsDto;
-  filters: any;
+  products: ProductDto;
+  filters?: any;
 }
 
-export interface ProductsDto {
-  id: number;
-  title: string;
+export interface ProductDto {
   number: number;
   totalElements: number;
-  content: any[];
+  content: BaseProduct[];
 }

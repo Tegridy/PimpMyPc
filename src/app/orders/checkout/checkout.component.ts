@@ -5,7 +5,7 @@ import { CartService } from '../../core/services/cart.service';
 import { UserService } from '../../core/services/user.service';
 import { BaseProduct } from '../../shared/model/BaseProduct';
 import { OrderService } from '../../core/services/order.service';
-import { Order } from '../../shared/model/Order';
+import { CustomerOrderDetails } from '../../shared/model/Order';
 import { Address } from '../../shared/model/User';
 
 @Component({
@@ -82,7 +82,7 @@ export class CheckoutComponent implements OnInit {
 
   saveOrder(): void {
     if (this.orderForm.valid) {
-      const order: Order = new Order(
+      const order: CustomerOrderDetails = new CustomerOrderDetails(
         this.orderForm.get('customerFirstName')?.value,
         this.orderForm.get('customerLastName')?.value,
         this.orderForm.get('customerPhone')?.value,

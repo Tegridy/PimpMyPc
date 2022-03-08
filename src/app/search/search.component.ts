@@ -43,7 +43,11 @@ export class SearchComponent implements OnInit {
 
   private getProducts(params: Params): void {
     this.productService
-      .getProductsByCategory(params.query, params.category, this.pageNumber - 1)
+      .findProductsByCategory(
+        params.query,
+        params.category,
+        this.pageNumber - 1
+      )
       .subscribe((products) => {
         this.searchedProducts = products.content;
         this.productsCount = products.totalElements;
