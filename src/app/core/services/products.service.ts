@@ -1,12 +1,9 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, throwError } from 'rxjs';
-import { catchError, delay, debounceTime } from 'rxjs/operators';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import {
-  ProductResponse,
-  ProductDto,
-} from '../../shared/model/ProductResponse';
-import { BaseProduct } from '../../shared/model/BaseProduct';
+import {Injectable} from '@angular/core';
+import {BehaviorSubject, Observable} from 'rxjs';
+import {catchError} from 'rxjs/operators';
+import {HttpClient} from '@angular/common/http';
+import {ProductDto, ProductResponse,} from '../../shared/model/ProductResponse';
+import {BaseProduct} from '../../shared/model/BaseProduct';
 import Utils from 'src/app/shared/utils/Utils';
 
 @Injectable({
@@ -19,7 +16,8 @@ export class ProductsService {
   private productsSearchResultSource = new BehaviorSubject<BaseProduct[]>([]);
   productsSearchResult = this.productsSearchResultSource.asObservable();
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+  }
 
   getProductsPage(
     page: number,
@@ -34,11 +32,11 @@ export class ProductsService {
       return this.http
         .get<ProductResponse>(
           this.baseUrl +
-            category +
-            '?page=' +
-            page +
-            filtersUrls +
-            this.pageSizeUrl
+          category +
+          '?page=' +
+          page +
+          filtersUrls +
+          this.pageSizeUrl
         )
         .pipe(catchError(Utils.handleError));
     } else {
@@ -89,7 +87,6 @@ export class ProductsService {
   }
 
   getProductById(id: number): Observable<BaseProduct> {
-    console.log(this.baseUrl + id);
     return this.http
       .get<BaseProduct>(this.baseUrl + id)
       .pipe(catchError(Utils.handleError));

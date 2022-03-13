@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { CartService } from '../../core/services/cart.service';
-import { BaseProduct } from '../../shared/model/BaseProduct';
+import {Component, OnInit} from '@angular/core';
+import {CartService} from '../../core/services/cart.service';
+import {BaseProduct} from '../../shared/model/BaseProduct';
 
 @Component({
   selector: 'pmp-cart',
@@ -11,7 +11,8 @@ export class CartComponent implements OnInit {
   cartItems: BaseProduct[] = [];
   totalPrice = 0;
 
-  constructor(private cartService: CartService) {}
+  constructor(private cartService: CartService) {
+  }
 
   ngOnInit(): void {
     this.cartService.currentCart.subscribe((cart) => {

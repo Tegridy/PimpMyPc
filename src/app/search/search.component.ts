@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { ProductsService } from '../core/services/products.service';
-import { BaseProduct } from '../shared/model/BaseProduct';
-import { ActivatedRoute, Params, Router, UrlSegment } from '@angular/router';
-import { PaginationInstance } from 'ngx-pagination';
-import { parse } from 'search-params';
+import {Component, OnInit} from '@angular/core';
+import {ProductsService} from '../core/services/products.service';
+import {BaseProduct} from '../shared/model/BaseProduct';
+import {ActivatedRoute, Params, Router, UrlSegment} from '@angular/router';
+import {PaginationInstance} from 'ngx-pagination';
+import {parse} from 'search-params';
 import Utils from '../shared/utils/Utils';
-import { of } from 'rxjs';
+import {of} from 'rxjs';
 
 @Component({
   selector: 'pmp-search',
@@ -39,14 +39,15 @@ export class SearchComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
 
   private getProducts(params: Params): void {
     this.productService
       .findProductsByCategory(
         params.query,
-        params.category,
-        this.pageNumber - 1
+        this.pageNumber - 1,
+        params.category
       )
       .subscribe((products) => {
         this.searchedProducts = products.content;
@@ -61,14 +62,14 @@ export class SearchComponent implements OnInit {
   onPageChange($event: number): void {
     this.pageNumber = $event;
     this.getProducts(this.queryParams);
-    this.updateQueryParam({ page: this.pageNumber });
+    this.updateQueryParam({page: this.pageNumber});
     this.updateUrl();
   }
 
-  updateUrl(): void {
+  private updateUrl(): void {
     const currentUrl: ActivatedRoute = new ActivatedRoute();
     currentUrl.url = of([
-      new UrlSegment(this.router.url, { name: 'pageNumber' }),
+      new UrlSegment(this.router.url, {name: 'pageNumber'}),
     ]);
 
     const params = parse(Utils.buildUrl(this.queryParams));
@@ -80,7 +81,7 @@ export class SearchComponent implements OnInit {
     });
   }
 
-  updateQueryParam(queryParam = {}, force = false): void {
+  private updateQueryParam(queryParam = {}, force = false): void {
     const queryParamLoc = Object.assign({}, this.queryParams);
     this.queryParams = force
       ? queryParam

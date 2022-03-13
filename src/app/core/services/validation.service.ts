@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import { AbstractControl } from '@angular/forms';
+import {Injectable} from '@angular/core';
+import {AbstractControl} from '@angular/forms';
 
 @Injectable({
   providedIn: 'root',
@@ -18,6 +18,6 @@ export class ValidationService {
     if (password1Control?.value === password2Control?.value) {
       return null;
     }
-    return { match: true };
+    return {match: true};
   }
 }

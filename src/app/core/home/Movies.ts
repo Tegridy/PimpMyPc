@@ -1,4 +1,4 @@
-import { Movie } from './../../shared/model/Movie';
+import {Movie} from './../../shared/model/Movie';
 
 export const movies: Movie[] = [
   {

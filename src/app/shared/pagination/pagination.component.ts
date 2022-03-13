@@ -1,5 +1,5 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { PaginationInstance } from 'ngx-pagination';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {PaginationInstance} from 'ngx-pagination';
 
 @Component({
   selector: 'pmp-pagination',
@@ -8,12 +8,14 @@ import { PaginationInstance } from 'ngx-pagination';
 })
 export class PaginationComponent implements OnInit {
   @Input()
-  config: PaginationInstance = { itemsPerPage: 9, currentPage: 1 };
+  config: PaginationInstance = {itemsPerPage: 9, currentPage: 1};
 
   @Output()
   pageChangeEvent = new EventEmitter<number>();
 
-  constructor() {}
+  constructor() {
+  }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
 }

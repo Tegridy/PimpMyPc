@@ -1,23 +1,9 @@
-import { Category } from './../../shared/model/Category';
-import { Processor, Motherboard, Ram } from './../../shared/model/BaseProduct';
-import { BaseProduct } from 'src/app/shared/model/BaseProduct';
-import { CartService } from './cart.service';
-import { Address } from './../../shared/model/User';
-import { AuthService } from './auth.service';
-import {
-  HttpClientTestingModule,
-  HttpTestingController,
-} from '@angular/common/http/testing';
-import set = Reflect.set;
-import {
-  HttpErrorResponse,
-  HttpHeaderResponse,
-  HttpHeaders,
-} from '@angular/common/http';
-import { Observable, of, throwError } from 'rxjs';
-import { User } from 'src/app/shared/model/User';
-import { TestBed } from '@angular/core/testing';
-import { ConfiguratorService } from './configurator.service';
+import {Category} from './../../shared/model/Category';
+import {Motherboard, Processor, Ram} from './../../shared/model/BaseProduct';
+import {AuthService} from './auth.service';
+import {HttpClientTestingModule,} from '@angular/common/http/testing';
+import {TestBed} from '@angular/core/testing';
+import {ConfiguratorService} from './configurator.service';
 
 describe('ConfiguratorService', () => {
   let service: ConfiguratorService;
@@ -41,7 +27,7 @@ describe('ConfiguratorService', () => {
       price: 1900,
       motherboardSocket: 'LGA2022',
       tdp: '250',
-      categories: [{ name: 'Processors' } as Category],
+      categories: [{name: 'Processors'} as Category],
     };
 
     service.addPart(processor);
@@ -60,7 +46,7 @@ describe('ConfiguratorService', () => {
       price: 1900,
       motherboardSocket: 'LGA2022',
       tdp: '250',
-      categories: [{ name: 'Processors' } as Category],
+      categories: [{name: 'Processors'} as Category],
     };
 
     const motherboard: Motherboard = {
@@ -69,7 +55,7 @@ describe('ConfiguratorService', () => {
       price: 800,
       motherboardSocket: 'LGA2022',
       ramType: 'DDR4',
-      categories: [{ name: 'Motherboards' } as Category],
+      categories: [{name: 'Motherboards'} as Category],
     };
 
     const ram: Ram = {
@@ -77,7 +63,7 @@ describe('ConfiguratorService', () => {
       title: 'Processor',
       price: 900,
       ramType: 'DDR4',
-      categories: [{ name: 'Memory RAM' } as Category],
+      categories: [{name: 'Memory RAM'} as Category],
     };
 
     service.addPart(processor);

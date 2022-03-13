@@ -1,17 +1,16 @@
-import { InformationsModule } from './../informations/informations.module';
-import { StarRatingModule } from 'angular-star-rating';
-import { ProductFullComponent } from './product-full/product-full.component';
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { ProductRoutingModule } from './products-routing.module';
-
+import {InformationsModule} from './../informations/informations.module';
+import {StarRatingModule} from 'angular-star-rating';
+import {ProductFullComponent} from './product-full/product-full.component';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {ProductRoutingModule} from './products-routing.module';
 
 
 @NgModule({
   declarations: [
     ProductFullComponent
   ],
-  schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [
     CommonModule,
     StarRatingModule.forRoot(),
@@ -19,4 +18,5 @@ import { ProductRoutingModule } from './products-routing.module';
     InformationsModule
   ]
 })
-export class ProductModule { }
+export class ProductModule {
+}

@@ -12,31 +12,31 @@
     <ul class="flex items-center md:order-2">
       <li *ngIf="isUserLoggedIn" class="h-full">
         <button (click)="logout()"
-          class="flex items-center justify-center h-full px-5 bg-gray-300 rounded cursor-pointer hover:bg-blue-500 hover:shadow">
+                class="flex items-center justify-center h-full px-5 bg-gray-300 rounded cursor-pointer hover:bg-blue-500 hover:shadow">
           Logout
         </button>
       </li>
       <li class="px-5 rounded cursor-pointer hover:bg-gray-200 hover:shadow"><a class="flex flex-col items-center"
-          routerLink="/account">
-          <ion-icon name="person-outline"></ion-icon>
-          Account
-        </a></li>
+                                                                                routerLink="/account">
+        <ion-icon name="person-outline"></ion-icon>
+        Account
+      </a></li>
       <li class="px-5 rounded cursor-pointer hover:bg-gray-200 hover:shadow"><a
-          class="relative flex flex-col items-center" routerLink="/order/cart">
-          <ion-icon name="basket-outline"></ion-icon>
-          Cart
-          <ng-container *ngIf="numberOfItemsInCart > 0">
-            <div class="flex justify-center items-center h-6 w-6 bg-green-600 rounded-full absolute top-2.5 -left-5">
-              <span class="font-semibold">{{ numberOfItemsInCart }}</span>
-            </div>
-          </ng-container>
-        </a></li>
+        class="relative flex flex-col items-center" routerLink="/order/cart">
+        <ion-icon name="basket-outline"></ion-icon>
+        Cart
+        <ng-container *ngIf="numberOfItemsInCart > 0">
+          <div class="flex justify-center items-center h-6 w-6 bg-green-600 rounded-full absolute top-2.5 -left-5">
+            <span class="font-semibold">{{ numberOfItemsInCart }}</span>
+          </div>
+        </ng-container>
+      </a></li>
     </ul>
 
     <div class="flex items-center justify-center w-full">
 
       <button (click)="toggleMenu()" class="hamburger hamburger--collapse-r lg:hidden"
-        [ngClass]="{'is-active': showMenu}" type="button" id="navbar-btn">
+              [ngClass]="{'is-active': showMenu}" type="button" id="navbar-btn">
         <span class="hamburger-box">
           <span class="hamburger-inner"></span>
         </span>
@@ -45,13 +45,13 @@
 
       <div class="flex items-center order-1 w-3/4 h-8 m-2 bg-white border-2 border-black rounded-full shadow">
         <input class="border-0" type="search" placeholder="Search" [(ngModel)]="searchPhrase"
-          (keyup.enter)="searchProduct()">
+               (keyup.enter)="searchProduct()">
         <select id="search-bar" class="hidden lg:block" (change)="changeCurrentSearchCategory($event)">
           <option selected>Everywhere</option>
           <option *ngFor="let category of mainCategories">{{ category.name }}</option>
         </select>
         <button (click)="searchProduct()"
-          class="relative flex items-center justify-center w-24 h-8 bg-gray-600 rounded-full -right-2">
+                class="relative flex items-center justify-center w-24 h-8 bg-gray-600 rounded-full -right-2">
           <ion-icon name="search"></ion-icon>
         </button>
       </div>
@@ -65,9 +65,9 @@
     <hr class="my-1.5">
     <ul id="main-menu" class="flex flex-col lg:flex-row lg:justify-between">
       <li *ngFor="let category of mainCategories" (mouseenter)="toggleMenuBackdrop();"
-        (mouseleave)="toggleMenuBackdrop()" class="relative p-2 rounded-t cursor-pointer hover:bg-gray-400">
+          (mouseleave)="toggleMenuBackdrop()" class="relative p-2 rounded-t cursor-pointer hover:bg-gray-400">
         <a routerLink='/categories/{{ category.endpointName | lowercase }}' [queryParams]="{page: 1}"
-          class="flex items-center">
+           class="flex items-center">
           <ion-icon name="{{ category.iconName }}" class="pr-2"></ion-icon>
           {{ category.name }}
         </a>
@@ -77,20 +77,20 @@
 
             <li class="relative flex items-center w-full">
               <a class="flex items-center justify-between w-full p-3 hover:bg-gray-400"
-                routerLink='/categories/{{ firstLevelMenuItem.endpointName | lowercase }}' [queryParams]="{page: 1}">
+                 routerLink='/categories/{{ firstLevelMenuItem.endpointName | lowercase }}' [queryParams]="{page: 1}">
                 <span>{{ firstLevelMenuItem.name }}</span>
 
                 <ion-icon *ngIf="firstLevelMenuItem.secondLevelMenu" name="caret-forward-outline"></ion-icon>
 
               </a>
               <div *ngIf="firstLevelMenuItem.secondLevelMenu"
-                class="absolute top-0 rounded-tr-lg rounded-bl-lg rounded-br-lg left-full bg-gray-50 w-44">
+                   class="absolute top-0 rounded-tr-lg rounded-bl-lg rounded-br-lg left-full bg-gray-50 w-44">
                 <ul class="hidden pb-4 animate-fade-in-down">
                   <li class="relative flex items-center w-full"
-                    *ngFor="let secondLevelMenuItem of firstLevelMenuItem.secondLevelMenu">
+                      *ngFor="let secondLevelMenuItem of firstLevelMenuItem.secondLevelMenu">
                     <a class="w-full p-3 hover:bg-gray-400" (click)="setFilter(secondLevelMenuItem.filterParams)"
-                      routerLink="/categories/{{ firstLevelMenuItem.endpointName | lowercase }}"
-                      [queryParams]="secondLevelMenuItem.filterParams">
+                       routerLink="/categories/{{ firstLevelMenuItem.endpointName | lowercase }}"
+                       [queryParams]="secondLevelMenuItem.filterParams">
                       {{ secondLevelMenuItem.name }}
                     </a>
 
@@ -134,7 +134,7 @@
           <ul *ngFor="let firstLevelMenuItem of category.firstLevelMenu">
             <li>
               <a (click)="checkIfMenuCanBeClosed(firstLevelMenuItem)"
-                [routerLink]="canMoveDeeperInMenu(firstLevelMenuItem)">
+                 [routerLink]="canMoveDeeperInMenu(firstLevelMenuItem)">
 
                 <label class="p-3 label-style" for="menu-{{ firstLevelMenuItem.name }}">
                   {{ firstLevelMenuItem.name }}
@@ -147,7 +147,7 @@
                   <ul *ngFor="let secondLevelMenuItem of firstLevelMenuItem.secondLevelMenu">
                     <li class="p-3">
                       <a (click)="toggleMenu()" routerLink="/categories/{{ firstLevelMenuItem.endpointName }}"
-                        [queryParams]="secondLevelMenuItem.filterParams">
+                         [queryParams]="secondLevelMenuItem.filterParams">
                         <label class="label-style">{{ secondLevelMenuItem.name }}</label>
                       </a>
                     </li>
@@ -183,6 +183,6 @@
 
 
 <div (click)="toggleMenu()"
-  class="fixed top-0 left-0 z-10 flex items-center justify-center w-full h-screen bg-black opacity-50 animate-fade-bg"
-  [ngClass]="{'hidden': (!showMenu && toggleBackdrop)}">
+     class="fixed top-0 left-0 z-10 flex items-center justify-center w-full h-screen bg-black opacity-50 animate-fade-bg"
+     [ngClass]="{'hidden': (!showMenu && toggleBackdrop)}">
 </div>

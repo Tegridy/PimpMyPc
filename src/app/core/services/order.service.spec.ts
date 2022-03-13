@@ -1,26 +1,10 @@
-import { Order, OrderResponse } from './../../shared/model/Order';
-import { Category } from './../../shared/model/Category';
-import { Processor, Motherboard, Ram } from './../../shared/model/BaseProduct';
-import { BaseProduct } from 'src/app/shared/model/BaseProduct';
-import { CartService } from './cart.service';
-import { Address } from './../../shared/model/User';
-import { AuthService } from './auth.service';
-import {
-  HttpClientTestingModule,
-  HttpTestingController,
-} from '@angular/common/http/testing';
-import set = Reflect.set;
-import {
-  HttpErrorResponse,
-  HttpHeaderResponse,
-  HttpHeaders,
-} from '@angular/common/http';
-import { Observable, of, throwError } from 'rxjs';
-import { User } from 'src/app/shared/model/User';
-import { TestBed } from '@angular/core/testing';
-import { ConfiguratorService } from './configurator.service';
-import { OrderService } from './order.service';
-import { CustomerOrderDetails, OrderDto } from 'src/app/shared/model/Order';
+import {Order, OrderResponse} from './../../shared/model/Order';
+import {Address} from './../../shared/model/User';
+import {AuthService} from './auth.service';
+import {HttpClientTestingModule, HttpTestingController,} from '@angular/common/http/testing';
+import {TestBed} from '@angular/core/testing';
+import {OrderService} from './order.service';
+import {CustomerOrderDetails, OrderDto} from 'src/app/shared/model/Order';
 
 describe('OrderService', () => {
   let service: OrderService;
@@ -75,7 +59,7 @@ describe('OrderService', () => {
     content: orders,
   };
 
-  const oDto: OrderDto = { id: 1, status: 'IN_PROGRESS' };
+  const oDto: OrderDto = {id: 1, status: 'IN_PROGRESS'};
 
   it('should send order request', () => {
     service.sendOrderRequest(orderDetails).subscribe((orderDto: OrderDto) => {

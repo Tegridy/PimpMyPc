@@ -12,11 +12,11 @@
             <input type="text" placeholder="Last name" [value]="personalDetailsForm.get('lastName')?.value" disabled>
             <input type="text" placeholder="Phone number" [value]="personalDetailsForm.get('phone')?.value" disabled>
             <input [value]="personalDetailsForm.get('email')?.value" class="w-full" type="email"
-              placeholder="E-mail address" disabled>
+                   placeholder="E-mail address" disabled>
           </div>
           <div class="flex items-center justify-center w-1/5">
             <button (click)="setModal(personalDetailsEditModalName)"
-              class="flex items-center justify-center p-1 border-2 border-black rounded-lg hover:bg-gray-50">
+                    class="flex items-center justify-center p-1 border-2 border-black rounded-lg hover:bg-gray-50">
               <ion-icon name="create-outline"></ion-icon>
             </button>
           </div>
@@ -25,15 +25,15 @@
           <div class="flex flex-col w-4/5 space-y-2">
             <h5 class="my-4 font-bold">Address</h5>
             <input [value]="addressDetailsForm.get('street')?.value" type="text" placeholder="Street" value="Long"
-              disabled>
+                   disabled>
             <input [value]="addressDetailsForm.get('city')?.value" type="text" placeholder="City" disabled>
             <input [value]="addressDetailsForm.get('state')?.value" type="text" placeholder="State" disabled>
             <input [value]="addressDetailsForm.get('zip')?.value" type="text" placeholder="Zip code" value="00-000"
-              disabled>
+                   disabled>
           </div>
           <div class="flex items-center justify-center w-1/5">
             <button (click)="setModal(addressDetailsEditModalName)"
-              class="flex items-center justify-center p-1 border-2 border-black rounded-lg hover:bg-gray-50">
+                    class="flex items-center justify-center p-1 border-2 border-black rounded-lg hover:bg-gray-50">
               <ion-icon name="create-outline"></ion-icon>
             </button>
           </div>
@@ -46,7 +46,7 @@
         </div>
         <div class="flex self-end justify-center w-1/5">
           <button (click)="setModal(passwordEditModalName)"
-            class="flex items-center justify-center p-1 border-2 border-black rounded-lg hover:bg-gray-50">
+                  class="flex items-center justify-center p-1 border-2 border-black rounded-lg hover:bg-gray-50">
             <ion-icon name="create-outline"></ion-icon>
           </button>
         </div>
@@ -60,10 +60,10 @@
     <ng-container *ngIf="currentModal === personalDetailsEditModalName">
       <form novalidate (ngSubmit)="savePersonalData()" [formGroup]="personalDetailsForm">
         <input id="firstNameId" formControlName="firstName" type="text" class="w-full my-3"
-          placeholder="First name (required)" [ngClass]="{'is-invalid': (personalDetailsForm.get('firstName')?.touched
+               placeholder="First name (required)" [ngClass]="{'is-invalid': (personalDetailsForm.get('firstName')?.touched
           ||
           personalDetailsForm.get('firstName')?.dirty) &&
-          !personalDetailsForm.get('firstName')?.valid }" />
+          !personalDetailsForm.get('firstName')?.valid }"/>
 
         <span class="error-message" *ngIf="personalDetailsForm.get('firstName')?.errors?.required &&
           personalDetailsForm.get('firstName')?.touched">
@@ -74,10 +74,10 @@
         </span>
 
         <input id="lastNameId" formControlName="lastName" type="text" class="w-full mb-3"
-          placeholder="Last name (required)" [ngClass]="{'is-invalid': (personalDetailsForm.get('lastName')?.touched
+               placeholder="Last name (required)" [ngClass]="{'is-invalid': (personalDetailsForm.get('lastName')?.touched
           ||
           personalDetailsForm.get('lastName')?.dirty) &&
-          !personalDetailsForm.get('lastName')?.valid }" />
+          !personalDetailsForm.get('lastName')?.valid }"/>
 
         <span class="error-message" *ngIf="personalDetailsForm.get('lastName')?.errors?.required &&
         personalDetailsForm.get('lastName')?.touched">
@@ -88,9 +88,9 @@
         </span>
 
         <input id="phoneId" formControlName="phone" type="text" class="w-full mb-3"
-          placeholder="Phone number (optional)" [ngClass]="{'is-invalid': (personalDetailsForm.get('phone')?.touched ||
+               placeholder="Phone number (optional)" [ngClass]="{'is-invalid': (personalDetailsForm.get('phone')?.touched ||
           personalDetailsForm.get('phone')?.dirty) &&
-          !personalDetailsForm.get('phone')?.valid }" />
+          !personalDetailsForm.get('phone')?.valid }"/>
 
         <span class="error-message" *ngIf="personalDetailsForm.get('phone')?.errors?.required &&
         personalDetailsForm.get('phone')?.touched">
@@ -101,10 +101,10 @@
         </span>
 
         <input id="emailId" formControlName="email" type="email" class="w-full mb-3"
-          placeholder="E-mail address (required)" [ngClass]="{'is-invalid': (personalDetailsForm.get('email')?.touched
+               placeholder="E-mail address (required)" [ngClass]="{'is-invalid': (personalDetailsForm.get('email')?.touched
           ||
           personalDetailsForm.get('email')?.dirty) &&
-          !personalDetailsForm.get('email')?.valid }" />
+          !personalDetailsForm.get('email')?.valid }"/>
 
         <span class="error-message" *ngIf="personalDetailsForm.get('email')?.errors?.required &&
         personalDetailsForm.get('email')?.touched">
@@ -122,10 +122,10 @@
     <ng-container *ngIf="currentModal === addressDetailsEditModalName">
       <form novalidate (ngSubmit)="saveAddressData()" [formGroup]="addressDetailsForm">
         <input id="streetId" formControlName="street" type="text" class="w-full mb-3"
-          placeholder="Street name (required)" [ngClass]="{'is-invalid': (addressDetailsForm.get('street')?.touched
+               placeholder="Street name (required)" [ngClass]="{'is-invalid': (addressDetailsForm.get('street')?.touched
           ||
           addressDetailsForm.get('street')?.dirty) &&
-          !addressDetailsForm.get('street')?.valid }" />
+          !addressDetailsForm.get('street')?.valid }"/>
 
         <span class="error-message" *ngIf="addressDetailsForm.get('street')?.errors?.required &&
         addressDetailsForm.get('street')?.touched">
@@ -136,10 +136,10 @@
         </span>
 
         <input id="cityId" formControlName="city" type="text" class="w-full mb-3" placeholder="City name (required)"
-          [ngClass]="{'is-invalid': (addressDetailsForm.get('city')?.touched
+               [ngClass]="{'is-invalid': (addressDetailsForm.get('city')?.touched
           ||
           addressDetailsForm.get('city')?.dirty) &&
-          !addressDetailsForm.get('city')?.valid }" />
+          !addressDetailsForm.get('city')?.valid }"/>
 
         <span class="error-message" *ngIf="addressDetailsForm.get('city')?.errors?.required &&
         addressDetailsForm.get('city')?.touched">
@@ -150,10 +150,10 @@
         </span>
 
         <input id="stateId" formControlName="state" type="text" class="w-full mb-3 " placeholder="State name (required)"
-          [ngClass]="{'is-invalid': (addressDetailsForm.get('state')?.touched
+               [ngClass]="{'is-invalid': (addressDetailsForm.get('state')?.touched
           ||
           addressDetailsForm.get('state')?.dirty) &&
-          !addressDetailsForm.get('state')?.valid }" />
+          !addressDetailsForm.get('state')?.valid }"/>
 
         <span class="error-message" *ngIf="addressDetailsForm.get('state')?.errors?.required &&
         addressDetailsForm.get('state')?.touched">
@@ -164,10 +164,10 @@
         </span>
 
         <input id="zipId" formControlName="zip" type="text" class="w-full mb-3" placeholder="Zip code (required)"
-          [ngClass]="{'is-invalid': (addressDetailsForm.get('zip')?.touched
+               [ngClass]="{'is-invalid': (addressDetailsForm.get('zip')?.touched
           ||
           addressDetailsForm.get('zip')?.dirty) &&
-          !addressDetailsForm.get('zip')?.valid }" />
+          !addressDetailsForm.get('zip')?.valid }"/>
 
         <span class="error-message" *ngIf="addressDetailsForm.get('zip')?.errors?.required &&
         addressDetailsForm.get('zip')?.touched">
@@ -185,13 +185,13 @@
     <ng-container *ngIf="currentModal === passwordEditModalName">
       <form novalidate (ngSubmit)="saveAuthData()" [formGroup]="authDetailsForm">
         <input formControlName="password" [value]="authDetailsForm.get('password')?.value"
-          class="w-full mb-4 border rounded-lg" type="password" placeholder="New password">
+               class="w-full mb-4 border rounded-lg" type="password" placeholder="New password">
         <input formControlName="confirmPassword" [value]="authDetailsForm.get('confirmPassword')?.value"
-          class="w-full mb-4 border rounded-lg" [ngClass]="{'bg-red-700': authDetailsForm?.errors ||
+               class="w-full mb-4 border rounded-lg" [ngClass]="{'bg-red-700': authDetailsForm?.errors ||
                                              ((authDetailsForm.get('confirmPassword')?.touched ||
                                               authDetailsForm.get('confirmPassword')?.dirty) &&
                                               !authDetailsForm.get('confirmPassword')?.valid) }" type="password"
-          placeholder="Confirm new password">
+               placeholder="Confirm new password">
         <span *ngIf="authDetailsForm.errors?.match">
           Passwords do not match.
         </span>

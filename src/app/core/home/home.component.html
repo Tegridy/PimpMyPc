@@ -41,8 +41,8 @@
   <div id="bestsellers-slider">
     <ng-container *ngIf="bestsellersProducts && bestsellersProducts.length > 0">
       <ngx-glide #ngxGlide [perView]="slidesPerView" [showBullets]="showBullets" [arrowLeftTemplate]="leftArrow"
-        [arrowRightTemplate]="rightArrow" [bound]="bound"
-        [breakpoints]="{'400': {perView: 1}, '1010': { perView: 2 }, '1280': { perView: 4 }}" class="m-5">
+                 [arrowRightTemplate]="rightArrow" [bound]="bound"
+                 [breakpoints]="{'400': {perView: 1}, '1010': { perView: 2 }, '1280': { perView: 4 }}" class="m-5">
         <ng-container *ngFor="let product of bestsellersProducts">
           <pmp-product-small [product]="product"></pmp-product-small>
         </ng-container>
@@ -60,8 +60,8 @@
   <div id="movies-slider">
     <ng-container *ngIf="movies && movies.length > 0">
       <ngx-glide #ngxGlide [perView]=4 [showBullets]="showBullets" [arrowLeftTemplate]="leftArrow"
-        [arrowRightTemplate]="rightArrow" [bound]="bound"
-        [breakpoints]="{'400': {perView: 1},'1010': { perView: 2 }, '1280': { perView: 4 }}">
+                 [arrowRightTemplate]="rightArrow" [bound]="bound"
+                 [breakpoints]="{'400': {perView: 1},'1010': { perView: 2 }, '1280': { perView: 4 }}">
         <ng-container *ngFor="let movie of movies">
 
           <a href="{{ movie.url }}" class="min-h-37vh w-80 min-w-min p-4 flex flex-col justify-between rounded-lg shadow-lg cursor-pointer bg-gray-50

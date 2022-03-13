@@ -1,5 +1,5 @@
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'pmp-contact-us',
@@ -9,7 +9,8 @@ import { Component, OnInit } from '@angular/core';
 export class ContactUsComponent implements OnInit {
   contactUsForm!: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(private formBuilder: FormBuilder) {
+  }
 
   ngOnInit(): void {
     this.contactUsForm = this.formBuilder.group({

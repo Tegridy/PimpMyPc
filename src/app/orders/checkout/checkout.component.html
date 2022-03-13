@@ -5,8 +5,8 @@
     <h3 class="text-2xl font-semibold">Order items:</h3>
     <hr class="w-full my-2 border border-black">
     <ul class="flex flex-col items-center justify-center space-y-4">
-      <li *ngFor="let cartItem of cartProducts"
-        class="flex flex-col md:flex-row items-center w-11/12 mx-auto md:w-4/5 p-4 border border-black rounded">
+      <li id="product" *ngFor="let cartItem of cartProducts"
+          class="flex flex-col md:flex-row items-center w-11/12 mx-auto md:w-4/5 p-4 border border-black rounded">
         <div class="flex items-center justify-center w-4/5 md:w-2/5">
           <img class="object-contain h-24 rounded" src="{{ cartItem.imageUrl }}" alt="{{ cartItem.title }} image">
         </div>
@@ -21,8 +21,8 @@
   </section>
 
   <section id="customer-data" class="pb-8">
-    <form novalidate (ngSubmit)="saveOrder()" [formGroup]="orderForm"
-      class="w-11/12 md:w-3/5 p-5 mx-auto border border-black rounded-xl">
+    <form id="checkout-form" novalidate (ngSubmit)="saveOrder()" [formGroup]="checkoutForm"
+          class="w-11/12 md:w-3/5 p-5 mx-auto border border-black rounded-xl">
 
       <div class="flex flex-col w-full md:w-3/5 mx-auto">
         <h3 class="self-start my-2 text-xl font-semibold">Personal data:</h3>
@@ -30,129 +30,102 @@
 
         <label for="firstNameId" class="input-label">First name:</label>
         <input formControlName="customerFirstName" id="firstNameId" type="text" class="mb-3" placeholder="First name"
-          [ngClass]="{'is-invalid': (orderForm.get('customerFirstName')?.touched ||
-         orderForm.get('customerFirstName')?.dirty) &&
-         !orderForm.get('customerFirstName')?.valid }" />
+               [ngClass]="{'is-invalid': (checkoutForm.get('customerFirstName')?.touched ||
+         checkoutForm.get('customerFirstName')?.dirty) &&
+         !checkoutForm.get('customerFirstName')?.valid }"/>
 
         <span class="error-message"
-          *ngIf="orderForm.get('customerFirstName')?.errors?.required && orderForm.get('customerFirstName')?.touched">
-          Please enter your first name.
-        </span>
-        <span class="error-message" *ngIf="orderForm.get('customerFirstName')?.errors?.minlength">
-          The first name must be longer than 3 characters.
-        </span>
+              *ngIf="checkoutForm.get('customerFirstName')?.errors?.required
+              && checkoutForm.get('customerFirstName')?.touched">Please enter your first name.</span>
+        <span class="error-message"
+              *ngIf="checkoutForm.get('customerFirstName')?.errors?.minlength">The first name must be longer than 3 characters.</span>
 
         <label for="lastNameId" class="input-label">Last name:</label>
         <input formControlName="customerLastName" id="lastNameId" type="text" class="mb-3" placeholder="Last name"
-          [ngClass]="{'is-invalid': (orderForm.get('customerLastName')?.touched ||
-                                            orderForm.get('customerLastName')?.dirty) &&
-                                            !orderForm.get('customerLastName')?.valid }" />
+               [ngClass]="{'is-invalid': (checkoutForm.get('customerLastName')?.touched ||
+                                            checkoutForm.get('customerLastName')?.dirty) &&
+                                            !checkoutForm.get('customerLastName')?.valid }"/>
 
 
-        <span class="error-message" *ngIf="orderForm.get('customerLastName')?.errors?.required &&
-        orderForm.get('customerLastName')?.touched">
-          Please enter your last name.
-        </span>
-        <span class="error-message" *ngIf="orderForm.get('customerLastName')?.errors?.minlength">
-          The last name must be longer than 3 characters.
-        </span>
+        <span class="error-message" *ngIf="checkoutForm.get('customerLastName')?.errors?.required &&
+        checkoutForm.get('customerLastName')?.touched">Please enter your last name.</span>
+        <span class="error-message"
+              *ngIf="checkoutForm.get('customerLastName')?.errors?.minlength">The last name must be longer than 3 characters.</span>
 
         <label for="emailId" class="input-label">E-mail address:</label>
         <input formControlName="customerEmail" id="emailId" type="text" class="mb-3" placeholder="E-mail address"
-          [ngClass]="{'is-invalid': (orderForm.get('customerEmail')?.touched ||
-                                            orderForm.get('customerEmail')?.dirty) &&
-                                            !orderForm.get('customerEmail')?.valid }" />
+               [ngClass]="{'is-invalid': (checkoutForm.get('customerEmail')?.touched ||
+                                            checkoutForm.get('customerEmail')?.dirty) &&
+                                            !checkoutForm.get('customerEmail')?.valid }"/>
 
-        <span class="error-message" *ngIf="orderForm.get('customerEmail')?.errors?.required &&
-        orderForm.get('customerEmail')?.touched">
-          E-mail address is required.
-        </span>
-        <span class="error-message" *ngIf="orderForm.get('customerEmail')?.errors?.email">
-          E-mail address is not valid.
-        </span>
+        <span class="error-message" *ngIf="checkoutForm.get('customerEmail')?.errors?.required &&
+        checkoutForm.get('customerEmail')?.touched">E-mail address is required.</span>
+        <span class="error-message"
+              *ngIf="checkoutForm.get('customerEmail')?.errors?.email">E-mail address is not valid.</span>
 
         <label for="phoneNumberId" class="input-label">Phone:</label>
         <input formControlName="customerPhone" id="phoneNumberId" type="text" class="mb-3" placeholder="Phone number"
-          [ngClass]="{'is-invalid': (orderForm.get('customerPhone')?.touched ||
-                                            orderForm.get('customerPhone')?.dirty) &&
-                                            !orderForm.get('customerPhone')?.valid }" />
+               [ngClass]="{'is-invalid': (checkoutForm.get('customerPhone')?.touched ||
+                                            checkoutForm.get('customerPhone')?.dirty) &&
+                                            !checkoutForm.get('customerPhone')?.valid }"/>
 
-        <span class="error-message" *ngIf="orderForm.get('customerPhone')?.errors?.required &&
-        orderForm.get('customerPhone')?.touched">
-          Phone number is required.
-        </span>
-        <span class="error-message" *ngIf="orderForm.get('customerPhone')?.errors?.pattern">
-          Phone number is not valid.
-        </span>
-        <span class="error-message" *ngIf="orderForm.get('customerPhone')?.errors?.minlength">
-          Phone number too short(at least 5 numbers).
-        </span>
-
-
+        <span class="error-message" *ngIf="checkoutForm.get('customerPhone')?.errors?.required &&
+        checkoutForm.get('customerPhone')?.touched">Phone number is required.</span>
+        <span class="error-message"
+              *ngIf="checkoutForm.get('customerPhone')?.errors?.pattern">Phone number is not valid.</span>
+        <span class="error-message"
+              *ngIf="checkoutForm.get('customerPhone')?.errors?.minlength">Phone number too short(at least 5 numbers).</span>
 
 
         <div formGroupName="deliveryAddress" class="flex flex-col w-4/5 mx-auto">
           <h3 class="self-start my-2 text-xl font-semibold">Address:</h3>
           <label for="stateId" class="input-label">State:</label>
-          <input formControlName="state" id="stateId" type="text" class="mb-3" placeholder="State" [ngClass]="{'is-invalid': (orderForm.get('deliveryAddress.state')?.touched ||
-                                            orderForm.get('deliveryAddress.state')?.dirty) &&
-                                            !orderForm.get('deliveryAddress.state')?.valid }" />
+          <input formControlName="state" id="stateId" type="text" class="mb-3" placeholder="State" [ngClass]="{'is-invalid': (checkoutForm.get('deliveryAddress.state')?.touched ||
+                                            checkoutForm.get('deliveryAddress.state')?.dirty) &&
+                                            !checkoutForm.get('deliveryAddress.state')?.valid }"/>
 
-          <span class="error-message" *ngIf="orderForm.get('deliveryAddress.state')?.errors?.required &&
-        orderForm.get('deliveryAddress.state')?.touched">
-            Please enter your state name.
-          </span>
-          <span class="error-message" *ngIf="orderForm.get('deliveryAddress.state')?.errors?.minlength">
-            The state name must be longer than 3 characters.
-          </span>
+          <span class="error-message" *ngIf="checkoutForm.get('deliveryAddress.state')?.errors?.required &&
+        checkoutForm.get('deliveryAddress.state')?.touched">Please enter your state name.</span>
+          <span class="error-message" *ngIf="checkoutForm.get('deliveryAddress.state')?.errors?.minlength">The state name must be longer than 3 characters.</span>
 
           <label for="cityNameId" class="input-label">City:</label>
-          <input formControlName="city" id="cityNameId" type="text" class="mb-3" placeholder="City name" [ngClass]="{'is-invalid': (orderForm.get('deliveryAddress.city')?.touched ||
-                                            orderForm.get('deliveryAddress.city')?.dirty) &&
-                                            !orderForm.get('deliveryAddress.city')?.valid }" />
+          <input formControlName="city" id="cityNameId" type="text" class="mb-3" placeholder="City name" [ngClass]="{'is-invalid': (checkoutForm.get('deliveryAddress.city')?.touched ||
+                                            checkoutForm.get('deliveryAddress.city')?.dirty) &&
+                                            !checkoutForm.get('deliveryAddress.city')?.valid }"/>
 
 
-          <span class="error-message" *ngIf="orderForm.get('deliveryAddress.city')?.errors?.required &&
-        orderForm.get('deliveryAddress.city')?.touched">
-            Please enter your city name.
-          </span>
-          <span class="error-message" *ngIf="orderForm.get('deliveryAddress.city')?.errors?.minlength">
-            The city name must be longer than 3 characters.
-          </span>
+          <span class="error-message" *ngIf="checkoutForm.get('deliveryAddress.city')?.errors?.required &&
+        checkoutForm.get('deliveryAddress.city')?.touched">Please enter your city name.</span>
+          <span class="error-message"
+                *ngIf="checkoutForm.get('deliveryAddress.city')?.errors?.minlength">The city name must be longer than 3 characters.</span>
 
 
           <label for="streetNameId" class="input-label">Street:</label>
           <input formControlName="street" id="streetNameId" type="text" class="mb-3" placeholder="Street name"
-            [ngClass]="{'is-invalid': (orderForm.get('deliveryAddress.street')?.touched ||
-                                            orderForm.get('deliveryAddress.street')?.dirty) &&
-                                            !orderForm.get('deliveryAddress.street')?.valid }" />
+                 [ngClass]="{'is-invalid': (checkoutForm.get('deliveryAddress.street')?.touched ||
+                                            checkoutForm.get('deliveryAddress.street')?.dirty) &&
+                                            !checkoutForm.get('deliveryAddress.street')?.valid }"/>
 
-          <span class="error-message" *ngIf="orderForm.get('deliveryAddress.street')?.errors?.required &&
-        orderForm.get('deliveryAddress.street')?.touched">
-            Please enter your street name.
-          </span>
-          <span class="error-message" *ngIf="orderForm.get('deliveryAddress.street')?.errors?.minlength">
-            The street name must be longer than 3 characters.
-          </span>
+          <span class="error-message" *ngIf="checkoutForm.get('deliveryAddress.street')?.errors?.required &&
+        checkoutForm.get('deliveryAddress.street')?.touched">Please enter your street name.</span>
+          <span class="error-message"
+                *ngIf="checkoutForm.get('deliveryAddress.street')?.errors?.minlength">The street name must be longer than 3 characters.</span>
 
           <label for="zipCodeId" class="input-label">Zip code:</label>
-          <input formControlName="zip" id="zipCodeId" type="text" class="mb-3" placeholder="Zip code" [ngClass]="{'is-invalid': (orderForm.get('deliveryAddress.zip')?.touched ||
-                                            orderForm.get('deliveryAddress.zip')?.dirty) &&
-                                            !orderForm.get('deliveryAddress.zip')?.valid }" />
+          <input formControlName="zip" id="zipCodeId" type="text" class="mb-3" placeholder="Zip code" [ngClass]="{'is-invalid': (checkoutForm.get('deliveryAddress.zip')?.touched ||
+                                            checkoutForm.get('deliveryAddress.zip')?.dirty) &&
+                                            !checkoutForm.get('deliveryAddress.zip')?.valid }"/>
 
-          <span class="error-message" *ngIf="orderForm.get('deliveryAddress.zip')?.errors?.required &&
-        orderForm.get('deliveryAddress.zip')?.touched">
-            Please enter your zip code.
-          </span>
-          <span class="error-message" *ngIf="orderForm.get('deliveryAddress.zip')?.errors?.minlength">
-            The zip code must be longer than 3 characters.
-          </span>
+          <span class="error-message" *ngIf="checkoutForm.get('deliveryAddress.zip')?.errors?.required &&
+        checkoutForm.get('deliveryAddress.zip')?.touched">Please enter your zip code.</span>
+          <span class="error-message"
+                *ngIf="checkoutForm.get('deliveryAddress.zip')?.errors?.minlength">The zip code must be longer than 3 characters.</span>
         </div>
 
-        <input type="submit" class="w-3/5 p-2 mx-auto mt-8 bg-blue-500 cursor-pointer rounded-2xl"
-          [disabled]="cartProducts.length < 1" value="Place order">
+        <input id="save-order-button" type="submit" class="w-3/5 p-2 mx-auto mt-8 bg-blue-500 cursor-pointer rounded-2xl"
+               [disabled]="cartProducts.length < 1" value="Place order">
 
-        <span class="mt-2 text-center text-blue-600" *ngIf="cartProducts.length < 1"> You need at least one item
+        <span class="mt-2 text-center text-blue-600" *ngIf="cartProducts.length < 1">You need at least one item
           in
           the cart</span>
       </div>

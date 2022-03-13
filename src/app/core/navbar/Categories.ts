@@ -1,5 +1,4 @@
-import { Category } from './../../shared/model/Category';
-import { Param } from '../../shared/model/Param';
+import {Category} from './../../shared/model/Category';
 
 export const categories: Category[] = [
   {
@@ -11,15 +10,15 @@ export const categories: Category[] = [
         secondLevelMenu: [
           {
             name: 'Notebook/Laptop 15"',
-            filterParams: { page: 1, displaySize: 15 },
+            filterParams: {page: 1, displaySize: 15},
           },
           {
             name: 'Notebook/Laptop 16"',
-            filterParams: { page: 1, displaySize: 16 },
+            filterParams: {page: 1, displaySize: 16},
           },
           {
             name: 'Notebook/Laptop 17"',
-            filterParams: { page: 1, displaySize: 17 },
+            filterParams: {page: 1, displaySize: 17},
           },
         ],
         endpointName: 'laptops',
@@ -44,31 +43,31 @@ export const categories: Category[] = [
       {
         name: 'Processors',
         secondLevelMenu: [
-          { name: 'Intel', filterParams: { page: 1, title: 'intel' } },
-          { name: 'AMD', filterParams: { page: 1, title: 'amd' } },
+          {name: 'Intel', filterParams: {page: 1, title: 'intel'}},
+          {name: 'AMD', filterParams: {page: 1, title: 'amd'}},
         ],
         endpointName: 'processors',
       },
-      { name: 'Memory RAM', endpointName: 'rams' },
+      {name: 'Memory RAM', endpointName: 'rams'},
       {
         name: 'Graphic cards',
         secondLevelMenu: [
-          { name: 'Nvidia', filterParams: { page: 1, title: 'nvidia' } },
-          { name: 'AMD', filterParams: { page: 1, title: 'amd' } },
+          {name: 'Nvidia', filterParams: {page: 1, title: 'nvidia'}},
+          {name: 'AMD', filterParams: {page: 1, title: 'amd'}},
         ],
         endpointName: 'graphics',
       },
-      { name: 'Motherboards', endpointName: 'motherboards' },
+      {name: 'Motherboards', endpointName: 'motherboards'},
       {
         name: 'Hard drives',
         secondLevelMenu: [
-          { name: 'SSD', filterParams: { page: 1, storageType: 'SSD' } },
-          { name: 'HDD', filterParams: { page: 1, storageType: 'HDD' } },
+          {name: 'SSD', filterParams: {page: 1, storageType: 'SSD'}},
+          {name: 'HDD', filterParams: {page: 1, storageType: 'HDD'}},
         ],
         endpointName: 'drives',
       },
-      { name: 'Power supply', endpointName: 'power-supplies' },
-      { name: 'Cases', endpointName: 'cases' },
+      {name: 'Power supply', endpointName: 'power-supplies'},
+      {name: 'Cases', endpointName: 'cases'},
     ],
     endpointName: 'processors',
   },
@@ -76,9 +75,9 @@ export const categories: Category[] = [
     name: 'Peripherals',
     iconName: 'print-outline',
     firstLevelMenu: [
-      { name: 'Monitors', endpointName: 'monitors' },
-      { name: 'Computer mouse', endpointName: 'mouses' },
-      { name: 'Computer keyboard', endpointName: 'keyboards' },
+      {name: 'Monitors', endpointName: 'monitors'},
+      {name: 'Computer mouse', endpointName: 'mouses'},
+      {name: 'Computer keyboard', endpointName: 'keyboards'},
     ],
     endpointName: 'monitors',
   },

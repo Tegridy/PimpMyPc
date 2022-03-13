@@ -15,7 +15,7 @@
           <h4 class="w-2/3 p-4">{{ customerComputer.motherboard?.title }}</h4>
           <div *ngIf="customerComputer.motherboard?.imageUrl" class="w-1/3 p-4">
             <img class="object-contain w-48 shadow-lg h-36" [src]="customerComputer.motherboard?.imageUrl"
-              alt="Motherboard image">
+                 alt="Motherboard image">
           </div>
         </div>
       </div>
@@ -33,7 +33,7 @@
           <h4 class="w-2/3 p-4">{{ customerComputer.processor?.title }}</h4>
           <div *ngIf="customerComputer.processor?.imageUrl" class="w-1/3 p-4">
             <img class="object-contain w-48 shadow-lg h-36" [src]="customerComputer.processor?.imageUrl"
-              alt="Processor image">
+                 alt="Processor image">
           </div>
         </div>
       </div>
@@ -56,7 +56,7 @@
           <h4 class="w-2/3 p-4">{{ customerComputer.graphicCard?.title }}</h4>
           <div *ngIf="customerComputer.graphicCard?.imageUrl" class="w-1/3 p-4">
             <img class="object-contain w-48 shadow-lg h-36" [src]="customerComputer.graphicCard?.imageUrl"
-              alt="Processor image">
+                 alt="Processor image">
           </div>
         </div>
       </div>
@@ -117,7 +117,7 @@
           <h4 class="w-2/3 p-4">{{ customerComputer.powerSupply?.title }}</h4>
           <div *ngIf="customerComputer.powerSupply?.imageUrl" class="w-1/3 p-4">
             <img class="object-contain w-48 shadow-lg h-36" [src]="customerComputer.powerSupply?.imageUrl"
-              alt="Power supply image">
+                 alt="Power supply image">
           </div>
         </div>
       </div>
@@ -130,11 +130,9 @@
   </ul>
 
 
-
-
   <div class="flex justify-center my-8">
     <button class="flex items-center justify-center px-4 py-2 text-center bg-blue-500 rounded-lg" type="button"
-      (click)="sendPcOrder()">Order PC
+            (click)="sendPcOrder()">Order PC
       <ion-icon class="ml-2" name="bag-check-outline"></ion-icon>
     </button>
   </div>

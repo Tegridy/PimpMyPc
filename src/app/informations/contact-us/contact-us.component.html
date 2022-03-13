@@ -40,7 +40,7 @@
 
   <div class="flex justify-center w-full pb-8 mt-16">
     <form novalidate class="flex flex-col w-4/5 p-8 border border-black rounded-lg md:w-2/5"
-      [formGroup]="contactUsForm">
+          [formGroup]="contactUsForm">
 
       <h3 class="mb-4 text-3xl font-bold">Contact us</h3>
 
@@ -48,7 +48,7 @@
       <input formControlName="email" id="email" class="mb-4" type="text" placeholder="Your e-mail" [ngClass]="{'is-invalid': (contactUsForm.get('email')?.touched
           ||
           contactUsForm.get('email')?.dirty) &&
-          !contactUsForm.get('email')?.valid }" />
+          !contactUsForm.get('email')?.valid }"/>
 
       <span class="error-message" *ngIf="contactUsForm.get('email')?.errors?.required &&
         contactUsForm.get('email')?.touched">
@@ -65,7 +65,7 @@
       <small>Up to 20 MB (.jpg, .png, .pdf, .doc, .docx)</small>
 
       <input type="submit" value="Send"
-        class="cursor-pointer w-2/5 py-2 mx-auto mt-6 text-center bg-blue-600 rounded-full">
+             class="cursor-pointer w-2/5 py-2 mx-auto mt-6 text-center bg-blue-600 rounded-full">
     </form>
   </div>
 

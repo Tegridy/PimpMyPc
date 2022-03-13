@@ -1,9 +1,8 @@
-import { catchError, map } from 'rxjs/operators';
-import { Injectable } from '@angular/core';
-import { BaseProduct } from '../../shared/model/BaseProduct';
-import { BehaviorSubject } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
-import { Cart } from '../../shared/model/Cart';
+import {Injectable} from '@angular/core';
+import {BaseProduct} from '../../shared/model/BaseProduct';
+import {BehaviorSubject} from 'rxjs';
+import {HttpClient} from '@angular/common/http';
+import {Cart} from '../../shared/model/Cart';
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +13,8 @@ export class CartService {
   private cartSource = new BehaviorSubject<Cart>(this.cart);
   currentCart = this.cartSource.asObservable();
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+  }
 
   removeProductFromCart(id: number): void {
     const productIndex = this.cart.products.findIndex(

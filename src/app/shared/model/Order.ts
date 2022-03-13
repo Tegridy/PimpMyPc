@@ -1,5 +1,5 @@
-import { BaseProduct } from './BaseProduct';
-import { Address } from './User';
+import {BaseProduct} from './BaseProduct';
+import {Address} from './User';
 
 export class CustomerOrderDetails {
   constructor(
@@ -8,7 +8,8 @@ export class CustomerOrderDetails {
     public customerPhone: string,
     public customerEmail: string,
     public deliveryAddress: Address
-  ) {}
+  ) {
+  }
 }
 
 export interface OrderResponse {

@@ -1,10 +1,10 @@
-import { NgxPaginationModule } from 'ngx-pagination';
-import { SharedModule } from 'src/app/shared/shared.module';
-import { ProductsCategoryComponent } from './products-category/products-category.component';
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { ProductsRoutingModule } from './products-routing.module';
-import { FormsModule } from '@angular/forms';
+import {NgxPaginationModule} from 'ngx-pagination';
+import {SharedModule} from 'src/app/shared/shared.module';
+import {ProductsCategoryComponent} from './products-category/products-category.component';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {ProductsRoutingModule} from './products-routing.module';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [ProductsRoutingModule.components],
@@ -18,4 +18,5 @@ import { FormsModule } from '@angular/forms';
   ],
   exports: [ProductsCategoryComponent],
 })
-export class ProductsModule {}
+export class ProductsModule {
+}

@@ -1,8 +1,8 @@
-import { movies } from './Movies';
-import { Component, OnInit } from '@angular/core';
-import { ProductsService } from '../services/products.service';
-import { BaseProduct } from '../../shared/model/BaseProduct';
-import { Movie } from '../../shared/model/Movie';
+import {movies} from './Movies';
+import {Component, OnInit} from '@angular/core';
+import {ProductsService} from '../services/products.service';
+import {BaseProduct} from '../../shared/model/BaseProduct';
+import {Movie} from '../../shared/model/Movie';
 
 @Component({
   selector: 'pmp-home',

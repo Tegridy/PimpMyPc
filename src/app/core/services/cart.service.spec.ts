@@ -1,20 +1,8 @@
-import { BaseProduct } from 'src/app/shared/model/BaseProduct';
-import { CartService } from './cart.service';
-import { Address } from './../../shared/model/User';
-import { AuthService } from './auth.service';
-import {
-  HttpClientTestingModule,
-  HttpTestingController,
-} from '@angular/common/http/testing';
-import set = Reflect.set;
-import {
-  HttpErrorResponse,
-  HttpHeaderResponse,
-  HttpHeaders,
-} from '@angular/common/http';
-import { Observable, of, throwError } from 'rxjs';
-import { User } from 'src/app/shared/model/User';
-import { TestBed } from '@angular/core/testing';
+import {BaseProduct} from 'src/app/shared/model/BaseProduct';
+import {CartService} from './cart.service';
+import {AuthService} from './auth.service';
+import {HttpClientTestingModule, HttpTestingController,} from '@angular/common/http/testing';
+import {TestBed} from '@angular/core/testing';
 
 describe('CartService', () => {
   let service: CartService;
@@ -34,8 +22,8 @@ describe('CartService', () => {
   });
 
   it('should add products to cart and update price', () => {
-    const product: BaseProduct = { id: 1, title: 'Laptop', price: 800 };
-    const product2: BaseProduct = { id: 2, title: 'Computer', price: 1800 };
+    const product: BaseProduct = {id: 1, title: 'Laptop', price: 800};
+    const product2: BaseProduct = {id: 2, title: 'Computer', price: 1800};
 
     service.addProductToCart(product);
     service.addProductToCart(product2);
@@ -55,8 +43,8 @@ describe('CartService', () => {
   });
 
   it('should remove product from cart and update price', () => {
-    const product: BaseProduct = { id: 1, title: 'Laptop', price: 800 };
-    const product2: BaseProduct = { id: 2, title: 'Computer', price: 1800 };
+    const product: BaseProduct = {id: 1, title: 'Laptop', price: 800};
+    const product2: BaseProduct = {id: 2, title: 'Computer', price: 1800};
 
     service.addProductToCart(product);
     service.addProductToCart(product2);
@@ -79,7 +67,7 @@ describe('CartService', () => {
   });
 
   it('should change cart state and update price', () => {
-    const product: BaseProduct = { id: 1, title: 'Laptop', price: 800 };
+    const product: BaseProduct = {id: 1, title: 'Laptop', price: 800};
 
     service.addProductToCart(product);
 
@@ -96,7 +84,7 @@ describe('CartService', () => {
   });
 
   it('should clear cart state', () => {
-    const product: BaseProduct = { id: 1, title: 'Laptop', price: 800 };
+    const product: BaseProduct = {id: 1, title: 'Laptop', price: 800};
 
     service.addProductToCart(product);
     service.clearCart();

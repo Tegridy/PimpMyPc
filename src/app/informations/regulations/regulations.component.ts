@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'pmp-regulations',
@@ -6,7 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: [],
 })
 export class RegulationsComponent implements OnInit {
-  constructor() {}
+  constructor() {
+  }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
 }

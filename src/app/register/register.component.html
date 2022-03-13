@@ -1,153 +1,123 @@
 <section id="sign-up">
 
-  <div class="w-full md:w-4/5 p-4 mx-auto lg:w-3/5 xl:w-2/5 lg:p-16">
+  <div class="w-full p-4 mx-auto md:w-4/5 lg:w-3/5 xl:w-2/5 lg:p-16">
     <div class="p-4 border-2 border-black rounded-lg lg:p-8">
 
       <h2 class="m-4 mb-6 text-3xl">Sign up</h2>
 
-      <form novalidate (ngSubmit)="saveForm()" [formGroup]="registerForm"
-        class="flex flex-col items-center justify-center">
+      <form id="register-form" novalidate (ngSubmit)="saveForm()" [formGroup]="registerForm"
+            class="flex flex-col items-center justify-center">
         <input id="usernameId" formControlName="username" type="text" class="w-4/5 my-3"
-          placeholder="Username (required)" [ngClass]="{'is-invalid': (registerForm.get('username')?.touched
+               placeholder="Username (required)" [ngClass]="{'is-invalid': (registerForm.get('username')?.touched
           ||
           registerForm.get('username')?.dirty) &&
-          !registerForm.get('username')?.valid }" />
+          !registerForm.get('username')?.valid }"/>
 
         <span class="error-message" *ngIf="registerForm.get('username')?.errors?.required &&
-          registerForm.get('username')?.touched">
-          Please enter your username.
-        </span>
-        <span class="error-message" *ngIf="registerForm.get('username')?.errors?.minlength">
-          The username must be longer than 3 characters.
-        </span>
+          registerForm.get('username')?.touched">Please enter your username.</span>
+        <span class="error-message" *ngIf="registerForm.get('username')?.errors?.minlength">The username must be longer
+          than 3 characters.</span>
 
         <input id="passwordId" formControlName="password" type="password" class="w-4/5"
-          placeholder="Password (required)" [ngClass]="{'is-invalid': (registerForm.get('password')?.touched
+               placeholder="Password (required)" [ngClass]="{'is-invalid': (registerForm.get('password')?.touched
           ||
           registerForm.get('password')?.dirty) &&
-          !registerForm.get('password')?.valid }" />
+          !registerForm.get('password')?.valid }"/>
 
-        <span class="error-message" *ngIf="registerForm.get('password')?.errors?.required &&
-          registerForm.get('password')?.touched">
-          Please enter your password.
-        </span>
-        <span class="error-message" *ngIf="registerForm.get('password')?.errors?.minlength">
-          The password must be longer than 8 characters.
-        </span>
+        <span class="error-message"
+              *ngIf="registerForm.get('password')?.errors?.required &&
+          registerForm.get('password')?.touched">Please enter your password.</span>
+        <span class="error-message"
+              *ngIf="registerForm.get('password')?.errors?.minlength">The password must be longer than 8 characters.</span>
 
         <input id="firstNameId" formControlName="firstName" type="text" class="w-4/5 my-3"
-          placeholder="First name (required)" [ngClass]="{'is-invalid': (registerForm.get('firstName')?.touched
+               placeholder="First name (required)" [ngClass]="{'is-invalid': (registerForm.get('firstName')?.touched
           ||
           registerForm.get('firstName')?.dirty) &&
-          !registerForm.get('firstName')?.valid }" />
+          !registerForm.get('firstName')?.valid }"/>
 
         <span class="error-message" *ngIf="registerForm.get('firstName')?.errors?.required &&
-          registerForm.get('firstName')?.touched">
-          Please enter your first name.
-        </span>
-        <span class="error-message" *ngIf="registerForm.get('firstName')?.errors?.minlength">
-          The first name must be longer than 3 characters.
-        </span>
+          registerForm.get('firstName')?.touched">Please enter your first name.</span>
+        <span class="error-message"
+              *ngIf="registerForm.get('firstName')?.errors?.minlength">The first name must be longer than 3 characters.</span>
 
         <input id="lastNameId" formControlName="lastName" type="text" class="w-4/5 mb-3"
-          placeholder="Last name (required)" [ngClass]="{'is-invalid': (registerForm.get('lastName')?.touched
+               placeholder="Last name (required)" [ngClass]="{'is-invalid': (registerForm.get('lastName')?.touched
           ||
           registerForm.get('lastName')?.dirty) &&
-          !registerForm.get('lastName')?.valid }" />
+          !registerForm.get('lastName')?.valid }"/>
 
         <span class="error-message" *ngIf="registerForm.get('lastName')?.errors?.required &&
-        registerForm.get('lastName')?.touched">
-          Please enter your last name.
-        </span>
-        <span class="error-message" *ngIf="registerForm.get('lastName')?.errors?.minlength">
-          The last name must be longer than 3 characters.
-        </span>
+        registerForm.get('lastName')?.touched">Please enter your last name.</span>
+        <span class="error-message"
+              *ngIf="registerForm.get('lastName')?.errors?.minlength">The last name must be longer than 3 characters.</span>
 
         <h3 class="self-start my-2 ml-5 text-xl font-semibold">Address:</h3>
         <div formGroupName="address" class="flex flex-col w-4/5">
           <input id="streetId" formControlName="street" type="text" class="mb-3" placeholder="Street name (required)"
-            [ngClass]="{'is-invalid': (registerForm.get('address.street')?.touched
+                 [ngClass]="{'is-invalid': (registerForm.get('address.street')?.touched
           ||
           registerForm.get('address.street')?.dirty) &&
-          !registerForm.get('address.street')?.valid }" />
+          !registerForm.get('address.street')?.valid }"/>
 
           <span class="error-message" *ngIf="registerForm.get('address.street')?.errors?.required &&
-        registerForm.get('address.street')?.touched">
-            Please enter your state name.
-          </span>
-          <span class="error-message" *ngIf="registerForm.get('address.street')?.errors?.minlength">
-            The state name must be longer than 3 characters.
-          </span>
+        registerForm.get('address.street')?.touched">Please enter your street name.</span>
+          <span class="error-message"
+                *ngIf="registerForm.get('address.street')?.errors?.minlength">The street name must be longer than 3 characters.</span>
 
           <input id="cityId" formControlName="city" type="text" class="mb-3" placeholder="City name (required)"
-            [ngClass]="{'is-invalid': (registerForm.get('address.city')?.touched
+                 [ngClass]="{'is-invalid': (registerForm.get('address.city')?.touched
           ||
           registerForm.get('address.city')?.dirty) &&
-          !registerForm.get('address.city')?.valid }" />
+          !registerForm.get('address.city')?.valid }"/>
 
           <span class="error-message" *ngIf="registerForm.get('address.city')?.errors?.required &&
-        registerForm.get('address.city')?.touched">
-            Please enter your city name.
-          </span>
-          <span class="error-message" *ngIf="registerForm.get('address.city')?.errors?.minlength">
-            The city name must be longer than 3 characters.
-          </span>
+        registerForm.get('address.city')?.touched">Please enter your city name.</span>
+          <span class="error-message" *ngIf="registerForm.get('address.city')?.errors?.minlength">The city name must be longer than 3 characters.</span>
 
           <input id="stateId" formControlName="state" type="text" class="mb-3 " placeholder="State name (required)"
-            [ngClass]="{'is-invalid': (registerForm.get('address.state')?.touched
+                 [ngClass]="{'is-invalid': (registerForm.get('address.state')?.touched
           ||
           registerForm.get('address.state')?.dirty) &&
-          !registerForm.get('address.state')?.valid }" />
+          !registerForm.get('address.state')?.valid }"/>
 
-          <span class="error-message" *ngIf="registerForm.get('address.state')?.errors?.required &&
-        registerForm.get('address.state')?.touched">
-            Please enter your state name.
-          </span>
-          <span class="error-message" *ngIf="registerForm.get('address.state')?.errors?.minlength">
-            The state name must be longer than 3 characters.
-          </span>
+          <span class="error-message"
+                *ngIf="registerForm.get('address.state')?.errors?.required &&
+        registerForm.get('address.state')?.touched">Please enter your state name.</span>
+          <span class="error-message"
+                *ngIf="registerForm.get('address.state')?.errors?.minlength">The state name must be longer than 3 characters.</span>
 
           <input id="zipId" formControlName="zip" type="text" class="mb-3" placeholder="Zip code (required)" [ngClass]="{'is-invalid': (registerForm.get('address.zip')?.touched
           ||
           registerForm.get('address.zip')?.dirty) &&
-          !registerForm.get('address.zip')?.valid }" />
+          !registerForm.get('address.zip')?.valid }"/>
 
           <span class="error-message" *ngIf="registerForm.get('address.zip')?.errors?.required &&
-        registerForm.get('address.zip')?.touched">
-            Please enter your zip code.
-          </span>
-          <span class="error-message" *ngIf="registerForm.get('address.zip')?.errors?.minlength">
-            The zip code must be longer than 3 characters.
-          </span>
+        registerForm.get('address.zip')?.touched">Please enter your zip code.</span>
+          <span class="error-message"
+                *ngIf="registerForm.get('address.zip')?.errors?.minlength">The zip code must be longer than 3 characters.</span>
 
         </div>
         <h3 class="self-start my-2 ml-5 text-xl font-semibold">Other:</h3>
         <input id="phoneId" formControlName="phone" type="text" class="w-4/5 mb-3" placeholder="Phone number (optional)"
-          [ngClass]="{'is-invalid': (registerForm.get('phone')?.touched ||
+               [ngClass]="{'is-invalid': (registerForm.get('phone')?.touched ||
           registerForm.get('phone')?.dirty) &&
-          !registerForm.get('phone')?.valid }" />
+          !registerForm.get('phone')?.valid }"/>
 
         <span class="error-message" *ngIf="registerForm.get('phone')?.errors?.required &&
-        registerForm.get('phone')?.touched">
-          Phone number is required.
-        </span>
-        <span class="error-message" *ngIf="registerForm.get('phone')?.errors?.pattern">
-          Phone number is not valid.
-        </span>
+        registerForm.get('phone')?.touched">Phone number is required.</span>
+        <span class="error-message" *ngIf="registerForm.get('phone')?.errors?.pattern">Phone number is not valid.</span>
 
         <input id="emailId" formControlName="email" type="email" class="w-4/5 mb-3"
-          placeholder="E-mail address (required)" [ngClass]="{'is-invalid': (registerForm.get('email')?.touched
+               placeholder="E-mail address (required)" [ngClass]="{'is-invalid': (registerForm.get('email')?.touched
           ||
           registerForm.get('email')?.dirty) &&
-          !registerForm.get('email')?.valid }" />
+          !registerForm.get('email')?.valid }"/>
 
         <span class="error-message" *ngIf="registerForm.get('email')?.errors?.required &&
-        registerForm.get('email')?.touched">
-          E-mail address is required.
-        </span>
-        <span class="error-message" *ngIf="registerForm.get('email')?.errors?.email">
-          E-mail address is not valid.
-        </span>
+        registerForm.get('email')?.touched">E-mail address is required.</span>
+        <span class="error-message"
+              *ngIf="registerForm.get('email')?.errors?.email">E-mail address is not valid.</span>
 
 
         <div class="flex items-center w-4/5 mt-4">
@@ -162,9 +132,9 @@
         </ng-container>
 
         <input type="submit" class="px-4 py-2 my-6 bg-blue-600 rounded-full cursor-pointer" value="Sign up"
-          [disabled]="loading" [ngClass]="{'bg-gray-500' : loading}">
+               [disabled]="loading" [ngClass]="{'bg-gray-500' : loading}">
         <small class="w-4/5 py-2">By creating an account, you agree to PimpMyPc's <a href="#" class="underline">Privacy
-            Notice</a> and <a href="#" class="underline">Terms of Use.</a></small>
+          Notice</a> and <a href="#" class="underline">Terms of Use.</a></small>
       </form>
 
     </div>

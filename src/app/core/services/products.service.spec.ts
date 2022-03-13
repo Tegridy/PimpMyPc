@@ -1,38 +1,9 @@
-import {
-  ProductResponse,
-  ProductDto,
-} from './../../shared/model/ProductResponse';
-import { ProductsService } from './products.service';
-import {
-  UserEdit,
-  UserEditAddress,
-  UserEditAuth,
-} from './../../shared/model/UserEdit';
-import { LoginDetails } from './../../shared/model/LoginDetails';
-import { UserService } from './user.service';
-import { Order, OrderResponse } from './../../shared/model/Order';
-import { Category } from './../../shared/model/Category';
-import { Processor, Motherboard, Ram } from './../../shared/model/BaseProduct';
-import { BaseProduct } from 'src/app/shared/model/BaseProduct';
-import { CartService } from './cart.service';
-import { Address } from './../../shared/model/User';
-import { AuthService } from './auth.service';
-import {
-  HttpClientTestingModule,
-  HttpTestingController,
-} from '@angular/common/http/testing';
-import set = Reflect.set;
-import {
-  HttpErrorResponse,
-  HttpHeaderResponse,
-  HttpHeaders,
-} from '@angular/common/http';
-import { Observable, of, throwError } from 'rxjs';
-import { User } from 'src/app/shared/model/User';
-import { TestBed } from '@angular/core/testing';
-import { ConfiguratorService } from './configurator.service';
-import { OrderService } from './order.service';
-import { CustomerOrderDetails, OrderDto } from 'src/app/shared/model/Order';
+import {ProductDto, ProductResponse,} from './../../shared/model/ProductResponse';
+import {ProductsService} from './products.service';
+import {BaseProduct} from 'src/app/shared/model/BaseProduct';
+import {AuthService} from './auth.service';
+import {HttpClientTestingModule, HttpTestingController,} from '@angular/common/http/testing';
+import {TestBed} from '@angular/core/testing';
 
 describe('ProductsService', () => {
   let service: ProductsService;
@@ -51,13 +22,15 @@ describe('ProductsService', () => {
     expect(service).toBeTruthy();
   });
 
-  const product: BaseProduct = { id: 1, title: 'Laptop', price: 800 };
-  const product2: BaseProduct = { id: 2, title: 'Computer', price: 1800 };
+  const product: BaseProduct = {id: 1, title: 'Laptop', price: 800};
+  const product2: BaseProduct = {id: 2, title: 'Computer', price: 1800};
 
-  const productDto: ProductDto = {
+  const mockProducts = [product, product2];
+
+  let productDto: ProductDto = {
     number: 0,
     totalElements: 2,
-    content: [product, product2],
+    content: mockProducts,
   };
 
   const productsResponse: ProductResponse = {
@@ -133,7 +106,7 @@ describe('ProductsService', () => {
 
     const req = httpMock
       .expectOne('http://localhost:8080/api/v1/products/laptops?page=1&size=9')
-      .error(error, { status: 500 });
+      .error(error, {status: 500});
   });
 
   it('should find products by given category', () => {
@@ -148,7 +121,7 @@ describe('ProductsService', () => {
     const req = httpMock.expectOne(
       'http://localhost:8080/api/v1/products/search?productName=dell&productCategory=laptops&size=9&page=1'
     );
-    req.flush(productsResponse);
+    req.flush(productDto);
     expect(req.request.method).toEqual('GET');
   });
 
@@ -164,7 +137,7 @@ describe('ProductsService', () => {
     const req = httpMock.expectOne(
       'http://localhost:8080/api/v1/products/search?productName=dell&size=9&page=1'
     );
-    req.flush(productsResponse);
+    req.flush(productDto);
     expect(req.request.method).toEqual('GET');
   });
 

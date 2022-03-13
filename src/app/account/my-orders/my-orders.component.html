@@ -5,11 +5,11 @@
     <ul class="mb-4 sm:mb-0" *ngFor="let order of userOrders">
       <li class="mb-4 flex justify-center">
         <div class="flex flex-col sm:flex-row w-3/4 md:w-1/2 border border-black shadow-lg rounded-lg cursor-pointer "
-          routerLink="/account/orders/{{ order.id }}">
+             routerLink="/account/orders/{{ order.id }}">
 
           <div class="bg-gray-400 bg-opacity-40 p-4 w-full rounded-t-lg sm:rounded-l-lg">
             <h4 class="mb-4 font-bold text-2xl">Status: <span
-                class="text-green-700">{{ order.status | orderStatus }}</span></h4>
+              class="text-green-700">{{ order.status | orderStatus }}</span></h4>
             <div class="flex flex-col mb-4">
               <span>Order date: {{ order.orderDate }}</span>
               <span>Order id: {{ order.id }}</span>

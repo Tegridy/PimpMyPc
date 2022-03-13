@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'pmp-modal',
@@ -15,9 +15,11 @@ export class ModalComponent implements OnInit {
   @Output() modalToggleEvent: EventEmitter<boolean> =
     new EventEmitter<boolean>();
 
-  constructor() {}
+  constructor() {
+  }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
 
   toggleModal(): void {
     this.showModal = !this.showModal;

@@ -1,12 +1,11 @@
-import { ProductsService } from '../../core/services/products.service';
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { PaginationInstance } from 'ngx-pagination';
-import { Subscription } from 'rxjs';
-import { BaseProduct } from '../../shared/model/BaseProduct';
-import { Filter, FilterGroup } from '../../shared/model/FilterGroup';
-import { Param } from '../../shared/model/Param';
-import { parse } from 'search-params';
+import {ProductsService} from '../../core/services/products.service';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
+import {PaginationInstance} from 'ngx-pagination';
+import {Subscription} from 'rxjs';
+import {BaseProduct} from '../../shared/model/BaseProduct';
+import {Filter, FilterGroup} from '../../shared/model/FilterGroup';
+import {Param} from '../../shared/model/Param';
 import Utils from 'src/app/shared/utils/Utils';
 
 @Component({

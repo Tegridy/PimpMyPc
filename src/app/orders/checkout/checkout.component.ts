@@ -14,16 +14,14 @@ import { Address } from '../../shared/model/User';
   styleUrls: [],
 })
 export class CheckoutComponent implements OnInit {
-  orderForm!: FormGroup;
+  checkoutForm!: FormGroup;
   cartProducts: BaseProduct[] = [];
-  productIDs: number[] = [];
+  private productIDs: number[] = [];
   totalPrice = 0;
   orderComplete = false;
 
   orderId = 0;
   orderStatus = '';
-
-  isUserLoggedIn = false;
 
   constructor(
     private authService: AuthService,
@@ -34,7 +32,7 @@ export class CheckoutComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.orderForm = this.formBuilder.group({
+    this.checkoutForm = this.formBuilder.group({
       customerFirstName: ['', [Validators.required, Validators.minLength(3)]],
       customerLastName: ['', [Validators.required, Validators.minLength(3)]],
       customerEmail: ['', [Validators.required, Validators.email]],
@@ -57,7 +55,7 @@ export class CheckoutComponent implements OnInit {
     this.authService.isUserLoggedIn.subscribe((isLoggedIn) => {
       if (isLoggedIn) {
         this.userService.getUserAccountDetails().subscribe((userData) => {
-          this.orderForm.patchValue({
+          this.checkoutForm.patchValue({
             customerFirstName: userData.firstName,
             customerLastName: userData.lastName,
             customerEmail: userData.email,
@@ -81,17 +79,17 @@ export class CheckoutComponent implements OnInit {
   }
 
   saveOrder(): void {
-    if (this.orderForm.valid) {
+    if (this.checkoutForm.valid) {
       const order: CustomerOrderDetails = new CustomerOrderDetails(
-        this.orderForm.get('customerFirstName')?.value,
-        this.orderForm.get('customerLastName')?.value,
-        this.orderForm.get('customerPhone')?.value,
-        this.orderForm.get('customerEmail')?.value,
+        this.checkoutForm.get('customerFirstName')?.value,
+        this.checkoutForm.get('customerLastName')?.value,
+        this.checkoutForm.get('customerPhone')?.value,
+        this.checkoutForm.get('customerEmail')?.value,
         new Address(
-          this.orderForm.get('deliveryAddress.street')?.value,
-          this.orderForm.get('deliveryAddress.city')?.value,
-          this.orderForm.get('deliveryAddress.state')?.value,
-          this.orderForm.get('deliveryAddress.zip')?.value
+          this.checkoutForm.get('deliveryAddress.street')?.value,
+          this.checkoutForm.get('deliveryAddress.city')?.value,
+          this.checkoutForm.get('deliveryAddress.state')?.value,
+          this.checkoutForm.get('deliveryAddress.zip')?.value
         )
       );
 
@@ -104,7 +102,7 @@ export class CheckoutComponent implements OnInit {
 
       this.cartService.clearCart();
     } else {
-      this.orderForm.markAllAsTouched();
+      this.checkoutForm.markAllAsTouched();
     }
   }
 }

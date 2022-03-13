@@ -1,9 +1,9 @@
-import { catchError } from 'rxjs/operators';
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { Address, User } from '../../shared/model/User';
-import { UserEdit, UserEditAuth } from '../../shared/model/UserEdit';
+import {catchError} from 'rxjs/operators';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {Address, User} from '../../shared/model/User';
+import {UserEdit, UserEditAuth} from '../../shared/model/UserEdit';
 import Utils from 'src/app/shared/utils/Utils';
 
 @Injectable({
@@ -12,7 +12,8 @@ import Utils from 'src/app/shared/utils/Utils';
 export class UserService {
   baseUrl = 'http://localhost:8080/api/v1/user/';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+  }
 
   getUserAccountDetails(): Observable<User> {
     const userId = sessionStorage.getItem('userId');

@@ -54,8 +54,6 @@ export class RegisterComponent implements OnInit {
     this.auth.signUpUser(user).subscribe(
       (registerResponse) => {
         this.loading = false;
-        console.log(registerResponse.username);
-
         this.toastr.success(
           'Account created!',
           'Welcome ' + registerResponse.username,
@@ -72,7 +70,7 @@ export class RegisterComponent implements OnInit {
     );
   }
 
-  buildAddress(): FormGroup {
+  private buildAddress(): FormGroup {
     return this.formBuilder.group({
       street: ['', [Validators.required, Validators.minLength(3)]],
       city: ['', [Validators.required, Validators.minLength(3)]],

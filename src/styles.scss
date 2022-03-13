@@ -55,7 +55,7 @@ input[type="submit"]:disabled {
   }
 
   .error-message {
-    @apply font-bold text-red-500;
+    @apply font-bold text-center text-red-500;
   }
 
   .input-label {

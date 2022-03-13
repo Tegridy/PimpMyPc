@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'pmp-privacy-policy',
@@ -6,7 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: [],
 })
 export class PrivacyPolicyComponent implements OnInit {
-  constructor() {}
+  constructor() {
+  }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
 }

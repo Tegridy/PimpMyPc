@@ -18,7 +18,7 @@
       <div class="mx-auto mt-8">
         <span class="font-bold text-center" *ngIf="">Product is not available at the moment.</span>
         <button *ngIf="" (click)="addProductToCart()"
-          class="p-4 text-green-700 bg-white border-4 border-green-700 rounded-lg md:group-hover:block hover:border-green-700 hover:bg-green-700 hover:text-gray-50 sm:block">
+                class="p-4 text-green-700 bg-white border-4 border-green-700 rounded-lg md:group-hover:block hover:border-green-700 hover:bg-green-700 hover:text-gray-50 sm:block">
           <div class="flex items-center text-center justify-items-center">
             <ion-icon class="w-8 h-8" name="bag-add-outline"></ion-icon>
             <span class="ml-2">Add to basket</span>
@@ -35,8 +35,8 @@
       <ion-icon (click)="showFullText()" class="w-20 h-20 cursor-pointer" name="clipboard-outline"></ion-icon>
 
       <p id="description" (click)="showFullText()"
-        class="w-full text-lg tracking-wide text-left truncate md:overflow-visible md:whitespace-normal"
-        [ngClass]="showFullDescription ? 'overflow-visible whitespace-normal' : 'truncate'">
+         class="w-full text-lg tracking-wide text-left truncate md:overflow-visible md:whitespace-normal"
+         [ngClass]="showFullDescription ? 'overflow-visible whitespace-normal' : 'truncate'">
         {{ product.description }}
       </p>
 
@@ -53,10 +53,10 @@
       <table class="w-3/4 my-4 border-collapse table-auto">
         <tr class="w-full odd:bg-gray-200" *ngFor="let productDetail of productDetails">
           <th class="w-1/2 py-2 text-left border-t border-b border-gray-400"><span
-              class="ml-8">{{ (productDetail.key) | titlecase }}</span>
+            class="ml-8">{{ (productDetail.key) | titlecase }}</span>
           </th>
           <th class="w-1/2 py-2 border-t border-b border-gray-400"><span
-              class="float-left">{{ productDetail.value }}</span>
+            class="float-left">{{ productDetail.value }}</span>
           </th>
         </tr>
       </table>

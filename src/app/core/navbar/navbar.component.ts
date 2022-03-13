@@ -1,11 +1,11 @@
-import { AuthService } from './../services/auth.service';
-import { Component, OnInit } from '@angular/core';
-import { categories } from './Categories';
-import { Params, Router } from '@angular/router';
-import { CartService } from '../services/cart.service';
-import { Param } from '../../shared/model/Param';
-import { Category } from 'src/app/shared/model/Category';
-import { ToastrService } from 'ngx-toastr';
+import {AuthService} from './../services/auth.service';
+import {Component, OnInit} from '@angular/core';
+import {categories} from './Categories';
+import {Params, Router} from '@angular/router';
+import {CartService} from '../services/cart.service';
+import {Param} from '../../shared/model/Param';
+import {Category} from 'src/app/shared/model/Category';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'pmp-navbar',
@@ -18,7 +18,8 @@ export class NavbarComponent implements OnInit {
     private router: Router,
     private authService: AuthService,
     private toastr: ToastrService
-  ) {}
+  ) {
+  }
 
   showMenu = false;
   toggleBackdrop = true;

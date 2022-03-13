@@ -1,4 +1,5 @@
-import { BaseProduct } from 'src/app/shared/model/BaseProduct';
+import {BaseProduct} from 'src/app/shared/model/BaseProduct';
+
 export interface ProductResponse {
   products: ProductDto;
   filters?: any;

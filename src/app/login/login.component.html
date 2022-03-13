@@ -1,37 +1,33 @@
-<section id="sign-in" class="min-h-100vh">
+<section id="login" class="min-h-100vh">
 
   <div class="flex flex-col items-center justify-center w-full sm:flex-row md:space-x-32">
     <div class="hidden m-12 md:block md:w-2/5 lg:w-auto">
       <img src="assets/logo.svg" alt="PimpMyPc logo">
     </div>
 
-    <div id="sign-in-form" class="w-11/12 p-6 m-6 border-2 border-black rounded-lg md:w-1/3">
+    <div class="w-11/12 p-6 m-6 border-2 border-black rounded-lg md:w-1/3">
 
       <h2 class="mb-6 text-3xl">Sign in</h2>
 
-      <form class="flex flex-col p-2" [formGroup]="loginForm" novalidate>
-        <label class="text-lg font-bold" for="username">Username</label>
-        <input formControlName="username" name="username" class="my-4" type="text" [ngClass]="{'is-invalid': (loginForm.get('username')?.touched
+      <form id="login-form" class="flex flex-col p-2" [formGroup]="loginForm" novalidate>
+        <label class="text-lg font-bold" for="usernameId">Username</label>
+        <input id="usernameId" formControlName="username" name="username" class="my-4" type="text" [ngClass]="{'is-invalid': (loginForm.get('username')?.touched
           ||
           loginForm.get('username')?.dirty) &&
           !loginForm.get('username')?.valid }">
 
         <span class="error-message" *ngIf="loginForm.get('username')?.errors?.required &&
-        loginForm.get('username')?.touched">
-          Please enter your username.
-        </span>
+        loginForm.get('username')?.touched">Please enter your username.</span>
 
 
-        <label class="text-lg font-bold" for="password">Password</label>
-        <input name="password" class="my-4" type="password" formControlName="password" [ngClass]="{'is-invalid': (loginForm.get('password')?.touched
+        <label class="text-lg font-bold" for="passwordId">Password</label>
+        <input id="passwordId" name="password" class="my-4" type="password" formControlName="password" [ngClass]="{'is-invalid': (loginForm.get('password')?.touched
           ||
           loginForm.get('password')?.dirty) &&
           !loginForm.get('password')?.valid }">
 
         <span class="mb-4 error-message" *ngIf="loginForm.get('password')?.errors?.required &&
-        loginForm.get('password')?.touched">
-          Please enter your password.
-        </span>
+        loginForm.get('password')?.touched">Please enter your password.</span>
 
 
         <span *ngIf="errorMsg" class="mb-4 font-bold text-center text-red-500">{{ errorMsg }}</span>
@@ -42,7 +38,7 @@
 
 
         <input (click)="loginUser()" type="submit" value="Sign in" [disabled]="loading" class="mt-2"
-          [ngClass]="{'bg-gray-500' : loading}" class="px-4 py-2 bg-blue-600 rounded-full cursor-pointer">
+               [ngClass]="{'bg-gray-500' : loading}" class="px-4 py-2 bg-blue-600 rounded-full cursor-pointer">
 
       </form>
 

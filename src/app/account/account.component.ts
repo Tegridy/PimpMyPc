@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'pmp-account',
@@ -13,7 +13,8 @@ export class AccountComponent implements OnInit {
     this.username = sessionStorage.getItem('username') as string;
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
 
   toggleAccountMenu(): void {
     this.showAccountMenu = !this.showAccountMenu;

@@ -15,7 +15,7 @@
 
                 <label class="flex" for="{{ filterValue.name + filterValue.id }}">
                   <input id="{{ filterValue.name + filterValue.id }}" class="mr-1" type="checkbox"
-                    [checked]="filterValue.isChecked" (change)="filterClick(filterGroup, filterValue)">
+                         [checked]="filterValue.isChecked" (change)="filterClick(filterGroup, filterValue)">
                   {{ filterValue.name }}
                 </label>
 
@@ -38,11 +38,11 @@
 
           <div class="hidden md:flex">
             <button class="flex items-center justify-center p-2 mr-4 rounded-lg"
-              [ngClass]="{'bg-gray-400' : !showProductsInListView}" (click)="changeProductsView()">
+                    [ngClass]="{'bg-gray-400' : !showProductsInListView}" (click)="changeProductsView()">
               <ion-icon name="grid-outline"></ion-icon>
             </button>
             <button class="flex items-center justify-center p-2 rounded-lg" (click)="changeProductsView()"
-              [ngClass]="{'bg-gray-400' : showProductsInListView}">
+                    [ngClass]="{'bg-gray-400' : showProductsInListView}">
               <ion-icon name="list-outline"></ion-icon>
             </button>
           </div>

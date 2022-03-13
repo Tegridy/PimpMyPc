@@ -1,17 +1,8 @@
-import {
-  Motherboard,
-  Processor,
-  Ram,
-  Case,
-  GraphicCard,
-  PowerSupply,
-} from './../shared/model/BaseProduct';
-import { Router } from '@angular/router';
-import { of } from 'rxjs';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Computer } from './../shared/model/Computer';
-import { ConfiguratorService } from './../core/services/configurator.service';
-import { Component, OnInit } from '@angular/core';
+import {Case, GraphicCard, Motherboard, PowerSupply, Processor, Ram,} from './../shared/model/BaseProduct';
+import {Router} from '@angular/router';
+import {Computer} from './../shared/model/Computer';
+import {ConfiguratorService} from './../core/services/configurator.service';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'pmp-build-pc',
@@ -25,12 +16,13 @@ export class BuildPcComponent implements OnInit {
   areRamCompatible = true;
   motherboardFitInCase = true;
   isPowerSupplySufficient = true;
-  params = { config: true, page: 1 };
+  params = {config: true, page: 1};
 
   constructor(
     private configuratorService: ConfiguratorService,
     private router: Router
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
     this.configuratorService.customerComputer.subscribe((computer) => {

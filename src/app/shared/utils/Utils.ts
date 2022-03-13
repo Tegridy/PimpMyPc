@@ -1,8 +1,8 @@
-import { HttpErrorResponse } from '@angular/common/http';
-import { ActivatedRoute, Params, UrlSegment, Router } from '@angular/router';
-import { Observable, of, throwError } from 'rxjs';
-import { parse } from 'search-params';
-import { Param } from '../model/Param';
+import {HttpErrorResponse} from '@angular/common/http';
+import {ActivatedRoute, Params, Router, UrlSegment} from '@angular/router';
+import {Observable, of, throwError} from 'rxjs';
+import {parse} from 'search-params';
+import {Param} from '../model/Param';
 
 export default class Utils {
   public static buildUrl(queryParams: Param[] | Params): string {

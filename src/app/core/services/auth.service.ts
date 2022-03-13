@@ -1,11 +1,11 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { User } from '../../shared/model/User';
-import { LoginDetails } from '../../shared/model/LoginDetails';
-import { map, catchError } from 'rxjs/operators';
-import { throwError, Observable, BehaviorSubject } from 'rxjs';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {User} from '../../shared/model/User';
+import {LoginDetails} from '../../shared/model/LoginDetails';
+import {catchError, map} from 'rxjs/operators';
+import {BehaviorSubject, Observable} from 'rxjs';
 import Utils from 'src/app/shared/utils/Utils';
-import { RegisterResponse } from 'src/app/shared/model/RegisterResponse';
+import {RegisterResponse} from 'src/app/shared/model/RegisterResponse';
 
 @Injectable({
   providedIn: 'root',
@@ -16,10 +16,11 @@ export class AuthService {
 
   baseUrl = 'http://localhost:8080/api/v1/auth/';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+  }
 
   loginUser(username: string, password: string): Observable<any> {
-    return this.http.post(this.baseUrl + 'login', { username, password }).pipe(
+    return this.http.post(this.baseUrl + 'login', {username, password}).pipe(
       map((loginDetails) => {
         const details = loginDetails as LoginDetails;
         sessionStorage.setItem('username', details.username);

@@ -1,9 +1,9 @@
-import { CartService } from './../../core/services/cart.service';
-import { Component, OnInit } from '@angular/core';
-import { ProductsService } from '../../core/services/products.service';
-import { BaseProduct } from '../../shared/model/BaseProduct';
-import { ActivatedRoute } from '@angular/router';
-import { ProductDetail } from '../../shared/model/ProductDetail';
+import {CartService} from './../../core/services/cart.service';
+import {Component, OnInit} from '@angular/core';
+import {ProductsService} from '../../core/services/products.service';
+import {BaseProduct} from '../../shared/model/BaseProduct';
+import {ActivatedRoute} from '@angular/router';
+import {ProductDetail} from '../../shared/model/ProductDetail';
 
 @Component({
   selector: 'pmp-product-full',
@@ -25,7 +25,8 @@ export class ProductFullComponent implements OnInit {
     private productsService: ProductsService,
     private route: ActivatedRoute,
     private cartService: CartService
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
     this.getProductId();
