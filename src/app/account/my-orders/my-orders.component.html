@@ -4,7 +4,7 @@
   <ng-container *ngIf="userOrders.length > 0; else noOrders">
     <ul class="mb-4 sm:mb-0" *ngFor="let order of userOrders">
       <li class="mb-4 flex justify-center">
-        <div class="flex flex-col sm:flex-row w-3/4 md:w-1/2 border border-black shadow-lg rounded-lg cursor-pointer "
+        <div id="order-{{ order.id }}" class="flex flex-col sm:flex-row w-3/4 md:w-1/2 border border-black shadow-lg rounded-lg cursor-pointer "
              routerLink="/account/orders/{{ order.id }}">
 
           <div class="bg-gray-400 bg-opacity-40 p-4 w-full rounded-t-lg sm:rounded-l-lg">

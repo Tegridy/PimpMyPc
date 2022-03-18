@@ -46,7 +46,7 @@
       <div class="flex items-center order-1 w-3/4 h-8 m-2 bg-white border-2 border-black rounded-full shadow">
         <input class="border-0" type="search" placeholder="Search" [(ngModel)]="searchPhrase"
                (keyup.enter)="searchProduct()">
-        <select id="search-bar" class="hidden lg:block" (change)="changeCurrentSearchCategory($event)">
+        <select id="search-bar-select" class="hidden lg:block" (change)="changeCurrentSearchCategory($event)">
           <option selected>Everywhere</option>
           <option *ngFor="let category of mainCategories">{{ category.name }}</option>
         </select>

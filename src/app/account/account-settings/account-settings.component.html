@@ -15,7 +15,7 @@
                    placeholder="E-mail address" disabled>
           </div>
           <div class="flex items-center justify-center w-1/5">
-            <button (click)="setModal(personalDetailsEditModalName)"
+            <button id="personal-data-edit" (click)="setModal(personalDetailsEditModalName)"
                     class="flex items-center justify-center p-1 border-2 border-black rounded-lg hover:bg-gray-50">
               <ion-icon name="create-outline"></ion-icon>
             </button>
@@ -32,7 +32,7 @@
                    disabled>
           </div>
           <div class="flex items-center justify-center w-1/5">
-            <button (click)="setModal(addressDetailsEditModalName)"
+            <button id="address-data-edit" (click)="setModal(addressDetailsEditModalName)"
                     class="flex items-center justify-center p-1 border-2 border-black rounded-lg hover:bg-gray-50">
               <ion-icon name="create-outline"></ion-icon>
             </button>
@@ -45,7 +45,7 @@
           <input class="w-full" type="password" value="12345678" placeholder="Password" disabled>
         </div>
         <div class="flex self-end justify-center w-1/5">
-          <button (click)="setModal(passwordEditModalName)"
+          <button id="password-edit" (click)="setModal(passwordEditModalName)"
                   class="flex items-center justify-center p-1 border-2 border-black rounded-lg hover:bg-gray-50">
             <ion-icon name="create-outline"></ion-icon>
           </button>

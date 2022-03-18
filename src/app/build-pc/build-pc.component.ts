@@ -1,37 +1,45 @@
-import {Case, GraphicCard, Motherboard, PowerSupply, Processor, Ram,} from './../shared/model/BaseProduct';
-import {Router} from '@angular/router';
-import {Computer} from './../shared/model/Computer';
-import {ConfiguratorService} from './../core/services/configurator.service';
-import {Component, OnInit} from '@angular/core';
+import {
+  Case,
+  GraphicCard,
+  Motherboard,
+  PowerSupply,
+  Processor,
+  Ram,
+} from './../shared/model/BaseProduct';
+import { Router } from '@angular/router';
+import { Computer } from './../shared/model/Computer';
+import { ConfiguratorService } from './../core/services/configurator.service';
+import { Component, OnInit } from '@angular/core';
+import { CartService } from '../core/services/cart.service';
 
 @Component({
   selector: 'pmp-build-pc',
   templateUrl: './build-pc.component.html',
-  styleUrls: ['./build-pc.component.scss'],
+  styleUrls: [],
 })
 export class BuildPcComponent implements OnInit {
   customerComputer!: Computer;
-  showModal: boolean = false;
+  showModal = false;
   areSocketsCompatible = true;
   areRamCompatible = true;
   motherboardFitInCase = true;
   isPowerSupplySufficient = true;
-  params = {config: true, page: 1};
+  params = { config: true, page: 1 };
 
   constructor(
+    private cartService: CartService,
     private configuratorService: ConfiguratorService,
     private router: Router
-  ) {
-  }
+  ) {}
 
   ngOnInit(): void {
     this.configuratorService.customerComputer.subscribe((computer) => {
       this.customerComputer = computer;
-      this.checkPartsCompatibility();
+      console.log(this.customerComputer);
     });
   }
 
-  private checkPartsCompatibility() {
+  private checkPartsCompatibility(): void {
     this.areSocketsCompatible = this.checkSocketCompatibility();
     this.areRamCompatible = this.checkRamCompatibility();
     this.motherboardFitInCase = this.checkIfMotherboardCanFitCase();
@@ -39,6 +47,7 @@ export class BuildPcComponent implements OnInit {
   }
 
   sendPcOrder(): void {
+    this.checkPartsCompatibility();
     if (
       this.customerComputer.processor &&
       this.customerComputer.motherboard &&
@@ -47,7 +56,7 @@ export class BuildPcComponent implements OnInit {
       this.customerComputer.powerSupply &&
       this.customerComputer.ram
     ) {
-      // Send order to backend
+      this.router.navigateByUrl('/order/cart');
     } else {
       // Show error
       this.showModal = true;
@@ -55,33 +64,41 @@ export class BuildPcComponent implements OnInit {
     console.log(this.customerComputer);
   }
 
-  navigateToProductsPage(name: string) {
+  navigateToProductsPage(name: string): void {
     this.router.navigate(['/categories/' + name], {
       queryParams: this.params,
     });
   }
 
-  toggleModal() {
+  toggleModal(): void {
     this.showModal = !this.showModal;
   }
 
   private checkSocketCompatibility(): boolean {
-    const motherboard: Motherboard = this.customerComputer
-      .motherboard as Motherboard;
-    const processor: Processor = this.customerComputer.processor as Processor;
+    if (this.customerComputer.motherboard && this.customerComputer.processor) {
+      const motherboard: Motherboard = this.customerComputer
+        .motherboard as Motherboard;
+      const processor: Processor = this.customerComputer.processor as Processor;
 
-    return motherboard.motherboardSocket === processor.motherboardSocket;
+      return motherboard.motherboardSocket === processor.motherboardSocket;
+    } else {
+      return false;
+    }
   }
 
   private checkRamCompatibility(): boolean {
-    const motherboard: Motherboard = this.customerComputer
-      .motherboard as Motherboard;
-    const ram: Ram = this.customerComputer.ram as Ram;
+    if (this.customerComputer.motherboard && this.customerComputer.ram) {
+      const motherboard: Motherboard = this.customerComputer
+        .motherboard as Motherboard;
+      const ram: Ram = this.customerComputer.ram as Ram;
 
-    return motherboard.ramType === ram.ramType;
+      return motherboard.ramType === ram.ramType;
+    } else {
+      return false;
+    }
   }
 
-  private checkIfMotherboardCanFitCase() {
+  private checkIfMotherboardCanFitCase(): boolean {
     const motherboard: Motherboard = this.customerComputer
       .motherboard as Motherboard;
     const case2: Case = this.customerComputer.case as Case;
@@ -89,7 +106,7 @@ export class BuildPcComponent implements OnInit {
     return motherboard.motherboardSocket === case2.motherboardSocket;
   }
 
-  private checkPowerRequirements() {
+  private checkPowerRequirements(): boolean {
     const processor: Processor = this.customerComputer.processor as Processor;
     const graphicCard: GraphicCard = this.customerComputer
       .graphicCard as GraphicCard;

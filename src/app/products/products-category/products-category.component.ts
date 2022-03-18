@@ -1,11 +1,11 @@
-import {ProductsService} from '../../core/services/products.service';
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
-import {PaginationInstance} from 'ngx-pagination';
-import {Subscription} from 'rxjs';
-import {BaseProduct} from '../../shared/model/BaseProduct';
-import {Filter, FilterGroup} from '../../shared/model/FilterGroup';
-import {Param} from '../../shared/model/Param';
+import { ProductsService } from '../../core/services/products.service';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { PaginationInstance } from 'ngx-pagination';
+import { Subscription } from 'rxjs';
+import { BaseProduct } from '../../shared/model/BaseProduct';
+import { Filter, FilterGroup } from '../../shared/model/FilterGroup';
+import { Param } from '../../shared/model/Param';
 import Utils from 'src/app/shared/utils/Utils';
 
 @Component({
@@ -19,18 +19,18 @@ export class ProductsCategoryComponent implements OnInit, OnDestroy {
   loading = true;
   configurator = false;
 
-  currentCategory = '';
+  private currentCategory = '';
   errorMessage = '';
   sortType = 'default';
 
   pageNumber = 1;
-  productsCount = 0;
+  private productsCount = 0;
 
   products: BaseProduct[] = [];
   productsFilters: FilterGroup[] = [];
-  queryParams: Param[] = [];
+  private queryParams: Param[] = [];
 
-  subscription: Subscription = new Subscription();
+  private subscription: Subscription = new Subscription();
 
   paginationConfig: PaginationInstance = {
     itemsPerPage: 9,
@@ -81,14 +81,14 @@ export class ProductsCategoryComponent implements OnInit, OnDestroy {
     this.getCurrentCategoryProducts(this.findCurrentPageNumber());
   }
 
-  checkIfConfigMode(): void {
+  private checkIfConfigMode(): void {
     const config = this.queryParams.find(
       (param) => param.key === 'config'
     )?.value;
     this.configurator = config as boolean;
   }
 
-  getCurrentCategoryProducts(page: number): void {
+  private getCurrentCategoryProducts(page: number): void {
     page = Utils.validatePageNumber(page);
 
     const categoryName = this.getCategoryTypeFromUrl();
@@ -127,7 +127,7 @@ export class ProductsCategoryComponent implements OnInit, OnDestroy {
     this.paginationConfig.totalItems = this.productsCount;
   }
 
-  private checkIfProductsExists() {
+  private checkIfProductsExists(): void {
     if (this.products.length < 1) {
       this.errorMessage = 'No products found.';
     } else {
@@ -160,17 +160,21 @@ export class ProductsCategoryComponent implements OnInit, OnDestroy {
   }
 
   private getCategoryTypeFromUrl(): string {
-    const category = this.router.url
-      .split('/categories/')[1]
-      .toLocaleLowerCase()
-      .replace(new RegExp('\\?.+'), '');
+    let category = 'laptops';
+
+    if (this.router.url.split('/categories')[1] !== undefined) {
+      category = this.router.url
+        .split('/categories/')[1]
+        .toLocaleLowerCase()
+        .replace(new RegExp('\\?.+'), '');
+    }
 
     this.resetUrlIfCategoryChanged(category);
 
     return category;
   }
 
-  private resetUrlIfCategoryChanged(category: string) {
+  private resetUrlIfCategoryChanged(category: string): void {
     if (category !== this.currentCategory) {
       this.currentCategory = category;
       this.sortType = 'default';
@@ -179,10 +183,6 @@ export class ProductsCategoryComponent implements OnInit, OnDestroy {
   }
 
   filterClick(filterGroup: FilterGroup, filter: Filter): void {
-    console.log(filterGroup);
-    console.log(filter);
-    console.log('');
-
     this.toggleFilter(filter);
 
     if (filter.isChecked) {
@@ -200,10 +200,9 @@ export class ProductsCategoryComponent implements OnInit, OnDestroy {
 
     this.findAndUpdateQueryParam('page', '1');
     Utils.updateUrl(this.queryParams, this.router);
-    console.log(this.queryParams);
   }
 
-  toggleFilter(filter: Filter) {
+  toggleFilter(filter: Filter): void {
     filter.isChecked = !filter.isChecked;
   }
 
@@ -227,7 +226,7 @@ export class ProductsCategoryComponent implements OnInit, OnDestroy {
     this.getCurrentCategoryProducts(1);
   }
 
-  sortFiltersByName(): void {
+  private sortFiltersByName(): void {
     this.productsFilters.forEach((mainFilter) =>
       mainFilter.values.sort((firstFilter, secondFilter) =>
         firstFilter.name.localeCompare(secondFilter.name, 'en', {
@@ -245,7 +244,7 @@ export class ProductsCategoryComponent implements OnInit, OnDestroy {
     Utils.updateUrl(this.queryParams, this.router);
   }
 
-  findAndUpdateQueryParam(
+  private findAndUpdateQueryParam(
     paramName: string,
     valueToUpdate: string | number
   ): void {

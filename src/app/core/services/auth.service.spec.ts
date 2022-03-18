@@ -1,8 +1,11 @@
-import {Address} from './../../shared/model/User';
-import {AuthService} from './auth.service';
-import {HttpClientTestingModule, HttpTestingController,} from '@angular/common/http/testing';
-import {User} from 'src/app/shared/model/User';
-import {TestBed} from '@angular/core/testing';
+import { Address } from './../../shared/model/User';
+import { AuthService } from './auth.service';
+import {
+  HttpClientTestingModule,
+  HttpTestingController,
+} from '@angular/common/http/testing';
+import { User } from 'src/app/shared/model/User';
+import { TestBed } from '@angular/core/testing';
 
 const mockUser: User = {
   username: 'Tester',
@@ -68,6 +71,23 @@ describe('AuthService', () => {
   });
 
   it('should throw error after bad register attempt', () => {
+    service.signUpUser(mockUser).subscribe(
+      () => fail('should not success'),
+      (error) => {
+        expect(error).toBeTruthy();
+        expect(error).toContain('code: 500');
+        expect(error).toContain('Server error occurred');
+      },
+      () => fail('should not finalize')
+    );
+
+    const error = new ErrorEvent('Server error', {
+      message: 'Server error occurred',
+    });
+
+    const request = httpMock
+      .expectOne('http://localhost:8080/api/v1/auth/register')
+      .error(error, { status: 500 });
   });
 
   it('should send POST to login', () => {
@@ -76,7 +96,7 @@ describe('AuthService', () => {
     const request = httpMock.expectOne(
       'http://localhost:8080/api/v1/auth/login'
     );
-    request.flush({username: 'Tester', userId: 1, token: 'JWT-token'});
+    request.flush({ username: 'Tester', userId: 1, token: 'JWT-token' });
 
     expect(request.request.method).toEqual('POST');
   });
@@ -95,14 +115,14 @@ describe('AuthService', () => {
     const request = httpMock.expectOne(
       'http://localhost:8080/api/v1/auth/login'
     );
-    request.flush({username: 'Tester', userId: 1, token: 'JWT-token'});
+    request.flush({ username: 'Tester', userId: 1, token: 'JWT-token' });
 
     expect(request.request.responseType).toEqual('json');
     expect(request.request.body.username).toEqual('Tester');
   });
 
   it('should throw error after bad login attempt', () => {
-    service.signUpUser(mockUser).subscribe(
+    service.loginUser('username', 'password').subscribe(
       () => fail('should not success'),
       (error) => {
         expect(error).toBeTruthy();
@@ -117,8 +137,8 @@ describe('AuthService', () => {
     });
 
     const request = httpMock
-      .expectOne('http://localhost:8080/api/v1/auth/register')
-      .error(error, {status: 500});
+      .expectOne('http://localhost:8080/api/v1/auth/login')
+      .error(error, { status: 500 });
   });
 
   it('should show user alert on login error', () => {
@@ -138,7 +158,7 @@ describe('AuthService', () => {
 
     const request = httpMock
       .expectOne('http://localhost:8080/api/v1/auth/login')
-      .error(error, {status: 500});
+      .error(error, { status: 500 });
   });
 
   it('should logout user', () => {
@@ -151,7 +171,7 @@ describe('AuthService', () => {
     const request = httpMock.expectOne(
       'http://localhost:8080/api/v1/auth/login'
     );
-    request.flush({username: 'Tester', userId: 1, token: 'JWT-token'});
+    request.flush({ username: 'Tester', userId: 1, token: 'JWT-token' });
 
     service.logoutUser();
     service.isUserLoggedIn.subscribe((isLoggedIn) =>

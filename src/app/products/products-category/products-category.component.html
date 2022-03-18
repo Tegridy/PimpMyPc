@@ -75,7 +75,7 @@
 
             <ng-container *ngFor="let product of products | paginate: paginationConfig ">
 
-              <pmp-product-small [listView]="showProductsInListView" [product]="product" [configMode]="configurator">
+              <pmp-product-small id="product" [listView]="showProductsInListView" [product]="product" [configMode]="configurator">
               </pmp-product-small>
 
             </ng-container>

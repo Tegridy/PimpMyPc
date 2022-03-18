@@ -1,11 +1,11 @@
-import {AuthService} from './../services/auth.service';
-import {Component, OnInit} from '@angular/core';
-import {categories} from './Categories';
-import {Params, Router} from '@angular/router';
-import {CartService} from '../services/cart.service';
-import {Param} from '../../shared/model/Param';
-import {Category} from 'src/app/shared/model/Category';
-import {ToastrService} from 'ngx-toastr';
+import { AuthService } from './../services/auth.service';
+import { Component, OnInit } from '@angular/core';
+import { categories } from './Categories';
+import { Params, Router } from '@angular/router';
+import { CartService } from '../services/cart.service';
+import { Param } from '../../shared/model/Param';
+import { ToastrService } from 'ngx-toastr';
+import { MenuCategory } from '../../shared/model/MenuCategory';
 
 @Component({
   selector: 'pmp-navbar',
@@ -18,19 +18,18 @@ export class NavbarComponent implements OnInit {
     private router: Router,
     private authService: AuthService,
     private toastr: ToastrService
-  ) {
-  }
+  ) {}
 
   showMenu = false;
   toggleBackdrop = true;
 
-  currentSearchCategory = '';
+  private currentSearchCategory = '';
   searchPhrase = '';
 
   numberOfItemsInCart = 0;
 
-  mainCategories: Category[] = [];
-  queryParams!: Params;
+  mainCategories: MenuCategory[] = [];
+  private queryParams!: Params;
 
   isUserLoggedIn = false;
 
@@ -46,8 +45,7 @@ export class NavbarComponent implements OnInit {
   }
 
   changeCurrentSearchCategory(event: Event): void {
-    const categoryName = (event.target as HTMLInputElement).value;
-    this.currentSearchCategory = categoryName;
+    this.currentSearchCategory = (event.target as HTMLInputElement).value;
   }
 
   searchProduct(): void {

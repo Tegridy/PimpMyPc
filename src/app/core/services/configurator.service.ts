@@ -1,7 +1,7 @@
-import {Computer} from './../../shared/model/Computer';
-import {Injectable} from '@angular/core';
-import {BaseProduct} from 'src/app/shared/model/BaseProduct';
-import {BehaviorSubject} from 'rxjs';
+import { Computer } from './../../shared/model/Computer';
+import { Injectable } from '@angular/core';
+import { BaseProduct } from 'src/app/shared/model/BaseProduct';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -12,12 +12,13 @@ export class ConfiguratorService {
   private customerComputerSource = new BehaviorSubject<Computer>(this.computer);
   customerComputer = this.customerComputerSource.asObservable();
 
-  constructor() {
-  }
+  constructor() {}
 
-  addPart(product: BaseProduct) {
+  addPart(product: BaseProduct): void {
+    console.log(product);
     if (product.categories) {
-      switch (product.categories[0].name) {
+      console.log(product.categories[0]);
+      switch (product.categories[0].title) {
         case 'Motherboards':
           this.computer.motherboard = product;
           break;
@@ -41,7 +42,7 @@ export class ConfiguratorService {
     }
   }
 
-  private updateCustomerComputer(computer: Computer) {
+  private updateCustomerComputer(computer: Computer): void {
     this.customerComputerSource.next(computer);
   }
 }

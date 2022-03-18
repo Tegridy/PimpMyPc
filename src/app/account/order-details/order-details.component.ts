@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
-import {OrderService} from '../../core/services/order.service';
-import {ActivatedRoute} from '@angular/router';
-import {Order} from '../../shared/model/Order';
-import {Address} from '../../shared/model/User';
+import { Component, OnInit } from '@angular/core';
+import { OrderService } from '../../core/services/order.service';
+import { ActivatedRoute } from '@angular/router';
+import { Order } from '../../shared/model/Order';
+import { Address } from '../../shared/model/User';
 
 @Component({
   selector: 'pmp-order-details',
@@ -18,8 +18,7 @@ export class OrderDetailsComponent implements OnInit {
   constructor(
     private orderService: OrderService,
     private route: ActivatedRoute
-  ) {
-  }
+  ) {}
 
   ngOnInit(): void {
     this.id = Number(this.route.snapshot.paramMap.get('id'));
@@ -27,7 +26,6 @@ export class OrderDetailsComponent implements OnInit {
       this.order = order;
       this.orderProducts = order.products;
       this.orderAddress = order.address;
-      console.log(order);
     });
   }
 }

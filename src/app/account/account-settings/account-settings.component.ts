@@ -1,10 +1,10 @@
-import {Component, OnInit} from '@angular/core';
-import {UserService} from '../../core/services/user.service';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {Address, User} from '../../shared/model/User';
-import {UserEdit, UserEditAuth} from '../../shared/model/UserEdit';
-import {ValidationService} from '../../core/services/validation.service';
-import {ToastrService} from 'ngx-toastr';
+import { Component, OnInit } from '@angular/core';
+import { UserService } from '../../core/services/user.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Address, User } from '../../shared/model/User';
+import { UserEdit, UserEditAuth } from '../../shared/model/UserEdit';
+import { ValidationService } from '../../core/services/validation.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'pmp-account-settings',
@@ -27,8 +27,7 @@ export class AccountSettingsComponent implements OnInit {
     private userService: UserService,
     private formBuilder: FormBuilder,
     private toastr: ToastrService
-  ) {
-  }
+  ) {}
 
   ngOnInit(): void {
     this.getUserDetails();
@@ -51,7 +50,7 @@ export class AccountSettingsComponent implements OnInit {
         password: ['', [Validators.required, Validators.minLength(8)]],
         confirmPassword: ['', [Validators.required, Validators.minLength(8)]],
       },
-      {validators: ValidationService.passwordMatcher}
+      { validators: ValidationService.passwordMatcher }
     );
   }
 
@@ -64,7 +63,7 @@ export class AccountSettingsComponent implements OnInit {
     this.showModal = !this.showModal;
   }
 
-  getUserDetails(): void {
+  private getUserDetails(): void {
     this.userService
       .getUserAccountDetails()
       .subscribe((user) => this.loadFormData(user));

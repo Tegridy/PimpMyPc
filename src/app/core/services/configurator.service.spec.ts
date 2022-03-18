@@ -1,9 +1,9 @@
-import {Category} from './../../shared/model/Category';
-import {Motherboard, Processor, Ram} from './../../shared/model/BaseProduct';
-import {AuthService} from './auth.service';
-import {HttpClientTestingModule,} from '@angular/common/http/testing';
-import {TestBed} from '@angular/core/testing';
-import {ConfiguratorService} from './configurator.service';
+import { Motherboard, Processor, Ram } from './../../shared/model/BaseProduct';
+import { AuthService } from './auth.service';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { TestBed } from '@angular/core/testing';
+import { ConfiguratorService } from './configurator.service';
+import { ProductCategory } from '../../shared/model/ProductCategory';
 
 describe('ConfiguratorService', () => {
   let service: ConfiguratorService;
@@ -27,7 +27,7 @@ describe('ConfiguratorService', () => {
       price: 1900,
       motherboardSocket: 'LGA2022',
       tdp: '250',
-      categories: [{name: 'Processors'} as Category],
+      categories: [{ title: 'Processors' } as ProductCategory],
     };
 
     service.addPart(processor);
@@ -46,7 +46,7 @@ describe('ConfiguratorService', () => {
       price: 1900,
       motherboardSocket: 'LGA2022',
       tdp: '250',
-      categories: [{name: 'Processors'} as Category],
+      categories: [{ title: 'Processors' } as ProductCategory],
     };
 
     const motherboard: Motherboard = {
@@ -55,7 +55,7 @@ describe('ConfiguratorService', () => {
       price: 800,
       motherboardSocket: 'LGA2022',
       ramType: 'DDR4',
-      categories: [{name: 'Motherboards'} as Category],
+      categories: [{ title: 'Motherboards' } as ProductCategory],
     };
 
     const ram: Ram = {
@@ -63,7 +63,7 @@ describe('ConfiguratorService', () => {
       title: 'Processor',
       price: 900,
       ramType: 'DDR4',
-      categories: [{name: 'Memory RAM'} as Category],
+      categories: [{ title: 'Memory RAM' } as ProductCategory],
     };
 
     service.addPart(processor);

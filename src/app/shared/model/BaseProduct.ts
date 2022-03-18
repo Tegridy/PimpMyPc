@@ -1,4 +1,4 @@
-import {Category} from './Category';
+import { ProductCategory } from './ProductCategory';
 
 export interface BaseProduct {
   id: number;
@@ -8,7 +8,7 @@ export interface BaseProduct {
   model?: string;
   imageUrl?: string;
   price: number;
-  categories?: Category[];
+  categories?: ProductCategory[];
 }
 
 export interface Motherboard extends BaseProduct {
