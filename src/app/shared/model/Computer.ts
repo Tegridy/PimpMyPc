@@ -1,10 +1,17 @@
-import {BaseProduct} from './BaseProduct';
+import {
+  Case,
+  GraphicCard,
+  Motherboard,
+  PowerSupply,
+  Processor,
+  Ram,
+} from './BaseProduct';
 
 export interface Computer {
-  motherboard: BaseProduct;
-  processor: BaseProduct;
-  ram: BaseProduct;
-  powerSupply: BaseProduct;
-  graphicCard: BaseProduct;
-  case: BaseProduct;
+  motherboard: Motherboard;
+  processor: Processor;
+  ram: Ram;
+  powerSupply: PowerSupply;
+  graphicCard: GraphicCard;
+  case: Case;
 }

@@ -1,4 +1,5 @@
 import {
+  BaseProduct,
   Case,
   GraphicCard,
   Motherboard,
@@ -35,19 +36,33 @@ export class BuildPcComponent implements OnInit {
   ngOnInit(): void {
     this.configuratorService.customerComputer.subscribe((computer) => {
       this.customerComputer = computer;
-      console.log(this.customerComputer);
     });
-  }
-
-  private checkPartsCompatibility(): void {
-    this.areSocketsCompatible = this.checkSocketCompatibility();
-    this.areRamCompatible = this.checkRamCompatibility();
-    this.motherboardFitInCase = this.checkIfMotherboardCanFitCase();
-    this.isPowerSupplySufficient = this.checkPowerRequirements();
   }
 
   sendPcOrder(): void {
     this.checkPartsCompatibility();
+
+    if (!this.canProceed()) {
+      window.scroll({
+        top: 0,
+        left: 0,
+        behavior: 'smooth',
+      });
+    } else if (this.isComputerComplete() && this.canProceed()) {
+      this.navigateAndUpdateCart();
+    } else if (!this.isComputerComplete()) {
+      this.showModal = true;
+    }
+  }
+
+  private checkPartsCompatibility(): void {
+    this.checkSocketCompatibility();
+    this.checkRamCompatibility();
+    this.checkIfMotherboardCanFitCase();
+    this.checkPowerRequirements();
+  }
+
+  private isComputerComplete(): boolean {
     if (
       this.customerComputer.processor &&
       this.customerComputer.motherboard &&
@@ -56,12 +71,10 @@ export class BuildPcComponent implements OnInit {
       this.customerComputer.powerSupply &&
       this.customerComputer.ram
     ) {
-      this.router.navigateByUrl('/order/cart');
+      return true;
     } else {
-      // Show error
-      this.showModal = true;
+      return false;
     }
-    console.log(this.customerComputer);
   }
 
   navigateToProductsPage(name: string): void {
@@ -74,45 +87,77 @@ export class BuildPcComponent implements OnInit {
     this.showModal = !this.showModal;
   }
 
-  private checkSocketCompatibility(): boolean {
+  private checkSocketCompatibility(): void {
     if (this.customerComputer.motherboard && this.customerComputer.processor) {
       const motherboard: Motherboard = this.customerComputer
         .motherboard as Motherboard;
       const processor: Processor = this.customerComputer.processor as Processor;
 
-      return motherboard.motherboardSocket === processor.motherboardSocket;
-    } else {
-      return false;
+      this.areSocketsCompatible =
+        motherboard.motherboardSocket === processor.motherboardSocket;
     }
   }
 
-  private checkRamCompatibility(): boolean {
+  private checkRamCompatibility(): void {
     if (this.customerComputer.motherboard && this.customerComputer.ram) {
       const motherboard: Motherboard = this.customerComputer
         .motherboard as Motherboard;
       const ram: Ram = this.customerComputer.ram as Ram;
 
-      return motherboard.ramType === ram.ramType;
-    } else {
-      return false;
+      this.areRamCompatible = motherboard.ramType === ram.moduleType;
     }
   }
 
-  private checkIfMotherboardCanFitCase(): boolean {
-    const motherboard: Motherboard = this.customerComputer
-      .motherboard as Motherboard;
-    const case2: Case = this.customerComputer.case as Case;
+  private checkIfMotherboardCanFitCase(): void {
+    if (this.customerComputer.motherboard && this.customerComputer.case) {
+      const motherboard: Motherboard = this.customerComputer
+        .motherboard as Motherboard;
+      const computerCase: Case = this.customerComputer.case as Case;
 
-    return motherboard.motherboardSocket === case2.motherboardSocket;
+      this.motherboardFitInCase = computerCase.motherboardFormats.includes(
+        motherboard.motherboardFormat
+      );
+    }
   }
 
-  private checkPowerRequirements(): boolean {
-    const processor: Processor = this.customerComputer.processor as Processor;
-    const graphicCard: GraphicCard = this.customerComputer
-      .graphicCard as GraphicCard;
-    const powerSupply: PowerSupply = this.customerComputer
-      .powerSupply as PowerSupply;
+  private checkPowerRequirements(): void {
+    if (
+      this.customerComputer.processor &&
+      this.customerComputer.graphicCard &&
+      this.customerComputer.powerSupply
+    ) {
+      const processor: Processor = this.customerComputer.processor as Processor;
+      const processorWattage = Number(processor.tdp.replace(' W', ''));
 
-    return powerSupply.adapterPower > processor.tdp + graphicCard.tdp;
+      const graphicCard: GraphicCard = this.customerComputer
+        .graphicCard as GraphicCard;
+      const graphicCardWattage = Number(graphicCard.tdp.replace(' W', ''));
+
+      const powerSupply: PowerSupply = this.customerComputer
+        .powerSupply as PowerSupply;
+      const powerSupplyWattage = Number(
+        powerSupply.adapterPower.replace(' W', '')
+      );
+
+      this.isPowerSupplySufficient =
+        powerSupplyWattage > processorWattage + graphicCardWattage;
+    }
+  }
+
+  private canProceed(): boolean {
+    return (
+      this.areSocketsCompatible &&
+      this.areRamCompatible &&
+      this.motherboardFitInCase &&
+      this.isPowerSupplySufficient
+    );
+  }
+
+  navigateAndUpdateCart(): void {
+    Object.values(this.customerComputer).forEach((part: BaseProduct) =>
+      this.cartService.addProductToCart(part)
+    );
+
+    this.router.navigateByUrl('/order/cart');
   }
 }

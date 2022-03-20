@@ -13,6 +13,7 @@ export interface BaseProduct {
 
 export interface Motherboard extends BaseProduct {
   motherboardSocket: string;
+  motherboardFormat: string;
   ramType: string;
 }
 
@@ -22,11 +23,11 @@ export interface Processor extends BaseProduct {
 }
 
 export interface Ram extends BaseProduct {
-  ramType: string;
+  moduleType: string;
 }
 
 export interface Case extends BaseProduct {
-  motherboardSocket: string;
+  motherboardFormats: string[];
 }
 
 export interface PowerSupply extends BaseProduct {

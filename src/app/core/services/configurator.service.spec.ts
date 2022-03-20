@@ -4,9 +4,12 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { ConfiguratorService } from './configurator.service';
 import { ProductCategory } from '../../shared/model/ProductCategory';
+import { ProductsService } from './products.service';
+import { of } from 'rxjs';
 
 describe('ConfiguratorService', () => {
   let service: ConfiguratorService;
+  let productsService: ProductsService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -14,6 +17,7 @@ describe('ConfiguratorService', () => {
       providers: [AuthService],
     });
     service = TestBed.inject(ConfiguratorService);
+    productsService = TestBed.inject(ProductsService);
   });
 
   it('should be created', () => {
@@ -30,11 +34,11 @@ describe('ConfiguratorService', () => {
       categories: [{ title: 'Processors' } as ProductCategory],
     };
 
-    service.addPart(processor);
+    spyOn(productsService, 'getProductById').and.returnValue(of(processor));
+
+    service.addPart(1);
 
     service.customerComputer.subscribe((computer) => {
-      console.log(computer);
-
       expect(computer.processor.title).toEqual(processor.title);
     });
   });
@@ -54,6 +58,7 @@ describe('ConfiguratorService', () => {
       title: 'Processor',
       price: 800,
       motherboardSocket: 'LGA2022',
+      motherboardFormat: 'ATX',
       ramType: 'DDR4',
       categories: [{ title: 'Motherboards' } as ProductCategory],
     };
@@ -62,13 +67,19 @@ describe('ConfiguratorService', () => {
       id: 3,
       title: 'Processor',
       price: 900,
-      ramType: 'DDR4',
+      moduleType: 'DDR4',
       categories: [{ title: 'Memory RAM' } as ProductCategory],
     };
 
-    service.addPart(processor);
-    service.addPart(motherboard);
-    service.addPart(ram);
+    spyOn(productsService, 'getProductById').and.returnValues(
+      of(processor),
+      of(motherboard),
+      of(ram)
+    );
+
+    service.addPart(1);
+    service.addPart(2);
+    service.addPart(3);
 
     service.customerComputer.subscribe((computer) => {
       expect(computer.processor).toBeTruthy();

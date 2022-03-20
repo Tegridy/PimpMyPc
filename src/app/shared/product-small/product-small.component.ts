@@ -1,8 +1,8 @@
-import {ConfiguratorService} from './../../core/services/configurator.service';
-import {Component, Input, OnInit} from '@angular/core';
-import {BaseProduct} from '../model/BaseProduct';
-import {CartService} from '../../core/services/cart.service';
-import {Router} from '@angular/router';
+import { ConfiguratorService } from './../../core/services/configurator.service';
+import { Component, Input, OnInit } from '@angular/core';
+import { BaseProduct } from '../model/BaseProduct';
+import { CartService } from '../../core/services/cart.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'pmp-product-small',
@@ -24,19 +24,16 @@ export class ProductSmallComponent implements OnInit {
     private cartService: CartService,
     private configuratorService: ConfiguratorService,
     private router: Router
-  ) {
-  }
+  ) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   addItemToCart(): void {
     this.cartService.addProductToCart(this.product);
   }
 
   addItemToConfigurator(): void {
-    this.configuratorService.addPart(this.product);
-
+    this.configuratorService.addPart(this.product.id);
     this.router.navigateByUrl('/build-pc');
   }
 }

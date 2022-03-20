@@ -39,9 +39,9 @@
       </div>
     </li>
 
-    <div *ngIf="!areSocketsCompatible" class="flex justify-center">
+    <div id="socket-compatibility-error" *ngIf="!areSocketsCompatible" class="flex justify-center">
       <span class="font-bold text-center text-red-500">Motherboards socket and processor socket are not
-        compatible.</span>
+        compatible</span>
     </div>
 
     <li class="w-4/5 mx-auto border">
@@ -79,8 +79,8 @@
       </div>
     </li>
 
-    <div *ngIf="!areRamCompatible" class="flex justify-center">
-      <span class="font-bold text-center text-red-500">Selected RAM is not compatible with current motherboard.</span>
+    <div id="ram-type-compatibility-error" *ngIf="!areRamCompatible" class="flex justify-center">
+      <span class="font-bold text-center text-red-500">Selected RAM is not compatible with current motherboard</span>
     </div>
 
 
@@ -94,15 +94,15 @@
         </div>
         <div class="flex items-center justify-between w-4/5 p-4">
           <h4 class="w-2/3 p-4">{{ customerComputer.case?.title }}</h4>
-          <ng-container *ngIf="customerComputer.case?.imageUrl" class="w-1/3 p-4">
+          <div *ngIf="customerComputer.case?.imageUrl" class="w-1/3 p-4">
             <img class="object-contain w-48 shadow-lg h-36" [src]="customerComputer.case?.imageUrl" alt="Case image">
-          </ng-container>
+          </div>
         </div>
       </div>
     </li>
 
-    <div *ngIf="!motherboardFitInCase" class="flex justify-center">
-      <span class="font-bold text-center text-red-500">Selected motherboards will not fit into this case.</span>
+    <div id="motherboard-format-error" *ngIf="!motherboardFitInCase" class="flex justify-center">
+      <span class="font-bold text-center text-red-500">Selected motherboard will not fit into this case</span>
     </div>
 
     <li class="w-4/5 mx-auto border">
@@ -123,8 +123,8 @@
       </div>
     </li>
 
-    <div *ngIf="!isPowerSupplySufficient" class="flex justify-center">
-      <span class="font-bold text-center text-red-500">Selected power supply have not enough power.</span>
+    <div id="power-requirements-error" *ngIf="!isPowerSupplySufficient" class="flex justify-center">
+      <span class="font-bold text-center text-red-500">Selected power supply have not enough power</span>
     </div>
 
   </ul>
@@ -139,10 +139,10 @@
 </section>
 
 <pmp-modal [showModal]="showModal" modalName="Computer build is not complete">
-  <div>
-    <p class="text-center">There is still missing parts in your build do you want to proceed ?</p>
+  <div id="completion-modal">
+    <h6 class="text-center">There is still missing parts in your build do you want to proceed ?</h6>
     <div class="flex justify-between w-full">
-      <button class="w-1/3 modal-button" routerLink="/order/cart">Yes</button>
+      <button class="w-1/3 modal-button" (click)="navigateAndUpdateCart()">Yes</button>
       <button class="w-1/3 modal-button" (click)="toggleModal()">No</button>
     </div>
   </div>

@@ -1,7 +1,17 @@
 import { Computer } from './../../shared/model/Computer';
 import { Injectable } from '@angular/core';
-import { BaseProduct } from 'src/app/shared/model/BaseProduct';
+import {
+  BaseProduct,
+  Case,
+  GraphicCard,
+  Motherboard,
+  PowerSupply,
+  Processor,
+  Ram,
+} from 'src/app/shared/model/BaseProduct';
 import { BehaviorSubject } from 'rxjs';
+import { CartService } from './cart.service';
+import { ProductsService } from './products.service';
 
 @Injectable({
   providedIn: 'root',
@@ -12,34 +22,37 @@ export class ConfiguratorService {
   private customerComputerSource = new BehaviorSubject<Computer>(this.computer);
   customerComputer = this.customerComputerSource.asObservable();
 
-  constructor() {}
+  constructor(
+    private cartService: CartService,
+    private productsService: ProductsService
+  ) {}
 
-  addPart(product: BaseProduct): void {
-    console.log(product);
-    if (product.categories) {
-      console.log(product.categories[0]);
-      switch (product.categories[0].title) {
-        case 'Motherboards':
-          this.computer.motherboard = product;
-          break;
-        case 'Processors':
-          this.computer.processor = product;
-          break;
-        case 'Memory RAM':
-          this.computer.ram = product;
-          break;
-        case 'Cases':
-          this.computer.case = product;
-          break;
-        case 'Graphic cards':
-          this.computer.graphicCard = product;
-          break;
-        case 'Power supply':
-          this.computer.powerSupply = product;
-          break;
+  addPart(productId: number): void {
+    this.productsService.getProductById(productId).subscribe((product) => {
+      if (product.categories) {
+        switch (product.categories[0].title) {
+          case 'Motherboards':
+            this.computer.motherboard = product as Motherboard;
+            break;
+          case 'Processors':
+            this.computer.processor = product as Processor;
+            break;
+          case 'Memory RAM':
+            this.computer.ram = product as Ram;
+            break;
+          case 'Cases':
+            this.computer.case = product as Case;
+            break;
+          case 'Graphic cards':
+            this.computer.graphicCard = product as GraphicCard;
+            break;
+          case 'Power supply':
+            this.computer.powerSupply = product as PowerSupply;
+            break;
+        }
+        this.updateCustomerComputer(this.computer);
       }
-      this.updateCustomerComputer(this.computer);
-    }
+    });
   }
 
   private updateCustomerComputer(computer: Computer): void {
