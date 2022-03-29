@@ -12,7 +12,7 @@
   }
 
   .modal-button {
-    @apply w-2/5 h-8 my-4 bg-blue-600 rounded-full;
+    @apply cursor-pointer w-2/5 h-8 my-4 bg-blue-600 rounded-full;
   }
 
   .table-element {
@@ -36,7 +36,7 @@
    }
 
    [type="search"] {
-    @apply w-10/12 h-6 ml-5 focus:ring-0 focus:outline-none;  
+    @apply w-10/12 h-6 ml-5 focus:ring-0 focus:outline-none;
   }
 
 input[type="text"]:disabled,
