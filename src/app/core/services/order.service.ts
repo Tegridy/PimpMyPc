@@ -1,19 +1,23 @@
-import {Order} from './../../shared/model/Order';
-import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {CustomerOrderDetails, OrderDto, OrderResponse,} from '../../shared/model/Order';
-import {Observable} from 'rxjs';
+import { Order } from './../../shared/model/Order';
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import {
+  CustomerOrderDetails,
+  OrderDto,
+  OrderResponse,
+} from '../../shared/model/Order';
+import { Observable } from 'rxjs';
 import Utils from 'src/app/shared/utils/Utils';
-import {catchError} from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class OrderService {
-  baseUrl = 'http://localhost:8080/api/v1/order/';
+  baseUrl = environment.API_URL + '/api/v1/order/';
 
-  constructor(private http: HttpClient) {
-  }
+  constructor(private http: HttpClient) {}
 
   sendOrderRequest(order: CustomerOrderDetails): Observable<OrderDto> {
     return this.http

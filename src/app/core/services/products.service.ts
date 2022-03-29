@@ -1,23 +1,26 @@
-import {Injectable} from '@angular/core';
-import {BehaviorSubject, Observable} from 'rxjs';
-import {catchError} from 'rxjs/operators';
-import {HttpClient} from '@angular/common/http';
-import {ProductDto, ProductResponse,} from '../../shared/model/ProductResponse';
-import {BaseProduct} from '../../shared/model/BaseProduct';
+import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
+import {
+  ProductDto,
+  ProductResponse,
+} from '../../shared/model/ProductResponse';
+import { BaseProduct } from '../../shared/model/BaseProduct';
 import Utils from 'src/app/shared/utils/Utils';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProductsService {
-  baseUrl = 'http://localhost:8080/api/v1/products/';
+  baseUrl = environment.API_URL + '/api/v1/products/';
   pageSizeUrl = '&size=9';
 
   private productsSearchResultSource = new BehaviorSubject<BaseProduct[]>([]);
   productsSearchResult = this.productsSearchResultSource.asObservable();
 
-  constructor(private http: HttpClient) {
-  }
+  constructor(private http: HttpClient) {}
 
   getProductsPage(
     page: number,
@@ -32,11 +35,11 @@ export class ProductsService {
       return this.http
         .get<ProductResponse>(
           this.baseUrl +
-          category +
-          '?page=' +
-          page +
-          filtersUrls +
-          this.pageSizeUrl
+            category +
+            '?page=' +
+            page +
+            filtersUrls +
+            this.pageSizeUrl
         )
         .pipe(catchError(Utils.handleError));
     } else {

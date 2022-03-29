@@ -1,8 +1,9 @@
-import {Injectable} from '@angular/core';
-import {BaseProduct} from '../../shared/model/BaseProduct';
-import {BehaviorSubject} from 'rxjs';
-import {HttpClient} from '@angular/common/http';
-import {Cart} from '../../shared/model/Cart';
+import { Injectable } from '@angular/core';
+import { BaseProduct } from '../../shared/model/BaseProduct';
+import { BehaviorSubject } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Cart } from '../../shared/model/Cart';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -13,8 +14,7 @@ export class CartService {
   private cartSource = new BehaviorSubject<Cart>(this.cart);
   currentCart = this.cartSource.asObservable();
 
-  constructor(private http: HttpClient) {
-  }
+  constructor(private http: HttpClient) {}
 
   removeProductFromCart(id: number): void {
     const productIndex = this.cart.products.findIndex(
@@ -33,7 +33,7 @@ export class CartService {
     const productsIndexes = this.cart.products.map((product) => product.id);
 
     this.http
-      .put('http://localhost:8080/api/v1/cart', productsIndexes)
+      .put(environment.API_URL + '/api/v1/cart', productsIndexes)
       .subscribe((totalPrice) => {
         this.cart.cartTotalPrice = totalPrice as number;
 
