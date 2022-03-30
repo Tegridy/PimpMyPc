@@ -137,8 +137,8 @@
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
             "assets": [
-              "src/favicon.ico",
               "src/assets",
+              "favicon.png",
               {
                 "glob": "**/*",
                 "input": "node_modules/ionicons/dist/ionicons",
