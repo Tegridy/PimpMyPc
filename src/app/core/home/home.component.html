@@ -1,9 +1,12 @@
 <pmp-recommended-products></pmp-recommended-products>
 
-<section class="flex my-4">
-  <hr class="my-4 bg-black border-black rounded-lg">
+<div class="flex justify-center items-center" id="home-error-message" *ngIf="errorMessage">
+  <span class="text-red-500 font-bold" >{{ errorMessage }}</span>
+</div>
 
-  <span class="text-center font-bold" *ngIf="errorMessage">{{ errorMessage }}</span>
+<section class="flex my-4">
+
+  <hr class="my-4 bg-black border-black rounded-lg">
 
   <ng-container *ngIf="newestProduct">
     <div class="hidden w-2/5 min-h-full ml-8 border-2 border-black rounded-lg bg-gray-50 lg:block py-9">

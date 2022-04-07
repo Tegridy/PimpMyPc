@@ -1,8 +1,8 @@
-import {HttpErrorResponse} from '@angular/common/http';
-import {ActivatedRoute, Params, Router, UrlSegment} from '@angular/router';
-import {Observable, of, throwError} from 'rxjs';
-import {parse} from 'search-params';
-import {Param} from '../model/Param';
+import { HttpErrorResponse } from '@angular/common/http';
+import { ActivatedRoute, Params, Router, UrlSegment } from '@angular/router';
+import { Observable, of, throwError } from 'rxjs';
+import { parse } from 'search-params';
+import { Param } from '../model/Param';
 
 export default class Utils {
   public static buildUrl(queryParams: Param[] | Params): string {
@@ -42,9 +42,13 @@ export default class Utils {
   }
 
   public static handleError(error: HttpErrorResponse): Observable<never> {
-    let errorMessage = 'Something went wrong. Try again later.';
+    let errorMessage = '';
 
-    errorMessage = `Server returned code: ${error.status}, error message is: ${error.error.message}`;
+    if (error.status === 0) {
+      errorMessage = 'No connection with server. Please try again later.';
+    } else {
+      errorMessage = `Server returned code: ${error.status}, error message is: ${error.error.message}`;
+    }
 
     return throwError(errorMessage);
   }
