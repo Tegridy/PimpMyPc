@@ -40,7 +40,7 @@ export class CheckoutComponent implements OnInit {
         '',
         [
           Validators.required,
-          Validators.minLength(5),
+          Validators.minLength(9),
           Validators.pattern('[- +()0-9]+'),
         ],
       ],
@@ -74,7 +74,7 @@ export class CheckoutComponent implements OnInit {
     this.cartService.currentCart.subscribe((cart) => {
       cart.products.forEach((cartItem) => this.productIDs.push(cartItem.id));
       this.cartProducts = cart.products;
-      this.totalPrice = cart.cartTotalPrice;
+      this.totalPrice = cart.totalPrice;
     });
   }
 
@@ -93,14 +93,14 @@ export class CheckoutComponent implements OnInit {
         )
       );
 
-      this.orderService.sendOrderRequest(order).subscribe((orderDto) => {
+      this.orderService.saveOrder(order).subscribe((orderDto) => {
         this.orderId = orderDto.id;
         this.orderStatus = orderDto.status;
+
+        this.cartService.clearCart();
       });
 
       this.orderComplete = true;
-
-      this.cartService.clearCart();
     } else {
       this.checkoutForm.markAllAsTouched();
     }

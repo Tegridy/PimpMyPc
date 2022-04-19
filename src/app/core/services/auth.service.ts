@@ -39,6 +39,7 @@ export class AuthService {
   }
 
   logoutUser(): void {
+    sessionStorage.clear();
     this.isUserLoggedInSource.next(false);
   }
 }

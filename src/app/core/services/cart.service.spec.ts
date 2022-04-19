@@ -1,8 +1,11 @@
-import {BaseProduct} from 'src/app/shared/model/BaseProduct';
-import {CartService} from './cart.service';
-import {AuthService} from './auth.service';
-import {HttpClientTestingModule, HttpTestingController,} from '@angular/common/http/testing';
-import {TestBed} from '@angular/core/testing';
+import { BaseProduct } from 'src/app/shared/model/BaseProduct';
+import { CartService } from './cart.service';
+import { AuthService } from './auth.service';
+import {
+  HttpClientTestingModule,
+  HttpTestingController,
+} from '@angular/common/http/testing';
+import { TestBed } from '@angular/core/testing';
 
 describe('CartService', () => {
   let service: CartService;
@@ -22,8 +25,8 @@ describe('CartService', () => {
   });
 
   it('should add products to cart and update price', () => {
-    const product: BaseProduct = {id: 1, title: 'Laptop', price: 800};
-    const product2: BaseProduct = {id: 2, title: 'Computer', price: 1800};
+    const product: BaseProduct = { id: 1, title: 'Laptop', price: 800 };
+    const product2: BaseProduct = { id: 2, title: 'Computer', price: 1800 };
 
     service.addProductToCart(product);
     service.addProductToCart(product2);
@@ -38,13 +41,13 @@ describe('CartService', () => {
 
     service.currentCart.subscribe((cart) => {
       expect(cart.products.length).toBe(2);
-      expect(cart.cartTotalPrice).toBe(product.price + product2.price);
+      expect(cart.totalPrice).toBe(product.price + product2.price);
     });
   });
 
   it('should remove product from cart and update price', () => {
-    const product: BaseProduct = {id: 1, title: 'Laptop', price: 800};
-    const product2: BaseProduct = {id: 2, title: 'Computer', price: 1800};
+    const product: BaseProduct = { id: 1, title: 'Laptop', price: 800 };
+    const product2: BaseProduct = { id: 2, title: 'Computer', price: 1800 };
 
     service.addProductToCart(product);
     service.addProductToCart(product2);
@@ -62,12 +65,12 @@ describe('CartService', () => {
     service.currentCart.subscribe((cart) => {
       expect(cart.products.length).toBe(1);
       expect(cart.products[0].id).toEqual(2);
-      expect(cart.cartTotalPrice).toBe(product2.price);
+      expect(cart.totalPrice).toBe(product2.price);
     });
   });
 
   it('should change cart state and update price', () => {
-    const product: BaseProduct = {id: 1, title: 'Laptop', price: 800};
+    const product: BaseProduct = { id: 1, title: 'Laptop', price: 800 };
 
     service.addProductToCart(product);
 
@@ -79,12 +82,12 @@ describe('CartService', () => {
     service.currentCart.subscribe((cart) => {
       expect(cart.products.length).toBe(1);
       expect(cart.products[0].id).toEqual(1);
-      expect(cart.cartTotalPrice).toBe(product.price);
+      expect(cart.totalPrice).toBe(product.price);
     });
   });
 
   it('should clear cart state', () => {
-    const product: BaseProduct = {id: 1, title: 'Laptop', price: 800};
+    const product: BaseProduct = { id: 1, title: 'Laptop', price: 800 };
 
     service.addProductToCart(product);
     service.clearCart();

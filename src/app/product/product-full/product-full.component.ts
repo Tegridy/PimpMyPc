@@ -24,6 +24,7 @@ export class ProductFullComponent implements OnInit {
     'description',
     'price',
     'imageUrl',
+    'categories',
   ];
 
   constructor(

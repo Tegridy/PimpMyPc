@@ -15,11 +15,11 @@ import { environment } from '../../../environments/environment';
   providedIn: 'root',
 })
 export class OrderService {
-  baseUrl = environment.API_URL + '/api/v1/order/';
+  baseUrl = environment.API_URL + '/api/v1/orders/';
 
   constructor(private http: HttpClient) {}
 
-  sendOrderRequest(order: CustomerOrderDetails): Observable<OrderDto> {
+  saveOrder(order: CustomerOrderDetails): Observable<OrderDto> {
     return this.http
       .post<OrderDto>(this.baseUrl, order)
       .pipe(catchError((error) => Utils.handleError(error)));

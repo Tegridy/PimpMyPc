@@ -4,6 +4,7 @@ import { BehaviorSubject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Cart } from '../../shared/model/Cart';
 import { environment } from '../../../environments/environment';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -33,17 +34,16 @@ export class CartService {
     const productsIndexes = this.cart.products.map((product) => product.id);
 
     this.http
-      .put(environment.API_URL + '/api/v1/cart', productsIndexes)
-      .subscribe((totalPrice) => {
-        this.cart.cartTotalPrice = totalPrice as number;
-
+      .put<Cart>(environment.API_URL + '/api/v1/cart', productsIndexes)
+      .subscribe((cart) => {
+        this.cart.products = cart.products;
+        this.cart.totalPrice = cart.totalPrice as number;
         this.cartSource.next(this.cart);
       });
   }
 
   clearCart(): void {
     this.cart = new Cart([], 0);
-    this.cartSource.next(this.cart);
     this.updateCart();
   }
 }

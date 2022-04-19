@@ -1,10 +1,13 @@
-import {Order, OrderResponse} from './../../shared/model/Order';
-import {Address} from './../../shared/model/User';
-import {AuthService} from './auth.service';
-import {HttpClientTestingModule, HttpTestingController,} from '@angular/common/http/testing';
-import {TestBed} from '@angular/core/testing';
-import {OrderService} from './order.service';
-import {CustomerOrderDetails, OrderDto} from 'src/app/shared/model/Order';
+import { Order, OrderResponse } from './../../shared/model/Order';
+import { Address } from './../../shared/model/User';
+import { AuthService } from './auth.service';
+import {
+  HttpClientTestingModule,
+  HttpTestingController,
+} from '@angular/common/http/testing';
+import { TestBed } from '@angular/core/testing';
+import { OrderService } from './order.service';
+import { CustomerOrderDetails, OrderDto } from 'src/app/shared/model/Order';
 
 describe('OrderService', () => {
   let service: OrderService;
@@ -59,10 +62,10 @@ describe('OrderService', () => {
     content: orders,
   };
 
-  const oDto: OrderDto = {id: 1, status: 'IN_PROGRESS'};
+  const oDto: OrderDto = { id: 1, status: 'IN_PROGRESS' };
 
   it('should send order request', () => {
-    service.sendOrderRequest(orderDetails).subscribe((orderDto: OrderDto) => {
+    service.saveOrder(orderDetails).subscribe((orderDto: OrderDto) => {
       expect(orderDto.id).toEqual(oDto.id);
       expect(orderDto.status).toEqual(oDto.status);
     });
