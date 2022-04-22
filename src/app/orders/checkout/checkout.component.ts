@@ -93,14 +93,14 @@ export class CheckoutComponent implements OnInit {
         )
       );
 
-      this.orderService.saveOrder(order).subscribe((orderDto) => {
+      this.orderService.sendOrder(order).subscribe((orderDto) => {
         this.orderId = orderDto.id;
         this.orderStatus = orderDto.status;
-
-        this.cartService.clearCart();
       });
 
       this.orderComplete = true;
+
+      this.cartService.clearCart();
     } else {
       this.checkoutForm.markAllAsTouched();
     }

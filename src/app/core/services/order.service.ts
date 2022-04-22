@@ -19,7 +19,7 @@ export class OrderService {
 
   constructor(private http: HttpClient) {}
 
-  saveOrder(order: CustomerOrderDetails): Observable<OrderDto> {
+  sendOrder(order: CustomerOrderDetails): Observable<OrderDto> {
     return this.http
       .post<OrderDto>(this.baseUrl, order)
       .pipe(catchError((error) => Utils.handleError(error)));

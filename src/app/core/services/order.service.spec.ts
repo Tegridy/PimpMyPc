@@ -1,4 +1,3 @@
-import { Order, OrderResponse } from './../../shared/model/Order';
 import { Address } from './../../shared/model/User';
 import { AuthService } from './auth.service';
 import {
@@ -7,7 +6,12 @@ import {
 } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { OrderService } from './order.service';
-import { CustomerOrderDetails, OrderDto } from 'src/app/shared/model/Order';
+import {
+  CustomerOrderDetails,
+  Order,
+  OrderDto,
+  OrderResponse,
+} from '../../shared/model/Order';
 
 describe('OrderService', () => {
   let service: OrderService;
@@ -65,12 +69,12 @@ describe('OrderService', () => {
   const oDto: OrderDto = { id: 1, status: 'IN_PROGRESS' };
 
   it('should send order request', () => {
-    service.saveOrder(orderDetails).subscribe((orderDto: OrderDto) => {
+    service.sendOrder(orderDetails).subscribe((orderDto: OrderDto) => {
       expect(orderDto.id).toEqual(oDto.id);
       expect(orderDto.status).toEqual(oDto.status);
     });
 
-    const req = httpMock.expectOne('http://localhost:8080/api/v1/order/');
+    const req = httpMock.expectOne('http://localhost:8080/api/v1/orders/');
     expect(req.request.method).toEqual('POST');
     req.flush(oDto);
   });
@@ -82,7 +86,7 @@ describe('OrderService', () => {
       expect(orderResponse.content[1].title).toEqual(order2.title);
     });
 
-    const req = httpMock.expectOne('http://localhost:8080/api/v1/order/');
+    const req = httpMock.expectOne('http://localhost:8080/api/v1/orders/');
     expect(req.request.method).toEqual('GET');
     req.flush(orderRes);
   });
@@ -94,7 +98,7 @@ describe('OrderService', () => {
       expect(o.price).toEqual(order.price);
     });
 
-    const req = httpMock.expectOne('http://localhost:8080/api/v1/order/23');
+    const req = httpMock.expectOne('http://localhost:8080/api/v1/orders/23');
     expect(req.request.method).toEqual('GET');
     req.flush(order);
   });

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { environment } from '../environments/environment';
 
 @Component({
-  selector: 'app-root',
+  selector: 'pmp-root',
   templateUrl: './pmp.component.html',
   styleUrls: ['./pmp.component.scss'],
 })

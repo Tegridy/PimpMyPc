@@ -4,7 +4,7 @@ import { BehaviorSubject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Cart } from '../../shared/model/Cart';
 import { environment } from '../../../environments/environment';
-import { map } from 'rxjs/operators';
+import { car, cart } from 'ionicons/icons';
 
 @Injectable({
   providedIn: 'root',
@@ -35,15 +35,16 @@ export class CartService {
 
     this.http
       .put<Cart>(environment.API_URL + '/api/v1/cart', productsIndexes)
-      .subscribe((cart) => {
-        this.cart.products = cart.products;
-        this.cart.totalPrice = cart.totalPrice as number;
+      .subscribe((c) => {
+        this.cart.products = c.products;
+        this.cart.totalPrice = c.totalPrice as number;
         this.cartSource.next(this.cart);
       });
   }
 
   clearCart(): void {
     this.cart = new Cart([], 0);
+    this.cartSource.next(this.cart);
     this.updateCart();
   }
 }

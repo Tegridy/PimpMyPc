@@ -1,9 +1,15 @@
-import {ProductDto, ProductResponse,} from './../../shared/model/ProductResponse';
-import {ProductsService} from './products.service';
-import {BaseProduct} from 'src/app/shared/model/BaseProduct';
-import {AuthService} from './auth.service';
-import {HttpClientTestingModule, HttpTestingController,} from '@angular/common/http/testing';
-import {TestBed} from '@angular/core/testing';
+import {
+  ProductDto,
+  ProductResponse,
+} from './../../shared/model/ProductResponse';
+import { ProductsService } from './products.service';
+import { BaseProduct } from 'src/app/shared/model/BaseProduct';
+import { AuthService } from './auth.service';
+import {
+  HttpClientTestingModule,
+  HttpTestingController,
+} from '@angular/common/http/testing';
+import { TestBed } from '@angular/core/testing';
 
 describe('ProductsService', () => {
   let service: ProductsService;
@@ -22,8 +28,8 @@ describe('ProductsService', () => {
     expect(service).toBeTruthy();
   });
 
-  const product: BaseProduct = {id: 1, title: 'Laptop', price: 800};
-  const product2: BaseProduct = {id: 2, title: 'Computer', price: 1800};
+  const product: BaseProduct = { id: 1, title: 'Laptop', price: 800 };
+  const product2: BaseProduct = { id: 2, title: 'Computer', price: 1800 };
 
   const mockProducts = [product, product2];
 
@@ -106,7 +112,7 @@ describe('ProductsService', () => {
 
     const req = httpMock
       .expectOne('http://localhost:8080/api/v1/products/laptops?page=1&size=9')
-      .error(error, {status: 500});
+      .error(error, { status: 500 });
   });
 
   it('should find products by given category', () => {

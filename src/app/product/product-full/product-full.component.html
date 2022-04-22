@@ -16,7 +16,8 @@
       </div>
 
       <div class="mx-auto mt-8">
-        <button (click)="addProductToCart()"
+        <span class="font-bold text-center" *ngIf="">Product is not available at the moment.</span>
+        <button *ngIf="" (click)="addProductToCart()"
                 class="p-4 text-green-700 bg-white border-4 border-green-700 rounded-lg md:group-hover:block hover:border-green-700 hover:bg-green-700 hover:text-gray-50 sm:block">
           <div class="flex items-center text-center justify-items-center">
             <ion-icon class="w-8 h-8" name="bag-add-outline"></ion-icon>

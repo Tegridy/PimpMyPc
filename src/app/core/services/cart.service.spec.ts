@@ -5,7 +5,10 @@ import {
   HttpClientTestingModule,
   HttpTestingController,
 } from '@angular/common/http/testing';
-import { TestBed } from '@angular/core/testing';
+import { fakeAsync, TestBed } from '@angular/core/testing';
+import { car } from 'ionicons/icons';
+import { of, Subscription } from 'rxjs';
+import { Cart } from '../../shared/model/Cart';
 
 describe('CartService', () => {
   let service: CartService;
@@ -31,9 +34,9 @@ describe('CartService', () => {
     service.addProductToCart(product);
     service.addProductToCart(product2);
 
-    let requests = httpMock.match('http://localhost:8080/api/v1/cart');
+    const requests = httpMock.match('http://localhost:8080/api/v1/cart');
 
-    requests[1].flush(product.price + product2.price);
+    requests[1].flush(new Cart([product, product2], 2600));
 
     expect(requests.length).toBe(2);
     expect(requests[0].request.method).toEqual('PUT');
@@ -51,11 +54,11 @@ describe('CartService', () => {
 
     service.addProductToCart(product);
     service.addProductToCart(product2);
-    service.removeProductFromCart(1);
+    service.removeProductFromCart(product.id);
 
-    let requests = httpMock.match('http://localhost:8080/api/v1/cart');
+    const requests = httpMock.match('http://localhost:8080/api/v1/cart');
 
-    requests[2].flush(product2.price);
+    requests[2].flush(new Cart([product2], 1800));
 
     expect(requests.length).toBe(3);
     expect(requests[0].request.method).toEqual('PUT');
@@ -75,7 +78,7 @@ describe('CartService', () => {
     service.addProductToCart(product);
 
     const request = httpMock.expectOne('http://localhost:8080/api/v1/cart');
-    request.flush(product.price);
+    request.flush(new Cart([product], 800));
 
     expect(request.request.method).toEqual('PUT');
 
@@ -92,7 +95,7 @@ describe('CartService', () => {
     service.addProductToCart(product);
     service.clearCart();
 
-    let requests = httpMock.match('http://localhost:8080/api/v1/cart');
+    const requests = httpMock.match('http://localhost:8080/api/v1/cart');
 
     expect(requests.length).toBe(2);
     expect(requests[0].request.method).toEqual('PUT');
