@@ -99,7 +99,7 @@
 
         </div>
         <h3 class="self-start my-2 ml-5 text-xl font-semibold">Other:</h3>
-        <input id="phoneId" formControlName="phone" type="text" class="w-4/5 mb-3" placeholder="Phone number (optional)"
+        <input id="phoneId" formControlName="phone" type="text" class="w-4/5 mb-3" placeholder="Phone number (required)"
                [ngClass]="{'is-invalid': (registerForm.get('phone')?.touched ||
           registerForm.get('phone')?.dirty) &&
           !registerForm.get('phone')?.valid }"/>
