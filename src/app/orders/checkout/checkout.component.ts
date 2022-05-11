@@ -7,6 +7,7 @@ import { BaseProduct } from '../../shared/model/BaseProduct';
 import { OrderService } from '../../core/services/order.service';
 import { CustomerOrderDetails } from '../../shared/model/Order';
 import { Address } from '../../shared/model/User';
+import { Cart } from '../../shared/model/Cart';
 
 @Component({
   selector: 'pmp-checkout',
@@ -15,9 +16,8 @@ import { Address } from '../../shared/model/User';
 })
 export class CheckoutComponent implements OnInit {
   checkoutForm!: FormGroup;
-  cartProducts: BaseProduct[] = [];
+  cart: Cart = new Cart([], 0);
   private productIDs: number[] = [];
-  totalPrice = 0;
   orderComplete = false;
 
   orderId = 0;
@@ -73,8 +73,7 @@ export class CheckoutComponent implements OnInit {
 
     this.cartService.currentCart.subscribe((cart) => {
       cart.products.forEach((cartItem) => this.productIDs.push(cartItem.id));
-      this.cartProducts = cart.products;
-      this.totalPrice = cart.totalPrice;
+      this.cart = cart;
     });
   }
 
@@ -90,7 +89,8 @@ export class CheckoutComponent implements OnInit {
           this.checkoutForm.get('deliveryAddress.city')?.value,
           this.checkoutForm.get('deliveryAddress.state')?.value,
           this.checkoutForm.get('deliveryAddress.zip')?.value
-        )
+        ),
+        this.cart
       );
 
       this.orderService.sendOrder(order).subscribe((orderDto) => {

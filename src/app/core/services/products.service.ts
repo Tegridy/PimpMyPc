@@ -71,21 +71,21 @@ export class ProductsService {
     );
   }
 
-  getTopSellingProducts(): Observable<BaseProduct[]> {
+  getTopSellingProducts(): Observable<ProductDto> {
     return this.http
-      .get<BaseProduct[]>(this.baseUrl + 'top')
+      .get<ProductDto>(this.baseUrl + 'top')
       .pipe(catchError(Utils.handleError));
   }
 
-  getOurChoice(): Observable<BaseProduct[]> {
+  getOurChoice(): Observable<ProductDto> {
     return this.http
-      .get<BaseProduct[]>(this.baseUrl + 'our-choice')
+      .get<ProductDto>(this.baseUrl + 'our-choice')
       .pipe(catchError(Utils.handleError));
   }
 
-  getNewestProduct(): Observable<BaseProduct> {
+  getNewestProduct(): Observable<ProductDto> {
     return this.http
-      .get<BaseProduct>(this.baseUrl + 'newest')
+      .get<ProductDto>(this.baseUrl + 'newest')
       .pipe(catchError(Utils.handleError));
   }
 

@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit {
   bestsellersProducts: BaseProduct[] = [];
   ourChoiceProducts: BaseProduct[] = [];
   movies: Movie[] = [];
-  newestProduct!: BaseProduct;
+  newestProduct: BaseProduct[] = [];
 
   constructor(private productsService: ProductsService) {
     this.movies = movies;
@@ -29,15 +29,15 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.productsService.getTopSellingProducts().subscribe(
-      (bestsellers) => (this.bestsellersProducts = bestsellers),
+      (bestsellers) => (this.bestsellersProducts = bestsellers.content),
       (error) => (this.errorMessage = error)
     );
     this.productsService.getOurChoice().subscribe(
-      (ourChoice) => (this.ourChoiceProducts = ourChoice),
+      (ourChoice) => (this.ourChoiceProducts = ourChoice.content),
       (error) => (this.errorMessage = error)
     );
     this.productsService.getNewestProduct().subscribe(
-      (newestProduct) => (this.newestProduct = newestProduct),
+      (newestProduct) => (this.newestProduct = newestProduct.content),
       (error) => (this.errorMessage = error)
     );
   }

@@ -22,29 +22,28 @@ export class CartService {
       (product) => product.id === id
     );
     this.cart.products.splice(productIndex, 1);
-    this.updateCart();
+    this.calculateCartPrice();
   }
 
   addProductToCart(product: BaseProduct): void {
     this.cart.products.push(product);
-    this.updateCart();
-  }
-
-  private updateCart(): void {
-    const productsIndexes = this.cart.products.map((product) => product.id);
-
-    this.http
-      .put<Cart>(environment.API_URL + '/api/v1/cart', productsIndexes)
-      .subscribe((c) => {
-        this.cart.products = c.products;
-        this.cart.totalPrice = c.totalPrice as number;
-        this.cartSource.next(this.cart);
-      });
+    this.calculateCartPrice();
   }
 
   clearCart(): void {
     this.cart = new Cart([], 0);
     this.cartSource.next(this.cart);
-    this.updateCart();
+  }
+
+  calculateCartPrice(): void {
+    if (this.cart.products.length > 0) {
+      this.cart.totalPrice = this.cart.products
+        .map((x) => x.price)
+        .reduce((z, y) => z + y);
+    } else {
+      this.cart.totalPrice = 0;
+    }
+
+    this.cartSource.next(this.cart);
   }
 }

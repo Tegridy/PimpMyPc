@@ -5,19 +5,19 @@
     <h3 class="text-2xl font-semibold">Order items:</h3>
     <hr class="w-full my-2 border border-black">
     <ul class="flex flex-col items-center justify-center space-y-4">
-      <li id="product" *ngFor="let cartItem of cartProducts"
+      <li id="product" *ngFor="let cartItem of cart.products"
           class="flex flex-col md:flex-row items-center w-11/12 mx-auto md:w-4/5 p-4 border border-black rounded">
         <div class="flex items-center justify-center w-4/5 md:w-2/5">
           <img class="object-contain h-24 rounded" src="{{ cartItem.imageUrl }}" alt="{{ cartItem.title }} image">
         </div>
-        <div class="flex items-center mt-4 md:mt-0 w-4/5 md:w-3/5">
+        <div class="flex items-center justify-between mt-4 md:mt-0 w-4/5 md:w-3/5">
           <span class="mx-5">{{ cartItem.title }}</span>
           <span class="mx-5">{{ cartItem.price | currency}}</span>
         </div>
       </li>
     </ul>
 
-    <h3 class="my-5 text-lg font-semibold text-center">Total: {{ totalPrice | currency}}</h3>
+    <h3 class="my-5 text-lg font-semibold text-center">Total: {{ cart.totalPrice | currency}}</h3>
   </section>
 
   <section id="customer-data" class="pb-8">
@@ -74,7 +74,7 @@
         <span class="error-message"
               *ngIf="checkoutForm.get('customerPhone')?.errors?.pattern">Phone number is not valid.</span>
         <span class="error-message"
-              *ngIf="checkoutForm.get('customerPhone')?.errors?.minlength">Phone number too short(at least 5 numbers).</span>
+              *ngIf="checkoutForm.get('customerPhone')?.errors?.minlength">Phone number too short(at least 9 numbers).</span>
 
 
         <div formGroupName="deliveryAddress" class="flex flex-col w-4/5 mx-auto">
@@ -123,9 +123,9 @@
         </div>
 
         <input id="save-order-button" type="submit" class="w-3/5 p-2 mx-auto mt-8 bg-blue-500 cursor-pointer rounded-2xl"
-               [disabled]="cartProducts.length < 1" value="Place order">
+               [disabled]="cart.products.length < 1" value="Place order">
 
-        <span class="mt-2 text-center text-blue-600" *ngIf="cartProducts.length < 1">You need at least one item
+        <span class="mt-2 text-center text-blue-600" *ngIf="cart.products.length < 1">You need at least one item
           in
           the cart</span>
       </div>

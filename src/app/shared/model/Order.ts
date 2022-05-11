@@ -1,5 +1,6 @@
-import {BaseProduct} from './BaseProduct';
-import {Address} from './User';
+import { BaseProduct } from './BaseProduct';
+import { Address } from './User';
+import { Cart } from './Cart';
 
 export class CustomerOrderDetails {
   constructor(
@@ -7,9 +8,9 @@ export class CustomerOrderDetails {
     public customerLastName: string,
     public customerPhone: string,
     public customerEmail: string,
-    public deliveryAddress: Address
-  ) {
-  }
+    public deliveryAddress: Address,
+    public cart: Cart
+  ) {}
 }
 
 export interface OrderResponse {
