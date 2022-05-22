@@ -15,7 +15,7 @@ export class CartService {
   private cartSource = new BehaviorSubject<Cart>(this.cart);
   currentCart = this.cartSource.asObservable();
 
-  constructor(private http: HttpClient) {}
+  constructor() {}
 
   removeProductFromCart(id: number): void {
     const productIndex = this.cart.products.findIndex(
@@ -38,8 +38,8 @@ export class CartService {
   calculateCartPrice(): void {
     if (this.cart.products.length > 0) {
       this.cart.totalPrice = this.cart.products
-        .map((x) => x.price)
-        .reduce((z, y) => z + y);
+        .map((product) => product.price)
+        .reduce((product1, product2) => product1 + product2);
     } else {
       this.cart.totalPrice = 0;
     }

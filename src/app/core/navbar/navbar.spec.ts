@@ -102,7 +102,7 @@ describe('NavbarComponent', () => {
 
     const menuItemWithoutSubmenu = { endpointName: 'smartphones' };
 
-    component.checkIfMenuCanBeClosed(menuItemWithoutSubmenu);
+    component.navigateInMenu(menuItemWithoutSubmenu);
 
     expect(component.showMenu).toBeTrue();
   });

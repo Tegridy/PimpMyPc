@@ -93,9 +93,15 @@ export class ProductsCategoryComponent implements OnInit, OnDestroy {
 
     const categoryName = this.getCategoryTypeFromUrl();
     const filtersUrl = Utils.buildUrl(this.queryParams);
+    let categoryId = 0;
+    const category = this.queryParams.find((c) => c.key === 'categoryId');
+
+    if (category) {
+      categoryId = category.value as number;
+    }
 
     this.productsService
-      .getProductsPage(page - 1, categoryName, filtersUrl)
+      .getProductsPage(page - 1, categoryName, categoryId, filtersUrl)
       .subscribe(
         (productsPage) => {
           this.pageNumber = productsPage.products.number + 1;

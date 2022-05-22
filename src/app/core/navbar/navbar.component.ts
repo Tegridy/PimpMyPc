@@ -1,11 +1,11 @@
 import { AuthService } from './../services/auth.service';
 import { Component, OnInit } from '@angular/core';
-import { categories } from './Categories';
 import { Params, Router } from '@angular/router';
 import { CartService } from '../services/cart.service';
 import { Param } from '../../shared/model/Param';
 import { ToastrService } from 'ngx-toastr';
-import { MenuCategory } from '../../shared/model/MenuCategory';
+import { ProductsService } from '../services/products.service';
+import { ProductCategory } from '../../shared/model/ProductCategory';
 
 @Component({
   selector: 'pmp-navbar',
@@ -17,7 +17,8 @@ export class NavbarComponent implements OnInit {
     private cartService: CartService,
     private router: Router,
     private authService: AuthService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private productsService: ProductsService
   ) {}
 
   showMenu = false;
@@ -28,13 +29,17 @@ export class NavbarComponent implements OnInit {
 
   numberOfItemsInCart = 0;
 
-  mainCategories: MenuCategory[] = [];
+  mainCategories: ProductCategory[] = [];
   private queryParams!: Params;
 
   isUserLoggedIn = false;
 
   ngOnInit(): void {
-    this.mainCategories = categories;
+    this.productsService.getProductsCategories().subscribe((categories) => {
+      this.mainCategories = categories.slice(0, 6);
+      console.log(categories);
+    });
+
     this.cartService.currentCart.subscribe(
       (cart) => (this.numberOfItemsInCart = cart.products.length)
     );
@@ -80,17 +85,12 @@ export class NavbarComponent implements OnInit {
     this.toggleBackdrop = !this.toggleBackdrop;
   }
 
-  checkIfMenuCanBeClosed(menuItem: any): void {
-    if (!menuItem.firstLevelMenu && !menuItem.secondLevelMenu) {
+  navigateInMenu(menuItem: any): void {
+    if (menuItem.subCategories && menuItem.subCategories.length < 1) {
       this.toggleMenu();
-    }
-  }
-
-  canMoveDeeperInMenu(menuItem: any): string | undefined {
-    if (menuItem.firstLevelMenu || menuItem.secondLevelMenu) {
-      return;
-    } else {
-      return '/categories/' + menuItem.endpointName;
+      this.router.navigate(['/categories/' + menuItem.title.toLowerCase()], {
+        queryParams: { categoryId: menuItem.id },
+      });
     }
   }
 
@@ -100,5 +100,11 @@ export class NavbarComponent implements OnInit {
     this.toastr.info('Logout successful!', 'Good bye!', {
       positionClass: 'toast-bottom-right',
     });
+  }
+
+  checkIfBuildPc(categoryId: number): void {
+    if (categoryId === 4) {
+      this.router.navigateByUrl('/build-pc');
+    }
   }
 }

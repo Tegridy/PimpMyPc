@@ -9,6 +9,7 @@ import {
 import { BaseProduct } from '../../shared/model/BaseProduct';
 import Utils from 'src/app/shared/utils/Utils';
 import { environment } from '../../../environments/environment';
+import { ProductCategory } from '../../shared/model/ProductCategory';
 
 @Injectable({
   providedIn: 'root',
@@ -25,6 +26,7 @@ export class ProductsService {
   getProductsPage(
     page: number,
     category: string,
+    categoryId: number,
     filtersUrls?: string
   ): Observable<ProductResponse> {
     if (filtersUrls) {
@@ -35,11 +37,12 @@ export class ProductsService {
       return this.http
         .get<ProductResponse>(
           this.baseUrl +
-            category +
             '?page=' +
             page +
             filtersUrls +
-            this.pageSizeUrl
+            this.pageSizeUrl +
+            '&categoryId=' +
+            categoryId
         )
         .pipe(catchError(Utils.handleError));
     } else {
@@ -47,7 +50,12 @@ export class ProductsService {
 
       return this.http
         .get<ProductResponse>(
-          this.baseUrl + category + '?page=' + page + this.pageSizeUrl
+          this.baseUrl +
+            '?page=' +
+            page +
+            this.pageSizeUrl +
+            '&categoryId=' +
+            categoryId
         )
         .pipe(catchError(Utils.handleError));
     }
@@ -92,6 +100,12 @@ export class ProductsService {
   getProductById(id: number): Observable<BaseProduct> {
     return this.http
       .get<BaseProduct>(this.baseUrl + id)
+      .pipe(catchError(Utils.handleError));
+  }
+
+  getProductsCategories(): Observable<ProductCategory[]> {
+    return this.http
+      .get<ProductCategory[]>(environment.API_URL + '/api/v1/categories')
       .pipe(catchError(Utils.handleError));
   }
 

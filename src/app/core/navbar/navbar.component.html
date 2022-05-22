@@ -48,7 +48,7 @@
                (keyup.enter)="searchProduct()">
         <select id="search-bar-select" class="hidden lg:block" (change)="changeCurrentSearchCategory($event)">
           <option selected>Everywhere</option>
-          <option *ngFor="let category of mainCategories">{{ category.name }}</option>
+          <option *ngFor="let category of mainCategories">{{ category.title }}</option>
         </select>
         <button (click)="searchProduct()"
                 class="relative flex items-center justify-center w-24 h-8 bg-gray-600 rounded-full -right-2">
@@ -66,32 +66,32 @@
     <ul id="main-menu" class="flex flex-col lg:flex-row lg:justify-between">
       <li *ngFor="let category of mainCategories" (mouseenter)="toggleMenuBackdrop();"
           (mouseleave)="toggleMenuBackdrop()" class="relative p-2 rounded-t cursor-pointer hover:bg-gray-400">
-        <a routerLink='/categories/{{ category.endpointName | lowercase }}' [queryParams]="{page: 1}"
+        <a (click)="checkIfBuildPc(category.id)" routerLink='/categories/{{ category.title | lowercase }}' [queryParams]="{page: 1, categoryId: category.id}"
            class="flex items-center">
           <ion-icon name="{{ category.iconName }}" class="pr-2"></ion-icon>
-          {{ category.name }}
+          {{ category.title }}
         </a>
 
         <div id="sub-menu" class="absolute left-0 hidden rounded-b-lg top-10 bg-gray-50 animate-fade-in-down">
-          <ul *ngFor="let firstLevelMenuItem of category.firstLevelMenu" class="pb-4">
+          <ul *ngFor="let firstLevelMenuItem of category.subCategories" class="pb-4">
 
             <li class="relative flex items-center w-full">
               <a class="flex items-center justify-between w-full p-3 hover:bg-gray-400"
-                 routerLink='/categories/{{ firstLevelMenuItem.endpointName | lowercase }}' [queryParams]="{page: 1}">
-                <span>{{ firstLevelMenuItem.name }}</span>
+                 routerLink='/categories/{{ firstLevelMenuItem.title | lowercase }}' [queryParams]="{page: 1, categoryId: firstLevelMenuItem.id}">
+                <span>{{ firstLevelMenuItem.title }}</span>
 
-                <ion-icon *ngIf="firstLevelMenuItem.secondLevelMenu" name="caret-forward-outline"></ion-icon>
+                <ion-icon *ngIf="firstLevelMenuItem.subCategories && firstLevelMenuItem.subCategories.length > 0" name="caret-forward-outline"></ion-icon>
 
               </a>
-              <div *ngIf="firstLevelMenuItem.secondLevelMenu"
+              <div *ngIf="firstLevelMenuItem.subCategories && firstLevelMenuItem.subCategories.length > 0"
                    class="absolute top-0 rounded-tr-lg rounded-bl-lg rounded-br-lg left-full bg-gray-50 w-44">
                 <ul class="hidden pb-4 animate-fade-in-down">
                   <li class="relative flex items-center w-full"
-                      *ngFor="let secondLevelMenuItem of firstLevelMenuItem.secondLevelMenu">
-                    <a class="w-full p-3 hover:bg-gray-400" (click)="setFilter(secondLevelMenuItem.filterParams)"
-                       routerLink="/categories/{{ firstLevelMenuItem.endpointName | lowercase }}"
-                       [queryParams]="secondLevelMenuItem.filterParams">
-                      {{ secondLevelMenuItem.name }}
+                      *ngFor="let secondLevelMenuItem of firstLevelMenuItem.subCategories">
+                    <a class="w-full p-3 hover:bg-gray-400"
+                       routerLink="/categories/{{ firstLevelMenuItem.title | lowercase }}"
+                       [queryParams]="{categoryId: secondLevelMenuItem.id}">
+                      {{ secondLevelMenuItem.title }}
                     </a>
 
                   </li>
@@ -101,14 +101,6 @@
 
           </ul>
         </div>
-
-      </li>
-      <li class="flex items-center">
-        <a class="flex items-center" routerLink='/build-pc'>
-          <ion-icon class="mr-2" name='hammer-outline'></ion-icon>
-          Build PC
-        </a>
-      </li>
     </ul>
   </nav>
 
@@ -122,40 +114,39 @@
 
     <ul class="divide-y-2 divide-gray-300">
       <li *ngFor="let category of mainCategories" class="divide-y-2 ">
-        <a (click)="checkIfMenuCanBeClosed(category)" [routerLink]="canMoveDeeperInMenu(category)">
-          <label class="flex m-3 cursor-pointer" for="menu-{{ category.name }}">
+        <a (click)="navigateInMenu(category)">
+          <label class="flex m-3 cursor-pointer" for="menu-{{ category.title }}">
             <ion-icon name="{{ category.iconName }}" class="pr-2"></ion-icon>
-            {{ category.name }}
+            {{ category.title }}
           </label>
         </a>
 
-        <input type="checkbox" id="menu-{{ category.name }}" name="menu-1" class="menu-checkbox">
-        <div *ngIf="category.firstLevelMenu" class="menu">
-          <ul *ngFor="let firstLevelMenuItem of category.firstLevelMenu">
+        <input type="checkbox" id="menu-{{ category.title }}" name="menu-1" class="menu-checkbox">
+        <div *ngIf="category.subCategories" class="menu">
+          <ul *ngFor="let firstLevelMenuItem of category.subCategories">
             <li>
-              <a (click)="checkIfMenuCanBeClosed(firstLevelMenuItem)"
-                 [routerLink]="canMoveDeeperInMenu(firstLevelMenuItem)">
+              <a (click)="navigateInMenu(firstLevelMenuItem)">
 
-                <label class="p-3 label-style" for="menu-{{ firstLevelMenuItem.name }}">
-                  {{ firstLevelMenuItem.name }}
-                  <ion-icon *ngIf="firstLevelMenuItem.secondLevelMenu" name="caret-forward-outline"></ion-icon>
+                <label class="p-3 label-style" for="menu-{{ firstLevelMenuItem.title }}">
+                  {{ firstLevelMenuItem.title }}
+                  <ion-icon *ngIf="firstLevelMenuItem.subCategories && firstLevelMenuItem.subCategories.length > 0" name="caret-forward-outline"></ion-icon>
                 </label>
               </a>
-              <div *ngIf="firstLevelMenuItem.secondLevelMenu">
-                <input type="checkbox" id="menu-{{ firstLevelMenuItem.name }}" name="menu-2" class="menu-checkbox">
+              <div *ngIf="firstLevelMenuItem.subCategories">
+                <input type="checkbox" id="menu-{{ firstLevelMenuItem.title }}" name="menu-2" class="menu-checkbox">
                 <div class="menu">
-                  <ul *ngFor="let secondLevelMenuItem of firstLevelMenuItem.secondLevelMenu">
+                  <ul *ngFor="let secondLevelMenuItem of firstLevelMenuItem.subCategories">
                     <li class="p-3">
-                      <a (click)="toggleMenu()" routerLink="/categories/{{ firstLevelMenuItem.endpointName }}"
-                         [queryParams]="secondLevelMenuItem.filterParams">
-                        <label class="label-style">{{ secondLevelMenuItem.name }}</label>
+                      <a (click)="toggleMenu()" routerLink="/categories/laptops"
+                        [queryParams]="{categoryId: secondLevelMenuItem.id}">
+                        <label class="label-style">{{ secondLevelMenuItem.title }}</label>
                       </a>
                     </li>
                   </ul>
                   <hr>
                   <div class="flex items-center justify-center">
                     <ion-icon name="arrow-back-outline"></ion-icon>
-                    <label for="menu-{{ firstLevelMenuItem.name }}" class="label-style">Go back</label>
+                    <label for="menu-{{ firstLevelMenuItem.title }}" class="label-style">Go back</label>
                   </div>
                 </div>
               </div>
@@ -165,16 +156,10 @@
           <hr>
           <div class="flex items-center justify-center">
             <ion-icon name="arrow-back-outline"></ion-icon>
-            <label for="menu-{{ category.name }}" class="label-style">Go back</label>
+            <label for="menu-{{ category.title }}" class="label-style">Go back</label>
           </div>
         </div>
 
-      </li>
-      <li class="flex items-center p-3">
-        <a routerLink='/build-pc' class="flex items-center">
-          <ion-icon class="mr-2" name='hammer-outline'></ion-icon>
-          Build PC
-        </a>
       </li>
     </ul>
 
