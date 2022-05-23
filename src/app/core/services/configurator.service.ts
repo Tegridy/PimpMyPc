@@ -29,8 +29,8 @@ export class ConfiguratorService {
 
   addPart(productId: number): void {
     this.productsService.getProductById(productId).subscribe((product) => {
-      if (product.categories) {
-        switch (product.categories[0].title) {
+      product.categories?.forEach((category) => {
+        switch (category.title) {
           case 'Motherboards':
             this.computer.motherboard = product as Motherboard;
             break;
@@ -51,7 +51,7 @@ export class ConfiguratorService {
             break;
         }
         this.updateCustomerComputer(this.computer);
-      }
+      });
     });
   }
 

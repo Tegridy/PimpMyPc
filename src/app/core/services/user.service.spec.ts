@@ -1,11 +1,14 @@
-import {UserEdit, UserEditAuth,} from './../../shared/model/UserEdit';
-import {LoginDetails} from './../../shared/model/LoginDetails';
-import {UserService} from './user.service';
-import {Address} from './../../shared/model/User';
-import {AuthService} from './auth.service';
-import {HttpClientTestingModule, HttpTestingController,} from '@angular/common/http/testing';
-import {User} from 'src/app/shared/model/User';
-import {TestBed} from '@angular/core/testing';
+import { UserEdit, UserEditAuth } from './../../shared/model/UserEdit';
+import { LoginDetails } from './../../shared/model/LoginDetails';
+import { UserService } from './user.service';
+import { Address } from './../../shared/model/User';
+import { AuthService } from './auth.service';
+import {
+  HttpClientTestingModule,
+  HttpTestingController,
+} from '@angular/common/http/testing';
+import { User } from 'src/app/shared/model/User';
+import { TestBed } from '@angular/core/testing';
 
 describe('UserService', () => {
   let service: UserService;
@@ -59,7 +62,7 @@ describe('UserService', () => {
     expect(service).toBeTruthy();
   });
 
-  let mockUser: User = {
+  const mockUser: User = {
     username: 'John12',
     password: 'qwerty',
     firstName: 'John',
@@ -88,17 +91,17 @@ describe('UserService', () => {
   it('should handle user account details server error', () => {
     service.getUserAccountDetails().subscribe(
       (user: User) => fail('should not success'),
-      (error) => {
-        expect(error).toBeTruthy();
-        expect(error).toContain('code: 500');
-        expect(error).toContain('Server error occurred');
+      (err) => {
+        expect(err).toBeTruthy();
+        expect(err).toContain('code: 500');
+        expect(err).toContain('Server error occurred');
       },
       () => fail('should not complete')
     );
 
     const req = httpMock
       .expectOne('http://localhost:8080/api/v1/user/12')
-      .error(error, {status: 500});
+      .error(error, { status: 500 });
   });
 
   const userPersonalData: UserEdit = {
@@ -129,17 +132,17 @@ describe('UserService', () => {
   it('should handle user personal details server error', () => {
     service.updateUserPersonalDetails(userPersonalData).subscribe(
       () => fail('should not success'),
-      (error) => {
-        expect(error).toBeTruthy();
-        expect(error).toContain('code: 500');
-        expect(error).toContain('Server error occurred');
+      (err) => {
+        expect(err).toBeTruthy();
+        expect(err).toContain('code: 500');
+        expect(err).toContain('Server error occurred');
       },
       () => fail('should not complete')
     );
 
     const req = httpMock
       .expectOne('http://localhost:8080/api/v1/user/12/personal')
-      .error(error, {status: 500});
+      .error(error, { status: 500 });
   });
 
   const userAddress: Address = {
@@ -168,17 +171,17 @@ describe('UserService', () => {
   it('should handle user account address details server error', () => {
     service.updateUserAddressDetails(userAddress).subscribe(
       () => fail('should not success'),
-      (error) => {
-        expect(error).toBeTruthy();
-        expect(error).toContain('code: 500');
-        expect(error).toContain('Server error occurred');
+      (err) => {
+        expect(err).toBeTruthy();
+        expect(err).toContain('code: 500');
+        expect(err).toContain('Server error occurred');
       },
       () => fail('should not complete')
     );
 
     const req = httpMock
       .expectOne('http://localhost:8080/api/v1/user/12/address')
-      .error(error, {status: 500});
+      .error(error, { status: 500 });
   });
 
   const userEditAuth: UserEditAuth = {
@@ -205,16 +208,16 @@ describe('UserService', () => {
   it('should handle user account password change server error', () => {
     service.updateUserAuthDetails(userEditAuth).subscribe(
       () => fail('should not success'),
-      (error) => {
-        expect(error).toBeTruthy();
-        expect(error).toContain('code: 500');
-        expect(error).toContain('Server error occurred');
+      (err) => {
+        expect(err).toBeTruthy();
+        expect(err).toContain('code: 500');
+        expect(err).toContain('Server error occurred');
       },
       () => fail('should not complete')
     );
 
     const req = httpMock
       .expectOne('http://localhost:8080/api/v1/user/12/auth')
-      .error(error, {status: 500});
+      .error(error, { status: 500 });
   });
 });

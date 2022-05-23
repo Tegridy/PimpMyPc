@@ -25,7 +25,6 @@ export class BuildPcComponent implements OnInit {
   areRamCompatible = true;
   motherboardFitInCase = true;
   isPowerSupplySufficient = true;
-  params = { config: true, page: 1 };
 
   constructor(
     private cartService: CartService,
@@ -77,9 +76,9 @@ export class BuildPcComponent implements OnInit {
     }
   }
 
-  navigateToProductsPage(name: string): void {
+  navigateToProductsPage(name: string, catId: number): void {
     this.router.navigate(['/categories/' + name], {
-      queryParams: this.params,
+      queryParams: { page: 1, config: true, categoryId: catId },
     });
   }
 
@@ -91,10 +90,17 @@ export class BuildPcComponent implements OnInit {
     if (this.customerComputer.motherboard && this.customerComputer.processor) {
       const motherboard: Motherboard = this.customerComputer
         .motherboard as Motherboard;
+      const motherboardSocket = motherboard.attributes?.find(
+        (name) => name.attributeName === 'motherboardSocket'
+      );
+
       const processor: Processor = this.customerComputer.processor as Processor;
+      const processorSocket = processor.attributes?.find(
+        (name) => name.attributeName === 'motherboardSocket'
+      );
 
       this.areSocketsCompatible =
-        motherboard.motherboardSocket === processor.motherboardSocket;
+        motherboardSocket?.attributeValue === processorSocket?.attributeValue;
     }
   }
 
@@ -102,9 +108,17 @@ export class BuildPcComponent implements OnInit {
     if (this.customerComputer.motherboard && this.customerComputer.ram) {
       const motherboard: Motherboard = this.customerComputer
         .motherboard as Motherboard;
-      const ram: Ram = this.customerComputer.ram as Ram;
+      const motherboardRamType = motherboard.attributes?.find(
+        (name) => name.attributeName === 'ramType'
+      );
 
-      this.areRamCompatible = motherboard.ramType === ram.moduleType;
+      const ram: Ram = this.customerComputer.ram as Ram;
+      const ramType = ram.attributes?.find(
+        (name) => name.attributeName === 'ramType'
+      );
+
+      this.areRamCompatible =
+        motherboardRamType?.attributeValue === ramType?.attributeValue;
     }
   }
 
@@ -112,11 +126,18 @@ export class BuildPcComponent implements OnInit {
     if (this.customerComputer.motherboard && this.customerComputer.case) {
       const motherboard: Motherboard = this.customerComputer
         .motherboard as Motherboard;
-      const computerCase: Case = this.customerComputer.case as Case;
-
-      this.motherboardFitInCase = computerCase.motherboardFormats.includes(
-        motherboard.motherboardFormat
+      const motherboardFormat = motherboard.attributes?.find(
+        (name) => name.attributeName === 'motherboardFormat'
       );
+
+      const computerCase: Case = this.customerComputer.case as Case;
+      const caseMotherboardFormat = computerCase.attributes?.find(
+        (name) => name.attributeName === 'motherboardFormat'
+      );
+
+      this.motherboardFitInCase =
+        motherboardFormat?.attributeValue ===
+        caseMotherboardFormat?.attributeValue;
     }
   }
 
@@ -127,20 +148,33 @@ export class BuildPcComponent implements OnInit {
       this.customerComputer.powerSupply
     ) {
       const processor: Processor = this.customerComputer.processor as Processor;
-      const processorWattage = Number(processor.tdp.replace(' W', ''));
+      let processorWattage = processor.attributes?.find(
+        (name) => name.attributeName === 'tdp'
+      )?.attributeValue;
+
+      if (processorWattage === undefined) {
+        processorWattage = '100';
+      }
 
       const graphicCard: GraphicCard = this.customerComputer
         .graphicCard as GraphicCard;
-      const graphicCardWattage = Number(graphicCard.tdp.replace(' W', ''));
+      let graphicCardWattage = graphicCard.attributes?.find(
+        (name) => name.attributeName === 'tdp'
+      )?.attributeValue;
+
+      if (graphicCardWattage === undefined) {
+        graphicCardWattage = '200';
+      }
 
       const powerSupply: PowerSupply = this.customerComputer
         .powerSupply as PowerSupply;
-      const powerSupplyWattage = Number(
-        powerSupply.adapterPower.replace(' W', '')
-      );
+      const powerSupplyWattage = powerSupply.attributes?.find(
+        (name) => name.attributeName === 'adapterPower'
+      )?.attributeValue;
 
       this.isPowerSupplySufficient =
-        powerSupplyWattage > processorWattage + graphicCardWattage;
+        Number(powerSupplyWattage) >
+        Number(processorWattage) + Number(graphicCardWattage);
     }
   }
 

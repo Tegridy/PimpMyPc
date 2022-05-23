@@ -15,7 +15,7 @@ import { ProductCategory } from '../../shared/model/ProductCategory';
   providedIn: 'root',
 })
 export class ProductsService {
-  baseUrl = environment.API_URL + '/api/v1/products/';
+  baseUrl = environment.API_URL + '/api/v1/products';
   pageSizeUrl = '&size=9';
 
   private productsSearchResultSource = new BehaviorSubject<BaseProduct[]>([]);
@@ -68,7 +68,7 @@ export class ProductsService {
   ): Observable<ProductDto> {
     page = this.validatePageNumber(page);
 
-    let requestUrl = this.baseUrl + 'search?productName=' + productName;
+    let requestUrl = this.baseUrl + '/search?productName=' + productName;
 
     if (categoryName !== undefined && categoryName !== 'Everywhere') {
       requestUrl += '&productCategory=' + categoryName;
@@ -81,25 +81,25 @@ export class ProductsService {
 
   getTopSellingProducts(): Observable<ProductDto> {
     return this.http
-      .get<ProductDto>(this.baseUrl + 'top')
+      .get<ProductDto>(this.baseUrl + '/top')
       .pipe(catchError(Utils.handleError));
   }
 
   getOurChoice(): Observable<ProductDto> {
     return this.http
-      .get<ProductDto>(this.baseUrl + 'our-choice')
+      .get<ProductDto>(this.baseUrl + '/our-choice')
       .pipe(catchError(Utils.handleError));
   }
 
   getNewestProduct(): Observable<ProductDto> {
     return this.http
-      .get<ProductDto>(this.baseUrl + 'newest')
+      .get<ProductDto>(this.baseUrl + '/newest')
       .pipe(catchError(Utils.handleError));
   }
 
   getProductById(id: number): Observable<BaseProduct> {
     return this.http
-      .get<BaseProduct>(this.baseUrl + id)
+      .get<BaseProduct>(this.baseUrl + '/' + id)
       .pipe(catchError(Utils.handleError));
   }
 

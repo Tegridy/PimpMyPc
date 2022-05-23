@@ -251,7 +251,7 @@ describe('CheckoutComponent', () => {
   });
 
   it('should display products in cart', () => {
-    component.cartProducts = [product, product2];
+    component.cart.products = [product, product2];
 
     fixture.detectChanges();
 
@@ -274,7 +274,7 @@ describe('CheckoutComponent', () => {
   });
 
   it('should enable save button when there are items in cart', () => {
-    component.cartProducts = [product, product2];
+    component.cart.products = [product, product2];
 
     fixture.detectChanges();
 

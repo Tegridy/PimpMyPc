@@ -20,6 +20,7 @@ import {
 } from '../shared/model/BaseProduct';
 import { server } from 'ionicons/icons';
 import { CartService } from '../core/services/cart.service';
+import { ProductDetail } from '../shared/model/ProductDetail';
 
 describe('BuildPcComponent', () => {
   let component: BuildPcComponent;
@@ -54,40 +55,44 @@ describe('BuildPcComponent', () => {
       id: 1,
       title: 'Processor',
       price: 999,
-      tdp: '150 W',
-      motherboardSocket: 'LGA1511',
+      attributes: [
+        new ProductDetail('motherboardSocket', '1511'),
+        new ProductDetail('tdp', '150'),
+      ],
     } as Processor;
     const motherboard = {
       id: 2,
       title: 'Motherboard',
       price: 999,
-      motherboardSocket: 'LGA1511',
-      motherboardFormat: 'ATX',
-      ramType: 'DDR4',
+      attributes: [
+        new ProductDetail('motherboardSocket', '1511'),
+        new ProductDetail('motherboardFormat', 'ATX'),
+        new ProductDetail('ramType', 'DDR4'),
+      ],
     } as Motherboard;
     const ram = {
       id: 3,
       title: 'RAM',
       price: 999,
-      moduleType: 'DDR4',
+      attributes: [new ProductDetail('ramType', 'DDR4')],
     } as Ram;
     const graphicCard = {
       id: 4,
       title: 'GPU',
       price: 999,
-      tdp: '250 W',
+      attributes: [new ProductDetail('tdp', '250')],
     } as GraphicCard;
     const computerCase = {
       id: 5,
       title: 'Case',
       price: 999,
-      motherboardFormats: ['Micro_ATX', 'ATX'],
+      attributes: [new ProductDetail('motherboardFormat', 'ATX')],
     } as Case;
     const powerSupply = {
       id: 6,
       title: 'Power supply',
       price: 999,
-      adapterPower: '650 W',
+      attributes: [new ProductDetail('adapterPower', '650')],
     } as PowerSupply;
 
     computer = {
@@ -109,10 +114,10 @@ describe('BuildPcComponent', () => {
   it('should navigate to products page with correct query params', () => {
     const routerSpy = spyOn(mockRouter, 'navigate');
 
-    component.navigateToProductsPage('laptops');
+    component.navigateToProductsPage('laptops', 1);
 
     expect(routerSpy).toHaveBeenCalledWith(['/categories/laptops'], {
-      queryParams: { page: 1, config: true },
+      queryParams: { page: 1, config: true, categoryId: 1 },
     });
   });
 
@@ -136,7 +141,12 @@ describe('BuildPcComponent', () => {
   });
 
   it('should show motherboard and processor socket error', () => {
-    computer.processor.motherboardSocket = 'AM4';
+    let p = computer.processor.attributes?.find(
+      (attr) => attr.attributeName === 'motherboardSocket'
+    );
+    // @ts-ignore
+    p.attributeValue = 'AM4';
+
     component.customerComputer = computer;
 
     component.sendPcOrder();
@@ -151,7 +161,12 @@ describe('BuildPcComponent', () => {
   });
 
   it('should show ram and motherboard type error', () => {
-    computer.ram.moduleType = 'DDR3';
+    let p = computer.ram.attributes?.find(
+      (attr) => attr.attributeName === 'ramType'
+    );
+    // @ts-ignore
+    p.attributeValue = 'DDR3';
+
     component.customerComputer = computer;
 
     component.sendPcOrder();
@@ -168,7 +183,12 @@ describe('BuildPcComponent', () => {
   });
 
   it('should show motherboard and case format error', () => {
-    computer.motherboard.motherboardFormat = 'TRX';
+    let p = computer.motherboard.attributes?.find(
+      (attr) => attr.attributeName === 'motherboardFormat'
+    );
+    // @ts-ignore
+    p.attributeValue = 'TRX';
+
     component.customerComputer = computer;
 
     component.sendPcOrder();
@@ -183,7 +203,12 @@ describe('BuildPcComponent', () => {
   });
 
   it('should show power requirements error', () => {
-    computer.graphicCard.tdp = '1500 W';
+    let p = computer.graphicCard.attributes?.find(
+      (attr) => attr.attributeName === 'tdp'
+    );
+    // @ts-ignore
+    p.attributeValue = '1500';
+
     component.customerComputer = computer;
 
     component.sendPcOrder();

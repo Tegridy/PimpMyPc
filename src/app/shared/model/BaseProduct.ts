@@ -1,4 +1,5 @@
 import { ProductCategory } from './ProductCategory';
+import { ProductDetail } from './ProductDetail';
 
 export interface BaseProduct {
   id: number;
@@ -8,6 +9,7 @@ export interface BaseProduct {
   model?: string;
   imageUrl?: string;
   price: number;
+  attributes?: ProductDetail[];
   categories?: ProductCategory[];
 }
 
@@ -27,7 +29,7 @@ export interface Ram extends BaseProduct {
 }
 
 export interface Case extends BaseProduct {
-  motherboardFormats: string[];
+  motherboardFormat: string;
 }
 
 export interface PowerSupply extends BaseProduct {

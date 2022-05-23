@@ -17,15 +17,7 @@ export class ProductFullComponent implements OnInit {
   private productId = 0;
 
   product!: BaseProduct;
-  productDetails: ProductDetail[] = [];
-  private productDetailsToFilter = [
-    'id',
-    'title',
-    'description',
-    'price',
-    'imageUrl',
-    'categories',
-  ];
+  productDetails!: ProductDetail[] | undefined;
 
   constructor(
     private productsService: ProductsService,
@@ -38,24 +30,12 @@ export class ProductFullComponent implements OnInit {
 
     this.productsService.getProductById(this.productId).subscribe((product) => {
       this.product = product;
-      this.getProductDetails();
-      this.filterProductParams();
+      this.productDetails = product.attributes;
     });
   }
 
   private getProductId(): void {
     this.productId = this.route.snapshot.params.id;
-  }
-
-  private getProductDetails(): void {
-    for (let i = 0; i < Object.keys(this.product).length; i++) {
-      this.productDetails.push(
-        new ProductDetail(
-          Object.keys(this.product)[i],
-          Object.values(this.product)[i]
-        )
-      );
-    }
   }
 
   addProductToCart(): void {
@@ -64,13 +44,6 @@ export class ProductFullComponent implements OnInit {
 
   toggleModal(): void {
     this.showModal = !this.showModal;
-  }
-
-  private filterProductParams(): void {
-    this.productDetails = this.productDetails.filter(
-      (productDetail) =>
-        !this.productDetailsToFilter.includes(productDetail.key)
-    );
   }
 
   showFullText(): void {

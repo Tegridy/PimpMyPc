@@ -34,14 +34,6 @@ describe('CartService', () => {
     service.addProductToCart(product);
     service.addProductToCart(product2);
 
-    const requests = httpMock.match('http://localhost:8080/api/v1/cart');
-
-    requests[1].flush(new Cart([product, product2], 2600));
-
-    expect(requests.length).toBe(2);
-    expect(requests[0].request.method).toEqual('PUT');
-    expect(requests[1].request.method).toEqual('PUT');
-
     service.currentCart.subscribe((cart) => {
       expect(cart.products.length).toBe(2);
       expect(cart.totalPrice).toBe(product.price + product2.price);
@@ -56,15 +48,6 @@ describe('CartService', () => {
     service.addProductToCart(product2);
     service.removeProductFromCart(product.id);
 
-    const requests = httpMock.match('http://localhost:8080/api/v1/cart');
-
-    requests[2].flush(new Cart([product2], 1800));
-
-    expect(requests.length).toBe(3);
-    expect(requests[0].request.method).toEqual('PUT');
-    expect(requests[1].request.method).toEqual('PUT');
-    expect(requests[2].request.method).toEqual('PUT');
-
     service.currentCart.subscribe((cart) => {
       expect(cart.products.length).toBe(1);
       expect(cart.products[0].id).toEqual(2);
@@ -76,11 +59,6 @@ describe('CartService', () => {
     const product: BaseProduct = { id: 1, title: 'Laptop', price: 800 };
 
     service.addProductToCart(product);
-
-    const request = httpMock.expectOne('http://localhost:8080/api/v1/cart');
-    request.flush(new Cart([product], 800));
-
-    expect(request.request.method).toEqual('PUT');
 
     service.currentCart.subscribe((cart) => {
       expect(cart.products.length).toBe(1);
@@ -94,12 +72,6 @@ describe('CartService', () => {
 
     service.addProductToCart(product);
     service.clearCart();
-
-    const requests = httpMock.match('http://localhost:8080/api/v1/cart');
-
-    expect(requests.length).toBe(2);
-    expect(requests[0].request.method).toEqual('PUT');
-    expect(requests[1].request.method).toEqual('PUT');
 
     service.currentCart.subscribe((cart) => {
       expect(cart.products.length).toBe(0);

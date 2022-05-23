@@ -37,7 +37,6 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
     this.productsService.getProductsCategories().subscribe((categories) => {
       this.mainCategories = categories.slice(0, 6);
-      console.log(categories);
     });
 
     this.cartService.currentCart.subscribe(

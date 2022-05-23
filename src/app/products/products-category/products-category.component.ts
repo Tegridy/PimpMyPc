@@ -229,6 +229,8 @@ export class ProductsCategoryComponent implements OnInit, OnDestroy {
       this.queryParams.push(sortParam);
     }
 
+    Utils.updateUrl(this.queryParams, this.router);
+
     this.getCurrentCategoryProducts(1);
   }
 

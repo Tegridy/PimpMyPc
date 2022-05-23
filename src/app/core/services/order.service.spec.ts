@@ -12,6 +12,7 @@ import {
   OrderDto,
   OrderResponse,
 } from '../../shared/model/Order';
+import { Cart } from '../../shared/model/Cart';
 
 describe('OrderService', () => {
   let service: OrderService;
@@ -52,12 +53,15 @@ describe('OrderService', () => {
     address: new Address('street1', 'city1', 'state1', '11-111'),
   };
 
+  const c = new Cart([], 0);
+
   const orderDetails: CustomerOrderDetails = {
     customerFirstName: 'John',
     customerLastName: 'Doe',
     customerPhone: '123456789',
     customerEmail: 'test2@mail.com',
     deliveryAddress: new Address('street2', 'city2', 'state2', '22-111'),
+    cart: c,
   };
 
   const orders: Order[] = [order, order2];

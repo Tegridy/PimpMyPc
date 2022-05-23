@@ -73,10 +73,10 @@ describe('AuthService', () => {
   it('should throw error after bad register attempt', () => {
     service.signUpUser(mockUser).subscribe(
       () => fail('should not success'),
-      (error) => {
-        expect(error).toBeTruthy();
-        expect(error).toContain('code: 500');
-        expect(error).toContain('Server error occurred');
+      (err) => {
+        expect(err).toBeTruthy();
+        expect(err).toContain('code: 500');
+        expect(err).toContain('Server error occurred');
       },
       () => fail('should not finalize')
     );
@@ -124,10 +124,10 @@ describe('AuthService', () => {
   it('should throw error after bad login attempt', () => {
     service.loginUser('username', 'password').subscribe(
       () => fail('should not success'),
-      (error) => {
-        expect(error).toBeTruthy();
-        expect(error).toContain('code: 500');
-        expect(error).toContain('Server error occurred');
+      (err) => {
+        expect(err).toBeTruthy();
+        expect(err).toContain('code: 500');
+        expect(err).toContain('Server error occurred');
       },
       () => fail('should not finalize')
     );
@@ -144,10 +144,10 @@ describe('AuthService', () => {
   it('should show user alert on login error', () => {
     service.loginUser('test', 'test').subscribe(
       () => fail('should not success'),
-      (error) => {
-        expect(error).toBeTruthy();
-        expect(error).toContain('code: 500');
-        expect(error).toContain('Server error occurred');
+      (err) => {
+        expect(err).toBeTruthy();
+        expect(err).toContain('code: 500');
+        expect(err).toContain('Server error occurred');
       },
       () => fail('should not finalize')
     );

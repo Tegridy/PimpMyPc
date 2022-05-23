@@ -33,7 +33,7 @@ describe('ProductsService', () => {
 
   const mockProducts = [product, product2];
 
-  let productDto: ProductDto = {
+  const productDto: ProductDto = {
     number: 0,
     totalElements: 2,
     content: mockProducts,
@@ -49,16 +49,18 @@ describe('ProductsService', () => {
 
   it('should return products response without filters', () => {
     service
-      .getProductsPage(1, 'laptops')
-      .subscribe((products: ProductResponse) => {
-        expect(products.products.content.length).toBe(2);
-        expect(products.products.number).toBe(0);
-        expect(products.products.totalElements).toBe(2);
+      .getProductsPage(1, 'laptops', 1)
+      .subscribe((response: ProductResponse) => {
+        console.log(response);
+        expect(response.products.content.length).toBe(2);
+        expect(response.products.number).toBe(0);
+        expect(response.products.totalElements).toBe(2);
       });
 
     const req = httpMock.expectOne(
-      'http://localhost:8080/api/v1/products/laptops?page=1&size=9'
+      'http://localhost:8080/api/v1/products?page=1&size=9&categoryId=1'
     );
+
     req.flush(productsResponse);
     expect(req.request.method).toEqual('GET');
   });
@@ -67,7 +69,7 @@ describe('ProductsService', () => {
     const filters = '&title=lenovo&ram=16';
 
     service
-      .getProductsPage(1, 'laptops', filters)
+      .getProductsPage(1, 'laptops', 1, filters)
       .subscribe((products: ProductResponse) => {
         expect(products.products.content.length).toBe(2);
         expect(products.products.number).toBe(0);
@@ -75,7 +77,7 @@ describe('ProductsService', () => {
       });
 
     const req = httpMock.expectOne(
-      'http://localhost:8080/api/v1/products/laptops?page=1&title=lenovo&ram=16&size=9'
+      'http://localhost:8080/api/v1/products?page=1&title=lenovo&ram=16&size=9&categoryId=1'
     );
     req.flush(productsResponse);
     expect(req.request.method).toEqual('GET');
@@ -85,7 +87,7 @@ describe('ProductsService', () => {
     const pageNumber = -5;
 
     service
-      .getProductsPage(pageNumber, 'laptops')
+      .getProductsPage(pageNumber, 'laptops', 1)
       .subscribe((products: ProductResponse) => {
         expect(products.products.content.length).toBe(2);
         expect(products.products.number).toBe(0);
@@ -93,25 +95,27 @@ describe('ProductsService', () => {
       });
 
     const req = httpMock.expectOne(
-      'http://localhost:8080/api/v1/products/laptops?page=0&size=9'
+      'http://localhost:8080/api/v1/products?page=0&size=9&categoryId=1'
     );
     req.flush(productsResponse);
     expect(req.request.method).toEqual('GET');
   });
 
   it('getProductsPage should handle server error', () => {
-    service.getProductsPage(1, 'laptops').subscribe(
+    service.getProductsPage(1, 'laptops', 1).subscribe(
       (products: ProductResponse) => () => fail('should not success'),
-      (error) => {
-        expect(error).toBeTruthy();
-        expect(error).toContain('code: 500');
-        expect(error).toContain('Server error occurred');
+      (err) => {
+        expect(err).toBeTruthy();
+        expect(err).toContain('code: 500');
+        expect(err).toContain('Server error occurred');
       },
       () => fail('should not complete')
     );
 
     const req = httpMock
-      .expectOne('http://localhost:8080/api/v1/products/laptops?page=1&size=9')
+      .expectOne(
+        'http://localhost:8080/api/v1/products?page=1&size=9&categoryId=1'
+      )
       .error(error, { status: 500 });
   });
 
@@ -147,34 +151,40 @@ describe('ProductsService', () => {
     expect(req.request.method).toEqual('GET');
   });
 
-  const mockTopSellingProducts: BaseProduct[] = [product, product2];
-
   it('should return top selling products', () => {
-    service.getTopSellingProducts().subscribe((products: BaseProduct[]) => {
-      expect(products.length).toBe(2);
+    service.getTopSellingProducts().subscribe((products: ProductDto) => {
+      expect(products.content.length).toBe(2);
     });
 
     const req = httpMock.expectOne('http://localhost:8080/api/v1/products/top');
-    req.flush(mockTopSellingProducts);
+    req.flush(productDto);
     expect(req.request.method).toEqual('GET');
   });
 
   it('should return newest product', () => {
-    service.getNewestProduct().subscribe((product: BaseProduct) => {
-      expect(product.id).toBe(1);
+    service.getNewestProduct().subscribe((p: ProductDto) => {
+      expect(p.content[0].id).toBe(product.id);
+      expect(p.content[0].title).toBe(product.title);
     });
 
     const req = httpMock.expectOne(
       'http://localhost:8080/api/v1/products/newest'
     );
-    req.flush(product);
+
+    const result: ProductDto = {
+      content: [product],
+      number: 1,
+      totalElements: 1,
+    };
+
+    req.flush(result);
     expect(req.request.method).toEqual('GET');
   });
 
   it('should return product by id', () => {
-    service.getProductById(2).subscribe((product: BaseProduct) => {
-      expect(product.id).toBe(product2.id);
-      expect(product.title).toEqual(product2.title);
+    service.getProductById(2).subscribe((p: BaseProduct) => {
+      expect(p.id).toBe(product2.id);
+      expect(p.title).toEqual(product2.title);
     });
 
     const req = httpMock.expectOne(
