@@ -88,7 +88,7 @@ export class NavbarComponent implements OnInit {
     if (menuItem.subCategories && menuItem.subCategories.length < 1) {
       this.toggleMenu();
       this.router.navigate(['/categories/' + menuItem.title.toLowerCase()], {
-        queryParams: { categoryId: menuItem.id },
+        queryParams: { categoryId: menuItem.id, page: 1 },
       });
     }
   }

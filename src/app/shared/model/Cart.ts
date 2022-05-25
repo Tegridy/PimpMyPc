@@ -1,4 +1,4 @@
-import { BaseProduct } from './BaseProduct';
+import { BaseProduct, SingleProductDto } from './BaseProduct';
 
 export class Cart {
   products: BaseProduct[];

@@ -137,8 +137,8 @@
                 <div class="menu">
                   <ul *ngFor="let secondLevelMenuItem of firstLevelMenuItem.subCategories">
                     <li class="p-3">
-                      <a (click)="toggleMenu()" routerLink="/categories/laptops"
-                        [queryParams]="{categoryId: secondLevelMenuItem.id}">
+                      <a (click)="toggleMenu()" routerLink="/categories/{{ secondLevelMenuItem.title }}"
+                        [queryParams]="{categoryId: secondLevelMenuItem.id, page: 1}">
                         <label class="label-style">{{ secondLevelMenuItem.title }}</label>
                       </a>
                     </li>

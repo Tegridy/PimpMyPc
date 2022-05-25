@@ -26,8 +26,10 @@ export class CartService {
   }
 
   addProductToCart(product: BaseProduct): void {
-    this.cart.products.push(product);
-    this.calculateCartPrice();
+    if (!this.checkIfProductIsInCart(product.id)) {
+      this.cart.products.push(product);
+      this.calculateCartPrice();
+    }
   }
 
   clearCart(): void {
@@ -45,5 +47,9 @@ export class CartService {
     }
 
     this.cartSource.next(this.cart);
+  }
+
+  checkIfProductIsInCart(productId: number): boolean {
+    return !!this.cart.products.find((product) => product.id === productId);
   }
 }

@@ -13,6 +13,12 @@ export interface BaseProduct {
   categories?: ProductCategory[];
 }
 
+export interface SingleProductDto {
+  id: number;
+  title: string;
+  price: number;
+}
+
 export interface Motherboard extends BaseProduct {
   motherboardSocket: string;
   motherboardFormat: string;

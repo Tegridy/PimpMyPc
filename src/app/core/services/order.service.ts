@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
 import Utils from 'src/app/shared/utils/Utils';
 import { catchError } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
+import { SingleProductDto } from '../../shared/model/BaseProduct';
 
 @Injectable({
   providedIn: 'root',
@@ -20,6 +21,14 @@ export class OrderService {
   constructor(private http: HttpClient) {}
 
   sendOrder(order: CustomerOrderDetails): Observable<OrderDto> {
+    order.cart.products = order.cart.products.map((product) => {
+      return {
+        id: product.id,
+        title: product.title,
+        price: product.price,
+      } as SingleProductDto;
+    });
+
     return this.http
       .post<OrderDto>(this.baseUrl, order)
       .pipe(catchError((error) => Utils.handleError(error)));

@@ -107,6 +107,8 @@
         <span class="error-message" *ngIf="registerForm.get('phone')?.errors?.required &&
         registerForm.get('phone')?.touched">Phone number is required.</span>
         <span class="error-message" *ngIf="registerForm.get('phone')?.errors?.pattern">Phone number is not valid.</span>
+        <span class="error-message"
+              *ngIf="registerForm.get('phone')?.errors?.minlength">Phone number must be longer than 9 characters.</span>
 
         <input id="emailId" formControlName="email" type="email" class="w-4/5 mb-3"
                placeholder="E-mail address (required)" [ngClass]="{'is-invalid': (registerForm.get('email')?.touched
