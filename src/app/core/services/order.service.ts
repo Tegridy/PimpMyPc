@@ -34,15 +34,19 @@ export class OrderService {
       .pipe(catchError((error) => Utils.handleError(error)));
   }
 
-  getUserOrders(): Observable<OrderResponse> {
+  getUserOrders(id: number): Observable<OrderResponse> {
     return this.http
-      .get<OrderResponse>(this.baseUrl)
+      .get<OrderResponse>(this.baseUrl, {
+        params: {
+          userId: id,
+        },
+      })
       .pipe(catchError((error) => Utils.handleError(error)));
   }
 
   getOrderDetails(id: number): Observable<Order> {
     return this.http
-      .get<any>(this.baseUrl + id)
+      .get<any>(this.baseUrl)
       .pipe(catchError((error) => Utils.handleError(error)));
   }
 }

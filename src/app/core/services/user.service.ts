@@ -11,7 +11,7 @@ import { environment } from '../../../environments/environment';
   providedIn: 'root',
 })
 export class UserService {
-  baseUrl = environment.API_URL + '/api/v1/user/';
+  baseUrl = environment.API_URL + '/api/v1/users/';
 
   constructor(private http: HttpClient) {}
 

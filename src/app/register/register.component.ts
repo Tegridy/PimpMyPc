@@ -58,6 +58,7 @@ export class RegisterComponent implements OnInit {
       this.registerForm.get('phone')?.value,
       this.registerForm.get('email')?.value
     );
+
     this.auth.signUpUser(user).subscribe(
       (registerResponse) => {
         this.loading = false;

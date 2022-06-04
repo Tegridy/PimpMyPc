@@ -104,7 +104,6 @@ export class ProductsCategoryComponent implements OnInit, OnDestroy {
       .getProductsPage(page - 1, categoryName, categoryId, filtersUrl)
       .subscribe(
         (productsPage) => {
-          console.log('xd');
           this.pageNumber = productsPage.products.number + 1;
           this.productsCount = productsPage.products.totalElements;
 

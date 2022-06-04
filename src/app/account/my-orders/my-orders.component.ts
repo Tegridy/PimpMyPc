@@ -1,6 +1,6 @@
-import {Component, OnInit} from '@angular/core';
-import {OrderService} from '../../core/services/order.service';
-import {Order} from '../../shared/model/Order';
+import { Component, OnInit } from '@angular/core';
+import { OrderService } from '../../core/services/order.service';
+import { Order } from '../../shared/model/Order';
 
 @Component({
   selector: 'pmp-my-orders',
@@ -10,11 +10,12 @@ import {Order} from '../../shared/model/Order';
 export class MyOrdersComponent implements OnInit {
   userOrders: Order[] = [];
 
-  constructor(private orderService: OrderService) {
-  }
+  constructor(private orderService: OrderService) {}
 
   ngOnInit(): void {
-    this.orderService.getUserOrders().subscribe((orders) => {
+    const userId = Number(sessionStorage.getItem('userId'));
+
+    this.orderService.getUserOrders(userId).subscribe((orders) => {
       this.userOrders = orders.content;
     });
   }

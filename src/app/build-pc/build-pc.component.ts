@@ -114,7 +114,7 @@ export class BuildPcComponent implements OnInit {
 
       const ram: Ram = this.customerComputer.ram as Ram;
       const ramType = ram.attributes?.find(
-        (name) => name.attributeName === 'ramType'
+        (name) => name.attributeName === 'moduleType'
       );
 
       this.areRamCompatible =
@@ -188,9 +188,9 @@ export class BuildPcComponent implements OnInit {
   }
 
   navigateAndUpdateCart(): void {
-    Object.values(this.customerComputer).forEach((part: BaseProduct) =>
-      this.cartService.addProductToCart(part)
-    );
+    Object.values(this.customerComputer).forEach((part: BaseProduct) => {
+      this.cartService.addProductToCart(part);
+    });
 
     this.router.navigateByUrl('/order/cart');
   }

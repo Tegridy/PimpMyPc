@@ -33,6 +33,7 @@ export class AuthService {
   }
 
   signUpUser(user: User): Observable<RegisterResponse> {
+    console.log(user);
     return this.http
       .post<RegisterResponse>(this.baseUrl + 'register', user)
       .pipe(catchError((error) => Utils.handleError(error)));
