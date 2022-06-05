@@ -179,6 +179,7 @@ export class BuildPcComponent implements OnInit {
   }
 
   private canProceed(): boolean {
+    console.log(this.areRamCompatible);
     return (
       this.areSocketsCompatible &&
       this.areRamCompatible &&

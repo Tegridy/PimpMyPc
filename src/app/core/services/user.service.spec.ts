@@ -83,7 +83,7 @@ describe('UserService', () => {
       expect(user.address).toEqual(mockUser.address);
     });
 
-    const req2 = httpMock.expectOne('http://localhost:8080/api/v1/user/12');
+    const req2 = httpMock.expectOne('http://localhost:8080/api/v1/users/12');
     expect(req2.request.method).toEqual('GET');
     req2.flush(mockUser);
   });
@@ -100,7 +100,7 @@ describe('UserService', () => {
     );
 
     const req = httpMock
-      .expectOne('http://localhost:8080/api/v1/user/12')
+      .expectOne('http://localhost:8080/api/v1/users/12')
       .error(error, { status: 500 });
   });
 
@@ -123,7 +123,7 @@ describe('UserService', () => {
       });
 
     const req2 = httpMock.expectOne(
-      'http://localhost:8080/api/v1/user/12/personal'
+      'http://localhost:8080/api/v1/users/12/personal'
     );
     expect(req2.request.method).toEqual('PATCH');
     req2.flush(userPersonalData);
@@ -141,7 +141,7 @@ describe('UserService', () => {
     );
 
     const req = httpMock
-      .expectOne('http://localhost:8080/api/v1/user/12/personal')
+      .expectOne('http://localhost:8080/api/v1/users/12/personal')
       .error(error, { status: 500 });
   });
 
@@ -162,7 +162,7 @@ describe('UserService', () => {
     });
 
     const req2 = httpMock.expectOne(
-      'http://localhost:8080/api/v1/user/12/address'
+      'http://localhost:8080/api/v1/users/12/address'
     );
     expect(req2.request.method).toEqual('PATCH');
     req2.flush(userAddress);
@@ -180,7 +180,7 @@ describe('UserService', () => {
     );
 
     const req = httpMock
-      .expectOne('http://localhost:8080/api/v1/user/12/address')
+      .expectOne('http://localhost:8080/api/v1/users/12/address')
       .error(error, { status: 500 });
   });
 
@@ -196,7 +196,7 @@ describe('UserService', () => {
     });
 
     const req2 = httpMock.expectOne(
-      'http://localhost:8080/api/v1/user/12/auth'
+      'http://localhost:8080/api/v1/users/12/auth'
     );
     expect(req2.request.method).toEqual('PATCH');
 
@@ -217,7 +217,7 @@ describe('UserService', () => {
     );
 
     const req = httpMock
-      .expectOne('http://localhost:8080/api/v1/user/12/auth')
+      .expectOne('http://localhost:8080/api/v1/users/12/auth')
       .error(error, { status: 500 });
   });
 });

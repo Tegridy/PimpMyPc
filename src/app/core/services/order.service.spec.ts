@@ -78,19 +78,21 @@ describe('OrderService', () => {
       expect(orderDto.status).toEqual(oDto.status);
     });
 
-    const req = httpMock.expectOne('http://localhost:8080/api/v1/orders/');
+    const req = httpMock.expectOne('http://localhost:8080/api/v1/orders');
     expect(req.request.method).toEqual('POST');
     req.flush(oDto);
   });
 
   it('should get all orders', () => {
-    service.getUserOrders().subscribe((orderResponse: OrderResponse) => {
+    service.getUserOrders(11).subscribe((orderResponse: OrderResponse) => {
       expect(orderResponse.content.length).toEqual(orders.length);
       expect(orderResponse.content[0].title).toEqual(order.title);
       expect(orderResponse.content[1].title).toEqual(order2.title);
     });
 
-    const req = httpMock.expectOne('http://localhost:8080/api/v1/orders/');
+    const req = httpMock.expectOne(
+      'http://localhost:8080/api/v1/orders?userId=11'
+    );
     expect(req.request.method).toEqual('GET');
     req.flush(orderRes);
   });

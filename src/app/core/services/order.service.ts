@@ -16,7 +16,7 @@ import { SingleProductDto } from '../../shared/model/BaseProduct';
   providedIn: 'root',
 })
 export class OrderService {
-  baseUrl = environment.API_URL + '/api/v1/orders/';
+  baseUrl = environment.API_URL + '/api/v1/orders';
 
   constructor(private http: HttpClient) {}
 
@@ -46,7 +46,7 @@ export class OrderService {
 
   getOrderDetails(id: number): Observable<Order> {
     return this.http
-      .get<any>(this.baseUrl)
+      .get<any>(this.baseUrl + '/' + id)
       .pipe(catchError((error) => Utils.handleError(error)));
   }
 }

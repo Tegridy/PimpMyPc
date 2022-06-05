@@ -21,6 +21,7 @@ import {
 import { server } from 'ionicons/icons';
 import { CartService } from '../core/services/cart.service';
 import { ProductDetail } from '../shared/model/ProductDetail';
+import { CartComponent } from '../orders/cart/cart.component';
 
 describe('BuildPcComponent', () => {
   let component: BuildPcComponent;
@@ -36,7 +37,9 @@ describe('BuildPcComponent', () => {
       declarations: [BuildPcComponent],
       imports: [
         HttpClientTestingModule,
-        RouterTestingModule.withRoutes([]),
+        RouterTestingModule.withRoutes([
+          { path: 'order/cart', component: CartComponent },
+        ]),
         FormsModule,
         ReactiveFormsModule,
         CommonModule,
@@ -74,7 +77,7 @@ describe('BuildPcComponent', () => {
       id: 3,
       title: 'RAM',
       price: 999,
-      attributes: [new ProductDetail('ramType', 'DDR4')],
+      attributes: [new ProductDetail('moduleType', 'DDR4')],
     } as Ram;
     const graphicCard = {
       id: 4,
@@ -162,7 +165,7 @@ describe('BuildPcComponent', () => {
 
   it('should show ram and motherboard type error', () => {
     let p = computer.ram.attributes?.find(
-      (attr) => attr.attributeName === 'ramType'
+      (attr) => attr.attributeName === 'moduleType'
     );
     // @ts-ignore
     p.attributeValue = 'DDR3';
@@ -226,6 +229,8 @@ describe('BuildPcComponent', () => {
     const componentSpy = spyOn(component, 'navigateAndUpdateCart');
 
     component.customerComputer = computer;
+    console.log(component.customerComputer);
+    fixture.detectChanges();
     component.sendPcOrder();
 
     expect(componentSpy).toHaveBeenCalled();
