@@ -53,7 +53,7 @@
         <tr class="w-full bg-gray-200" *ngFor="let productDetail of productDetails">
           <ng-container *ngIf="productDetail.attributeValue && productDetail.attributeValue !== '0' && productDetail.attributeValue !== '0.0'">
           <th class="w-1/2 py-2 text-left border-t border-b border-gray-400"><span
-            class="ml-8">{{ productDetail.attributeName }}</span>
+            class="ml-8">{{ productDetail.attributeName | translate }}</span>
           </th>
           <th class="w-1/2 py-2 border-t border-b border-gray-400"><span
             class="float-left">{{ productDetail.attributeValue }}</span>

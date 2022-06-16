@@ -4,6 +4,7 @@ import { ProductsService } from '../../core/services/products.service';
 import { BaseProduct } from '../../shared/model/BaseProduct';
 import { ActivatedRoute } from '@angular/router';
 import { ProductDetail } from '../../shared/model/ProductDetail';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'pmp-product-full',
@@ -22,8 +23,14 @@ export class ProductFullComponent implements OnInit {
   constructor(
     private productsService: ProductsService,
     private route: ActivatedRoute,
-    private cartService: CartService
-  ) {}
+    private cartService: CartService,
+    private translate: TranslateService
+  ) {
+    translate.addLangs(['en']);
+    translate.setDefaultLang('en');
+
+    translate.use('en');
+  }
 
   ngOnInit(): void {
     this.getProductId();
