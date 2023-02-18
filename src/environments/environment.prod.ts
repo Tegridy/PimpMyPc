@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  API_URL: 'https://pmp-shop-api.herokuapp.com',
+  API_URL: 'http://144.24.167.43',
   showScreenBreakpoints: false,
 };
