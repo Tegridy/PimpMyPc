@@ -13,12 +13,12 @@
         <h2 class="mx-auto mb-6 text-2xl">Newest product</h2>
         <div class="w-10/12 mx-auto">
 
-          <img class="mx-auto object-contain w-2/5 shadow-lg" src="{{ newestProduct[0].imageUrl }}" alt="Photo">
+          <img class="mx-auto object-contain w-2/5 shadow-lg" src="{{ newestProduct[0]?.imageUrl }}" alt="Photo">
 
         </div>
         <div class="w-3/5 mx-auto flex flex-col items-center">
-          <span class="text-3xl my-14">{{ newestProduct[0].title }}</span>
-          <span class="text-2xl mt-5">{{ newestProduct[0].price }}$</span>
+          <span class="text-3xl my-14">{{ newestProduct[0]?.title }}</span>
+          <span class="text-2xl mt-5">{{ newestProduct[0]?.price }}$</span>
         </div>
       </div>
     </div>
