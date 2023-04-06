@@ -10,6 +10,7 @@ import { CommonModule } from '@angular/common';
 import { ProductFullComponent } from './product-full.component';
 import { ProductsService } from '../../core/services/products.service';
 import { Router } from '@angular/router';
+import {TranslateFakeCompiler, TranslateFakeLoader, TranslateService} from '@ngx-translate/core';
 
 describe('ProductFullComponent', () => {
   let component: ProductFullComponent;
@@ -27,7 +28,7 @@ describe('ProductFullComponent', () => {
         RouterTestingModule,
         ReactiveFormsModule,
         CommonModule,
-        ToastrModule.forRoot(),
+        ToastrModule.forRoot()
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
